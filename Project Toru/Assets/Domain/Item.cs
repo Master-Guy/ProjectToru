@@ -1,7 +1,15 @@
-﻿namespace Assets.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace Assets.Domain
 {
     interface Item
     {
+        string sprite { get; set; }
+        string name { get; set; }
+        bool uncovered { get; set; }
+        Dictionary<string, Delegate> options { get; set; }
 
+        Dictionary<int, Delegate> getOptions();
     }
 }
