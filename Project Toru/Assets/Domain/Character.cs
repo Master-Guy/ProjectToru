@@ -1,18 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Character : MonoBehaviour
+namespace Assets.Domain
 {
-    // Start is called before the first frame update
-    void Start()
+    interface Character
     {
-        
+		Dictionary<string, string> sprite { get; set; }
+		string name { get; set; }
+		Dictionary<string, float> stats { get; set; }
+		Skill[] skills { get; set; }
+		Dictionary<int, Delegate> getOptions();
+		int getSalaries();
     }
 
-    // Update is called once per frame
-    void Update()
+    enum gender
     {
-        
+		male,
+		female,
+		apache_helicopter
     }
+
+	enum state
+	{
+		guilty,
+		in_love,
+		griefing
+	}
+
+	enum trait
+	{
+		charming,
+		quickly_guilty
+	}
 }
+
