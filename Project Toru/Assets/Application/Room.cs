@@ -29,7 +29,7 @@ namespace Assets.Application
 		private bool uncovered = false;
 		private Character[] characters;
 		Dictionary<short, Furniture> objects;
-		Dictionary<string, Delegate> options;
+		Dictionary<Furniture, Dictionary<string, Delegate>> options;
 
 
 		// public Functions //
@@ -46,8 +46,8 @@ namespace Assets.Application
 			sizeX = xSize;		sizeY = ySize;
 			positionX = posX; positionY = posY;
 			bg = background;
-			Dictionary<short, Furniture> objects = new Dictionary<short, Furniture>();
-			Dictionary<string, Delegate> options = new Dictionary<string, Delegate>();
+			objects = new Dictionary<short, Furniture>();
+			options = new Dictionary<Furniture, Dictionary<string, Delegate>>();
 			characters = new Character[maxCharacters * sizeX];
 		}
 		/// <summary>
@@ -80,11 +80,14 @@ namespace Assets.Application
 		/// <returns></returns>
 		Dictionary<string, Delegate> getOptions()
 		{
+			Dictionary<string, Delegate> retOptions = new Dictionary<string, Delegate>();
 			if (options.Count == 0)
 			{
 				buildOptions();
 			}
-			return options;
+			foreach (KeyValuePair<Furniture, Dictionary<string, Delegate>> entry in options)
+				retOptions.Concat(entry.Value);
+			return retOptions;
 		}
 
 
@@ -96,7 +99,7 @@ namespace Assets.Application
 		{
 				foreach (KeyValuePair<short, Domain.Furniture> entry in objects)
 				{
-					options.Concat(entry.Value.getOptions());
+					options.Add(entry.Value, entry.Value.getOptions());
 					// options.Concat(entry.Value.getOptions(characters));
 				}
 
