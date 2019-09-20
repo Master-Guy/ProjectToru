@@ -1,6 +1,9 @@
-﻿namespace Assets.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace Assets.Domain
 {
-	interface Object
+	interface Furniture
 	{
 		string name
 		{
@@ -31,11 +34,7 @@
 			get;
 			set;
 		}
-
-        Object();
-
-		public void draw();
-
-		public Dictionary<string, Delegate> getOptions();
+		void draw();
+		Dictionary<string, Delegate> getOptions();
 	}
 }
