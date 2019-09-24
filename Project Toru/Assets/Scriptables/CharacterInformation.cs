@@ -33,6 +33,7 @@ namespace Assets.Scriptables
 
 	public enum State
 	{
+		none,
 		Guilty,
 		In_love,
 		Griefing
@@ -40,12 +41,14 @@ namespace Assets.Scriptables
 
 	public enum Trait
 	{
+		none,
 		Charming,
 		Quickly_guilty
 	}
 
 	public enum Skill
 	{
+		none,
 		Hacker,
 		Weapons_specialists
 	}
