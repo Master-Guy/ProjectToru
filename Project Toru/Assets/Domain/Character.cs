@@ -1,51 +1,19 @@
-﻿using Assets.Domain;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scriptables;
 
-[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-public class Character : ScriptableObject
+public class Character : MonoBehaviour
 {
-	public new string name;
-	public Sprite sprite;
+	public CharacterInformation info;
 
-	public Gender gender;
-	public State state;
-	public Trait trait;
-	public Skill skill;
+	void Start()
+	{
 
-	public float strength;
-	public float intimidation;
-	public float charm;
-	public float weaponHandling;
-	
-	// private IEnumerable<Item> inventory;
+	}
+
+	void Update()
+	{
+
+	}
 }
-
-public enum Gender
-{
-	Male,
-	Female
-}
-
-public enum State
-{
-	Guilty,
-	In_love,
-	Griefing
-}
-
-public enum Trait
-{
-	Charming,
-	Quickly_guilty
-}
-
-public enum Skill
-{
-	Hacker,
-	Weapons_specialists
-}
-
-
