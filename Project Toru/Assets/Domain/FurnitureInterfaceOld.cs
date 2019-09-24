@@ -17,11 +17,11 @@ namespace Assets.Domain
 			set;
 		}
 
-		Item[] items
+		/*Item[] items
 		{
 			get;
 			set;
-		}
+		}*/
 
 		bool uncovered
 		{
