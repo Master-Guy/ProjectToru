@@ -97,7 +97,7 @@ namespace Assets.Application
 		/// </summary>
 		private void buildOptions()
 		{
-				foreach (KeyValuePair<short, Domain.Furniture> entry in objects)
+				foreach (KeyValuePair<short, Domain.FurnitureInterfaceOld> entry in objects)
 				{
 					options.Add(entry.Value, entry.Value.getOptions());
 					// options.Concat(entry.Value.getOptions(characters));
