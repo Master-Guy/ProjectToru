@@ -1,11 +1,11 @@
 ﻿using System;
 using Assets.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using Furniture = Assets.Domain.FurnitureInterfaceOld;
+using UnityEngine;
 
-namespace Assets.Application
+namespace Assets.Scriptables
 {
+	[CreateAssetMenu(fileName = "new Room", menuName = "Room")]
 	/// <summary>
 	/// This class provides the layout for a room
 	/// </summary>
