@@ -2,6 +2,7 @@
 using Assets.Domain;
 using System.Collections.Generic;
 using System.Linq;
+using Furniture = Assets.Domain.FurnitureInterfaceOld;
 
 namespace Assets.Application
 {
