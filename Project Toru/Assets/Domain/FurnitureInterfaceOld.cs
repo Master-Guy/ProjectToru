@@ -17,7 +17,7 @@ namespace Assets.Domain
 			set;
 		}
 
-		Item[] items
+		ItemInterfaceOld[] items
 		{
 			get;
 			set;
