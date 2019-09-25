@@ -20,15 +20,15 @@ namespace Assets.Scriptables
 		private const int maxCharacters = 10;
 
 		// Variables //
-		private int positionX;
-		private int positionY;
-		private int sizeX = 1;
-		private int sizeY = 1;
-		private string name;
-		private bool lightsOn = true;
-		private List<Character> characters;
+		public int positionX;
+		public int positionY;
+		public int sizeX = 1;
+		public int sizeY = 1;
+		public string name;
+		public bool lightsOn = true;
+		public List<Character> characters;
 		short charactersPresent;
-		Dictionary<short, Furniture> furniture;
+		public Dictionary<short, Furniture> furniture;
 
 
 		// public Functions //

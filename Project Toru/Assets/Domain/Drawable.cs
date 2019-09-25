@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Domain
 {
-	abstract class Drawable
+	abstract class Drawable : MonoBehaviour
 	{
 		bool uncovered = false;
 		Sprite sprite;
