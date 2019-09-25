@@ -5,7 +5,7 @@ using Assets.Scriptables;
 
 public class Character : MonoBehaviour
 {
-	public CharacterInformation info;
+	public ScriptableCharacter info;
 
 	void Start()
 	{

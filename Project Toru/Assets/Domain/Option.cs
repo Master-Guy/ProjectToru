@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Assets.Domain
 {
-	interface Option
+	public interface Option
 	{
 
 		string description { get; set; }

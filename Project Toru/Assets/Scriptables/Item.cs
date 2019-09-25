@@ -9,13 +9,9 @@ using Option = Assets.Domain.Option;
 namespace Assets.Scriptables
 {
 	[CreateAssetMenu(fileName = "new Item", menuName = "Item")]
-	class Item : ScriptableObject
+	public class Item : ScriptableObject
 	{
-		public string name;
+		public new string name;
 		public List<Option> options;
-		public List<Option> getOptions()
-		{
-			return this.options;
-		}
 	}
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Assets.Scriptables
 {
 	[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-	public class CharacterInformation : ScriptableObject
+	public class ScriptableCharacter : ScriptableObject
 	{
 		public new string name;
 		public Sprite sprite;
@@ -22,7 +22,15 @@ namespace Assets.Scriptables
 		public float charm;
 		public float weaponHandling;
 
-		// private IEnumerable<Item> inventory;
+		public IEnumerable<Item> inventory;
+
+		public ScriptableCharacter()
+		{
+			this.inventory = new List<Item>();
+			this.state = State.none;
+			this.trait = Trait.none;
+			this.skill = Skill.none;
+		}
 	}
 
 	public enum Gender
