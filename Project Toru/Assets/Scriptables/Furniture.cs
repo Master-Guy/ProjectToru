@@ -10,7 +10,7 @@ namespace Assets.Scriptables
 		public new string name;
 		public Sprite sprite;
 		public List<Option> options;
-		//private List<> items { get; set; }       //items implementeren
+		private List<Item> items;   //items implementeren
 		public int sizeX;
 		public int sizeY;
 
@@ -22,6 +22,11 @@ namespace Assets.Scriptables
 		public List<Option> getOptions()
 		{
 			return this.options;
+		}
+
+		public List<Item> GetItems()
+		{
+			return this.items;
 		}
 
 	}
