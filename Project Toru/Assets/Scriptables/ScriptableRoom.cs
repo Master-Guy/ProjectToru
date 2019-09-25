@@ -14,7 +14,7 @@ namespace Assets.Scriptables
 	/// a room also has a variable denoting if it has been uncovered,
 	/// in game it will also store which characters are currently present.
 	/// </remarks>
-	class Room : Drawable
+	public class ScriptableRoom : Drawable
 	{
 		// Constants //
 		private const int maxCharacters = 10;
@@ -28,7 +28,8 @@ namespace Assets.Scriptables
 		public bool lightsOn = true;
 		public List<Character> characters;
 		short charactersPresent;
-		public Dictionary<short, Furniture> furniture;
+		public Dictionary<short, ScriptableFurniture> furniture;
+		public Domain.Room room;
 
 
 		// public Functions //
@@ -40,12 +41,13 @@ namespace Assets.Scriptables
 		/// <param name="xSize"></param>
 		/// <param name="ySize"></param>
 		/// <param name="background"></param>
-		Room(int posX, int posY, int xSize, int ySize, string background) : base(background)
+		ScriptableRoom(int posX, int posY, int xSize, int ySize, string background) : base(background)
 		{
 			sizeX = xSize;		sizeY = ySize;
 			positionX = posX; positionY = posY;
-			furniture = new Dictionary<short, Furniture>();
+			furniture = new Dictionary<short, ScriptableFurniture>();
 			characters = new List<Character>();
+			this.room = new Room("hallo", this);
 		}
 		/// <summary>
 		/// Constructor with standard size
@@ -56,7 +58,7 @@ namespace Assets.Scriptables
 		/// <param name="posX"></param>
 		/// <param name="posY"></param>
 		/// <param name="background"></param>
-		Room(int posX, int posY, string background) : this(posX, posY, 2, 1, background) { }
+		ScriptableRoom(int posX, int posY, string background) : this(posX, posY, 2, 1, background) { }
 		
 		/// <summary>
 		/// draws the room on screen
@@ -71,7 +73,7 @@ namespace Assets.Scriptables
 		/// </summary>
 		/// <param name="furn"></param>
 		/// <param name="loc"></param>
-		void addFurniture(Furniture furn, short loc)
+		void addFurniture(ScriptableFurniture furn, short loc)
 		{
 			furniture.Add(loc, furn);
 		}

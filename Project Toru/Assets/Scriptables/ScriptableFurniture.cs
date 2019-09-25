@@ -5,7 +5,7 @@ using Option = Assets.Domain.Option;
 namespace Assets.Scriptables
 {
 	[CreateAssetMenu(fileName = "new Furniture", menuName = "Furniture/Furniture")]
-	class Furniture : ScriptableObject
+	public class ScriptableFurniture : ScriptableObject
 	{
 		public new string name;
 		public Sprite sprite;
@@ -13,10 +13,12 @@ namespace Assets.Scriptables
 		private List<Item> items;   //items implementeren
 		public int sizeX;
 		public int sizeY;
+		public Domain.Furniture furniture;
 
-		public Furniture(Sprite sprite)
+		public ScriptableFurniture(Sprite sprite)
 		{
 			this.sprite = sprite;
+			this.furniture = new Domain.Furniture("hallo", this);
 		}
 
 		public List<Option> getOptions()

@@ -3,10 +3,10 @@
 namespace Assets.Scriptables { 
 
 	[CreateAssetMenu(fileName = "new Furniture", menuName = "Furniture/Door")]
-	class Door : Furniture
+	class Door : ScriptableFurniture
 	{
-		public Room source;
-		public Room Destination;
+		public ScriptableRoom source;
+		public ScriptableRoom Destination;
 		public Locklevel open;
 		public Door(Sprite sprite) : base(sprite)
 		{

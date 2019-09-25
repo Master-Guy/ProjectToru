@@ -24,12 +24,16 @@ namespace Assets.Scriptables
 
 		public IEnumerable<Item> inventory;
 
+		public Assets.Domain.Character character;
+
 		public ScriptableCharacter()
 		{
 			this.inventory = new List<Item>();
 			this.state = State.none;
 			this.trait = Trait.none;
 			this.skill = Skill.none;
+			this.character = new Character("hallo", this);
+				
 		}
 	}
 
