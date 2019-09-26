@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a927ea248e021e4c82a65c7c2b698e6, type: 3}
   m_Name: Theme1
   m_EditorClassIdentifier: 
-  name: Inner
-  topLeft: {fileID: 0}
-  left: {fileID: 0}
-  bottomLeft: {fileID: 0}
-  topRight: {fileID: 0}
-  right: {fileID: 0}
-  bottomRight: {fileID: 0}
-  top: {fileID: 0}
-  bottom: {fileID: 11400000, guid: fdfb95a2abac8f04096716cec62c751b, type: 2}
-  center: {fileID: 0}
+  name: InnerDark
+  topLeft: {fileID: 11400000, guid: 53bd19c1057eb6a429c8a38ae6e7a01b, type: 2}
+  left: {fileID: 11400000, guid: d3461ebd21f5de646875e12ace8b0028, type: 2}
+  bottomLeft: {fileID: 11400000, guid: 0cadd10a1380e934794be2a0bc85e3aa, type: 2}
+  topRight: {fileID: 11400000, guid: f07f2392038bcf4459e0148b30e53f2d, type: 2}
+  right: {fileID: 11400000, guid: 5d2fc9e6b988fd045bbd52b4663535f4, type: 2}
+  bottomRight: {fileID: 11400000, guid: d26bc44f25440704cbb4085b6c7778c5, type: 2}
+  top: {fileID: 11400000, guid: 914c3299f291c5d4d844d9b5ba2a68a5, type: 2}
+  bottom: {fileID: 11400000, guid: a37e8a5cb64fcb34583f754edd880e20, type: 2}
+  center: {fileID: 11400000, guid: 0ee073d749c900c4bb292bee872a08e0, type: 2}
