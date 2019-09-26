@@ -14,22 +14,23 @@ namespace Assets.Scriptables
 	/// a room also has a variable denoting if it has been uncovered,
 	/// in game it will also store which characters are currently present.
 	/// </remarks>
-	public class ScriptableRoom : Drawable
+	public class ScriptableRoom : ScriptableObject
 	{
 		// Constants //
 		private const int maxCharacters = 10;
 
 		// Variables //
-		public int positionX;
-		public int positionY;
-		public int sizeX = 1;
-		public int sizeY = 1;
-		public string name;
+		public Vector3Int position;
+		public RoomTheme theme;
+		public int width = 1;
+		public int height = 1;
+
+		public new string name;
 		public bool lightsOn = true;
 		public List<Character> characters;
 		short charactersPresent;
 		public Dictionary<short, ScriptableFurniture> furniture;
-		public Domain.Room room;
+		//public Domain.Room room;
 
 
 		// public Functions //
@@ -40,14 +41,14 @@ namespace Assets.Scriptables
 		/// <param name="posY"></param>
 		/// <param name="xSize"></param>
 		/// <param name="ySize"></param>
-		/// <param name="background"></param>
-		ScriptableRoom(int posX, int posY, int xSize, int ySize, string background) : base(background)
+		ScriptableRoom(Vector3Int pos, int xSize, int ySize, string roomTheme)
 		{
-			sizeX = xSize;		sizeY = ySize;
-			positionX = posX; positionY = posY;
+			position = pos;
+			width = xSize;
+			height = ySize;
 			furniture = new Dictionary<short, ScriptableFurniture>();
 			characters = new List<Character>();
-			this.room = new Room("hallo", this);
+			//this.room = new Room("hallo", this);
 		}
 		/// <summary>
 		/// Constructor with standard size
@@ -58,15 +59,7 @@ namespace Assets.Scriptables
 		/// <param name="posX"></param>
 		/// <param name="posY"></param>
 		/// <param name="background"></param>
-		ScriptableRoom(int posX, int posY, string background) : this(posX, posY, 2, 1, background) { }
-		
-		/// <summary>
-		/// draws the room on screen
-		/// </summary>
-		public override void Draw()
-		{
-			throw new NotImplementedException();
-		}
+		ScriptableRoom(Vector3Int pos, string background) : this(pos, 2, 1, background) { }
 
 		/// <summary>
 		/// adds a piece of furniture to the room

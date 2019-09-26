@@ -4,7 +4,7 @@ using ScriptableRoom = Assets.Scriptables.ScriptableRoom;
 
 namespace Assets.Domain
 {
-	public class Room : Drawable
+	public class Room : MonoBehaviour
 	{
 
 		public ScriptableRoom info;

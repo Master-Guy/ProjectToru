@@ -6,7 +6,7 @@ using Assets.Scriptables;
 namespace Assets.Domain
 {
 
-	public class Character : Drawable
+	public class Character : MonoBehaviour
 	{
 		public ScriptableCharacter info;
 

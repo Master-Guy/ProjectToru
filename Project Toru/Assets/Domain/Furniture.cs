@@ -4,7 +4,7 @@ using ScriptableFurniture = Assets.Scriptables.ScriptableFurniture;
 
 namespace Assets.Domain
 {
-	public class Furniture : Drawable
+	public class Furniture : MonoBehaviour
 	{
 		public ScriptableFurniture info;
 

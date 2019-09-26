@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace Assets.Domain
 {
-	public abstract class Drawable : MonoBehaviour
+	public abstract class MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		bool uncovered = false;
 		Sprite sprite;
 
-		public Drawable(string sprite)
+		public MonoBehaviour(string sprite)
 		{
 			// Todo sprite = stringToSprite;
 		}
