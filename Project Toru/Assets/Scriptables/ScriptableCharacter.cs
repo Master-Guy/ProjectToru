@@ -12,7 +12,7 @@ namespace Assets.Scriptables
 	}
 
 	[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-	public class ScriptableCharacter : ScriptableObject
+	public class ScriptableCharacter : Drawable
 	{
 		public new string name;
 		public Sprite sprite;
@@ -32,11 +32,17 @@ namespace Assets.Scriptables
 
 		public Assets.Domain.Character character;
 
-		public ScriptableCharacter(ScriptableRoom startLocation)
+		// TODO fix
+		public ScriptableCharacter(string sprite, ScriptableRoom startLocation) : base(sprite)
 		{
 			this.inventory = new List<Item>();
-			this.character = new Character("hallo", this);
+			this.character = new Character(this);
 			this.location = startLocation;
+		}
+
+		public override void Draw()
+		{
+			throw new NotImplementedException();
 		}
 
 		public void move(ScriptableRoom destination)

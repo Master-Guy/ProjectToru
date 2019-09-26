@@ -4,17 +4,13 @@ using ScriptableFurniture = Assets.Scriptables.ScriptableFurniture;
 
 namespace Assets.Domain
 {
-	public class Furniture : Drawable
+	public class Furniture : MonoBehaviour
 	{
 		public ScriptableFurniture info;
 
-		public Furniture(string sprite, ScriptableFurniture info) : base(sprite)
+		public Furniture(ScriptableFurniture info)
 		{
 			this.info = info;
-		}
-		public override void Draw()
-		{
-			throw new System.NotImplementedException();
 		}
 
 		void Start()
