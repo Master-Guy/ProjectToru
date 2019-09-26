@@ -24,11 +24,10 @@ namespace Assets.Scriptables
 		public int positionY;
 		public int sizeX = 1;
 		public int sizeY = 1;
-		public string name;
+		new public string name;
 		public bool lightsOn = true;
-		public List<Character> characters;
-		short charactersPresent;
 		public Dictionary<short, ScriptableFurniture> furniture;
+		private List<Door> doors;
 		public Domain.Room room;
 
 
@@ -46,7 +45,7 @@ namespace Assets.Scriptables
 			sizeX = xSize;		sizeY = ySize;
 			positionX = posX; positionY = posY;
 			furniture = new Dictionary<short, ScriptableFurniture>();
-			characters = new List<Character>();
+			doors = new List<Door>();
 			this.room = new Room("hallo", this);
 		}
 		/// <summary>
@@ -59,13 +58,9 @@ namespace Assets.Scriptables
 		/// <param name="posY"></param>
 		/// <param name="background"></param>
 		ScriptableRoom(int posX, int posY, string background) : this(posX, posY, 2, 1, background) { }
-		
-		/// <summary>
-		/// draws the room on screen
-		/// </summary>
 		public override void Draw()
 		{
-			throw new NotImplementedException();
+			throw new System.NotImplementedException();
 		}
 
 		/// <summary>
@@ -78,33 +73,24 @@ namespace Assets.Scriptables
 			furniture.Add(loc, furn);
 		}
 
-		/// <summary>
-		/// if the room isn't overcrowded adds a character to the room
-		/// </summary>
-		/// <param name=""></param>
-		/// <param name=""></param>
-		/// <returns></returns>
-		int addCharacter(Character character)
+		public List<ScriptableRoom> CalculatePath(ScriptableRoom dest, List<ScriptableRoom> route)
 		{
-			if (charactersPresent < maxCharacters)
+			if (dest == this)
 			{
-				characters.Add(character);
-				++charactersPresent;
-				return 0;
+				route.Add(this);
+				return route;
 			}
-			return -1;
-		}
-
-		/// <summary>
-		/// removes a character from the room if present
-		/// </summary>
-		/// <param name="character"></param>
-		/// <returns></returns>
-		int removeCharacter(Character character)
-		{
-			if (characters.Remove(character))
-				return 0;
-			return -1;
+			if (!uncovered || route.Contains(this))
+				return null;
+			List<ScriptableRoom> res = null, temp = null;
+			foreach (Door d in doors)
+			{
+				temp = d.calculatePath(dest, route);
+				if ((temp != null && temp.Count < res.Count) || res == null)
+					res = temp;
+			}
+			res.Add(this);
+			return res;
 		}
 	}
 

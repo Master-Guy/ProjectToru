@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace Assets.Scriptables
 {
+	static class selectedCharacter
+	{
+		public static Character selected; 
+	}
+
 	[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
 	public class ScriptableCharacter : ScriptableObject
 	{
@@ -13,9 +18,9 @@ namespace Assets.Scriptables
 		public Sprite sprite;
 
 		public Gender gender;
-		public State state;
-		public Trait trait;
-		public Skill skill;
+		public State state = State.none;
+		public Trait trait = Trait.none;
+		public Skill skill = Skill.none;
 
 		public float strength;
 		public float intimidation;
@@ -23,17 +28,27 @@ namespace Assets.Scriptables
 		public float weaponHandling;
 
 		public IEnumerable<Item> inventory;
+		public ScriptableRoom location;
 
 		public Assets.Domain.Character character;
 
-		public ScriptableCharacter()
+		public ScriptableCharacter(ScriptableRoom startLocation)
 		{
 			this.inventory = new List<Item>();
-			this.state = State.none;
-			this.trait = Trait.none;
-			this.skill = Skill.none;
 			this.character = new Character("hallo", this);
-				
+			this.location = startLocation;
+		}
+
+		public void move(ScriptableRoom destination)
+		{
+			List<ScriptableRoom> route = new List<ScriptableRoom>();
+			if (location.CalculatePath(destination, route).Count > 0)
+			{
+				// TODO move
+			} else
+			{
+				return;
+			}
 		}
 	}
 

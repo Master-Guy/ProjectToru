@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Assets.Domain
 {
-	public abstract class Drawable : MonoBehaviour
+	public abstract class Drawable : ScriptableObject
 	{
-		bool uncovered = false;
+		public bool uncovered = false;
 		Sprite sprite;
 
 		public Drawable(string sprite)
