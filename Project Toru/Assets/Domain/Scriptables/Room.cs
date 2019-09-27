@@ -14,7 +14,7 @@ namespace Assets.Scriptables
 	/// a room also has a variable denoting if it has been uncovered,
 	/// in game it will also store which characters are currently present.
 	/// </remarks>
-	public class ScriptableRoom : ScriptableObject
+	public class ScriptableRoom : Drawable
 	{
 		// Constants //
 		private const int maxCharacters = 10;
@@ -40,7 +40,7 @@ namespace Assets.Scriptables
 		/// <param name="posY"></param>
 		/// <param name="xSize"></param>
 		/// <param name="ySize"></param>
-		ScriptableRoom(Vector3Int pos, int xSize, int ySize, string roomTheme)
+		ScriptableRoom(Vector3Int pos, int xSize, int ySize, string roomTheme) : base(roomTheme)
 		{
 			position = pos;
 			width = xSize;
@@ -58,11 +58,7 @@ namespace Assets.Scriptables
 		/// <param name="posX"></param>
 		/// <param name="posY"></param>
 		/// <param name="background"></param>
-		ScriptableRoom(int posX, int posY, string background) : this(posX, posY, 2, 1, background) { }
-		public override void Draw()
-		{
-			throw new System.NotImplementedException();
-		}
+		ScriptableRoom(Vector3Int pos, string background) : this(pos, 2, 1, background) { }
 
 		/// <summary>
 		/// adds a piece of furniture to the room
@@ -93,6 +89,11 @@ namespace Assets.Scriptables
 			}
 			res.Add(this);
 			return res;
+		}
+
+		public override void Draw()
+		{
+			throw new NotImplementedException();
 		}
 	}
 

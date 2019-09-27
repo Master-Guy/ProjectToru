@@ -10,7 +10,7 @@ namespace Assets.Scriptables {
 		public ScriptableRoom source;
 		public ScriptableRoom destination;
 		public Locklevel open;
-		public Door(Sprite sprite) : base(sprite)
+		public Door(string sprite) : base(sprite)
 		{
 		}
 

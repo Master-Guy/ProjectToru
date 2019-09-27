@@ -12,7 +12,7 @@ namespace Assets.Domain
 		public bool uncovered = false;
 		Sprite sprite;
 
-		public MonoBehaviour(string sprite)
+		public Drawable(string sprite)
 		{
 			// Todo sprite = stringToSprite;
 		}
