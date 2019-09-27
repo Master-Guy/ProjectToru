@@ -8,11 +8,11 @@ namespace Assets.Scriptables
 {
 	static class selectedCharacter
 	{
-		public static Character selected; 
+		public static CharacterBehaviour selected; 
 	}
 
 	[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-	public class ScriptableCharacter : Drawable
+	public class Character : Drawable
 	{
 		public new string name;
 		public Sprite sprite;
@@ -28,15 +28,15 @@ namespace Assets.Scriptables
 		public float weaponHandling;
 
 		public IEnumerable<Item> inventory;
-		public ScriptableRoom location;
+		public Room location;
 
-		public Assets.Domain.Character character;
+		public Assets.Domain.CharacterBehaviour character;
 
 		// TODO fix
-		public ScriptableCharacter(string sprite, ScriptableRoom startLocation) : base(sprite)
+		public Character(string sprite, Room startLocation) : base(sprite)
 		{
 			this.inventory = new List<Item>();
-			this.character = new Character(this);
+			this.character = new CharacterBehaviour(this);
 			this.location = startLocation;
 		}
 
@@ -45,9 +45,9 @@ namespace Assets.Scriptables
 			throw new NotImplementedException();
 		}
 
-		public void move(ScriptableRoom destination)
+		public void move(Room destination)
 		{
-			List<ScriptableRoom> route = new List<ScriptableRoom>();
+			List<Room> route = new List<Room>();
 			if (location.CalculatePath(destination, route).Count > 0)
 			{
 				// TODO move

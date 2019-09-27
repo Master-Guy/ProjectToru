@@ -14,7 +14,7 @@ namespace Assets.Scriptables
 	/// a room also has a variable denoting if it has been uncovered,
 	/// in game it will also store which characters are currently present.
 	/// </remarks>
-	public class ScriptableRoom : Drawable
+	public class Room : Drawable
 	{
 		// Constants //
 		private const int maxCharacters = 10;
@@ -27,9 +27,8 @@ namespace Assets.Scriptables
 
 		public new string name;
 		public bool lightsOn = true;
-		public Dictionary<short, ScriptableFurniture> furniture;
+		public Dictionary<short, Furniture> furniture;
 		private List<Door> doors;
-		public Domain.Room room;
 
 
 		// public Functions //
@@ -40,14 +39,13 @@ namespace Assets.Scriptables
 		/// <param name="posY"></param>
 		/// <param name="xSize"></param>
 		/// <param name="ySize"></param>
-		ScriptableRoom(Vector3Int pos, int xSize, int ySize, string roomTheme) : base(roomTheme)
+		Room(Vector3Int pos, int xSize, int ySize, string roomTheme) : base(roomTheme)
 		{
 			position = pos;
 			width = xSize;
 			height = ySize;
-			furniture = new Dictionary<short, ScriptableFurniture>();
+			furniture = new Dictionary<short, Furniture>();
 			doors = new List<Door>();
-			this.room = new Room("hallo", this);
 		}
 		/// <summary>
 		/// Constructor with standard size
@@ -58,19 +56,19 @@ namespace Assets.Scriptables
 		/// <param name="posX"></param>
 		/// <param name="posY"></param>
 		/// <param name="background"></param>
-		ScriptableRoom(Vector3Int pos, string background) : this(pos, 2, 1, background) { }
+		Room(Vector3Int pos, string background) : this(pos, 2, 1, background) { }
 
 		/// <summary>
 		/// adds a piece of furniture to the room
 		/// </summary>
 		/// <param name="furn"></param>
 		/// <param name="loc"></param>
-		void addFurniture(ScriptableFurniture furn, short loc)
+		void addFurniture(Furniture furn, short loc)
 		{
 			furniture.Add(loc, furn);
 		}
 
-		public List<ScriptableRoom> CalculatePath(ScriptableRoom dest, List<ScriptableRoom> route)
+		public List<Room> CalculatePath(Room dest, List<Room> route)
 		{
 			if (dest == this)
 			{
@@ -80,7 +78,7 @@ namespace Assets.Scriptables
 			if (!uncovered || route.Contains(this))
 				return null;
 			route.Add(this);
-			List<ScriptableRoom> res = null, temp = null;
+			List<Room> res = null, temp = null;
 			foreach (Door d in doors)
 			{
 				temp = d.calculatePath(dest, route);

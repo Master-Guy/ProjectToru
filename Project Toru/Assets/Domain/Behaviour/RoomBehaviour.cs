@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ScriptableRoom = Assets.Scriptables.ScriptableRoom;
+using Room = Assets.Scriptables.Room;
 
 namespace Assets.Domain
 {
 
-	public class Room : MonoBehaviour
+	public class RoomBehaviour : MonoBehaviour
 	{
 
-		public ScriptableRoom info;
+		public RoomBehaviour info;
 
-		public Room(string sprite, ScriptableRoom info)
+		public RoomBehaviour(string sprite, RoomBehaviour info)
 		{
 			this.info = info;
 		}
