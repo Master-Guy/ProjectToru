@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ScriptableFurniture = Assets.Scriptables.ScriptableFurniture;
+using Furniture = Assets.Scriptables.Furniture;
 
 namespace Assets.Domain
 {
-	public class Furniture : MonoBehaviour
+	public class FurnitureBehaviour : MonoBehaviour
 	{
-		public ScriptableFurniture info;
+		public Furniture info;
 
-		public Furniture(ScriptableFurniture info)
+		public FurnitureBehaviour(Furniture info)
 		{
 			this.info = info;
 		}

@@ -6,11 +6,11 @@ using Assets.Scriptables;
 namespace Assets.Domain
 {
 
-	public class Character : MonoBehaviour
+	public class CharacterBehaviour : MonoBehaviour
 	{
-		public ScriptableCharacter info;
+		public Character info;
 
-		public Character(ScriptableCharacter info)
+		public CharacterBehaviour(Character info)
 		{
 			this.info = info;
 		}

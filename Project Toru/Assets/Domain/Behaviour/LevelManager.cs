@@ -1,12 +1,12 @@
-﻿using Assets.Scriptables;
+﻿using Assets.Domain;
+using Assets.Scriptables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
 public class LevelManager : MonoBehaviour
 {
-	public List<ScriptableRoom> rooms;
+	public List<Room> rooms;
 	public GameObject walls;
 	public GameObject background;
 	private Tilemap tilemapWalls;
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 		tilemapWalls = walls.GetComponent<Tilemap>();
 		tilemapBackground = background.GetComponent<Tilemap>();
 
-		foreach (ScriptableRoom r in rooms)
+		foreach (Room r in rooms)
 		{
 			GenerateWalls(r);
 			GenerateBackground(r);
@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
 	}
 
 	// Generates walls for each room
-	private void GenerateWalls(ScriptableRoom r)
+	private void GenerateWalls(Room r)
 	{
 		// Sets walls for top and bottom
 		for (int i = 0; i <= r.width; i++)
@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
 	}
 
 	// fills the background of each room with it's assigned theme tile
-	private void GenerateBackground(ScriptableRoom r)
+	private void GenerateBackground(Assets.Scriptables.Room r)
 	{
 		if (r.lightsOn)
 		{
