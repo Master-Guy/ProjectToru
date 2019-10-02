@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Theme1
   m_EditorClassIdentifier: 
   name: InnerDark
-  topLeft: {fileID: 11400000, guid: 53bd19c1057eb6a429c8a38ae6e7a01b, type: 2}
-  left: {fileID: 11400000, guid: d3461ebd21f5de646875e12ace8b0028, type: 2}
-  bottomLeft: {fileID: 11400000, guid: 0cadd10a1380e934794be2a0bc85e3aa, type: 2}
-  topRight: {fileID: 11400000, guid: f07f2392038bcf4459e0148b30e53f2d, type: 2}
-  right: {fileID: 11400000, guid: 5d2fc9e6b988fd045bbd52b4663535f4, type: 2}
-  bottomRight: {fileID: 11400000, guid: d26bc44f25440704cbb4085b6c7778c5, type: 2}
-  top: {fileID: 11400000, guid: 914c3299f291c5d4d844d9b5ba2a68a5, type: 2}
-  bottom: {fileID: 11400000, guid: a37e8a5cb64fcb34583f754edd880e20, type: 2}
+  topLeft: {fileID: 11400000, guid: 027895aba6b00154abe007b00941dd2c, type: 2}
+  left: {fileID: 11400000, guid: 9b61e5473a6e48e489881210c020c2f4, type: 2}
+  bottomLeft: {fileID: 11400000, guid: 54c3a8b080c73114f9cf531e795f8e88, type: 2}
+  topRight: {fileID: 11400000, guid: cca1086cb05c5c741a89a463b0d3ea80, type: 2}
+  right: {fileID: 11400000, guid: d7e9b818dfedee747aee072fda943cf7, type: 2}
+  bottomRight: {fileID: 11400000, guid: 0b1f293c9fa7c1c4aaf8cf535ef59eda, type: 2}
+  top: {fileID: 11400000, guid: b650397e1eef9214395448a562d8a567, type: 2}
+  bottom: {fileID: 11400000, guid: 68b598342484ad6459bff235494d5811, type: 2}
   center: {fileID: 11400000, guid: 0ee073d749c900c4bb292bee872a08e0, type: 2}
