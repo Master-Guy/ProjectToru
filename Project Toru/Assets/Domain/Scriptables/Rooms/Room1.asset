@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38cc99d98db8ca4589d1e09e4132933, type: 3}
   m_Name: Room1
   m_EditorClassIdentifier: 
+  uncovered: 0
   position: {x: 0, y: 0, z: 0}
   theme: {fileID: 11400000, guid: 57d0a8c7e5e6305409893d0c55ba60e4, type: 2}
   width: 10
   height: 5
-  name: Room1
+  name: Entryroom
   lightsOn: 1
-  characters: []

@@ -27,8 +27,8 @@ public class LevelManager : MonoBehaviour
 
 		foreach (Room r in rooms)
 		{
-			GenerateWalls(r);
-			GenerateBackground(r);
+			//GenerateWalls(r);
+			//GenerateBackground(r);
 		}
 	}
 
