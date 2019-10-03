@@ -58,14 +58,12 @@ public class RoomBehaviour : MonoBehaviour
 			Debug.Log(walls.size.y);
 
 
-			for (int i = 0; i <= walls.size.x; i++)
+			for (int i = 0; i < walls.size.x; i++)
 			{
-				for (int j = 0; j <= walls.size.y; j++)
+				for (int j = 0; j < walls.size.y; j++)
 				{
 					Debug.Log(i + " - " + j);
-
-					if (j % 2 == 0)
-						background.SetTile(new Vector3Int(i, j, 0), room.theme.center);
+					background.SetTile(new Vector3Int(i, j, 0), room.theme.center);
 				}
 			}
 		}
