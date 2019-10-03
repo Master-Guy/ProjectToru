@@ -328,9 +328,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1380342813}
   - component: {fileID: 1380342812}
-  - component: {fileID: 1380342811}
   - component: {fileID: 1380342814}
   - component: {fileID: 1380342815}
+  - component: {fileID: 1380342811}
+  - component: {fileID: 1380342816}
   m_Layer: 0
   m_Name: RandomSpriteAsCharacter
   m_TagString: Player
@@ -462,6 +463,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7146635, y: 0.7717309}
   m_EdgeRadius: 0
+--- !u!114 &1380342816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380342810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a448e4a17c79481418aab691b950df72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 11400000, guid: 806d56646157c5e4f8b134a74392dbf9, type: 2}
 --- !u!1 &1398202017
 GameObject:
   m_ObjectHideFlags: 0

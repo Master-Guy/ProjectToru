@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c1e672aeb1bb14c8800197fdf12c1e, type: 3}
   m_Name: Architect
   m_EditorClassIdentifier: 
+  uncovered: 0
   name: Architect
-  sprite: {fileID: 0}
+  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   gender: 0
   state: 0
   trait: 0
@@ -22,3 +23,5 @@ MonoBehaviour:
   intimidation: 10
   charm: 15
   weaponHandling: 5
+  location: {fileID: 0}
+  character: {fileID: 0}

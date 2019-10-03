@@ -1,9 +1,10 @@
-﻿using Assets.Domain;
-using Assets.Scriptables;
+﻿//using Assets.Domain;
+//using Assets.Scriptables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
 public class LevelManager : MonoBehaviour
 {
 	public List<Room> rooms;
@@ -56,7 +57,7 @@ public class LevelManager : MonoBehaviour
 	}
 
 	// fills the background of each room with it's assigned theme tile
-	private void GenerateBackground(Assets.Scriptables.Room r)
+	private void GenerateBackground(Room r)
 	{
 		if (r.lightsOn)
 		{

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Furniture = Assets.Scriptables.Furniture;
+//using Furniture = Assets.Scriptables.Furniture;
 
 namespace Assets.Domain
 {

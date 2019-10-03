@@ -4,88 +4,88 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scriptables
+
+static class selectedCharacter
 {
-	static class selectedCharacter
+	public static CharacterBehaviour selected;
+}
+
+[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
+public class Character : Drawable
+{
+	public new string name;
+	public Sprite sprite;
+
+	public Gender gender;
+	public State state = State.none;
+	public Trait trait = Trait.none;
+	public Skill skill = Skill.none;
+
+	public float strength;
+	public float intimidation;
+	public float charm;
+	public float weaponHandling;
+
+	public IEnumerable<Item> inventory;
+	public Room location;
+
+	public CharacterBehaviour character;
+
+	// TODO fix
+	public Character(string sprite, Room startLocation) : base(sprite)
 	{
-		public static CharacterBehaviour selected; 
+		this.inventory = new List<Item>();
+		this.character = new CharacterBehaviour(this);
+		this.location = startLocation;
 	}
 
-	[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-	public class Character : Drawable
+	public override void Draw()
 	{
-		public new string name;
-		public Sprite sprite;
+		throw new NotImplementedException();
+	}
 
-		public Gender gender;
-		public State state = State.none;
-		public Trait trait = Trait.none;
-		public Skill skill = Skill.none;
-
-		public float strength;
-		public float intimidation;
-		public float charm;
-		public float weaponHandling;
-
-		public IEnumerable<Item> inventory;
-		public Room location;
-
-		public Assets.Domain.CharacterBehaviour character;
-
-		// TODO fix
-		public Character(string sprite, Room startLocation) : base(sprite)
+	public void move(Room destination)
+	{
+		List<Room> route = new List<Room>();
+		if (location.CalculatePath(destination, route).Count > 0)
 		{
-			this.inventory = new List<Item>();
-			this.character = new CharacterBehaviour(this);
-			this.location = startLocation;
+			// TODO move
 		}
-
-		public override void Draw()
+		else
 		{
-			throw new NotImplementedException();
+			return;
 		}
-
-		public void move(Room destination)
-		{
-			List<Room> route = new List<Room>();
-			if (location.CalculatePath(destination, route).Count > 0)
-			{
-				// TODO move
-			} else
-			{
-				return;
-			}
-		}
-	}
-
-	public enum Gender
-	{
-		Male,
-		Female
-	}
-
-	public enum State
-	{
-		none,
-		Guilty,
-		In_love,
-		Griefing
-	}
-
-	public enum Trait
-	{
-		none,
-		Charming,
-		Quickly_guilty
-	}
-
-	public enum Skill
-	{
-		none,
-		Hacker,
-		Weapons_specialists
 	}
 }
+
+public enum Gender
+{
+	Male,
+	Female
+}
+
+public enum State
+{
+	none,
+	Guilty,
+	In_love,
+	Griefing
+}
+
+public enum Trait
+{
+	none,
+	Charming,
+	Quickly_guilty
+}
+
+public enum Skill
+{
+	none,
+	Hacker,
+	Weapons_specialists
+}
+
 
 
 
