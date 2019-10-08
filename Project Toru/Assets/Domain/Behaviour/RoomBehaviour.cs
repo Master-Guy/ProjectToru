@@ -42,22 +42,8 @@ public class RoomBehaviour : MonoBehaviour
 
 	private void GenerateBackground()
 	{
-		if (room.lightsOn)
+		if (room.lightsOn && background.size.x == 0)
 		{
-			Debug.Log("!!!!!");
-
-			Debug.Log(walls.layoutGrid.cellSize.x);
-			Debug.Log(walls.layoutGrid.cellSize.y);
-			Debug.Log(walls.layoutGrid.cellSize.z);
-			Debug.Log(background.layoutGrid.cellSize.x);
-			Debug.Log(background.layoutGrid.cellSize.y);
-			Debug.Log(background.layoutGrid.cellSize.z);
-
-			Debug.Log("????");
-			Debug.Log(walls.size.x);
-			Debug.Log(walls.size.y);
-
-
 			for (int i = 0; i < walls.size.x; i++)
 			{
 				for (int j = 0; j < walls.size.y; j++)

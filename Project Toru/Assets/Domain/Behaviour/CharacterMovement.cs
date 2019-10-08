@@ -7,46 +7,42 @@ public class CharacterMovement : MonoBehaviour
 	public float speed;
 	private Rigidbody2D myRigidbody;
 	private Vector3 change;
+	private Animator animator;
 
-	private Vector3 currentLocation;
-	private Vector3 targetLocation;
-
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Start is called before the first frame update
+	void Start()
+	{
 		myRigidbody = GetComponent<Rigidbody2D>();
-    }
+		animator = GetComponent<Animator>();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 		change = Vector3.zero;
-		change.x = Input.GetAxisRaw("Horizontal"); // Horizontal input (x)
-		change.y = Input.GetAxisRaw("Vertical"); // Vertical input (y)
+		change.x = Input.GetAxisRaw("Horizontal");
+		change.y = Input.GetAxisRaw("Vertical");
+		UpdateAnimationsAndMove();
+	}
 
-		MoveCharacter();
-		MoveCharacterWithMouse();
+	void UpdateAnimationsAndMove()
+	{
+		if (change != Vector3.zero)
+		{
+			MoveCharacter();
+			animator.SetFloat("moveX", change.x);
+			animator.SetFloat("moveY", change.y);
+			animator.SetBool("moving", true);
+		}
+		else
+		{
+			animator.SetBool("moving", false);
+		}
 	}
 
 	void MoveCharacter()
 	{
 		change.Normalize();
 		myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
-	}
-
-	void MoveCharacterWithMouse()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			currentLocation = transform.position;
-			targetLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			targetLocation.z = 1;
-		}
-
-		if (currentLocation != targetLocation)
-		{
-			transform.position = Vector3.Lerp(currentLocation, targetLocation, speed * Time.deltaTime);
-			currentLocation = transform.position;
-		}
 	}
 }
