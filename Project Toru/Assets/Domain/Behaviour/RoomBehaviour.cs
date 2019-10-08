@@ -46,7 +46,7 @@ public class RoomBehaviour : MonoBehaviour
 		{
 			for (int i = 0; i < walls.size.x; i++)
 			{
-				for (int j = 0; j < walls.size.y; j++)
+				for (int j = 1; j < walls.size.y; j++)
 				{
 					Debug.Log(i + " - " + j);
 					background.SetTile(new Vector3Int(i, j, 0), room.theme.center);
