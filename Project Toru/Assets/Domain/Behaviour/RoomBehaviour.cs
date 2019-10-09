@@ -7,7 +7,7 @@ public class RoomBehaviour : MonoBehaviour
 
 	// Note: The 
 	[SerializeField]
-	public Room room = null;
+	public RoomTheme theme = null;
 
 	[SerializeField]
 	private Tilemap walls = null;
@@ -15,22 +15,15 @@ public class RoomBehaviour : MonoBehaviour
 	[SerializeField]
 	private Tilemap background = null;
 
-	//public RoomBehaviour(string sprite, RoomBehaviour info)
-	//{
-	//	//this.info = info;
-	//}
+	[SerializeField]
+	private bool lightsOn;
 
 	void Start()
 	{
-		if (room == null || walls == null || background == null)
+		if (theme == null || walls == null || background == null)
 		{
 			Debug.LogError("Error: It is required to assign the Tilemap and room to prefab");
 		}
-
-		Debug.Log(room.name);
-		//Debug.Log(tiles.size.x);
-		//Debug.Log(tiles.size.y);
-		//Debug.Log(tiles.size.z);
 
 		GenerateBackground();
 	}
@@ -42,14 +35,14 @@ public class RoomBehaviour : MonoBehaviour
 
 	private void GenerateBackground()
 	{
-		if (room.lightsOn && background.size.x == 0)
+		if (lightsOn && background.size.x == 0)
 		{
 			for (int i = 0; i < walls.size.x; i++)
 			{
 				for (int j = 1; j < walls.size.y; j++)
 				{
 					Debug.Log(i + " - " + j);
-					background.SetTile(new Vector3Int(i, j, 0), room.theme.center);
+					background.SetTile(new Vector3Int(i, j, 0), theme.center);
 				}
 			}
 		}
