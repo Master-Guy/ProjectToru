@@ -16,6 +16,11 @@ public class Character : MonoBehaviour
 
 	private List<Item> inventory;
 
+	Character()
+	{
+		inventory = new List<Item>();
+	}
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -32,11 +37,11 @@ public class Character : MonoBehaviour
 		UpdateAnimationsAndMove();
 	}
 
-	public bool hasKey(Key key)
+	public bool hasKey(int key)
 	{
 		foreach(Item i in inventory)
 		{
-			if (i is Key && ((Key)i).privateKey == key.privateKey)
+			if (i is Key && ((Key)i).privateKey == key)
 				return true;
 		}
 		return false;

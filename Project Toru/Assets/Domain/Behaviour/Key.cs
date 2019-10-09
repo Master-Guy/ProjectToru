@@ -11,6 +11,11 @@ namespace Assets.Domain.Behaviour
 	{
 		public int privateKey;
 
+		Key()
+		{
+			Debug.Log("made a key");
+		}
+
 		void OnTriggerEnter2D(Collider2D collision)
 		{
 			if (collision.CompareTag("Player"))

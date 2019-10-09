@@ -13,7 +13,7 @@ public class DoorBehaviour : MonoBehaviour
 	private Tilemap appearance = null;
 
 	[SerializeField]
-	private Key key;
+	private int key;
 
     // Start is called before the first frame update
     void Start()
