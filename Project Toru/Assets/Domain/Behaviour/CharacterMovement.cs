@@ -9,6 +9,8 @@ public class CharacterMovement : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
+	private bool didUseStair = false;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -22,6 +24,21 @@ public class CharacterMovement : MonoBehaviour
 		change = Vector3.zero;
 		change.x = Input.GetAxisRaw("Horizontal");
 		change.y = Input.GetAxisRaw("Vertical");
+
+		// If player releases UP, reset Stair
+		if (didUseStair && change.y > 0)
+		{
+			change.y = 0;
+
+		}
+
+
+		// If player wants to go up, ignore movement
+		else if (didUseStair && change.y <= 0)
+		{
+			didUseStair = false;
+		}
+
 		UpdateAnimationsAndMove();
 	}
 
@@ -44,5 +61,11 @@ public class CharacterMovement : MonoBehaviour
 	{
 		change.Normalize();
 		myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
+	}
+
+	public void StairsTransistion()
+	{
+		didUseStair = true;
+		//Debug.Log("MovedStairs");
 	}
 }
