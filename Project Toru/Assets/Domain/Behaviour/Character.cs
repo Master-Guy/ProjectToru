@@ -1,13 +1,20 @@
-﻿using System.Collections;
+﻿using Assets.Domain.Behaviour;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+static class SelectedCharacter
+{
+	static Character Selected;
+}
+public class Character : MonoBehaviour
 {
 	public float speed;
 	private Rigidbody2D myRigidbody;
 	private Vector3 change;
 	private Animator animator;
+
+	private List<Item> inventory;
 
 	// Start is called before the first frame update
 	void Start()
@@ -23,6 +30,21 @@ public class CharacterMovement : MonoBehaviour
 		change.x = Input.GetAxisRaw("Horizontal");
 		change.y = Input.GetAxisRaw("Vertical");
 		UpdateAnimationsAndMove();
+	}
+
+	public bool hasKey(Key key)
+	{
+		foreach(Item i in inventory)
+		{
+			if (i is Key && ((Key)i).privateKey == key.privateKey)
+				return true;
+		}
+		return false;
+	}
+
+	public void addItem(Item i)
+	{
+		inventory.Add(i);
 	}
 
 	void UpdateAnimationsAndMove()

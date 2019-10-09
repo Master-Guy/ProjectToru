@@ -11,7 +11,7 @@ static class selectedCharacter
 }
 
 [CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-public class Character : Drawable
+public class CharacterOld : Drawable
 {
 	public new string name;
 	public Sprite sprite;
@@ -32,7 +32,7 @@ public class Character : Drawable
 	public CharacterBehaviour character;
 
 	// TODO fix
-	public Character(string sprite, Room startLocation) : base(sprite)
+	public CharacterOld(string sprite, Room startLocation) : base(sprite)
 	{
 		this.inventory = new List<Item>();
 		this.character = new CharacterBehaviour(this);

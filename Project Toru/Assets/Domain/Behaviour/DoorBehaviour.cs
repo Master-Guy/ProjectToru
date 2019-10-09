@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Domain.Behaviour;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,6 +12,9 @@ public class DoorBehaviour : MonoBehaviour
 	[SerializeField]
 	private Tilemap appearance = null;
 
+	[SerializeField]
+	private Key key;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,4 +26,11 @@ public class DoorBehaviour : MonoBehaviour
     {
         
     }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player"))
+			if (collision.gameObject.GetComponent<Character>().hasKey(key))
+				this.gameObject.SetActive(false);
+	}
 }

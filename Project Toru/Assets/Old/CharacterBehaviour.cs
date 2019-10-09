@@ -8,9 +8,9 @@ namespace Assets.Domain
 
 	public class CharacterBehaviour : MonoBehaviour
 	{
-		public Character info;
+		public CharacterOld info;
 
-		public CharacterBehaviour(Character info)
+		public CharacterBehaviour(CharacterOld info)
 		{
 			this.info = info;
 		}

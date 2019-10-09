@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
 
-public class RoomBehaviour : MonoBehaviour
+public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 {
 
 	// Note: The 
@@ -41,10 +42,17 @@ public class RoomBehaviour : MonoBehaviour
 			{
 				for (int j = 1; j < walls.size.y; j++)
 				{
-					Debug.Log(i + " - " + j);
 					background.SetTile(new Vector3Int(i, j, 0), theme.center);
 				}
 			}
+		}
+	}
+
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		if (eventData.button == PointerEventData.InputButton.Right)
+		{
+			Debug.Log("Right Mouse Button Clicked on: " + name);
 		}
 	}
 }
