@@ -20,11 +20,6 @@ public class RoomBehaviour : MonoBehaviour
 
 	void Start()
 	{
-		if (theme == null || walls == null || background == null)
-		{
-			Debug.LogError("Error: It is required to assign the Tilemap and room to prefab");
-		}
-
 		GenerateBackground();
 	}
 
