@@ -1319,7 +1319,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cancel
+  m_Text: Main Menu
 --- !u!222 &701694497
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3510,6 +3510,7 @@ MonoBehaviour:
   generalAudioSlider: {fileID: 219904219}
   musicSlider: {fileID: 1645633473}
   applyButton: {fileID: 737081077}
+  mainMenuButton: {fileID: 1794961367}
   generalSource: {fileID: 1230735279}
   musicSource: {fileID: 0}
 --- !u!4 &1833760537
