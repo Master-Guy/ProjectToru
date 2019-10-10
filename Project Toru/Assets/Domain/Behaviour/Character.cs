@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
 	private Animator animator;
 
 	private List<Item> inventory;
+	private bool didUseStair = false;
 
 	Character()
 	{
@@ -34,6 +35,21 @@ public class Character : MonoBehaviour
 		change = Vector3.zero;
 		change.x = Input.GetAxisRaw("Horizontal");
 		change.y = Input.GetAxisRaw("Vertical");
+
+		// If player releases UP, reset Stair
+		if (didUseStair && change.y > 0)
+		{
+			change.y = 0;
+
+		}
+
+
+		// If player wants to go up, ignore movement
+		else if (didUseStair && change.y <= 0)
+		{
+			didUseStair = false;
+		}
+
 		UpdateAnimationsAndMove();
 	}
 
@@ -71,5 +87,11 @@ public class Character : MonoBehaviour
 	{
 		change.Normalize();
 		myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
+	}
+
+	public void StairsTransistion()
+	{
+		didUseStair = true;
+		//Debug.Log("MovedStairs");
 	}
 }
