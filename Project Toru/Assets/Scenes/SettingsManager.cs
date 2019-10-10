@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SettingsManager : MonoBehaviour
     public Slider generalAudioSlider;
     public Slider musicSlider;
     public Button applyButton;
+    public Button mainMenuButton;
 
     public AudioSource generalSource;
     public AudioSource musicSource;
@@ -26,6 +28,7 @@ public class SettingsManager : MonoBehaviour
         generalAudioSlider.onValueChanged.AddListener(delegate { OnGeneralAudioChange(); });
         musicSlider.onValueChanged.AddListener(delegate { OnMusicVolumeChange(); });
         applyButton.onClick.AddListener(delegate { OnApplyClick(); });
+        mainMenuButton.onClick.AddListener(delegate { OnCancelClick(); });
 
         resolutions = Screen.resolutions;
 
@@ -63,6 +66,7 @@ public class SettingsManager : MonoBehaviour
     public void OnApplyClick()
     {
         SaveSettings();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadSettings()
@@ -73,5 +77,10 @@ public class SettingsManager : MonoBehaviour
         musicSlider.value = gameSettings.musicVolume;
         fullscreenToggle.isOn = gameSettings.fullscreen;
         resolutionDropdown.value = gameSettings.resolutionIndex;
+    }
+
+    public void OnCancelClick()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
