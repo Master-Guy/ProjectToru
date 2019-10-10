@@ -824,7 +824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6018d79aa100f4c1b89e0a12ee20980b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   target: {fileID: 9015496118105400155}
 --- !u!1 &6627284471428957900
 GameObject:
@@ -896,7 +895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6018d79aa100f4c1b89e0a12ee20980b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   target: {fileID: 5583071366738066302}
 --- !u!1 &6862494199235517560
 GameObject:
@@ -1883,7 +1881,6 @@ GameObject:
   - component: {fileID: 3813592448140720295}
   - component: {fileID: 6630552521671216021}
   - component: {fileID: 3901560896114030997}
-  - component: {fileID: 7717518679862731392}
   - component: {fileID: 7263434828113787816}
   - component: {fileID: 868584530253852782}
   - component: {fileID: 8921823952566945053}
@@ -2380,32 +2377,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!61 &7717518679862731392
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9083445114992440036}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 5.5, y: -5.92}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5, y: 0.2}
-  m_EdgeRadius: 0
 --- !u!68 &7263434828113787816
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -2422,15 +2393,15 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 2.9976003, y: -4.970707}
-  - {x: 4.9990864, y: -4.964827}
-  - {x: 5.0029416, y: -3.7610397}
+  - {x: 2.9976003, y: -4.9989767}
+  - {x: 5.110229, y: -4.9993196}
+  - {x: 5.1099763, y: -3.7931504}
   - {x: 6.839359, y: -3.780146}
   - {x: 6.84993, y: -4.972413}
   - {x: 7.9928675, y: -4.9916134}
   - {x: 7.9919844, y: -2.0092158}
   - {x: 2.9973454, y: -2.0148523}
-  - {x: 3.0211122, y: -4.93223}
+  - {x: 3.0006952, y: -4.998193}
 --- !u!68 &868584530253852782
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -2447,15 +2418,16 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 3.0096927, y: -0.9681746}
-  - {x: 5.112247, y: -0.968174}
-  - {x: 5.145688, y: -0.11542785}
-  - {x: 6.9013424, y: -0.13214791}
-  - {x: 6.901342, y: -0.968174}
-  - {x: 7.9715385, y: -0.96523833}
+  - {x: 3.000328, y: -0.99834925}
+  - {x: 4.122952, y: -0.9976172}
+  - {x: 4.1210613, y: -0.12131655}
+  - {x: 4.9993052, y: 0.25650364}
+  - {x: 5.8581557, y: -0.13169211}
+  - {x: 5.864938, y: -0.99172854}
+  - {x: 7.9892044, y: -1.0005703}
   - {x: 7.9882474, y: 1.9841063}
   - {x: 2.9836118, y: 1.9634769}
-  - {x: 2.997335, y: -0.9514539}
+  - {x: 3.0004566, y: -0.9993172}
 --- !u!68 &8921823952566945053
 EdgeCollider2D:
   m_ObjectHideFlags: 0
