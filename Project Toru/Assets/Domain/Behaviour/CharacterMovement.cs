@@ -32,7 +32,6 @@ public class CharacterMovement : MonoBehaviour
 
 		}
 
-
 		// If player wants to go up, ignore movement
 		else if (didUseStair && change.y <= 0)
 		{
