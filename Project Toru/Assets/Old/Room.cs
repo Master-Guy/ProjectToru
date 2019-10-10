@@ -19,7 +19,7 @@ public class Room : Drawable
 
 	// Variables //
 	public Vector3Int position;
-	public RoomTheme theme;
+	public Theme theme;
 	public int width = 1;
 	public int height = 1;
 
