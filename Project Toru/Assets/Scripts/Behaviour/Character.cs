@@ -77,6 +77,12 @@ public class Character : MonoBehaviour
 			animator.SetFloat("moveY", change.y);
 			animator.SetBool("moving", true);
 		}
+		else if (didUseStair)
+		{
+			animator.SetBool("moving", false);
+			animator.SetFloat("moveY", -1);
+
+		}
 		else
 		{
 			animator.SetBool("moving", false);
