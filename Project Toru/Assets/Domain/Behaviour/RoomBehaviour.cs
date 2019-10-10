@@ -8,7 +8,7 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 
 	// Note: The 
 	[SerializeField]
-	public RoomTheme theme = null;
+	public Theme theme = null;
 
 	[SerializeField]
 	private Tilemap walls = null;

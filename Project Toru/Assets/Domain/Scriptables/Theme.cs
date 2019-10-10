@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "new RoomTheme", menuName = "RoomTheme")]
-public class RoomTheme : ScriptableObject
+public class Theme : ScriptableObject
 {
 	public new string name;
 

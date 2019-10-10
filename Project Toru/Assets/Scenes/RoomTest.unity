@@ -373,8 +373,7 @@ PrefabInstance:
         type: 3}
       propertyPath: theme
       value: 
-      objectReference: {fileID: 11400000, guid: 0f6aa2beceb149c4589b35031169c714,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 270de48ed0f3c43039615016cf03224c,
         type: 3}
       propertyPath: m_LocalPosition.x

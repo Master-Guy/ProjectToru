@@ -6,7 +6,7 @@ public class StairBehaviour : MonoBehaviour
 {
 	[SerializeField]
 	private GameObject player;
-	private CharacterMovement playerScript;
+	private Character playerScript;
 
 	[SerializeField]
 	private Transform target;
@@ -15,7 +15,7 @@ public class StairBehaviour : MonoBehaviour
 	void Start()
 	{
 		Debug.Log("Starting");
-		playerScript = (CharacterMovement)player.GetComponent(typeof(CharacterMovement));
+		playerScript = (Character)player.GetComponent(typeof(Character));
 
 	}
 
