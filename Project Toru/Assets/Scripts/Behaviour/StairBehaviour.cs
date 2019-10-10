@@ -4,35 +4,26 @@ using UnityEngine;
 
 public class StairBehaviour : MonoBehaviour
 {
-	[SerializeField]
-	private GameObject player;
-	private Character playerScript;
-
+	// Assign target for this transistion. The character moves to this spot.
 	[SerializeField]
 	private Transform target;
 
-
-	void Start()
-	{
-		Debug.Log("Starting");
-		playerScript = (Character)player.GetComponent(typeof(Character));
-
-	}
-
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("IsColliding");
+		// Move character
+		other.transform.position = target.position;
 
-		player.transform.position = target.position;
-		playerScript.StairsTransistion();
+		// Let character know it is using a stairs
+		// Get GameObject from collider
+		GameObject gameobject = other.gameObject;
 
-		//player.position = target.position;
-		//GameObject.Find("Character").GetComponent<>().StairsTransistion();
+		// Check if this gameobject has an script Character
+		Character character = (Character)gameobject.GetComponent(typeof(Character));
 
-		// this was used to diff the player
-		//if (other.CompareTag("Player"))
-		//{
-
-		//}
+		if (character != null)
+		{
+			Debug.Log("Character is using stairs");
+			character.StairsTransistion();
+		}
 	}
 }
