@@ -8,11 +8,6 @@ public class CharacterManager : MonoBehaviour
 
 	private static GameObject[] characters;
 
-	public CharacterManager()
-	{
-		if (cm == null) cm = this; 
-	}
-
 	void Start()
 	{
 		characters = GameObject.FindGameObjectsWithTag("Player");
