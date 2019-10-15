@@ -1,0 +1,29 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterManager : MonoBehaviour
+{
+	private static CharacterManager cm;
+
+	private static GameObject[] characters;
+
+	public CharacterManager()
+	{
+		if (cm == null) cm = this; 
+	}
+
+	void Start()
+	{
+		characters = GameObject.FindGameObjectsWithTag("Player");
+	}
+
+	public void disableCharacterMovement()
+	{
+		foreach (GameObject c in characters)
+		{
+			Character character = (Character)c.GetComponent(typeof(Character));
+			character.disableMovement();
+		}
+	}
+}
