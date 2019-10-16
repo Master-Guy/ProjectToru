@@ -20,10 +20,14 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 	private bool lightsOn;
 
 	[SerializeField]
-	public Vector2 size = new Vector2(1, 1);
+	public Vector2Int size = new Vector2Int(0, 0);
 
 	void Start()
 	{
+		if (size.x == 0 || size.y == 0)
+		{
+			Debug.LogWarning("A room size must be set manualy");
+		}
 		GenerateBackground();
 	}
 
