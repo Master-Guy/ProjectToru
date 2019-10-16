@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DoorBehaviour : MonoBehaviour
+public class Door : MonoBehaviour
 {
 	[SerializeField]
-	private RoomBehaviour roomLeft = null, roomRight = null;
+	private Room roomLeft = null, roomRight = null;
 
 	[SerializeField]
 	private int key;
