@@ -19,6 +19,9 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	private bool lightsOn;
 
+	[SerializeField]
+	public Vector2 size = new Vector2(1, 1);
+
 	void Start()
 	{
 		GenerateBackground();
