@@ -44,6 +44,12 @@ TagManager:
   - name: Walls
     uniqueID: 3468499445
     locked: 0
+  - name: Items
+    uniqueID: 3388265027
+    locked: 0
+  - name: Doors
+    uniqueID: 4194868351
+    locked: 0
   - name: Player
     uniqueID: 2965519193
     locked: 0

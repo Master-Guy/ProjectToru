@@ -1270,7 +1270,7 @@ MonoBehaviour:
   theme: {fileID: 0}
   walls: {fileID: 7005030187107283721}
   background: {fileID: 1758127718735961169}
-  lightsOn: 0
+  lightsOn: 1
 --- !u!1839735485 &7476438788061625149
 Tilemap:
   m_ObjectHideFlags: 0
