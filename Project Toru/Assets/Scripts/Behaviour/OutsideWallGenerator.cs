@@ -44,11 +44,6 @@ public class OutsideWallGenerator : MonoBehaviour
 				// RIGHT
 				tilemap.SetTile(new Vector3Int(room.size.x, y, 0) + Vector3Int.FloorToInt(room.gameObject.transform.localPosition), tile);
 			}
-
-			Debug.Log(room.size);
-			//Debug.Log(room.gameObject.transform.localPosition.x);
-			//Debug.Log(room.gameObject.transform.localPosition.y);
-			//Debug.Log(room.gameObject.transform.localPosition.z);
 		}
 	}
 
