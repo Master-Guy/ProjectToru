@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
-public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
+public class Room : MonoBehaviour, IPointerClickHandler
 {
 
 	// Note: The 

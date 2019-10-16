@@ -21,8 +21,8 @@ public class OutsideWallGenerator : MonoBehaviour
 	void Start()
 	{
 		tilemap.SetTile(new Vector3Int(-1, 0, 0), tile);
-		RoomBehaviour[] rooms = grid.GetComponentsInChildren<RoomBehaviour>();
-		foreach (RoomBehaviour room in rooms)
+		Room[] rooms = grid.GetComponentsInChildren<Room>();
+		foreach (Room room in rooms)
 		{
 			Debug.Log(room.size);
 			//Debug.Log(room.gameObject.transform.localPosition.x);

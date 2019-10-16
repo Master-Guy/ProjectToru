@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2801526324469561694}
-  - component: {fileID: 7117552543091034422}
+  - component: {fileID: 8529288876547827963}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -64,7 +64,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7117552543091034422
+--- !u!114 &8529288876547827963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,7 +80,7 @@ MonoBehaviour:
   walls: {fileID: 0}
   background: {fileID: 0}
   lightsOn: 0
-  size: {x: 5, y: 8}
+  size: {x: 1, y: 1}
 --- !u!1 &3532554804510992287
 GameObject:
   m_ObjectHideFlags: 0
