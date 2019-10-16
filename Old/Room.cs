@@ -12,7 +12,7 @@ using UnityEngine;
 /// a room also has a variable denoting if it has been uncovered,
 /// in game it will also store which characters are currently present.
 /// </remarks>
-public class RoomOld : Drawable
+public class Room : Drawable
 {
 	// Constants //
 	private const int maxCharacters = 10;
@@ -26,7 +26,7 @@ public class RoomOld : Drawable
 	public new string name;
 	public bool lightsOn = true;
 	public Dictionary<short, Furniture> furniture;
-	private List<DoorOld> doors;
+	private List<Door> doors;
 
 
 	// public Functions //
@@ -37,13 +37,13 @@ public class RoomOld : Drawable
 	/// <param name="posY"></param>
 	/// <param name="xSize"></param>
 	/// <param name="ySize"></param>
-	RoomOld(Vector3Int pos, int xSize, int ySize, string roomTheme) : base(roomTheme)
+	Room(Vector3Int pos, int xSize, int ySize, string roomTheme) : base(roomTheme)
 	{
 		position = pos;
 		width = xSize;
 		height = ySize;
 		furniture = new Dictionary<short, Furniture>();
-		doors = new List<DoorOld>();
+		doors = new List<Door>();
 	}
 	/// <summary>
 	/// Constructor with standard size
@@ -54,7 +54,7 @@ public class RoomOld : Drawable
 	/// <param name="posX"></param>
 	/// <param name="posY"></param>
 	/// <param name="background"></param>
-	RoomOld(Vector3Int pos, string background) : this(pos, 2, 1, background) { }
+	Room(Vector3Int pos, string background) : this(pos, 2, 1, background) { }
 
 	/// <summary>
 	/// adds a piece of furniture to the room
@@ -66,7 +66,7 @@ public class RoomOld : Drawable
 		furniture.Add(loc, furn);
 	}
 
-	public List<RoomOld> CalculatePath(RoomOld dest, List<RoomOld> route)
+	public List<Room> CalculatePath(Room dest, List<Room> route)
 	{
 		if (dest == this)
 		{
@@ -76,8 +76,8 @@ public class RoomOld : Drawable
 		if (!uncovered || route.Contains(this))
 			return null;
 		route.Add(this);
-		List<RoomOld> res = null, temp = null;
-		foreach (DoorOld d in doors)
+		List<Room> res = null, temp = null;
+		foreach (Door d in doors)
 		{
 			temp = d.calculatePath(dest, route);
 			if ((temp != null && temp.Count < res.Count) || res == null)

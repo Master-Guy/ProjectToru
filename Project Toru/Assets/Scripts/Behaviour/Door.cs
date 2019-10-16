@@ -7,18 +7,16 @@ using UnityEngine.Tilemaps;
 public class Door : MonoBehaviour
 {
 	[SerializeField]
-	public Room roomLeft = null, roomRight = null;
-
-	[SerializeField]
-	private Tilemap appearance = null;
+	private Room roomLeft = null, roomRight = null;
 
 	[SerializeField]
 	private int key;
 
+    private bool closed = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -29,8 +27,16 @@ public class Door : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.CompareTag("Player"))
-			if (collision.gameObject.GetComponent<Character>().hasKey(key))
-				this.gameObject.SetActive(false);
+        if (collision.CompareTag("Player"))
+            if (collision.gameObject.GetComponent<Character>().hasKey(key) && closed)
+                OpenDoor();
 	}
+
+    private void OpenDoor()
+    {
+        Debug.Log("Opening door");
+        closed = false;
+        GetComponent<Animator>().SetBool("openDoor", true);
+        GetComponent<Collider2D>().enabled = false;
+    }
 }
