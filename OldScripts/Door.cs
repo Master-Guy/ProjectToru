@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new Furniture", menuName = "Furniture/Door")]
-public class Door : Furniture
+public class DoorOld : Furniture
 {
-	public Room source;
-	public Room destination;
+	public RoomOld source;
+	public RoomOld destination;
 	public Locklevel open;
-	public Door(string sprite) : base(sprite)
+	public DoorOld(string sprite) : base(sprite)
 	{
 	}
 
@@ -17,7 +17,7 @@ public class Door : Furniture
 
 	}
 
-	public List<Room> calculatePath(Room dest, List<Room> route) { return destination.CalculatePath(dest, route); }
+	public List<RoomOld> calculatePath(RoomOld dest, List<RoomOld> route) { return destination.CalculatePath(dest, route); }
 }
 
 public enum Locklevel
