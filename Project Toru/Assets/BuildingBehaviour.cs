@@ -8,31 +8,43 @@ public class BuildingBehaviour : MonoBehaviour
 	[SerializeField]
 	Grid grid = null;
 
+	/// <summary>
+	/// List of all rooms in this building
+	/// </summary>
+	RoomBehaviour[] rooms = null;
+
+	/// <summary>
+	/// Size of building
+	/// </summary>
+	Vector2Int size = new Vector2Int(0, 0);
+
+	/// <summary>
+	/// Center of building in canvas
+	/// </summary>
+	Vector2Int center = new Vector2Int(0, 0);
+
+	/// <summary>
+	/// Bottom left of building
+	/// </summary>
+	Vector2Int bottomLeft = new Vector2Int(0, 0);
+
 	// Start is called before the first frame update
 	void Start()
 	{
+		CalculateBuilding();
 	}
 
-	// Update is called once per frame
-	//void Update()
-	//{
-
-	//}
-
-	public RoomBehaviour[] GetRooms()
+	/// <summary>
+	/// Calculates building dimentions
+	/// must be called every time the room is changed dynamicly.
+	/// </summary>
+	void CalculateBuilding()
 	{
-		return grid.GetComponentsInChildren<RoomBehaviour>();
-	}
 
-	public int getTotalRooms()
-	{
-		return GetRooms().Length;
-	}
+		// Get rooms
+		RoomBehaviour[] rooms = grid.GetComponentsInChildren<RoomBehaviour>();
 
-	public Vector2Int size()
-	{
-		RoomBehaviour[] rooms = GetRooms();
-
+		// Calculate size of building
 		int left = int.MaxValue;
 		int right = int.MinValue;
 		int top = int.MinValue;
@@ -55,17 +67,61 @@ public class BuildingBehaviour : MonoBehaviour
 				top = position.y + room.GetSize().y;
 		}
 
-		return new Vector2Int(right - left, top - bottom);
+		size = new Vector2Int(right - left, top - bottom);
+
+		// Calculate center of building (For camera eg)
+		center = new Vector2Int((left + right) / 2, (bottom + top) / 2);
+
+		// Set bottom left
+		bottomLeft = new Vector2Int(left, bottom);
 	}
 
-	//   public Vector2Int center()
-	//{
+	/// <summary>
+	/// Returns all rooms in a list (Unordered)
+	/// Must be updated with CalculateBuilding() after building has changed
+	/// </summary>
+	/// <returns>Unordered list of rooms in this building</returns>
+	public RoomBehaviour[] GetRooms()
+	{
+		return rooms;
+	}
 
-	//}
+	/// <summary>
+	/// Returns total of rooms
+	/// </summary>
+	/// <returns>Total of rooms in building</returns>
+	public int GetTotalRooms()
+	{
+		return rooms.Length;
+	}
 
-	//   public Vector2Int bottomLeft()
-	//{
+	/// <summary>
+	/// Returns size of building
+	/// This is not dependend on canvas layout. Just an absolute value of the size
+	/// </summary>
+	/// <returns>Absolute value of the size of the building</returns>
+	public Vector2Int GetSize()
+	{
+		return size;
+	}
 
-	//}
+	/// <summary>
+	/// Returns center of building dependent of the canvas
+	/// </summary>
+	/// <returns>Center of building depending on canvas</returns>
+	public Vector2Int GetCenter()
+	{
+		return center;
+
+	}
+
+	/// <summary>
+	/// Returns bottomleft of building depentend of the canvas 
+	/// </summary>
+	/// <returns></returns>
+	public Vector2Int GetBottomLeft()
+	{
+		return bottomLeft;
+	}
 
 }
