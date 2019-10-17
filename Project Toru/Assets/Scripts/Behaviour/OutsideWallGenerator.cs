@@ -6,18 +6,13 @@ using UnityEngine.Tilemaps;
 public class OutsideWallGenerator : MonoBehaviour
 {
 	[SerializeField]
-	BuildingBehaviour building = null;
-
-	[SerializeField]
 	Tilemap tilemap = null;
 
 	[SerializeField]
 	Tile tile = null;
 
-	// Start is called before the first frame update
-	void Start()
+	public void generate(RoomBehaviour[] rooms)
 	{
-		RoomBehaviour[] rooms = building.GetRooms();
 
 		foreach (RoomBehaviour room in rooms)
 		{
