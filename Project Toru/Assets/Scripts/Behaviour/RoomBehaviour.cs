@@ -20,7 +20,7 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 	private bool lightsOn;
 
 	[SerializeField]
-	public Vector2Int size = new Vector2Int(0, 0);
+	Vector2Int size = new Vector2Int(0, 0);
 
 	void Start()
 	{
@@ -56,5 +56,23 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 		{
 			Debug.Log("Right Mouse Button Clicked on: " + name);
 		}
+	}
+
+	/// <summary>
+	/// This function returns the current position seen from bottom left
+	/// </summary>
+	/// <returns>Returns current position from bottom left</returns>
+	public Vector3Int GetPosition()
+	{
+		return Vector3Int.FloorToInt(this.gameObject.transform.localPosition);
+	}
+
+	/// <summary>
+	/// This function returns the size of the room set by level designer
+	/// </summary>
+	/// <returns>Returns current size of room</returns>
+	public Vector2Int GetSize()
+	{
+		return size;
 	}
 }
