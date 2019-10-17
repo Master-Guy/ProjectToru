@@ -28,10 +28,14 @@ public class BuildingBehaviour : MonoBehaviour
 	/// </summary>
 	Vector2Int bottomLeft = new Vector2Int(0, 0);
 
+	[SerializeField]
+	OutsideWallGenerator wallGenerator = null;
+
 	// Start is called before the first frame update
 	void Start()
 	{
 		CalculateBuilding();
+		wallGenerator.generate(rooms);
 	}
 
 	/// <summary>
@@ -42,7 +46,7 @@ public class BuildingBehaviour : MonoBehaviour
 	{
 
 		// Get rooms
-		RoomBehaviour[] rooms = grid.GetComponentsInChildren<RoomBehaviour>();
+		rooms = grid.GetComponentsInChildren<RoomBehaviour>();
 
 		// Calculate size of building
 		int left = int.MaxValue;
