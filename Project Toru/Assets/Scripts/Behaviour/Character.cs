@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
 	private List<Item> inventory;
 	private bool didUseStair = false;
 
-	private CharacterManager cm;
+	private static CharacterManager cm;
 	private bool isDisabled;
 	ParticleSystem ps;
 
@@ -27,16 +27,19 @@ public class Character : MonoBehaviour
 	{
 		myRigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		cm = new CharacterManager();
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
-		ps.Stop();
+
+		if(cm == null)
+		{
+			cm = new CharacterManager();
+		}
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if(!isDisabled)
+		if (!isDisabled)
 		{
 			change = Vector3.zero;
 			change.x = Input.GetAxisRaw("Horizontal");
@@ -124,6 +127,21 @@ public class Character : MonoBehaviour
 			cm.disableCharacterMovement();
 			enableMovement();
 			ps.Play();
+		}
+	}
+	void OnTriggerEnter(Collider other)
+	{
+		Debug.Log("Ja");
+		if (other.tag.Equals("Player"))
+		{
+			if (this.transform.position.y > other.transform.position.y)
+			{
+				transform.position = new Vector3(transform.position.x, transform.position.y, -2);
+			}
+			else
+			{
+				transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+			}
 		}
 	}
 }

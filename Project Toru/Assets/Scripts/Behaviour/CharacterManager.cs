@@ -10,7 +10,10 @@ public class CharacterManager : MonoBehaviour
 
 	void Start()
 	{
-		characters = GameObject.FindGameObjectsWithTag("Player");
+		if (characters == null)
+		{
+			characters = GameObject.FindGameObjectsWithTag("Player");
+		}
 	}
 
 	public void disableCharacterMovement()
