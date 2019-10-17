@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-static class SelectedCharacter
-{
-	static Character Selected;
-}
 public class Character : MonoBehaviour
 {
 	public float speed;
@@ -16,6 +12,10 @@ public class Character : MonoBehaviour
 
 	private List<Item> inventory;
 	private bool didUseStair = false;
+
+	private static CharacterManager cm;
+	private bool isDisabled;
+	private ParticleSystem ps;
 
 	Character()
 	{
@@ -27,30 +27,40 @@ public class Character : MonoBehaviour
 	{
 		myRigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
+		isDisabled = true;
+		ps = GetComponent<ParticleSystem>();
+
+		if(cm == null)
+		{
+			cm = new CharacterManager();
+		}
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		change = Vector3.zero;
-		change.x = Input.GetAxisRaw("Horizontal");
-		change.y = Input.GetAxisRaw("Vertical");
-
-		// If player releases UP, reset Stair
-		if (didUseStair && change.y > 0)
+		if (!isDisabled)
 		{
-			change.y = 0;
+			change = Vector3.zero;
+			change.x = Input.GetAxisRaw("Horizontal");
+			change.y = Input.GetAxisRaw("Vertical");
 
+			// If player releases UP, reset Stair
+			if (didUseStair && change.y > 0)
+			{
+				change.y = 0;
+
+			}
+
+
+			// If player wants to go up, ignore movement
+			else if (didUseStair && change.y <= 0)
+			{
+				didUseStair = false;
+			}
+
+			UpdateAnimationsAndMove();
 		}
-
-
-		// If player wants to go up, ignore movement
-		else if (didUseStair && change.y <= 0)
-		{
-			didUseStair = false;
-		}
-
-		UpdateAnimationsAndMove();
 	}
 
 	public bool hasKey(int key)
@@ -99,5 +109,38 @@ public class Character : MonoBehaviour
 	{
 		didUseStair = true;
 		//Debug.Log("MovedStairs");
+	}
+
+	public void enableMovement()
+	{
+		isDisabled = false;
+	}
+
+	public void disableMovement()
+	{
+		isDisabled = true;
+	}
+
+	void OnMouseDown()
+	{
+		if (Input.GetMouseButtonDown(0)) {
+			cm.disableCharacterMovement();
+			enableMovement();
+			ps.Play();
+		}
+	}
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag.Equals("Player"))
+		{
+			if (this.transform.position.y > other.transform.position.y)
+			{
+				transform.position = new Vector3(transform.position.x, transform.position.y, -2);
+			}
+			else
+			{
+				transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+			}
+		}
 	}
 }

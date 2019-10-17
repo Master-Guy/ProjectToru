@@ -71,6 +71,17 @@ public class SettingsManager : MonoBehaviour
 
     public void LoadSettings()
     {
+        if(!File.Exists(Application.persistentDataPath + "/gamesettings.json"))
+        {
+            gameSettings.fullscreen = true;
+            gameSettings.generalAudioVolume = 100;
+            gameSettings.musicVolume = 100;
+            gameSettings.resolutionIndex = 0;
+
+            string jsonData = JsonUtility.ToJson(gameSettings, true);
+            File.WriteAllText(Application.persistentDataPath + "/gamesettings.json", jsonData);
+        }
+
         gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
 
         generalAudioSlider.value = gameSettings.generalAudioVolume;
