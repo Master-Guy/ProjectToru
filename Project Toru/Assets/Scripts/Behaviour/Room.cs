@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
+using Assets.Scripts.Behaviour;
+using System.Collections.Generic;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {

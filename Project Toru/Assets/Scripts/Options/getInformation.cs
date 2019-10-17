@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Options
 {
-	public class Option
+	class getInformation : Option
 	{
-		public void getInfo()
-		{
-
-		}
 	}
 }

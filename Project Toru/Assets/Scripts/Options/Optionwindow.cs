@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Behaviour
+namespace Assets.Scripts.Options
 {
-	class Furniture
+	class Optionwindow
 	{
 	}
 }
