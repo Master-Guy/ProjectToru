@@ -98,8 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomLeft: {fileID: 0}
   roomRight: {fileID: 0}
-  doorOpen: {fileID: 21300000, guid: 779a29c18bea89241acb14b0c372e902, type: 3}
-  doorClosed: {fileID: 21300000, guid: 6437978d3e0a93447ad11e5e38e45a46, type: 3}
   key: 5
 --- !u!61 &2369414609990655978
 BoxCollider2D:
@@ -140,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.35771847, y: -0.19612503}
+  m_Offset: {x: -0.38349915, y: -0.19612503}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7180786, y: 1.9881134}
+  m_Size: {x: 1.1508999, y: 1.9881134}
   m_EdgeRadius: 0
 --- !u!95 &2369414610302479788
 Animator:
