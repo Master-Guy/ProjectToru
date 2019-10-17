@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
 
 	private static CharacterManager cm;
 	private bool isDisabled;
-	ParticleSystem ps;
+	private ParticleSystem ps;
 
 	Character()
 	{
@@ -131,7 +131,6 @@ public class Character : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("Ja");
 		if (other.tag.Equals("Player"))
 		{
 			if (this.transform.position.y > other.transform.position.y)

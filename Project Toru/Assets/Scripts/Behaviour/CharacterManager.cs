@@ -8,6 +8,8 @@ public class CharacterManager : MonoBehaviour
 
 	private static GameObject[] characters;
 
+	private static int selected;
+
 	void Start()
 	{
 		if (characters == null)
@@ -22,6 +24,6 @@ public class CharacterManager : MonoBehaviour
 		{
 			Character character = (Character)c.GetComponent(typeof(Character));
 			character.disableMovement();
-		}
-	}
+		}	
+	}	
 }
