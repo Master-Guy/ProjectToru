@@ -34,6 +34,8 @@ public class Character : MonoBehaviour
 		{
 			cm = new CharacterManager();
 		}
+
+		AdjustOrderLayer();
 	}
 
 	// Update is called once per frame
@@ -41,6 +43,7 @@ public class Character : MonoBehaviour
 	{
 		if (!isDisabled)
 		{
+			Camera.main.GetComponent<CameraBehaviour>().target = transform;
 			change = Vector3.zero;
 			change.x = Input.GetAxisRaw("Horizontal");
 			change.y = Input.GetAxisRaw("Vertical");
@@ -62,7 +65,7 @@ public class Character : MonoBehaviour
 			UpdateAnimationsAndMove();
 		}
 
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 10); 
+		
 	}
 
 	public bool hasKey(int key)
@@ -84,6 +87,7 @@ public class Character : MonoBehaviour
 	{
 		if (change != Vector3.zero)
 		{
+			AdjustOrderLayer();
 			MoveCharacter();
 			animator.SetFloat("moveX", change.x);
 			animator.SetFloat("moveY", change.y);
@@ -131,18 +135,9 @@ public class Character : MonoBehaviour
 			ps.Play();
 		}
 	}
-	void OnTriggerEnter(Collider other)
+
+	void AdjustOrderLayer()
 	{
-		if (other.tag.Equals("Player"))
-		{
-			if (this.transform.position.y > other.transform.position.y)
-			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, -2);
-			}
-			else
-			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, -1);
-			}
-		}
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
 }

@@ -8,25 +8,54 @@ public class Stair : MonoBehaviour
 	[SerializeField]
 	private Transform target;
 
-	void OnTriggerEnter2D(Collider2D other)
+	private float timer = 0;
+	private float stairsDuration = 1;
+	private bool playerOnTheStairs = false;
+	private Collider2D player = null;
+
+	void Update()
 	{
-		if (other.tag != "Player")
+		if (playerOnTheStairs)
 		{
-			// Move character
-			other.transform.position = target.position;
+			timer += Time.deltaTime;
+		}
 
-			// Let character know it is using a stairs
-			// Get GameObject from collider
-			GameObject gameobject = other.gameObject;
-
-			// Check if this gameobject has an script Character
-			Character character = (Character)gameobject.GetComponent(typeof(Character));
-
-			if (character != null)
-			{
-				Debug.Log("Character is using stairs");
-				character.StairsTransistion();
-			}
+		if (timer > stairsDuration)
+		{
+			playerOnTheStairs = false;
+			timer = 0;
+			PlayerUsesStairs();
 		}
 	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			player = other;
+			playerOnTheStairs = true;
+			player.gameObject.SetActive(false);
+		}
+	}
+
+	private void PlayerUsesStairs()
+	{
+		// Move character
+		player.gameObject.SetActive(true);
+		player.transform.position = target.position;
+
+		// Let character know it is using a stairs
+		// Get GameObject from collider
+		GameObject gameobject = player.gameObject;
+
+		// Check if this gameobject has an script Character
+		Character character = (Character)gameobject.GetComponent(typeof(Character));
+
+		if (character != null)
+		{
+			character.StairsTransistion();
+		}
+	}
+
+
 }
