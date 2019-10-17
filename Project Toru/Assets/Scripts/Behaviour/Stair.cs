@@ -10,20 +10,23 @@ public class Stair : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		// Move character
-		other.transform.position = target.position;
-
-		// Let character know it is using a stairs
-		// Get GameObject from collider
-		GameObject gameobject = other.gameObject;
-
-		// Check if this gameobject has an script Character
-		Character character = (Character)gameobject.GetComponent(typeof(Character));
-
-		if (character != null)
+		if (other.tag != "Player")
 		{
-			Debug.Log("Character is using stairs");
-			character.StairsTransistion();
+			// Move character
+			other.transform.position = target.position;
+
+			// Let character know it is using a stairs
+			// Get GameObject from collider
+			GameObject gameobject = other.gameObject;
+
+			// Check if this gameobject has an script Character
+			Character character = (Character)gameobject.GetComponent(typeof(Character));
+
+			if (character != null)
+			{
+				Debug.Log("Character is using stairs");
+				character.StairsTransistion();
+			}
 		}
 	}
 }

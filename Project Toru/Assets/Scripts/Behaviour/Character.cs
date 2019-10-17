@@ -61,6 +61,8 @@ public class Character : MonoBehaviour
 
 			UpdateAnimationsAndMove();
 		}
+
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 10); 
 	}
 
 	public bool hasKey(int key)
