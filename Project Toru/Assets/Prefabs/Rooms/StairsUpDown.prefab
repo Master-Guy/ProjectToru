@@ -1356,9 +1356,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7702936504895663089}
+  - component: {fileID: 5033858499975325313}
   - component: {fileID: 3407473928853707310}
   - component: {fileID: 2734191828680844559}
-  - component: {fileID: 5033858499975325313}
   - component: {fileID: 8256445067387621699}
   m_Layer: 0
   m_Name: StairsUp
@@ -1382,6 +1382,20 @@ Transform:
   m_Father: {fileID: 9076703609153213656}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5033858499975325313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837577560235578560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6018d79aa100f4c1b89e0a12ee20980b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stairsBehaviour: {fileID: 8513253477087706233}
+  DirectionIsUp: 1
 --- !u!1839735485 &3407473928853707310
 Tilemap:
   m_ObjectHideFlags: 0
@@ -1585,19 +1599,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &5033858499975325313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4837577560235578560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6018d79aa100f4c1b89e0a12ee20980b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!61 &8256445067387621699
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1740,7 +1741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6018d79aa100f4c1b89e0a12ee20980b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  stairsBehaviour: {fileID: 8513253477087706233}
+  DirectionIsUp: 0
 --- !u!1839735485 &3760078661822157089
 Tilemap:
   m_ObjectHideFlags: 0

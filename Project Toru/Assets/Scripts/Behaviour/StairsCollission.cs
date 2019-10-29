@@ -4,28 +4,16 @@ using UnityEngine;
 
 public class StairsCollission : MonoBehaviour
 {
-	// Assign target for this transistion. The character moves to this spot.
 	[SerializeField]
-	private Transform target;
+	private StairsBehaviour stairsBehaviour;
+
+	[SerializeField]
+	private bool DirectionIsUp = false;
+
+
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-
-		Debug.Log("Hello!");
-		//// Move character
-		//other.transform.position = target.position;
-
-		//// Let character know it is using a stairs
-		//// Get GameObject from collider
-		//GameObject gameobject = other.gameObject;
-
-		//// Check if this gameobject has an script Character
-		//Character character = (Character)gameobject.GetComponent(typeof(Character));
-
-		//if (character != null)
-		//{
-		//	Debug.Log("Character is using stairs");
-		//	character.StairsTransistion();
-		//}
+		stairsBehaviour.UseStairs(DirectionIsUp, other);
 	}
 }
