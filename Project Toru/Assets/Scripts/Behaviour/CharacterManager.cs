@@ -8,6 +8,8 @@ public class CharacterManager : MonoBehaviour
 
 	private static GameObject[] characters;
 
+    public Character selectedCharacter;
+
 	void Start()
 	{
 		if (characters == null)

@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
 	private List<Item> inventory;
 	private bool didUseStair = false;
 
-	private static CharacterManager cm;
+	private static CharacterManager cm = new CharacterManager();
 	private bool isDisabled;
 	private ParticleSystem ps;
 
@@ -29,11 +29,6 @@ public class Character : MonoBehaviour
 		animator = GetComponent<Animator>();
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
-
-		if(cm == null)
-		{
-			cm = new CharacterManager();
-		}
 
 		AdjustOrderLayer();
 	}
@@ -131,6 +126,7 @@ public class Character : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0)) {
 			cm.disableCharacterMovement();
+            cm.selectedCharacter = this;
 			enableMovement();
 			ps.Play();
 		}
