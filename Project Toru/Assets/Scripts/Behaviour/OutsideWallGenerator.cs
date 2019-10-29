@@ -6,35 +6,28 @@ using UnityEngine.Tilemaps;
 public class OutsideWallGenerator : MonoBehaviour
 {
 	[SerializeField]
+	Grid grid = null;
+
+	[SerializeField]
 	Tilemap tilemap = null;
+
+	[SerializeField]
+	EdgeCollider2D collider = null;
 
 	[SerializeField]
 	Tile tile = null;
 
-	public void generate(RoomBehaviour[] rooms)
+	// Start is called before the first frame update
+	void Start()
 	{
-
-		foreach (RoomBehaviour room in rooms)
+		tilemap.SetTile(new Vector3Int(-1, 0, 0), tile);
+		Room[] rooms = grid.GetComponentsInChildren<Room>();
+		foreach (Room room in rooms)
 		{
-			// TOP / BOTTOM
-			for (int x = -1; x < room.GetSize().x + 1; x++)
-			{
-				// TOP
-				tilemap.SetTile(new Vector3Int(x, room.GetSize().y, 0) + room.GetPosition(), tile);
-
-				//// BOTTOM
-				tilemap.SetTile(new Vector3Int(x, -1, 0) + room.GetPosition(), tile);
-			}
-
-			// LEFT / RIGHT
-			for (int y = 0; y < room.GetSize().y; y++)
-			{
-				// LEFT
-				tilemap.SetTile(new Vector3Int(-1, y, 0) + room.GetPosition(), tile);
-
-				// RIGHT
-				tilemap.SetTile(new Vector3Int(room.GetSize().x, y, 0) + room.GetPosition(), tile);
-			}
+			Debug.Log(room.size);
+			//Debug.Log(room.gameObject.transform.localPosition.x);
+			//Debug.Log(room.gameObject.transform.localPosition.y);
+			//Debug.Log(room.gameObject.transform.localPosition.z);
 		}
 	}
 

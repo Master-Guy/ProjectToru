@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
-public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
+public class Room : MonoBehaviour, IPointerClickHandler
 {
 
 	// Note: The 
@@ -24,8 +24,6 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 
 	public RoomBehaviour LeftRoom;
 	public RoomBehaviour RightRoom;
-
-
 
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
@@ -49,11 +47,6 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-	void Update()
-	{
-
-	}
-
 	private void GenerateBackground()
 	{
 		if (lightsOn && background.size.x == 0)
@@ -66,6 +59,7 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 				}
 			}
 		}
+
 	}
 
 	public void OnPointerClick(PointerEventData eventData)

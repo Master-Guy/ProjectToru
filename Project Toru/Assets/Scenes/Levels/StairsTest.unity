@@ -1607,6 +1607,7 @@ GameObject:
   - component: {fileID: 1286827952}
   - component: {fileID: 1286827951}
   - component: {fileID: 1286827950}
+  - component: {fileID: 1286827953}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1702,6 +1703,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room R
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035884668655751474, guid: 270de48ed0f3c43039615016cf03224c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 270de48ed0f3c43039615016cf03224c,
         type: 3}
@@ -6425,7 +6431,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2139789197}
   - component: {fileID: 2139789196}
-  - component: {fileID: 2139789198}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged

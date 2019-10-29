@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu's/SettingsMenu.unity
     guid: e379f03afbdc1994289c06dfefcb7aa8
+  - enabled: 1
+    path: Assets/Scenes/Levels/StairsTest.unity
+    guid: 2de5127b6cd747f419777e485d79c807
   m_configObjects: {}
