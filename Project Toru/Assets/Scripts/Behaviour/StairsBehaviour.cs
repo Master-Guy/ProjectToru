@@ -10,10 +10,10 @@ public class StairsBehaviour : MonoBehaviour
 	public StairsBehaviour Downstairs = null;
 
 	[SerializeField]
-	GameObject GoUpStairs = null;
+	StairsCollission GoUpStairs = null;
 
 	[SerializeField]
-	GameObject GoDownStairs = null;
+	StairsCollission GoDownStairs = null;
 
 	void Start()
 	{
@@ -21,12 +21,12 @@ public class StairsBehaviour : MonoBehaviour
 		// Hide stairs when floor is not connected
 		if (Upstair == null)
 		{
-			GoUpStairs.SetActive(false);
+			GoUpStairs.Disable();
 		}
 
 		if (Downstairs == null)
 		{
-			GoDownStairs.SetActive(false);
+			GoDownStairs.Disable();
 		}
 	}
 
@@ -42,18 +42,7 @@ public class StairsBehaviour : MonoBehaviour
 
 		// Find PositionTarget
 		// We need to get the Downstairs target, because the character must end there.
-		Transform[] objects = GoDownStairs.GetComponentsInChildren<Transform>();
-		foreach (Transform transformObject in objects)
-		{
-			if (transformObject.tag == "PositionTarget")
-			{
-				return transformObject;
-			}
-		}
-
-
-		Debug.LogError("No target found with tag PositionTarget");
-		return null;
+		return GoDownStairs.GetTarget();
 	}
 
 	/// <summary>
@@ -68,18 +57,7 @@ public class StairsBehaviour : MonoBehaviour
 
 		// Find PositionTarget
 		// We need to get the Downstairs target, because the character must end there.
-		Transform[] objects = GoUpStairs.GetComponentsInChildren<Transform>();
-		foreach (Transform transformObject in objects)
-		{
-			if (transformObject.tag == "PositionTarget")
-			{
-				return transformObject;
-			}
-		}
-
-
-		Debug.LogError("No target found with tag PositionTarget");
-		return null;
+		return GoDownStairs.GetTarget();
 	}
 
 	/// <summary>

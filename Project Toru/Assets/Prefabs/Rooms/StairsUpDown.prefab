@@ -1396,6 +1396,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stairsBehaviour: {fileID: 8513253477087706233}
   DirectionIsUp: 1
+  target: {fileID: 8097394803100348572}
+  tilemapRenderer: {fileID: 2734191828680844559}
+  DisabledStairsBarrier: {fileID: 0}
 --- !u!1839735485 &3407473928853707310
 Tilemap:
   m_ObjectHideFlags: 0
@@ -1692,8 +1695,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upstair: {fileID: 0}
   Downstairs: {fileID: 0}
-  GoUpStairs: {fileID: 4837577560235578560}
-  GoDownStairs: {fileID: 7766117156067981809}
+  GoUpStairs: {fileID: 5033858499975325313}
+  GoDownStairs: {fileID: 8944547003569207853}
 --- !u!1 &7766117156067981809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,6 +1746,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stairsBehaviour: {fileID: 8513253477087706233}
   DirectionIsUp: 0
+  target: {fileID: 562953573597773029}
+  tilemapRenderer: {fileID: 6257701177135516580}
+  DisabledStairsBarrier: {fileID: 0}
 --- !u!1839735485 &3760078661822157089
 Tilemap:
   m_ObjectHideFlags: 0
@@ -2627,6 +2633,8 @@ GameObject:
   - component: {fileID: 8848863803309412481}
   - component: {fileID: 8848863803309412480}
   - component: {fileID: 8848863803309412495}
+  - component: {fileID: 2082715978970953513}
+  - component: {fileID: 1737253178948412152}
   m_Layer: 0
   m_Name: FloorWall
   m_TagString: Untagged
@@ -2858,7 +2866,64 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!50 &2082715978970953513
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848863803309412493}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!66 &1737253178948412152
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848863803309412493}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 8848863803309412495}
+    m_ColliderPaths:
+    - - X: 249999971
+        Y: 0
+      - X: 249999971
+        Y: 2500000
+      - X: 180000000
+        Y: 2499971
+      - X: 180000029
+        Y: 0
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 24.999994, y: 0}
+      - {x: 24.999994, y: 0.25}
+      - {x: 18, y: 0.2499942}
+      - {x: 18.000006, y: 0}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.000005
