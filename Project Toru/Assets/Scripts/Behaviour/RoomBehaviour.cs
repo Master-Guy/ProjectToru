@@ -11,16 +11,21 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 	public Theme theme = null;
 
 	[SerializeField]
-	private Tilemap walls = null;
+	Tilemap walls = null;
 
 	[SerializeField]
-	private Tilemap background = null;
+	Tilemap background = null;
 
 	[SerializeField]
-	private bool lightsOn;
+	bool lightsOn;
+
+	[SerializeField]
+	WallController wallController;
 
 	public RoomBehaviour LeftRoom;
 	public RoomBehaviour RightRoom;
+
+
 
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
@@ -29,9 +34,19 @@ public class RoomBehaviour : MonoBehaviour, IPointerClickHandler
 	{
 		if (size.x == 0 || size.y == 0)
 		{
-			Debug.LogWarning("A room size must be set manualy");
+			Debug.LogError("A room size must be set manualy");
 		}
 		GenerateBackground();
+
+		if (LeftRoom != null)
+		{
+			wallController.EnableLeftWall(false);
+		}
+
+		if (RightRoom != null)
+		{
+			wallController.EnableRightWall(false);
+		}
 	}
 
 	void Update()
