@@ -18,6 +18,9 @@ public class StairsCollission : MonoBehaviour
 	TilemapRenderer tilemapRenderer = null;
 
 	[SerializeField]
+	Collider2D collider = null;
+
+	[SerializeField]
 	Collider2D DisabledStairsBarrier = null;
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -28,11 +31,13 @@ public class StairsCollission : MonoBehaviour
 	public void Enable()
 	{
 		tilemapRenderer.enabled = true;
+		collider.enabled = true;
 	}
 
 	public void Disable()
 	{
 		tilemapRenderer.enabled = false;
+		collider.enabled = false;
 	}
 
 	public Transform GetTarget()

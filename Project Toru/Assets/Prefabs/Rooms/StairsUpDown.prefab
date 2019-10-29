@@ -1398,6 +1398,7 @@ MonoBehaviour:
   DirectionIsUp: 1
   target: {fileID: 8097394803100348572}
   tilemapRenderer: {fileID: 2734191828680844559}
+  collider: {fileID: 8256445067387621699}
   DisabledStairsBarrier: {fileID: 0}
 --- !u!1839735485 &3407473928853707310
 Tilemap:
@@ -1748,6 +1749,7 @@ MonoBehaviour:
   DirectionIsUp: 0
   target: {fileID: 562953573597773029}
   tilemapRenderer: {fileID: 6257701177135516580}
+  collider: {fileID: 7056798127418524799}
   DisabledStairsBarrier: {fileID: 0}
 --- !u!1839735485 &3760078661822157089
 Tilemap:
