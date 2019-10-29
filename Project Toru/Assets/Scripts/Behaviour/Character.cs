@@ -52,10 +52,10 @@ public class Character : MonoBehaviour
 
 			if (timer > stairsDuration)
 			{
-				Debug.Log("HI");
 				playerOnTheStairs = false;
 				timer = 0;
 				this.GetComponent<Renderer>().enabled = true;
+				this.enableMovement();
 			}
 		}
 
@@ -82,8 +82,6 @@ public class Character : MonoBehaviour
 
 			UpdateAnimationsAndMove();
 		}
-
-
 	}
 
 	public bool hasKey(int key)
@@ -134,6 +132,7 @@ public class Character : MonoBehaviour
 		didUseStair = true;
 		playerOnTheStairs = true;
 		this.GetComponent<Renderer>().enabled = false;
+		this.disableMovement();
 	}
 
 	public void enableMovement()
