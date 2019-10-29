@@ -17,6 +17,8 @@ public class StairsBehaviour : MonoBehaviour
 
 	void Start()
 	{
+
+		// Hide stairs when floor is not connected
 		if (Upstair == null)
 		{
 			GoUpStairs.SetActive(false);
@@ -28,36 +30,64 @@ public class StairsBehaviour : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Returns target for Go Up movement
+	/// </summary>
+	/// <returns>Target set by GoDown</returns>
 	public Transform GetUpTarget()
 	{
 
-		Debug.Log("1");
-		if (GoUpStairs == null) return null;
-		Debug.Log("2");
-		Transform[] objects = GoUpStairs.GetComponentsInChildren<Transform>();
-		Debug.Log("3");
+		// If GoUpstairs is not set, return null
+		if (GoDownStairs == null) return null;
+
+		// Find PositionTarget
+		// We need to get the Downstairs target, because the character must end there.
+		Transform[] objects = GoDownStairs.GetComponentsInChildren<Transform>();
 		foreach (Transform transformObject in objects)
 		{
-			Debug.Log("4");
 			if (transformObject.tag == "PositionTarget")
 			{
-				Debug.Log("5");
 				return transformObject;
 			}
 		}
-		Debug.Log("6");
+
+
+		Debug.LogError("No target found with tag PositionTarget");
 		return null;
 	}
 
+	/// <summary>
+	/// Returns target for Go Down movement
+	/// </summary>
+	/// <returns>Target set by GoUp</returns>
 	public Transform GetDownTarget()
 	{
 
-		if (GoDownStairs == null) return null;
+		// If GoUpstairs is not set, return null
+		if (GoUpStairs == null) return null;
 
-		return Downstairs.GetComponent(typeof(Transform)) as Transform;
+		// Find PositionTarget
+		// We need to get the Downstairs target, because the character must end there.
+		Transform[] objects = GoUpStairs.GetComponentsInChildren<Transform>();
+		foreach (Transform transformObject in objects)
+		{
+			if (transformObject.tag == "PositionTarget")
+			{
+				return transformObject;
+			}
+		}
+
+
+		Debug.LogError("No target found with tag PositionTarget");
+		return null;
 	}
 
-
+	/// <summary>
+	/// Receives message from collider script in stairs
+	/// Gets target and sends information to character
+	/// </summary>
+	/// <param name="GoUp">True when movement is up direction, false when down direction</param>
+	/// <param name="collider">The character collider</param>
 	public void UseStairs(bool GoUp, Collider2D collider)
 	{
 
