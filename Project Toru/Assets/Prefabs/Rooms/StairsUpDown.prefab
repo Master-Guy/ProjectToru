@@ -1131,6 +1131,9 @@ GameObject:
   - component: {fileID: 9076703609153213656}
   - component: {fileID: 1207368584829930352}
   - component: {fileID: 8112737640933931952}
+  - component: {fileID: 3830957847700083374}
+  - component: {fileID: 842340204352332815}
+  - component: {fileID: 2060102128461581736}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -1347,6 +1350,84 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!61 &3830957847700083374
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4528229318113678560}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: 1.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!61 &842340204352332815
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4528229318113678560}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 3.5, y: 1.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 1}
+  m_EdgeRadius: 0
+--- !u!61 &2060102128461581736
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4528229318113678560}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 6.4, y: 1.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4837577560235578560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1441,7 @@ GameObject:
   - component: {fileID: 3407473928853707310}
   - component: {fileID: 2734191828680844559}
   - component: {fileID: 8256445067387621699}
+  - component: {fileID: 6803085255862147021}
   m_Layer: 0
   m_Name: StairsUp
   m_TagString: Untagged
@@ -1399,7 +1481,7 @@ MonoBehaviour:
   target: {fileID: 8097394803100348572}
   tilemapRenderer: {fileID: 2734191828680844559}
   collider: {fileID: 8256445067387621699}
-  DisabledStairsBarrier: {fileID: 0}
+  DisabledStairsBarrier: {fileID: 6803085255862147021}
 --- !u!1839735485 &3407473928853707310
 Tilemap:
   m_ObjectHideFlags: 0
@@ -1629,6 +1711,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.25}
   m_EdgeRadius: 0
+--- !u!61 &6803085255862147021
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837577560235578560}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 5, y: 1.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6696491881226293851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,6 +1819,7 @@ GameObject:
   - component: {fileID: 3760078661822157089}
   - component: {fileID: 6257701177135516580}
   - component: {fileID: 7056798127418524799}
+  - component: {fileID: 6232263949642507710}
   m_Layer: 0
   m_Name: StairsDown
   m_TagString: Untagged
@@ -1750,7 +1859,7 @@ MonoBehaviour:
   target: {fileID: 562953573597773029}
   tilemapRenderer: {fileID: 6257701177135516580}
   collider: {fileID: 7056798127418524799}
-  DisabledStairsBarrier: {fileID: 0}
+  DisabledStairsBarrier: {fileID: 6232263949642507710}
 --- !u!1839735485 &3760078661822157089
 Tilemap:
   m_ObjectHideFlags: 0
@@ -1935,6 +2044,32 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 0.25}
+  m_EdgeRadius: 0
+--- !u!61 &6232263949642507710
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766117156067981809}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 2, y: 1.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &8848863802122849193
 GameObject:

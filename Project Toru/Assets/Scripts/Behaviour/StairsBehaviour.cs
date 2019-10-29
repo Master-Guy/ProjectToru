@@ -57,7 +57,7 @@ public class StairsBehaviour : MonoBehaviour
 
 		// Find PositionTarget
 		// We need to get the Downstairs target, because the character must end there.
-		return GoDownStairs.GetTarget();
+		return GoUpStairs.GetTarget();
 	}
 
 	/// <summary>

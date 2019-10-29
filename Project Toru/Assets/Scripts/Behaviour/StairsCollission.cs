@@ -32,12 +32,14 @@ public class StairsCollission : MonoBehaviour
 	{
 		tilemapRenderer.enabled = true;
 		collider.enabled = true;
+		DisabledStairsBarrier.enabled = false;
 	}
 
 	public void Disable()
 	{
 		tilemapRenderer.enabled = false;
 		collider.enabled = false;
+		DisabledStairsBarrier.enabled = true;
 	}
 
 	public Transform GetTarget()
