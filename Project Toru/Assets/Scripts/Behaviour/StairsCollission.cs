@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StairBehaviour : MonoBehaviour
+public class StairsCollission : MonoBehaviour
 {
 	// Assign target for this transistion. The character moves to this spot.
 	[SerializeField]
