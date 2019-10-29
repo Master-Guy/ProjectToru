@@ -1,29 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class StairsCollission : MonoBehaviour
 {
-	// Assign target for this transistion. The character moves to this spot.
 	[SerializeField]
-	private Transform target;
+	StairsBehaviour stairsBehaviour;
+
+	[SerializeField]
+	bool DirectionIsUp = false;
+
+	[SerializeField]
+	Transform target = null;
+
+	[SerializeField]
+	TilemapRenderer tilemapRenderer = null;
+
+	[SerializeField]
+	Collider2D collider = null;
+
+	[SerializeField]
+	Collider2D DisabledStairsBarrier = null;
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		// Move character
-		other.transform.position = target.position;
+		stairsBehaviour.UseStairs(DirectionIsUp, other);
+	}
 
-		// Let character know it is using a stairs
-		// Get GameObject from collider
-		GameObject gameobject = other.gameObject;
+	public void Enable()
+	{
+		tilemapRenderer.enabled = true;
+		collider.enabled = true;
+		DisabledStairsBarrier.enabled = false;
+	}
 
-		// Check if this gameobject has an script Character
-		Character character = (Character)gameobject.GetComponent(typeof(Character));
+	public void Disable()
+	{
+		tilemapRenderer.enabled = false;
+		collider.enabled = false;
+		DisabledStairsBarrier.enabled = true;
+	}
 
-		if (character != null)
-		{
-			Debug.Log("Character is using stairs");
-			character.StairsTransistion();
-		}
+	public Transform GetTarget()
+	{
+		return target;
 	}
 }
