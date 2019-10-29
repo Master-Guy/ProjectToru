@@ -2,9 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum Skills
+{
+	hacker
+}
 public class Character : MonoBehaviour
 {
+
 	public float speed;
 	private Rigidbody2D myRigidbody;
 	private Vector3 change;
@@ -12,6 +16,7 @@ public class Character : MonoBehaviour
 
 	private List<Item> inventory;
 	private bool didUseStair = false;
+	public List<Skills> skills = new List<Skills>();
 
 	private static CharacterManager cm;
 	private bool isDisabled;

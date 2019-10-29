@@ -8,9 +8,17 @@ namespace Assets.Scripts.Options
 {
 	public class Option
 	{
-		public void getInfo()
-		{
+		private readonly string Description;
+		public Skills? Prerequisite = null;
 
+		Option(string desc)
+		{
+			Description = desc;
+		}
+
+		public string getInfo()
+		{
+			return Description;
 		}
 	}
 }
