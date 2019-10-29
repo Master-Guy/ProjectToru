@@ -6,9 +6,6 @@ using UnityEngine.EventSystems;
 public class StairsBehaviour : RoomBehaviour
 {
 
-	public RoomBehaviour LeftRoom;
-	public RoomBehaviour RightRoom;
-
 	public RoomBehaviour LeftRoomUpstairs;
 	public RoomBehaviour RightRoomUpstairs;
 }
