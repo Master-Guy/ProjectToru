@@ -11,7 +11,7 @@ public class BuildingBehaviour : MonoBehaviour
 	/// <summary>
 	/// List of all rooms in this building
 	/// </summary>
-	RoomBehaviour[] rooms = null;
+	Room[] rooms = null;
 
 	/// <summary>
 	/// Size of building
@@ -28,14 +28,10 @@ public class BuildingBehaviour : MonoBehaviour
 	/// </summary>
 	Vector2Int bottomLeft = new Vector2Int(0, 0);
 
-	[SerializeField]
-	OutsideWallGenerator wallGenerator = null;
-
 	// Start is called before the first frame update
 	void Start()
 	{
 		CalculateBuilding();
-		wallGenerator.generate(rooms);
 	}
 
 	/// <summary>
@@ -46,7 +42,7 @@ public class BuildingBehaviour : MonoBehaviour
 	{
 
 		// Get rooms
-		rooms = grid.GetComponentsInChildren<RoomBehaviour>();
+		rooms = grid.GetComponentsInChildren<Room>();
 
 		// Calculate size of building
 		int left = int.MaxValue;
@@ -54,7 +50,7 @@ public class BuildingBehaviour : MonoBehaviour
 		int top = int.MinValue;
 		int bottom = int.MaxValue;
 
-		foreach (RoomBehaviour room in rooms)
+		foreach (Room room in rooms)
 		{
 
 			Vector3Int position = room.GetPosition();
@@ -85,7 +81,7 @@ public class BuildingBehaviour : MonoBehaviour
 	/// Must be updated with CalculateBuilding() after building has changed
 	/// </summary>
 	/// <returns>Unordered list of rooms in this building</returns>
-	public RoomBehaviour[] GetRooms()
+	public Room[] GetRooms()
 	{
 		return rooms;
 	}
