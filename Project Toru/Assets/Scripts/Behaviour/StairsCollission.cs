@@ -10,20 +10,22 @@ public class StairsCollission : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		// Move character
-		other.transform.position = target.position;
 
-		// Let character know it is using a stairs
-		// Get GameObject from collider
-		GameObject gameobject = other.gameObject;
+		Debug.Log("Hello!");
+		//// Move character
+		//other.transform.position = target.position;
 
-		// Check if this gameobject has an script Character
-		Character character = (Character)gameobject.GetComponent(typeof(Character));
+		//// Let character know it is using a stairs
+		//// Get GameObject from collider
+		//GameObject gameobject = other.gameObject;
 
-		if (character != null)
-		{
-			Debug.Log("Character is using stairs");
-			character.StairsTransistion();
-		}
+		//// Check if this gameobject has an script Character
+		//Character character = (Character)gameobject.GetComponent(typeof(Character));
+
+		//if (character != null)
+		//{
+		//	Debug.Log("Character is using stairs");
+		//	character.StairsTransistion();
+		//}
 	}
 }
