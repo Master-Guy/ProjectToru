@@ -17,6 +17,9 @@ public class Character : MonoBehaviour
 	private bool isDisabled;
 	private ParticleSystem ps;
 
+	private GameObject currentRoom;
+	public static GameObject selectedCharacter;
+
 	Character()
 	{
 		inventory = new List<Item>();
@@ -126,7 +129,7 @@ public class Character : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0)) {
 			cm.disableCharacterMovement();
-            cm.selectedCharacter = this;
+			selectedCharacter = this.gameObject;
 			enableMovement();
 			ps.Play();
 		}
@@ -135,5 +138,13 @@ public class Character : MonoBehaviour
 	void AdjustOrderLayer()
 	{
 		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject;
+		}
 	}
 }

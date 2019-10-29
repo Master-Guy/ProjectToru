@@ -23,8 +23,8 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	public Vector2 size = new Vector2(1, 1);
 
-    private HashSet<GameObject> charactersInRoom;
-    private HashSet<GameObject> npcsInRoom;
+    public HashSet<GameObject> charactersInRoom;
+    public HashSet<GameObject> npcsInRoom;
 
     public Room()
     {

@@ -204,12 +204,12 @@ PrefabInstance:
     - target: {fileID: 2369414609990655976, guid: 03b9813dc28e1ce458567d0df2809a6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.404552
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 03b9813dc28e1ce458567d0df2809a6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3263936
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 03b9813dc28e1ce458567d0df2809a6a,
         type: 3}
@@ -273,12 +273,12 @@ PrefabInstance:
     - target: {fileID: 6209381211620940952, guid: e8a6ee6176414b540a61b57e8b018226,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.03
+      value: 13.27
       objectReference: {fileID: 0}
     - target: {fileID: 6209381211620940952, guid: e8a6ee6176414b540a61b57e8b018226,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.14
+      value: 5.16
       objectReference: {fileID: 0}
     - target: {fileID: 6209381211620940952, guid: e8a6ee6176414b540a61b57e8b018226,
         type: 3}
@@ -540,38 +540,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   smoothing: 0.04
---- !u!1 &1393237123 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9035884668655751474, guid: 270de48ed0f3c43039615016cf03224c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1408785795}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1393237124
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393237123}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &1398202017
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +751,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9035884668655751474, guid: 270de48ed0f3c43039615016cf03224c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
+      objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 270de48ed0f3c43039615016cf03224c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -933,6 +906,11 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3126798535552125680, guid: 270de48ed0f3c43039615016cf03224c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270de48ed0f3c43039615016cf03224c, type: 3}
 --- !u!1001 &1494362125
@@ -950,12 +928,12 @@ PrefabInstance:
     - target: {fileID: 2369414609990655976, guid: 03b9813dc28e1ce458567d0df2809a6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.396
+      value: 18.5
       objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 03b9813dc28e1ce458567d0df2809a6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.322
+      value: 1.52
       objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 03b9813dc28e1ce458567d0df2809a6a,
         type: 3}
@@ -1011,6 +989,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7797366713139842315, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 033d95449e271cc4b889ed5a769aecd8, type: 2}
     - target: {fileID: 4947826929547256574, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: m_Name
@@ -1019,17 +1002,17 @@ PrefabInstance:
     - target: {fileID: 4947826929547256574, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 4947826929547256064, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.46
+      value: 15.7
       objectReference: {fileID: 0}
     - target: {fileID: 4947826929547256064, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.15
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 4947826929547256064, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
@@ -1091,6 +1074,22 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4947826929547256570, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947826929547256069, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3555098256961693778, guid: 896be2e5d09deb343844e0f84f5c60a5,
+        type: 3}
+    - target: {fileID: 4947826929547256069, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cef2cc5444238334dadd6abbae014fad, type: 3}
 --- !u!1001 &1745012195
@@ -1104,6 +1103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room R Upstairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035884668655751474, guid: 270de48ed0f3c43039615016cf03224c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 270de48ed0f3c43039615016cf03224c,
         type: 3}
@@ -2362,6 +2366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room L
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035884668655751474, guid: 270de48ed0f3c43039615016cf03224c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 270de48ed0f3c43039615016cf03224c,
         type: 3}
