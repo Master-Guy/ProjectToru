@@ -10,17 +10,12 @@ public class Character : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
-	private List<Item> inventory;
+	private Inventory inventory;
+	
 	private bool didUseStair = false;
-
 	private static CharacterManager cm;
 	private bool isDisabled;
 	private ParticleSystem ps;
-
-	Character()
-	{
-		inventory = new List<Item>();
-	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -34,6 +29,8 @@ public class Character : MonoBehaviour
 		{
 			cm = new CharacterManager();
 		}
+
+		inventory = new Inventory();
 
 		AdjustOrderLayer();
 	}
@@ -64,13 +61,11 @@ public class Character : MonoBehaviour
 
 			UpdateAnimationsAndMove();
 		}
-
-		
 	}
 
-	public bool hasKey(int key)
+	public bool HasKey(int key)
 	{
-		foreach(Item i in inventory)
+		foreach(Item i in inventory.getItemsList())
 		{
 			if (i is Key && ((Key)i).privateKey == key)
 				return true;
@@ -78,9 +73,10 @@ public class Character : MonoBehaviour
 		return false;
 	}
 
-	public void addItem(Item i)
+	public void AddItemToList(Item item)
 	{
-		inventory.Add(i);
+		//Debug.Log(item);
+		inventory.addItem(item);
 	}
 
 	void UpdateAnimationsAndMove()

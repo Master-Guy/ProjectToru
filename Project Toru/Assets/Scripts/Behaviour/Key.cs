@@ -20,7 +20,7 @@ namespace Assets.Domain.Behaviour
 		{
 			if (collision.CompareTag("Player"))
 			{
-				collision.GetComponent<Character>().addItem(this);
+				collision.GetComponent<Character>().AddItemToList(this);
 				this.gameObject.SetActive(false);
 				Debug.Log("You picked up a key");
 			}

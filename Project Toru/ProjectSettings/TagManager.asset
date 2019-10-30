@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Stairs
+  - Inventory
+  - InventorySlotHolder
   layers:
   - Default
   - TransparentFX
