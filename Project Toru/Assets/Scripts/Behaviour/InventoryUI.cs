@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
 		for (int i = 0; i < inv.Count; i++)
 		{
 			//NEEDS AN IF - If there are more items it will not show (SCROLL OBJECT) 
-			slots[i].GetComponentInChildren<Image>().sprite = inv[i].sp;
+			slots[i].GetComponentInChildren<Image>().sprite = inv[i].UIIcon;
 			slots[i].GetComponent<Mask>().showMaskGraphic = true;
 		}
 	}
