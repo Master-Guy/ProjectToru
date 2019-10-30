@@ -17,6 +17,10 @@ public class Character : MonoBehaviour
 	private bool isDisabled;
 	private ParticleSystem ps;
 
+	private float timer = 0;
+	private float stairsDuration = 1;
+	private bool playerOnTheStairs = false;
+
 	Character()
 	{
 		inventory = new List<Item>();
@@ -30,7 +34,7 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
-		if(cm == null)
+		if (cm == null)
 		{
 			cm = new CharacterManager();
 		}
@@ -41,6 +45,20 @@ public class Character : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+
+		if (playerOnTheStairs)
+		{
+			timer += Time.deltaTime;
+
+			if (timer > stairsDuration)
+			{
+				playerOnTheStairs = false;
+				timer = 0;
+				this.GetComponent<Renderer>().enabled = true;
+				this.enableMovement();
+			}
+		}
+
 		if (!isDisabled)
 		{
 			Camera.main.GetComponent<CameraBehaviour>().target = transform;
@@ -64,13 +82,11 @@ public class Character : MonoBehaviour
 
 			UpdateAnimationsAndMove();
 		}
-
-		
 	}
 
 	public bool hasKey(int key)
 	{
-		foreach(Item i in inventory)
+		foreach (Item i in inventory)
 		{
 			if (i is Key && ((Key)i).privateKey == key)
 				return true;
@@ -114,7 +130,9 @@ public class Character : MonoBehaviour
 	public void StairsTransistion()
 	{
 		didUseStair = true;
-		//Debug.Log("MovedStairs");
+		playerOnTheStairs = true;
+		this.GetComponent<Renderer>().enabled = false;
+		this.disableMovement();
 	}
 
 	public void enableMovement()
@@ -129,7 +147,8 @@ public class Character : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0))
+		{
 			cm.disableCharacterMovement();
 			enableMovement();
 			ps.Play();

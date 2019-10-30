@@ -11,25 +11,40 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public Theme theme = null;
 
 	[SerializeField]
-	private Tilemap walls = null;
+	Tilemap walls = null;
 
 	[SerializeField]
-	private Tilemap background = null;
+	Tilemap background = null;
 
 	[SerializeField]
-	private bool lightsOn;
+	bool lightsOn;
 
 	[SerializeField]
-	public Vector2 size = new Vector2(1, 1);
+	WallController wallController;
+
+	public Room LeftRoom;
+	public Room RightRoom;
+
+	[SerializeField]
+	Vector2Int size = new Vector2Int(0, 0);
 
 	void Start()
 	{
+		if (size.x == 0 || size.y == 0)
+		{
+			Debug.LogError("A room size must be set manualy");
+		}
 		GenerateBackground();
-	}
 
-	void Update()
-	{
+		if (LeftRoom != null)
+		{
+			wallController.EnableLeftWall(false);
+		}
 
+		if (RightRoom != null)
+		{
+			wallController.EnableRightWall(false);
+		}
 	}
 
 	private void GenerateBackground()
@@ -44,6 +59,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 				}
 			}
 		}
+
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -52,5 +68,23 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		{
 			Debug.Log("Right Mouse Button Clicked on: " + name);
 		}
+	}
+
+	/// <summary>
+	/// This function returns the current position seen from bottom left
+	/// </summary>
+	/// <returns>Returns current position from bottom left</returns>
+	public Vector3Int GetPosition()
+	{
+		return Vector3Int.FloorToInt(this.gameObject.transform.localPosition);
+	}
+
+	/// <summary>
+	/// This function returns the size of the room set by level designer
+	/// </summary>
+	/// <returns>Returns current size of room</returns>
+	public Vector2Int GetSize()
+	{
+		return size;
 	}
 }
