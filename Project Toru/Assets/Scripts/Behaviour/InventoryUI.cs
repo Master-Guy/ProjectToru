@@ -33,7 +33,7 @@ public class InventoryUI : MonoBehaviour
 		inventory.SetActive(false);
 	}
 
-	public void showInv(List<Item> inv)
+	public void showInv(HashSet<Item> inv)
 	{
 		//Character has his own inventory - Call function to set the inventory to the Inventory
 		addInventoryToUI(inv);
@@ -42,7 +42,7 @@ public class InventoryUI : MonoBehaviour
 		inventory.SetActive(true);
 	}
 
-	public void hideInv(List<Item> inv)
+	public void hideInv(HashSet<Item> inv)
 	{
 		//Character has his own inventory - Call function to set the inventory to the Inventory
 		addInventoryToUI(inv);
@@ -51,12 +51,12 @@ public class InventoryUI : MonoBehaviour
 		inventory.SetActive(false);
 	}
 
-	public void addInventoryToUI(List<Item> inv)
+	public void addInventoryToUI(HashSet<Item> inv)
 	{
-		for (int i = 0; i < inv.Count; i++)
+		List<Item> inv2 = new List<Item>(inv);
+		for(int i = 0; i < inv2.Count; i++)
 		{
-			//NEEDS AN IF - If there are more items it will not show (SCROLL OBJECT) 
-			slots[i].GetComponentInChildren<Image>().sprite = inv[i].UIIcon;
+			slots[i].GetComponentInChildren<Image>().sprite = inv2[i].UIIcon;
 			slots[i].GetComponent<Mask>().showMaskGraphic = true;
 		}
 	}

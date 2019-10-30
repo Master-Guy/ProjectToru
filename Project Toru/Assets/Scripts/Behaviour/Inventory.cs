@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory
 {
 	//Assign a Item List
-	private List<Item> inv;
+	private HashSet<Item> inv;
 
 	//Create's a static InventoryUI manager
 	private static InventoryUI INVUI = new InventoryUI();
@@ -13,7 +13,7 @@ public class Inventory
 	//Constructor - Creates a Item List
 	public Inventory()
 	{
-		inv = new List<Item>();
+		inv = new HashSet<Item>();
 	}
 
 	//Add an item to the Inventory
@@ -31,7 +31,7 @@ public class Inventory
 	}
 
 	//Get the list of Items
-	public List<Item> getItemsList()
+	public HashSet<Item> getItemsList()
 	{
 		return inv;
 	}
