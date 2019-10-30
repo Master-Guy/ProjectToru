@@ -129,6 +129,7 @@ public class Character : MonoBehaviour
 			cm.disableCharacterMovement();
 			enableMovement();
 			ps.Play();
+			inventory.UpdateUI();
 		}
 	}
 
