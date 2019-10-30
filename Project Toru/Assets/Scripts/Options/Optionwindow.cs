@@ -23,11 +23,13 @@ namespace Assets.Scripts.Options
 
 		public void Update()
 		{
+
 			if (!OptionBox.isActiveAndEnabled)
-			{
-				DisplayNewOptions(OptionQueue[0]);
-				OptionQueue.RemoveAt(0);
-			}
+				if (OptionQueue.Count != 0)
+				{
+					DisplayNewOptions(OptionQueue[0]);
+					OptionQueue.RemoveAt(0);
+				}
 	}
 
 		public void AddOption(IDictionary<Option, Delegate> Options)

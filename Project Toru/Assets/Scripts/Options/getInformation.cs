@@ -8,5 +8,7 @@ namespace Assets.Scripts.Options
 {
 	class getInformation : Option
 	{
+		getInformation() : base("search for information") {	}
+		public getInformation(string description) : base(description) { }
 	}
 }

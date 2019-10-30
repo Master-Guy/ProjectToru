@@ -11,7 +11,7 @@ namespace Assets.Scripts.Options
 		private readonly string Description;
 		public Skills? Prerequisite = null;
 
-		Option(string desc)
+		public Option(string desc)
 		{
 			Description = desc;
 		}

@@ -34,11 +34,9 @@ namespace Assets.Scripts.Behaviour
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			if (!OWindow.isActiveAndEnabled)
-				if (Options.Count != 0)
-					// DO NOT touch this lambda function, it's very ugly, but the best way to do it
-					OWindow.AddOption(Options.Where(x => x.Key.Prerequisite == null ||
-							((Character)collision.gameObject.GetComponent(typeof(Character))).skills.Contains(x.Key.Prerequisite.Value)).ToDictionary(x => x.Key, x => x.Value));
+			// DO NOT touch this lambda function, it's very ugly, but the best way to do it
+			OWindow.AddOption(Options.Where(x => x.Key.Prerequisite == null ||
+					((Character)collision.gameObject.GetComponent(typeof(Character))).skills.Contains(x.Key.Prerequisite.Value)).ToDictionary(x => x.Key, x => x.Value));
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
