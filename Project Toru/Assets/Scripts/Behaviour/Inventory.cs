@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory
+public class Inventory : MonoBehaviour
 {
 	//Assign a Item List
 	private HashSet<Item> inv;
@@ -19,8 +19,12 @@ public class Inventory
 	//Add an item to the Inventory
 	public void addItem(Item item)
 	{
-		inv.Add(item);
-		UpdateUI();
+		if (inv.Count < INVUI.allSlots)
+		{
+			inv.Add(item);
+			UpdateUI();
+			Destroy(item.gameObject);
+		}
 	}
 
 	//Removes an item from the inventory
