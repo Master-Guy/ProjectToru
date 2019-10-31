@@ -5,41 +5,53 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Options
 {
-	public class Optionwindow : MonoBehaviour
+	public class Optionwindow : MonoBehaviour, IPointerClickHandler
 	{
-		[SerializeField]
-		TextMeshPro OptionBox;
-
-		List<IDictionary<Option, Delegate>> OptionQueue;
+		List<KeyValuePair<String, List<Option>>> OptionQueue;
 
 		public void Start()
 		{
-			OptionQueue = new List<IDictionary<Option, Delegate>>();
-			OptionBox.text = string.Empty;
+			OptionQueue = new List<KeyValuePair<String, List<Option>>>();
+			GetComponent<TextMeshPro>().text = string.Empty;
 		}
 
 		public void Update()
 		{
 
-			if (!OptionBox.isActiveAndEnabled)
+			if (!GetComponent<TextMeshPro>().isActiveAndEnabled)
 				if (OptionQueue.Count != 0)
 				{
-					DisplayNewOptions(OptionQueue[0]);
-					OptionQueue.RemoveAt(0);
+					DisplayNextOptions();
 				}
+
 	}
 
-		public void AddOption(IDictionary<Option, Delegate> Options)
+		public void AddOption(string text, List<Option> Options)
 		{
-			OptionQueue.Add(Options);
+			OptionQueue.Add(new KeyValuePair<string, List<Option>>(text, Options));
 		}
 
-		public void DisplayNewOptions(IDictionary<Option, Delegate> option)
+		public void DisplayNextOptions()
 		{
+			GetComponent<TextMeshPro>().text = OptionQueue[0] + System.Environment.NewLine;
 
+
+			int i = 0;
+			foreach(var o in OptionQueue[0].Value)
+				GetComponent<TextMeshPro>().text += "<link=" + i++ + ">" + o.getInfo() + "</link>" + System.Environment.NewLine;
+
+			OptionQueue.RemoveAt(0);
+		}
+
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshPro>(), eventData.position, null);
+			GetComponentInChildren<MeshRenderer>().enabled =
+			GetComponent<TextMeshPro>().enabled = false;
 		}
 	}
 }

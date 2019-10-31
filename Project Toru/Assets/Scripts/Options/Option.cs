@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Options
 {
-	public class Option
+	public abstract class Option
 	{
 		private readonly string Description;
 		public Skills? Prerequisite = null;
@@ -20,5 +20,7 @@ namespace Assets.Scripts.Options
 		{
 			return Description;
 		}
+
+		public abstract void Activate();
 	}
 }

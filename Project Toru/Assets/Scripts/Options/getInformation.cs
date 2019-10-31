@@ -10,5 +10,11 @@ namespace Assets.Scripts.Options
 	{
 		getInformation() : base("search for information") {	}
 		public getInformation(string description) : base(description) { }
+
+		public override void Activate()
+		{
+			// TODO gather information
+			Console.WriteLine("information found");
+		}
 	}
 }
