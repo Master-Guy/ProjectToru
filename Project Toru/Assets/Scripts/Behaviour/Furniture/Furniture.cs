@@ -22,13 +22,17 @@ namespace Assets.Scripts.Behaviour
 		[SerializeField]
 		string Description = string.Empty;
 
-		Optionwindow OWindow;
+		EventWindow OWindow;
 		Room Parent;
 
 
 		void Start()
 		{
-			OWindow = GameObject.Find(OptionWindowName).GetComponent<Optionwindow>();
+			Options = new List<Option>()
+			{
+				new getInformation()
+			};
+			OWindow = GameObject.Find(OptionWindowName).GetComponent<EventWindow>();
 		}
 
 		void Update()
@@ -36,11 +40,10 @@ namespace Assets.Scripts.Behaviour
 
 		}
 
-		private void OnTriggerEnter2D(Collider2D collision)
+		void OnTriggerEnter2D(Collider2D collision)
 		{
-			// DO NOT touch this lambda function, it's very ugly, but the best way to do it
-			OWindow.AddOption(Description, Options.Where(x => x.Prerequisite == null ||
-					((Character)collision.gameObject.GetComponent(typeof(Character))).skills.Contains(x.Prerequisite.Value)).ToList());
+			if (collision.CompareTag("Player") && collision.isTrigger)	// check if character has a destination, if so check if it is this
+				OWindow.AddEvent(new Options.Event(Description, gameObject, Options));
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
