@@ -20,11 +20,6 @@ public class Character : MonoBehaviour
 	private GameObject currentRoom;
 	public static GameObject selectedCharacter;
 
-	Character()
-	{
-		inventory = new List<Item>();
-	}
-
 	// Start is called before the first frame update
 	void Start()
 	{
