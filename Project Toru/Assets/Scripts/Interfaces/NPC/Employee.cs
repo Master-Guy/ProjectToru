@@ -20,6 +20,7 @@ public class Employee : MonoBehaviour, INPC
 
 	public void Surrender()
 	{
+		dropBag();
 		npc.animator.SetBool("Surrendering", true);
 		npc.Say("Don't shoot");
 	}
@@ -37,5 +38,23 @@ public class Employee : MonoBehaviour, INPC
 	public void CallForHelp()
 	{
 		// Method that looks for other npcs nearby and calls them for help
+	}
+
+	public GameObject GetCurrentRoom()
+	{
+		throw new NotImplementedException();
+	}
+
+	//Drops the items in the bag a NPC have
+	private void dropBag()
+	{
+		if (npc.bag.Count > 0)
+		{
+			foreach (GameObject b in npc.bag)
+			{
+				Instantiate(b, new Vector3((npc.transform.position.x + UnityEngine.Random.Range(-1f, 1f)), npc.transform.position.y, npc.transform.position.z), Quaternion.identity);
+			}
+			npc.bag.Clear();
+		}
 	}
 }

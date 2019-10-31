@@ -13,6 +13,10 @@ public class NPC : MonoBehaviour
 	[SerializeField]
 	private NPCinfo info;
 
+	public List<GameObject> bag;
+
+	private npcType type;
+	private npcState state;
 	[SerializeField]
 	private GameObject TextBox;
 
