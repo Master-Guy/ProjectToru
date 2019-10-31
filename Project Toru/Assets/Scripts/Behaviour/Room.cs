@@ -109,4 +109,16 @@ public class Room : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
     }
+
+	public bool SelectedPlayerInRoom()
+	{
+		if (this.charactersInRoom.Contains(Character.selectedCharacter))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

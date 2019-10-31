@@ -6,18 +6,23 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 	private INPC npcObject;
+	private npcType type;
+	private npcState state;
+	private Room currentRoom;
 
 	[SerializeField]
 	private NPCinfo info;
 
-	private npcType type;
-	private npcState state;
+	[SerializeField]
+	private GameObject TextBox;
 
+	[NonSerialized]
 	public Animator animator;
 
-	private GameObject currentRoom;
-
+	[NonSerialized]
 	public Vector3 startingPosition;
+
+	[NonSerialized]
 	public Vector3 change;
 
 	private bool moving = true;
@@ -56,7 +61,6 @@ public class NPC : MonoBehaviour
 				break;
 			case npcState.Idle:
 				npcObject.Idle();
-				Move();
 				break;
 			case npcState.Surrender:
 				npcObject.Surrender();
@@ -72,12 +76,14 @@ public class NPC : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		npcObject.Surrender();
-		state = npcState.None;
-
-		if(currentRoom != null)
+		if (currentRoom.SelectedPlayerInRoom())
 		{
-			Debug.Log(currentRoom.ToString());
+			npcObject.Surrender();
+			state = npcState.None;
+		}
+		else
+		{
+			Debug.Log("Selected player is not in the same room.");
 		}
 	}
 
@@ -85,11 +91,11 @@ public class NPC : MonoBehaviour
 	{
 		if (other.CompareTag("Room"))
 		{
-			currentRoom = other.gameObject;
+			currentRoom = other.gameObject.GetComponent<Room>(); ;
 		}
 	}
 
-	void Move()
+	public void Move()
 	{
 		if(transform.position != change)
 		{
@@ -101,10 +107,17 @@ public class NPC : MonoBehaviour
 		}
 	}
 
+	public void Say(string text)
+	{
+		TextBox.GetComponent<TextMesh>().text = text;
+		TextBox.SetActive(true);
+	}
+
 	void AdjustOrderLayer()
 	{
 		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
+
 }
 
 public enum npcType

@@ -14,26 +14,28 @@ public class Employee : MonoBehaviour, INPC
 
 	public void Idle()
 	{
-		npc.change = new Vector3(Mathf.PingPong(Time.time * 0.8f, 1.5f) + 15, npc.transform.position.y, npc.transform.position.z);
+		npc.change = new Vector3(Mathf.PingPong(Time.time, 1.5f) + npc.startingPosition.x, npc.transform.position.y, npc.transform.position.z);
+		npc.Move();
 	}
 
 	public void Surrender()
 	{
 		npc.animator.SetBool("Surrendering", true);
+		npc.Say("Don't shoot");
 	}
 
 	public void Flee()
 	{
-		throw new NotImplementedException();
+		// Method that requires pathfinding first, npc will search for a nearby exit.
 	}
 
 	public void Defend()
 	{
-		throw new NotImplementedException();
+		// Method that will implement any fighting back mechanics
 	}
 
 	public void CallForHelp()
 	{
-		throw new NotImplementedException();
+		// Method that looks for other npcs nearby and calls them for help
 	}
 }

@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
 	private bool isDisabled;
 	private ParticleSystem ps;
 
-	private GameObject currentRoom;
+	public GameObject currentRoom;
 	public static GameObject selectedCharacter;
 
 	// Start is called before the first frame update
