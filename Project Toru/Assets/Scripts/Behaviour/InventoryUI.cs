@@ -7,7 +7,7 @@ public class InventoryUI : MonoBehaviour
 {
 	private GameObject inventory;
 
-	private int allSlots;
+	public int allSlots;
 	private int enabledSlots;
 	private GameObject[] slots;
 

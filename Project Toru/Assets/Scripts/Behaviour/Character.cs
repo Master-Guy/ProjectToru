@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
-	private Inventory inventory;
+	public Inventory inventory;
 	
 	private bool didUseStair = false;
 	private static CharacterManager cm = new CharacterManager();
@@ -68,12 +68,6 @@ public class Character : MonoBehaviour
 				return true;
 		}
 		return false;
-	}
-
-	public void AddItemToList(Item item)
-	{
-		//Debug.Log(item);
-		inventory.addItem(item);
 	}
 
 	void UpdateAnimationsAndMove()
