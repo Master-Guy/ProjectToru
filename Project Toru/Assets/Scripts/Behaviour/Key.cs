@@ -15,8 +15,8 @@ namespace Assets.Domain.Behaviour
 		{
 			if (collision.CompareTag("Player"))
 			{
-				collision.GetComponent<Character>().addItem(this);
-				this.gameObject.SetActive(false);
+				Destroy(gameObject);
+				collision.GetComponent<Character>().AddItemToList(this);
 			}
 		}
 	}

@@ -10,9 +10,9 @@ public class Character : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
-	private List<Item> inventory;
+	private Inventory inventory;
+	
 	private bool didUseStair = false;
-
 	private static CharacterManager cm = new CharacterManager();
 	private bool isDisabled;
 	private ParticleSystem ps;
@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
+		inventory = new Inventory();
 		AdjustOrderLayer();
 	}
 
@@ -62,13 +63,11 @@ public class Character : MonoBehaviour
 
 			UpdateAnimationsAndMove();
 		}
-
-		
 	}
 
-	public bool hasKey(int key)
+	public bool HasKey(int key)
 	{
-		foreach(Item i in inventory)
+		foreach(Item i in inventory.getItemsList())
 		{
 			if (i is Key && ((Key)i).privateKey == key)
 				return true;
@@ -76,9 +75,10 @@ public class Character : MonoBehaviour
 		return false;
 	}
 
-	public void addItem(Item i)
+	public void AddItemToList(Item item)
 	{
-		inventory.Add(i);
+		//Debug.Log(item);
+		inventory.addItem(item);
 	}
 
 	void UpdateAnimationsAndMove()
@@ -132,6 +132,7 @@ public class Character : MonoBehaviour
 			selectedCharacter = this.gameObject;
 			enableMovement();
 			ps.Play();
+			inventory.UpdateUI();
 		}
 	}
 
