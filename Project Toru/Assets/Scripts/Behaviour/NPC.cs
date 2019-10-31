@@ -5,88 +5,73 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    private npcState currentState = npcState.defaultAction;
-	private GameObject currentRoom;
+	private INPC npcObject;
 
-	private bool surrendering = false;
-	private bool fleeing = false;
+	[SerializeField]
+	private NPCinfo info;
 
-	private Animator animator;
+	private npcType type;
+	private npcState state;
 
-    // Start is called before the first frame update
-    void Start()
+	public Animator animator { get; }
+
+	// Start is called before the first frame update
+	void Start()
     {
-		animator = GetComponent<Animator>();
-		AdjustOrderLayer();
-    }
+		type = info.type;
+		state = info.state;
+
+		switch (type)
+		{
+			case npcType.Employee:
+				npcObject = new Employee(this);
+				break;
+			case npcType.Guard:
+				npcObject = new Guard();
+				break;
+			default:
+				Debug.Log("Type of NPC does not exist");
+				break;
+		}
+	}
 
     // Update is called once per frame
     void Update()
     {
-        switch (currentState)
-        {
-            case npcState.defaultAction:
-				DefaultAction();
-                break;
-            case npcState.surrendering:
-				Surrender();
-                break;
-            case npcState.fleeing:
-				Flee();
-                break;
-            default:
-                break;
-        }
-    }
-
-	private void DefaultAction()
-	{
-		// default movements/actions of npc
-	}
-
-	private void Surrender()
-	{
-		fleeing = false;
-		surrendering = true;
-		animator.SetBool("Surrendering", true);
-	}
-
-	private void Flee()
-	{
-		surrendering = false;
-		fleeing = true;
-
-		// need pathfinding for this part, npc will run towards an exit
-	}
-
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Room"))
+		switch (state)
 		{
-			currentRoom = other.gameObject;
+			case npcState.Idle:
+				npcObject.Idle();
+				break;
+			case npcState.Surrender:
+				npcObject.Surrender();
+				break;
+			case npcState.Defend:
+				npcObject.Defend();
+				break;
+			case npcState.Flee:
+				npcObject.Flee();
+				break;
 		}
-	}
+    }
 
 	void OnMouseDown()
 	{
-		// checks if the npc and the selected character are in the same room
-		if (currentRoom.GetComponent<Room>().charactersInRoom.Contains(Character.selectedCharacter))
-		{
-			// going to be more complex, on-screen options on what action to execute.
-			currentState = npcState.surrendering;
-		}
+		npcObject.Surrender();
 	}
+}
 
-	// this method makes sure the order layer is correct, creates a fake 3d perspective when character/npcs walk past each other.
-	void AdjustOrderLayer()
-	{
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
-	}
+public enum npcType
+{
+	Employee,
+	Guard
 }
 
 public enum npcState
 {
-    defaultAction,
-    surrendering,
-    fleeing
+	None,
+	Idle,
+	Surrender,
+	Defend,
+	Flee
 }
