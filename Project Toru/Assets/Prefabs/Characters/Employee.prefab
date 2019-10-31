@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: 038012717f14fb743be63b4ae2024c2a, type: 2}
+  bag:
+  - {fileID: 3444742155135933046, guid: da04949429116084a88ada26f7cdd5c4, type: 3}
   TextBox: {fileID: 8285807996838187758}
 --- !u!95 &5149227096689411571
 Animator:

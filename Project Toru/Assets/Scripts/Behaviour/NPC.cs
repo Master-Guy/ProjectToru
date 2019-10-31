@@ -15,8 +15,6 @@ public class NPC : MonoBehaviour
 
 	public List<GameObject> bag;
 
-	private npcType type;
-	private npcState state;
 	[SerializeField]
 	private GameObject TextBox;
 
