@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   state: 1
+  animatorController: {fileID: 9100000, guid: 033d95449e271cc4b889ed5a769aecd8, type: 2}

@@ -7,5 +7,4 @@ public interface INPC
 	void Defend();
 	void Flee();
 	void CallForHelp();
-	GameObject GetCurrentRoom();
 }

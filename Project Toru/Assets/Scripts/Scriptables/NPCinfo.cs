@@ -5,4 +5,5 @@ public class NPCinfo : ScriptableObject
 {
 	public npcType type;
 	public npcState state;
+	public RuntimeAnimatorController animatorController;
 }

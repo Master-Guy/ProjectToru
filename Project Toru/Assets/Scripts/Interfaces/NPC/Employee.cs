@@ -14,12 +14,12 @@ public class Employee : MonoBehaviour, INPC
 
 	public void Idle()
 	{
-		npc.transform.position = new Vector2(Mathf.PingPong(Time.time * 0.5f, 1.5f) + 15, npc.transform.position.y);
+		npc.change = new Vector3(Mathf.PingPong(Time.time * 0.8f, 1.5f) + 15, npc.transform.position.y, npc.transform.position.z);
 	}
 
 	public void Surrender()
 	{
-		Debug.Log("OK ok , ill surrender..");
+		npc.animator.SetBool("Surrendering", true);
 	}
 
 	public void Flee()
@@ -33,11 +33,6 @@ public class Employee : MonoBehaviour, INPC
 	}
 
 	public void CallForHelp()
-	{
-		throw new NotImplementedException();
-	}
-
-	public GameObject GetCurrentRoom()
 	{
 		throw new NotImplementedException();
 	}

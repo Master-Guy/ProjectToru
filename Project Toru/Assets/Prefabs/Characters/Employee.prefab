@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4947826929547256068}
   - component: {fileID: 4947826929547256570}
   - component: {fileID: 6764899707426496021}
+  - component: {fileID: 5149227096689411571}
   m_Layer: 8
   m_Name: Employee
   m_TagString: NPC
@@ -144,3 +145,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: 038012717f14fb743be63b4ae2024c2a, type: 2}
+  animator: {fileID: 0}
+--- !u!95 &5149227096689411571
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947826929547256574}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 033d95449e271cc4b889ed5a769aecd8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

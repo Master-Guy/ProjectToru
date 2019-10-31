@@ -13,13 +13,25 @@ public class NPC : MonoBehaviour
 	private npcType type;
 	private npcState state;
 
-	public Animator animator { get; }
+	public Animator animator;
+
+	private GameObject currentRoom;
+
+	public Vector3 startingPosition;
+	public Vector3 change;
+
+	private bool moving = true;
 
 	// Start is called before the first frame update
 	void Start()
     {
 		type = info.type;
 		state = info.state;
+		animator = GetComponent<Animator>();
+		animator.runtimeAnimatorController = info.animatorController;
+
+		startingPosition = transform.position;
+		change = Vector3.zero;
 
 		switch (type)
 		{
@@ -40,8 +52,11 @@ public class NPC : MonoBehaviour
     {
 		switch (state)
 		{
+			case npcState.None:
+				break;
 			case npcState.Idle:
 				npcObject.Idle();
+				Move();
 				break;
 			case npcState.Surrender:
 				npcObject.Surrender();
@@ -58,6 +73,37 @@ public class NPC : MonoBehaviour
 	void OnMouseDown()
 	{
 		npcObject.Surrender();
+		state = npcState.None;
+
+		if(currentRoom != null)
+		{
+			Debug.Log(currentRoom.ToString());
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject;
+		}
+	}
+
+	void Move()
+	{
+		if(transform.position != change)
+		{
+			animator.SetFloat("changeX", change.x - transform.position.x);
+			animator.SetFloat("changeY", change.y - transform.position.y);
+			animator.SetBool("isMoving", moving);
+			transform.position = change;
+			AdjustOrderLayer();
+		}
+	}
+
+	void AdjustOrderLayer()
+	{
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
 }
 
