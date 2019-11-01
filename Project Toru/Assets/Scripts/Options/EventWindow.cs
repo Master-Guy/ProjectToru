@@ -14,12 +14,12 @@ namespace Assets.Scripts.Options
 	{
 		List<Event> EventQueue;
 		List<Option> current;
+		int LinkIndex;
 
 		public void Start()
 		{
 			EventQueue = new List<Event>();
 			gameObject.SetActive(false);
-			GetComponent<TextMeshProUGUI>().text = string.Empty;
 		}
 
 		public void Update()
@@ -50,26 +50,46 @@ namespace Assets.Scripts.Options
 				GetComponent<TextMeshProUGUI>().text += "<link>" + o.getInfo() + "</link>" + System.Environment.NewLine;
 		}
 
+		TextMeshProUGUI last;
+		Camera lastCam;
+
 		public void OnMouseOver()
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.current);
+			LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
 			if (LinkIndex == -1)
 				return;
 
-			Debug.Log(Input.mousePosition);
-			Debug.Log(LinkIndex);
+			if (GetComponent<TextMeshProUGUI>() != last) {
+				last = GetComponent<TextMeshProUGUI>();
+				Debug.Log("Changed TMPro");
+				Debug.Log(last);
+			}
+			if (Camera.current != lastCam)
+			{
+				lastCam = Camera.current;
+				Debug.Log("Camera changed on hover");
+				Debug.Log(lastCam);
+			}
 			// TODO highlight text
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.current);
-			Debug.Log(Input.mousePosition);
-			Debug.Log(LinkIndex);
-			Debug.Log(GetComponent<TextMeshProUGUI>().textInfo.linkCount);
+			if (GetComponent<TextMeshProUGUI>() != last)
+			{
+				last = GetComponent<TextMeshProUGUI>();
+				Debug.Log("Changed TMPro");
+				Debug.Log(last);
+			}
+			if (Camera.current != lastCam)
+			{
+				lastCam = Camera.current;
+				Debug.Log("Camera changed on click");
+				Debug.Log(lastCam);
+			}
+
 			if (LinkIndex == -1)
 				return;
-			// LinkIndex = 0;
 
 			current[LinkIndex].Activate();
 			EventQueue.RemoveAt(0);
