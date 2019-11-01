@@ -19,7 +19,6 @@ namespace Assets.Scripts.Options
 		{
 			EventQueue = new List<Event>();
 			gameObject.SetActive(false);
-			GetComponent<TextMeshProUGUI>().text = string.Empty;
 		}
 
 		public void Update()
@@ -41,7 +40,7 @@ namespace Assets.Scripts.Options
 		void DisplayNextOptions()
 		{
 			gameObject.SetActive(true);
-			// TODO slow down time
+			Time.timeScale = 0.2f;
 
 			GetComponent<TextMeshProUGUI>().text = EventQueue[0].Description + System.Environment.NewLine;
 
@@ -52,24 +51,18 @@ namespace Assets.Scripts.Options
 
 		public void OnMouseOver()
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.current);
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
 			if (LinkIndex == -1)
 				return;
 
-			Debug.Log(Input.mousePosition);
-			Debug.Log(LinkIndex);
 			// TODO highlight text
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.current);
-			Debug.Log(Input.mousePosition);
-			Debug.Log(LinkIndex);
-			Debug.Log(GetComponent<TextMeshProUGUI>().textInfo.linkCount);
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
 			if (LinkIndex == -1)
 				return;
-			// LinkIndex = 0;
 
 			current[LinkIndex].Activate();
 			EventQueue.RemoveAt(0);
@@ -77,7 +70,7 @@ namespace Assets.Scripts.Options
 			if (EventQueue.Count == 0)
 			{
 				gameObject.SetActive(false);
-				// TODO speed up time
+				Time.timeScale = 1.0f;
 			}
 			else
 				DisplayNextOptions();
