@@ -12,15 +12,21 @@ namespace Assets.Scripts.Options
 		public string Description;
 		public GameObject Object;
 		public List<Character> Actors = new List<Character>();
-		public List<Option> Options = new List<Option>();
+		public List<Option> Options;
 
-		public Event(string s, GameObject g, List<Option> o)
+		public Event(string s, GameObject g, List<Option> o, Character c)
 		{
 			Description = s;
 			Object = g;
 			Options = o;
+			Actors.Add(c);
 		}
 
+		/// <summary>
+		/// returns true if events were merged
+		/// </summary>
+		/// <param name="E"></param>
+		/// <returns></returns>
 		public bool Merge(Event E)
 		{
 			if (E.Object != Object)
@@ -41,6 +47,34 @@ namespace Assets.Scripts.Options
 			return Options.Where(x => x.Prerequisite == null ||
 					// or where there is at least one actor that has the required skill
 					Actors.Where(a => a.skills.Contains(x.Prerequisite.Value)).Count() != 0).ToList();
+		}
+
+		public string GetText(out List<Option> o)
+		{
+			Debug.Log(Actors.Count);
+			string temp = Actors[0].name;
+			for(int i = 1; i < Actors.Count - 1; i++)
+			{
+				temp += ", " + Actors[i].name;
+			}
+			if (Actors.Count > 1)
+				temp += " and " + Actors[Actors.Count].name;
+			temp += " " + Description + System.Environment.NewLine;
+
+			o = GetOptions();
+
+			foreach (var option in o)
+			{
+				temp += "<link>[";
+				if (option.Prerequisite == null)
+					temp += "anyone";
+				else
+					foreach (Character c in Actors)
+						if (c.skills.Contains(option.Prerequisite.Value))
+							temp += c.name + " ";
+				temp += "] " + option.getInfo() + "</link>" + System.Environment.NewLine;
+			}
+			return temp;
 		}
 	}
 }

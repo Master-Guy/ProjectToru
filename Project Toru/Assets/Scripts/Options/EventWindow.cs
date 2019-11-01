@@ -29,9 +29,10 @@ namespace Assets.Scripts.Options
 		public void AddEvent(Event NewEvent)
 		{
 			foreach (var e in EventQueue)
-				if (e.Merge(NewEvent)) {
-				DisplayNextOptions();
-				return;
+				if (e.Merge(NewEvent))
+				{
+					DisplayNextOptions();
+					return;
 				}
 			EventQueue.Add(NewEvent);
 			DisplayNextOptions();
@@ -42,11 +43,7 @@ namespace Assets.Scripts.Options
 			gameObject.SetActive(true);
 			Time.timeScale = 0.2f;
 
-			GetComponent<TextMeshProUGUI>().text = EventQueue[0].Description + System.Environment.NewLine;
-
-			current = EventQueue[0].GetOptions();
-			foreach (var o in current)
-				GetComponent<TextMeshProUGUI>().text += "<link>" + o.getInfo() + "</link>" + System.Environment.NewLine;
+			GetComponent<TextMeshProUGUI>().text = EventQueue[0].GetText(out current);
 		}
 
 		public void OnMouseOver()
