@@ -24,12 +24,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public Vector2 size = new Vector2(1, 1);
 
     public HashSet<GameObject> charactersInRoom;
-    public HashSet<GameObject> npcsInRoom;
+    public HashSet<NPC> npcsInRoom;
 
     public Room()
     {
         charactersInRoom = new HashSet<GameObject>();
-        npcsInRoom = new HashSet<GameObject>();
+        npcsInRoom = new HashSet<NPC>();
     }
 
 	void Start()
@@ -72,7 +72,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
         }
         if (other.CompareTag("NPC"))
         {
-            npcsInRoom.Add(other.gameObject);
+            npcsInRoom.Add(other.gameObject.GetComponent<NPC>());
         }
     }
 
@@ -84,7 +84,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
         }
         if (other.CompareTag("NPC"))
         {
-            npcsInRoom.Remove(other.gameObject);
+            npcsInRoom.Remove(other.gameObject.GetComponent<NPC>());
         }
     }
 
@@ -100,9 +100,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
             Debug.Log(g.ToString());
         }
 
-        foreach (GameObject g in npcsInRoom)
+        foreach (NPC npc in npcsInRoom)
         {
-            Debug.Log(g.ToString());
+            Debug.Log(npc.ToString());
         }
     }
     void printNumberOfGameObjects()

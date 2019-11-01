@@ -145,9 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55008f5a4e247964fa9bb8e38bd1b4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  currentRoom: {fileID: 0}
   info: {fileID: 11400000, guid: 038012717f14fb743be63b4ae2024c2a, type: 2}
-  bag:
-  - {fileID: 3444742155135933046, guid: da04949429116084a88ada26f7cdd5c4, type: 3}
+  bag: []
   TextBox: {fileID: 8285807996838187758}
 --- !u!95 &5149227096689411571
 Animator:

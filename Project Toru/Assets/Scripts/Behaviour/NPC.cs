@@ -7,8 +7,8 @@ public class NPC : MonoBehaviour
 {
 	private INPC npcObject;
 	private npcType type;
-	private npcState state;
-	private Room currentRoom;
+	public npcState state;
+	public Room currentRoom;
 
 	[SerializeField]
 	private NPCinfo info;
@@ -80,8 +80,7 @@ public class NPC : MonoBehaviour
 	{
 		if (currentRoom.SelectedPlayerInRoom())
 		{
-			npcObject.Surrender();
-			state = npcState.None;
+			state = npcState.Surrender;
 		}
 		else
 		{

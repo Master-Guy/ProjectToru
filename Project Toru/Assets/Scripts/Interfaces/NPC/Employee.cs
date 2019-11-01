@@ -7,6 +7,8 @@ public class Employee : MonoBehaviour, INPC
 {
 	private NPC npc;
 
+    private bool handsUp = false;
+
 	public Employee(NPC npc)
 	{
 		this.npc = npc;
@@ -21,8 +23,11 @@ public class Employee : MonoBehaviour, INPC
 	public void Surrender()
 	{
 		dropBag();
-		npc.animator.SetBool("Surrendering", true);
-		npc.Say("Don't shoot!");
+
+        if (!handsUp)
+        {
+            HandsUp();
+        }
 	}
 
 	public void Flee()
@@ -57,4 +62,16 @@ public class Employee : MonoBehaviour, INPC
 			npc.bag.Clear();
 		}
 	}
+
+    private void HandsUp()
+    {
+        handsUp = true;
+        npc.animator.SetBool("Surrendering", true);
+        npc.Say("Don't shoot!");
+        
+        foreach(NPC npc in npc.currentRoom.npcsInRoom)
+        {
+            npc.state = npcState.Surrender;
+        }
+    }
 }
