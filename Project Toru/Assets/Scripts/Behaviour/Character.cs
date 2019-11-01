@@ -20,6 +20,8 @@ public class Character : MonoBehaviour
 	public GameObject currentRoom;
 	public static GameObject selectedCharacter;
 
+	public float MaxWeight;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -28,7 +30,7 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
-		inventory = new Inventory();
+		inventory = new Inventory(MaxWeight);
 		AdjustOrderLayer();
 	}
 

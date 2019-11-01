@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -10,20 +11,43 @@ public class Inventory : MonoBehaviour
 	//Create's a static InventoryUI manager
 	private static InventoryUI INVUI = new InventoryUI();
 
+	public float MaxWeight;
+
 	//Constructor - Creates a Item List
-	public Inventory()
+	public Inventory(float MaxWeight)
 	{
+		this.MaxWeight = MaxWeight;
+
 		inv = new HashSet<Item>();
 	}
 
 	//Add an item to the Inventory
 	public void addItem(Item item)
 	{
-		if (inv.Count < INVUI.allSlots)
+		if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
 		{
-			inv.Add(item);
+			bool Found = false;
+			foreach (Item i in inv)
+			{
+				if (i is Money && !Found)
+				{
+					i.value += item.value;
+					Found = true;
+				}
+			}
+
+			if (!Found)
+			{
+				inv.Add(item);
+			}
+
 			UpdateUI();
 			Destroy(item.gameObject);
+
+			foreach(Item i in inv)
+			{
+				Debug.Log("Name: " + i.name + " - Value: " + i.value);
+			}
 		}
 	}
 
@@ -51,5 +75,17 @@ public class Inventory : MonoBehaviour
 		{
 			INVUI.showInv(inv);
 		}
+	}
+
+	private float getWeightOfInventory()
+	{
+		float currentWeight = 0;
+
+		foreach(Item i in inv)
+		{
+			currentWeight += i.Weight;
+		}
+
+		return currentWeight;
 	}
 }

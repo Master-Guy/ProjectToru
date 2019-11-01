@@ -13,7 +13,7 @@ namespace Assets.Domain.Behaviour
 
 		void OnTriggerEnter2D(Collider2D collision)
 		{
-			if (collision.CompareTag("Player"))
+			if (collision.CompareTag("Player") && collision.isTrigger)
 			{
 				collision.GetComponent<Character>().inventory.addItem(this);
 			}
