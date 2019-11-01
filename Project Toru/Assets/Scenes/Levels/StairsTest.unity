@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Passable: 0
-  Description: 
+  Description: you walked into a bookshelf
 --- !u!61 &64517616
 BoxCollider2D:
   m_ObjectHideFlags: 0
