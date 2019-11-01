@@ -14,7 +14,6 @@ namespace Assets.Scripts.Options
 	{
 		List<Event> EventQueue;
 		List<Option> current;
-		int LinkIndex;
 
 		public void Start()
 		{
@@ -41,7 +40,7 @@ namespace Assets.Scripts.Options
 		void DisplayNextOptions()
 		{
 			gameObject.SetActive(true);
-			// TODO slow down time
+			Time.timeScale = 0.2f;
 
 			GetComponent<TextMeshProUGUI>().text = EventQueue[0].Description + System.Environment.NewLine;
 
@@ -50,44 +49,18 @@ namespace Assets.Scripts.Options
 				GetComponent<TextMeshProUGUI>().text += "<link>" + o.getInfo() + "</link>" + System.Environment.NewLine;
 		}
 
-		TextMeshProUGUI last;
-		Camera lastCam;
-
 		public void OnMouseOver()
 		{
-			LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
 			if (LinkIndex == -1)
 				return;
 
-			if (GetComponent<TextMeshProUGUI>() != last) {
-				last = GetComponent<TextMeshProUGUI>();
-				Debug.Log("Changed TMPro");
-				Debug.Log(last);
-			}
-			if (Camera.current != lastCam)
-			{
-				lastCam = Camera.current;
-				Debug.Log("Camera changed on hover");
-				Debug.Log(lastCam);
-			}
 			// TODO highlight text
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			if (GetComponent<TextMeshProUGUI>() != last)
-			{
-				last = GetComponent<TextMeshProUGUI>();
-				Debug.Log("Changed TMPro");
-				Debug.Log(last);
-			}
-			if (Camera.current != lastCam)
-			{
-				lastCam = Camera.current;
-				Debug.Log("Camera changed on click");
-				Debug.Log(lastCam);
-			}
-
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
 			if (LinkIndex == -1)
 				return;
 
@@ -97,7 +70,7 @@ namespace Assets.Scripts.Options
 			if (EventQueue.Count == 0)
 			{
 				gameObject.SetActive(false);
-				// TODO speed up time
+				Time.timeScale = 1.0f;
 			}
 			else
 				DisplayNextOptions();
