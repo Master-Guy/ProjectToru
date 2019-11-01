@@ -23,7 +23,6 @@ public class Door : MonoBehaviour
 
     private void OpenDoor()
     {
-        Debug.Log("Opening door");
         closed = false;
         GetComponent<Animator>().SetBool("openDoor", true);
         GetComponent<Collider2D>().enabled = false;

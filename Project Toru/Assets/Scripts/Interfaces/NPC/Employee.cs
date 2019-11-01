@@ -22,7 +22,7 @@ public class Employee : MonoBehaviour, INPC
 	{
 		dropBag();
 		npc.animator.SetBool("Surrendering", true);
-		npc.Say("Don't shoot");
+		npc.Say("Don't shoot!");
 	}
 
 	public void Flee()

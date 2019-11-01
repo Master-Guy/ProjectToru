@@ -29,8 +29,8 @@ public class NPC : MonoBehaviour
 
 	private bool moving = true;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
 		type = info.type;
 		state = info.state;
@@ -113,13 +113,18 @@ public class NPC : MonoBehaviour
 	{
 		TextBox.GetComponent<TextMesh>().text = text;
 		TextBox.SetActive(true);
-	}
+        Invoke("disableTextBox", 3);
+    }
+
+    void disableTextBox()
+    {
+        TextBox.SetActive(false);
+    }
 
 	void AdjustOrderLayer()
 	{
 		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
-
 }
 
 public enum npcType
