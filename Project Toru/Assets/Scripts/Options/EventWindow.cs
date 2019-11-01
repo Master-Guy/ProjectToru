@@ -9,16 +9,25 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Options
 {
+	public enum EventTextType
+	{
+		options,
+		characters
+	}
+
 	[RequireComponent(typeof(TMP_Text))]
 	public class EventWindow : MonoBehaviour, IPointerClickHandler
 	{
 		List<Event> EventQueue;
-		List<Option> current;
+		TextMeshProUGUI TMP;
+		EventTextType TextType;
+		int OptionIndex;
 
 		public void Start()
 		{
 			EventQueue = new List<Event>();
 			gameObject.SetActive(false);
+			TMP = GetComponent<TextMeshProUGUI>();
 		}
 
 		public void Update()
@@ -43,12 +52,13 @@ namespace Assets.Scripts.Options
 			gameObject.SetActive(true);
 			Time.timeScale = 0.2f;
 
-			GetComponent<TextMeshProUGUI>().text = EventQueue[0].GetText(out current);
+			TMP.text = EventQueue[0].GetOptionText();
+			TextType = EventTextType.options;
 		}
 
 		public void OnMouseOver()
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
 			if (LinkIndex == -1)
 				return;
 
@@ -57,20 +67,36 @@ namespace Assets.Scripts.Options
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(GetComponent<TextMeshProUGUI>(), Input.mousePosition, Camera.main);
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
 			if (LinkIndex == -1)
 				return;
 
-			current[LinkIndex].Activate();
-			EventQueue.RemoveAt(0);
-
-			if (EventQueue.Count == 0)
+			switch (TextType)
 			{
-				gameObject.SetActive(false);
-				Time.timeScale = 1.0f;
+				case EventTextType.options:
+					if (EventQueue[0].ActivateOption(LinkIndex))
+						goto default;
+
+					TMP.text = EventQueue[0].GetActorText();
+					TextType = EventTextType.characters;
+					OptionIndex = LinkIndex;
+					break;
+				case EventTextType.characters:
+					EventQueue[0].ActivateOption(OptionIndex, LinkIndex);
+					goto default;
+				default:
+					EventQueue.RemoveAt(0);
+
+					if (EventQueue.Count == 0)
+					{
+						gameObject.SetActive(false);
+						Time.timeScale = 1.0f;
+					}
+					else
+						DisplayNextOptions();
+
+					break;
 			}
-			else
-				DisplayNextOptions();
 		}
 	}
 }

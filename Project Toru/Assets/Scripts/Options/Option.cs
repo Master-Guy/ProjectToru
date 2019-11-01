@@ -21,6 +21,6 @@ namespace Assets.Scripts.Options
 			return Description;
 		}
 
-		public abstract void Activate();
+		public abstract void Activate(Character c);
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Options
 {
@@ -11,10 +12,10 @@ namespace Assets.Scripts.Options
 		public getInformation() : base("search for information") {	}
 		public getInformation(string description) : base(description) { }
 
-		public override void Activate()
+		public override void Activate(Character c)
 		{
 			// TODO gather information
-			Console.WriteLine("information found");
+			Debug.Log("information found by " + c.name);
 		}
 	}
 }

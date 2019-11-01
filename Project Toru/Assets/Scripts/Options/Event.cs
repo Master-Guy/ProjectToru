@@ -9,10 +9,12 @@ namespace Assets.Scripts.Options
 {
 	public class Event
 	{
-		public string Description;
-		public GameObject Object;
-		public List<Character> Actors = new List<Character>();
-		public List<Option> Options;
+		string Description;
+		GameObject Object;
+		List<Character> Actors = new List<Character>();
+		List<Character> ActorShortList = new List<Character>();
+		List<Option> Options;
+		List<Option> OptionShortList = new List<Option>();
 
 		public Event(string s, GameObject g, List<Option> o, Character c)
 		{
@@ -41,40 +43,71 @@ namespace Assets.Scripts.Options
 			return true;
 		}
 
-		public List<Option> GetOptions()
+		private void BuildOptionShortList()
 		{
 			// return a list with options that have no prerequisite
-			return Options.Where(x => x.Prerequisite == null ||
+			OptionShortList = Options.Where(x => x.Prerequisite == null ||
 					// or where there is at least one actor that has the required skill
 					Actors.Where(a => a.skills.Contains(x.Prerequisite.Value)).Count() != 0).ToList();
 		}
 
-		public string GetText(out List<Option> o)
+		private void BuildActorShortList(Option o)
 		{
-			Debug.Log(Actors.Count);
+			if (o.Prerequisite == null)
+				ActorShortList = Actors;
+			else
+				ActorShortList = Actors.Where(x => x.skills.Contains(o.Prerequisite.Value)).ToList();
+		}
+
+		public string GetOptionText()
+		{
 			string temp = Actors[0].name;
 			for(int i = 1; i < Actors.Count - 1; i++)
 			{
 				temp += ", " + Actors[i].name;
 			}
 			if (Actors.Count > 1)
-				temp += " and " + Actors[Actors.Count].name;
+				temp += " and " + Actors[Actors.Count - 1].name;
 			temp += " " + Description + System.Environment.NewLine;
 
-			o = GetOptions();
+			BuildOptionShortList();
 
-			foreach (var option in o)
+			foreach (var option in OptionShortList)
 			{
 				temp += "<link>[";
-				if (option.Prerequisite == null)
-					temp += "anyone";
-				else
-					foreach (Character c in Actors)
-						if (c.skills.Contains(option.Prerequisite.Value))
-							temp += c.name + " ";
+				foreach (Character c in Actors)
+					if (option.Prerequisite == null || c.skills.Contains(option.Prerequisite.Value))
+						temp += c.name + " ";
 				temp += "] " + option.getInfo() + "</link>" + System.Environment.NewLine;
 			}
 			return temp;
+		}
+
+		public string GetActorText()
+		{
+			string text = "Who will perform this action" + System.Environment.NewLine;
+			foreach(var a in ActorShortList)
+				text += "<link>" + a.name + "</link>" + System.Environment.NewLine;
+			return text;
+		}
+
+		/// <summary>
+		/// returns true if an option was activated, false if an actor has to be selected
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
+		public bool ActivateOption(int index)
+		{
+			BuildActorShortList(OptionShortList[index]);
+			if (ActorShortList.Count > 1)
+				return false;
+			OptionShortList[index].Activate(ActorShortList[0]);
+			return true;
+		}
+
+		public void ActivateOption(int indexOption, int indexCharacter)
+		{
+			OptionShortList[indexOption].Activate(ActorShortList[indexCharacter]);
 		}
 	}
 }
