@@ -8,6 +8,7 @@ public class Employee : MonoBehaviour, INPC
 	private NPC npc;
 
     private bool handsUp = false;
+	private bool flee = false;
 
 	public Employee(NPC npc)
 	{
@@ -24,6 +25,11 @@ public class Employee : MonoBehaviour, INPC
 	{
 		dropBag();
 
+		if (!npc.currentRoom.SelectedPlayerInRoom())
+		{
+			npc.state = npcState.Flee;
+		}
+
         if (!handsUp)
         {
             HandsUp();
@@ -32,6 +38,20 @@ public class Employee : MonoBehaviour, INPC
 
 	public void Flee()
 	{
+		if (!flee)
+		{
+			Debug.Log("Flee()");
+			flee = true;
+		}
+
+		if (handsUp)
+		{
+			handsUp = false;
+			npc.animator.SetBool("Surrendering", false);
+			npc.animator.SetBool("isMoving", false);
+			npc.animator.SetFloat("changeX", 0);
+			npc.animator.SetFloat("changeY", 0);
+		}
 		// Method that requires pathfinding first, npc will search for a nearby exit.
 	}
 

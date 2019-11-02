@@ -26,11 +26,11 @@ public class Guard : MonoBehaviour, INPC
 
 	public void Idle()
 	{
-		
+		throw new System.NotImplementedException();
 	}
 
 	public void Surrender()
 	{
-		Debug.Log("Guards never surrender");
+		throw new System.NotImplementedException();
 	}
 }
