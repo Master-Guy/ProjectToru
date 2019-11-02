@@ -27,12 +27,15 @@ public class Inventory : MonoBehaviour
 		if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
 		{
 			bool Found = false;
-			foreach (Item i in inv)
+			if (item.isStackable)
 			{
-				if (i is Money && !Found)
+				foreach (Item i in inv)
 				{
-					i.value += item.value;
-					Found = true;
+					if (i.GetType().Equals(item.GetType()) && !Found)
+					{
+						i.value += item.value;
+						Found = true;
+					}
 				}
 			}
 
@@ -41,13 +44,8 @@ public class Inventory : MonoBehaviour
 				inv.Add(item);
 			}
 
-			UpdateUI();
+		    UpdateUI();
 			Destroy(item.gameObject);
-
-			foreach(Item i in inv)
-			{
-				Debug.Log("Name: " + i.name + " - Value: " + i.value);
-			}
 		}
 	}
 
