@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4947826929547256069}
   - component: {fileID: 4947826929547256068}
   - component: {fileID: 4947826929547256570}
-  - component: {fileID: 6764899707426496021}
-  - component: {fileID: 5149227096689411571}
+  - component: {fileID: 4521887051741011871}
+  - component: {fileID: 6188662567543495645}
   m_Layer: 8
   m_Name: Employee
   m_TagString: NPC
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4947826929547256574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 1.2, z: -2}
+  m_LocalPosition: {x: 15, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7295608357388078607}
@@ -133,7 +133,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8871603, y: 1.2453985}
   m_EdgeRadius: 0
---- !u!114 &6764899707426496021
+--- !u!114 &4521887051741011871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,15 +142,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4947826929547256574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55008f5a4e247964fa9bb8e38bd1b4a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3185d39ac0868af46a91beea8ac49336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  currentRoom: {fileID: 0}
-  info: {fileID: 11400000, guid: 038012717f14fb743be63b4ae2024c2a, type: 2}
-  bag: []
   TextBox: {fileID: 8285807996838187758}
---- !u!95 &5149227096689411571
+  escapePath: []
+--- !u!95 &6188662567543495645
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -323,7 +320,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 117293569
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6544784237345316725

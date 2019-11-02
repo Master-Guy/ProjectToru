@@ -7,10 +7,6 @@ using System.Collections.Generic;
 public class Room : MonoBehaviour, IPointerClickHandler
 {
 
-	// Note: The 
-	[SerializeField]
-	public Theme theme = null;
-
 	[SerializeField]
 	private Tilemap walls = null;
 
@@ -23,37 +19,23 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	public Vector2 size = new Vector2(1, 1);
 
-    public HashSet<GameObject> charactersInRoom;
-    public HashSet<NPC> npcsInRoom;
+    private HashSet<GameObject> charactersInRoom;
+    private HashSet<GameObject> npcsInRoom;
 
     public Room()
     {
         charactersInRoom = new HashSet<GameObject>();
-        npcsInRoom = new HashSet<NPC>();
+        npcsInRoom = new HashSet<GameObject>();
     }
 
 	void Start()
 	{
-		GenerateBackground();
+
 	}
 
 	void Update()
 	{
 
-	}
-
-	private void GenerateBackground()
-	{
-		if (lightsOn && background.size.x == 0)
-		{
-			for (int i = 0; i < walls.size.x; i++)
-			{
-				for (int j = 1; j < walls.size.y; j++)
-				{
-					background.SetTile(new Vector3Int(i, j, 0), theme.center);
-				}
-			}
-		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -72,7 +54,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
         }
         if (other.CompareTag("NPC"))
         {
-            npcsInRoom.Add(other.gameObject.GetComponent<NPC>());
+            npcsInRoom.Add(other.gameObject);
         }
     }
 
@@ -84,7 +66,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
         }
         if (other.CompareTag("NPC"))
         {
-            npcsInRoom.Remove(other.gameObject.GetComponent<NPC>());
+            npcsInRoom.Remove(other.gameObject);
         }
     }
 
@@ -100,9 +82,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
             Debug.Log(g.ToString());
         }
 
-        foreach (NPC npc in npcsInRoom)
+        foreach (GameObject g in npcsInRoom)
         {
-            Debug.Log(npc.ToString());
+            Debug.Log(g.ToString());
         }
     }
     void printNumberOfGameObjects()
@@ -120,5 +102,22 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		{
 			return false;
 		}
+	}
+
+	public bool AnyCharacterInRoom()
+	{
+		if (this.charactersInRoom.Count > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public HashSet<GameObject> getNPCsInRoom()
+	{
+		return npcsInRoom;
 	}
 }
