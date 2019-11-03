@@ -21,6 +21,9 @@ public class NPC : MonoBehaviour
 
 	private bool surrender = false;
 
+	[SerializeField]
+	private GameObject[] bag;
+
 	void Start()
 	{
 		startingPosition = transform.position;
@@ -69,12 +72,21 @@ public class NPC : MonoBehaviour
 		{
 			surrender = true;
 			this.statemachine.ChangeState(new Surrender(this.animator, this.gameObject, this.currentRoom));
-			foreach(GameObject g in currentRoom.getNPCsInRoom())
+			dropBag();
+		}
+	}
+
+	public void dropBag()
+	{
+		if(bag.Length > 0)
+		{
+			foreach(GameObject g in bag)
 			{
-				g.GetComponent<NPC>().Surrender();
+				Instantiate(g, new Vector3(transform.position.x - 0.5f, transform.position.y - 0.5f, 0), Quaternion.identity);
 			}
 		}
 	}
+
 	public void Say(string text)
 	{
 		TextBox.GetComponent<TextMesh>().text = text;
