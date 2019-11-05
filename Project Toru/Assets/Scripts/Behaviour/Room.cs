@@ -43,9 +43,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
 			wallController.EnableLeftWall(false);
 		}
 
-		if (RightRoom != null)
+		if (RightRoom == null && door.enabled)
 		{
-			wallController.EnableRightWall(false);
+			Debug.LogError("Door enabled but no right-sided room assigned");
 		}
 	}
 
