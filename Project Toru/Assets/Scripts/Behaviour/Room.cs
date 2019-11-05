@@ -25,6 +25,8 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public Room LeftRoom;
 	public Room RightRoom;
 
+	public Door door;
+
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
 

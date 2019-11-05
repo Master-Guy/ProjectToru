@@ -6,37 +6,49 @@ using UnityEngine.Tilemaps;
 
 public class Door : MonoBehaviour
 {
-	[SerializeField]
-	private Room roomLeft = null, roomRight = null;
 
 	[SerializeField]
-	private int key;
+	Collider2D collider;
 
-    private bool closed = true;
+	[SerializeField]
+	int key;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	bool closed = true;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collision.CompareTag("Player"))
-            if (collision.gameObject.GetComponent<Character>().hasKey(key) && closed)
-                OpenDoor();
+		if (collision.CompareTag("Player"))
+			if (collision.gameObject.GetComponent<Character>().hasKey(key) && closed)
+				Open();
 	}
 
-    private void OpenDoor()
-    {
-        Debug.Log("Opening door");
-        closed = false;
-        GetComponent<Animator>().SetBool("openDoor", true);
-        GetComponent<Collider2D>().enabled = false;
-    }
+	public bool Close()
+	{
+		Debug.Log("Closing door");
+		closed = true;
+		GetComponent<Animator>().SetBool("openDoor", false);
+		collider.enabled = true;
+
+		return true;
+	}
+
+	public bool Open()
+	{
+		Debug.Log("Opening door");
+		closed = false;
+		GetComponent<Animator>().SetBool("openDoor", true);
+		collider.enabled = false;
+
+		return true;
+	}
+
+	public bool IsOpen()
+	{
+		return !closed;
+	}
+
+	public bool IsClosed()
+	{
+		return closed;
+	}
 }
