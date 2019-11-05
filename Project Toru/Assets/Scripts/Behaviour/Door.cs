@@ -37,9 +37,16 @@ public class Door : MonoBehaviour
 		Debug.Log("Opening door");
 		closed = false;
 		GetComponent<Animator>().SetBool("openDoor", true);
-		collider.enabled = false;
+
+		StartCoroutine(WaitForAnimationEndTimer());
 
 		return true;
+	}
+
+	IEnumerator WaitForAnimationEndTimer()
+	{
+		yield return new WaitForSeconds(0.5f);
+		collider.enabled = false;
 	}
 
 	public bool IsOpen()

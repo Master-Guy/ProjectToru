@@ -2903,7 +2903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8848863802122849194}
-  - component: {fileID: 6364071363778148582}
+  - component: {fileID: 7193484020114034785}
   m_Layer: 0
   m_Name: RightWall
   m_TagString: Untagged
@@ -2925,8 +2925,8 @@ Transform:
   m_Father: {fileID: 671413409307052402}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &6364071363778148582
-EdgeCollider2D:
+--- !u!60 &7193484020114034785
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2939,10 +2939,20 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 6.531788, y: 1.1516627}
-  - {x: 6.9670305, y: -0.011073828}
+    m_Paths:
+    - - {x: 6.55, y: 1}
+      - {x: 7, y: 0}
+      - {x: 7, y: 1}
 --- !u!1 &8848863802984564880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3379,7 +3389,7 @@ PrefabInstance:
         type: 3}
       propertyPath: collider
       value: 
-      objectReference: {fileID: 6364071363778148582}
+      objectReference: {fileID: 7193484020114034785}
     - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_Enabled

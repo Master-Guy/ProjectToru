@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e5aa38c1cfe4e2babfc9f9d0138c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftWall: {fileID: 0}
+  LeftWall: {fileID: 1626356353320361684}
 --- !u!1 &1626356353320361684
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5806881838564846442}
-  - component: {fileID: 92600834539804535}
+  - component: {fileID: 5775528775708929379}
   m_Layer: 0
   m_Name: Collider Right
   m_TagString: Untagged
@@ -126,8 +126,8 @@ Transform:
   m_Father: {fileID: 3382186349135791128}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &92600834539804535
-EdgeCollider2D:
+--- !u!60 &5775528775708929379
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -140,10 +140,20 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 0.5656538, y: 0.9628389}
-  - {x: 0.9205179, y: 0.06300044}
+    m_Paths:
+    - - {x: 0.55, y: 1}
+      - {x: 1, y: 0}
+      - {x: 1, y: 1}
 --- !u!1 &2606054759909119628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1024,43 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6680041823629940875}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 0, y: 1, z: 0}
+    second:
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 0, y: 2, z: 0}
+    second:
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 0, y: 3, z: 0}
+    second:
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
@@ -1023,10 +1069,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: 2c801d953fbe143a09ed2b8ed03e592e, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 7b672d7c5b4614d10bc13b46247db801, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -1034,12 +1080,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 8378638437827989985, guid: 343c15fcd60f74f8099472d0923dcc19,
+      type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 6236852482664162388, guid: 343c15fcd60f74f8099472d0923dcc19,
+      type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 0
+  - m_RefCount: 4
     m_Data:
       e00: 1
       e01: 0
@@ -1060,7 +1108,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 0.8295061, g: 0.57232785, b: 0.63169503, a: 1}
-  - m_RefCount: 0
+  - m_RefCount: 4
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 0.7475885, g: 0.37514788, b: 0.3846147, a: 1}
@@ -1445,7 +1493,7 @@ PrefabInstance:
         type: 3}
       propertyPath: collider
       value: 
-      objectReference: {fileID: 92600834539804535}
+      objectReference: {fileID: 5775528775708929379}
     - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_Enabled
