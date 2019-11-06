@@ -16,7 +16,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	bool lightsOn = true;
 
 	[SerializeField]
-	WallController wallController;
+	WallController wallController = null;
 
 	public Room LeftRoom = null;
 	public Room RightRoom = null;
@@ -42,7 +42,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 			Debug.LogError("A room size must be set manualy");
 		}
 
-		if (LeftRoom != null)
+		if (LeftRoom != null && wallController != null)
 		{
 			wallController.EnableLeftWall(false);
 		}

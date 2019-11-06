@@ -28,12 +28,6 @@ public class Character : MonoBehaviour
 	public float MaxWeight;
 
 	// Start is called before the first frame update
-	Character()
-	{
-		inventory = new Inventory(MaxWeight);
-	}
-
-	// Start is called before the first frame update
 	void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody2D>();
@@ -41,14 +35,7 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
-
 		inventory = new Inventory(MaxWeight);
-
-		if (cm == null)
-		{
-			cm = new CharacterManager();
-		}
-
 		AdjustOrderLayer();
 	}
 

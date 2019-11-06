@@ -19,12 +19,12 @@ public class StairsBehaviour : MonoBehaviour
 	{
 
 		// Hide stairs when floor is not connected
-		if (Upstair == null)
+		if (Upstair == null && GoUpStairs != null)
 		{
 			GoUpStairs.Disable();
 		}
 
-		if (Downstairs == null)
+		if (Downstairs == null && GoUpStairs != null)
 		{
 			GoDownStairs.Disable();
 		}
