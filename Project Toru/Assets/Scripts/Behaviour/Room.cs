@@ -1,41 +1,51 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
+	[SerializeField]
+	Tilemap walls = null;
 
 	[SerializeField]
-	private Tilemap walls = null;
+	Tilemap background = null;
 
 	[SerializeField]
-	private Tilemap background = null;
+	bool lightsOn = true;
 
 	[SerializeField]
-	private bool lightsOn;
+	WallController wallController;
+
+	public Room LeftRoom = null;
+	public Room RightRoom = null;
+
+	public Door door = null;
+
+	public HashSet<GameObject> charactersInRoom;
+	public HashSet<GameObject> npcsInRoom;
 
 	[SerializeField]
-	public Vector2 size = new Vector2(1, 1);
+	Vector2Int size = new Vector2Int(0, 0);
 
-    private HashSet<GameObject> charactersInRoom;
-    private HashSet<GameObject> npcsInRoom;
-
-    public Room()
-    {
-        charactersInRoom = new HashSet<GameObject>();
-        npcsInRoom = new HashSet<GameObject>();
-    }
+	public Room()
+	{
+		charactersInRoom = new HashSet<GameObject>();
+		npcsInRoom = new HashSet<GameObject>();
+	}
 
 	void Start()
 	{
+		if (size.x == 0 || size.y == 0)
+		{
+			Debug.LogError("A room size must be set manualy");
+		}
 
-	}
-
-	void Update()
-	{
-
+		if (LeftRoom != null)
+		{
+			wallController.EnableLeftWall(false);
+		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -46,51 +56,51 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            charactersInRoom.Add(other.gameObject);
-        }
-        if (other.CompareTag("NPC"))
-        {
-            npcsInRoom.Add(other.gameObject);
-        }
-    }
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Add(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Add(other.gameObject);
+		}
+	}
 
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            charactersInRoom.Remove(other.gameObject);
-        }
-        if (other.CompareTag("NPC"))
-        {
-            npcsInRoom.Remove(other.gameObject);
-        }
-    }
+	public void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Remove(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Remove(other.gameObject);
+		}
+	}
 
-    void OnMouseDown()
-    {
-        printNumberOfGameObjects();
-    }
+	void OnMouseDown()
+	{
+		printNumberOfGameObjects();
+	}
 
-    void printGameObjects()
-    {
-        foreach(GameObject g in charactersInRoom)
-        {
-            Debug.Log(g.ToString());
-        }
+	void printGameObjects()
+	{
+		foreach (GameObject g in charactersInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
 
-        foreach (GameObject g in npcsInRoom)
-        {
-            Debug.Log(g.ToString());
-        }
-    }
-    void printNumberOfGameObjects()
-    {
-        Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
-    }
+		foreach (GameObject g in npcsInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+	}
+	void printNumberOfGameObjects()
+	{
+		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
+	}
 
 	public bool SelectedPlayerInRoom()
 	{
@@ -119,5 +129,23 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public HashSet<GameObject> getNPCsInRoom()
 	{
 		return npcsInRoom;
+	}
+
+	/// <summary>
+	/// This function returns the current position seen from bottom left
+	/// </summary>
+	/// <returns>Returns current position from bottom left</returns>
+	public Vector3Int GetPosition()
+	{
+		return Vector3Int.FloorToInt(this.gameObject.transform.localPosition);
+	}
+
+	/// <summary>
+	/// This function returns the size of the room set by level designer
+	/// </summary>
+	/// <returns>Returns current size of room</returns>
+	public Vector2Int GetSize()
+	{
+		return size;
 	}
 }

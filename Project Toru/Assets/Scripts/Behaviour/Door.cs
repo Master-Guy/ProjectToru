@@ -6,25 +6,56 @@ using UnityEngine.Tilemaps;
 
 public class Door : MonoBehaviour
 {
-	[SerializeField]
-	private Room roomLeft = null, roomRight = null;
 
 	[SerializeField]
-	private int key;
+	Collider2D collider = null;
 
-    private bool closed = true;
+	[SerializeField]
+	int key = -1;
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	bool closed = true;
+
+	void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collision.CompareTag("Player"))
-            if (collision.gameObject.GetComponent<Character>().HasKey(key) && closed)
-                OpenDoor();
+		if (collision.CompareTag("Player"))
+			if (collision.gameObject.GetComponent<Character>().HasKey(key) && closed)
+				Open();
 	}
 
-    private void OpenDoor()
-    {
-        closed = false;
-        GetComponent<Animator>().SetBool("openDoor", true);
-        GetComponent<Collider2D>().enabled = false;
-    }
+	public bool Close()
+	{
+		Debug.Log("Closing door");
+		closed = true;
+		GetComponent<Animator>().SetBool("openDoor", false);
+		collider.enabled = true;
+
+		return true;
+	}
+
+	public bool Open()
+	{
+		Debug.Log("Opening door");
+		closed = false;
+		GetComponent<Animator>().SetBool("openDoor", true);
+
+		StartCoroutine(WaitForAnimationEndTimer());
+
+		return true;
+	}
+
+	IEnumerator WaitForAnimationEndTimer()
+	{
+		yield return new WaitForSeconds(0.5f);
+		collider.enabled = false;
+	}
+
+	public bool IsOpen()
+	{
+		return !closed;
+	}
+
+	public bool IsClosed()
+	{
+		return closed;
+	}
 }

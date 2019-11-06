@@ -11,16 +11,27 @@ public class Character : MonoBehaviour
 	private Animator animator;
 
 	public Inventory inventory;
-	
+
 	private bool didUseStair = false;
 	private static CharacterManager cm = new CharacterManager();
 	private bool isDisabled;
 	private ParticleSystem ps;
 
+	private float timer = 0;
+	private float stairsDuration = 1;
+	private bool playerOnTheStairs = false;
+
+
 	public GameObject currentRoom;
 	public static GameObject selectedCharacter;
 
 	public float MaxWeight;
+
+	// Start is called before the first frame update
+	Character()
+	{
+		inventory = new Inventory(MaxWeight);
+	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -30,13 +41,34 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
+
 		inventory = new Inventory(MaxWeight);
+
+		if (cm == null)
+		{
+			cm = new CharacterManager();
+		}
+
 		AdjustOrderLayer();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+
+		if (playerOnTheStairs)
+		{
+			timer += Time.deltaTime;
+
+			if (timer > stairsDuration)
+			{
+				playerOnTheStairs = false;
+				timer = 0;
+				this.GetComponent<Renderer>().enabled = true;
+				this.enableMovement();
+			}
+		}
+
 		if (!isDisabled)
 		{
 			Camera.main.GetComponent<CameraBehaviour>().target = transform;
@@ -59,12 +91,14 @@ public class Character : MonoBehaviour
 			}
 
 			UpdateAnimationsAndMove();
+
 		}
 	}
 
 	public bool HasKey(int key)
 	{
-		foreach(Item i in inventory.getItemsList())
+
+		foreach (Item i in inventory.getItemsList())
 		{
 			if (i is Key && ((Key)i).privateKey == key)
 				return true;
@@ -103,7 +137,9 @@ public class Character : MonoBehaviour
 	public void StairsTransistion()
 	{
 		didUseStair = true;
-		//Debug.Log("MovedStairs");
+		playerOnTheStairs = true;
+		this.GetComponent<Renderer>().enabled = false;
+		this.disableMovement();
 	}
 
 	public void enableMovement()
@@ -118,7 +154,8 @@ public class Character : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0))
+		{
 			cm.disableCharacterMovement();
 			selectedCharacter = this.gameObject;
 			enableMovement();
