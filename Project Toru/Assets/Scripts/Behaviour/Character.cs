@@ -10,10 +10,10 @@ public class Character : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
-	private List<Item> inventory;
-	private bool didUseStair = false;
+	public Inventory inventory;
 
-	private static CharacterManager cm;
+	private bool didUseStair = false;
+	private static CharacterManager cm = new CharacterManager();
 	private bool isDisabled;
 	private ParticleSystem ps;
 
@@ -21,10 +21,11 @@ public class Character : MonoBehaviour
 	private float stairsDuration = 1;
 	private bool playerOnTheStairs = false;
 
-	Character()
-	{
-		inventory = new List<Item>();
-	}
+
+	public GameObject currentRoom;
+	public static GameObject selectedCharacter;
+
+	public float MaxWeight;
 
 	// Start is called before the first frame update
 	void Start()
@@ -34,11 +35,7 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
-		if (cm == null)
-		{
-			cm = new CharacterManager();
-		}
-
+		inventory = new Inventory(MaxWeight);
 		AdjustOrderLayer();
 	}
 
@@ -81,22 +78,19 @@ public class Character : MonoBehaviour
 			}
 
 			UpdateAnimationsAndMove();
+
 		}
 	}
 
-	public bool hasKey(int key)
+	public bool HasKey(int key)
 	{
-		foreach (Item i in inventory)
+
+		foreach (Item i in inventory.getItemsList())
 		{
 			if (i is Key && ((Key)i).privateKey == key)
 				return true;
 		}
 		return false;
-	}
-
-	public void addItem(Item i)
-	{
-		inventory.Add(i);
 	}
 
 	void UpdateAnimationsAndMove()
@@ -150,13 +144,23 @@ public class Character : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			cm.disableCharacterMovement();
+			selectedCharacter = this.gameObject;
 			enableMovement();
 			ps.Play();
+			inventory.UpdateUI();
 		}
 	}
 
 	void AdjustOrderLayer()
 	{
 		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject;
+		}
 	}
 }

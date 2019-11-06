@@ -5,8 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Stairs
-  - PositionTarget
+  - NPC
   - Room
+  - Inventory
+  - InventorySlotHolder
+  - PositionTarget
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -42,6 +46,12 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
+    uniqueID: 2126931023
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Walls
     uniqueID: 3468499445
     locked: 0
   - name: Background Items
@@ -57,5 +67,8 @@ TagManager:
     uniqueID: 2965519193
     locked: 0
   - name: Foreground
-    uniqueID: 189804213
+    uniqueID: 2338746139
+    locked: 0
+  - name: UI
+    uniqueID: 117293569
     locked: 0

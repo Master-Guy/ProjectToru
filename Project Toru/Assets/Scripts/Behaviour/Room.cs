@@ -1,15 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
-
-	// Note: The 
-	[SerializeField]
-	public Theme theme = null;
-
 	[SerializeField]
 	Tilemap walls = null;
 
@@ -20,15 +16,24 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	bool lightsOn = true;
 
 	[SerializeField]
-	WallController wallController;
+	WallController wallController = null;
 
 	public Room LeftRoom = null;
 	public Room RightRoom = null;
 
 	public Door door = null;
 
+	public HashSet<GameObject> charactersInRoom;
+	public HashSet<GameObject> npcsInRoom;
+
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
+
+	public Room()
+	{
+		charactersInRoom = new HashSet<GameObject>();
+		npcsInRoom = new HashSet<GameObject>();
+	}
 
 	void Start()
 	{
@@ -36,27 +41,11 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		{
 			Debug.LogError("A room size must be set manualy");
 		}
-		GenerateBackground();
 
-		if (LeftRoom != null)
+		if (LeftRoom != null && wallController != null)
 		{
 			wallController.EnableLeftWall(false);
 		}
-	}
-
-	private void GenerateBackground()
-	{
-		if (lightsOn && background.size.x == 0)
-		{
-			for (int i = 0; i < walls.size.x; i++)
-			{
-				for (int j = 1; j < walls.size.y; j++)
-				{
-					background.SetTile(new Vector3Int(i, j, 0), theme.center);
-				}
-			}
-		}
-
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -65,6 +54,81 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		{
 			Debug.Log("Right Mouse Button Clicked on: " + name);
 		}
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Add(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Add(other.gameObject);
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Remove(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Remove(other.gameObject);
+		}
+	}
+
+	void OnMouseDown()
+	{
+		printNumberOfGameObjects();
+	}
+
+	void printGameObjects()
+	{
+		foreach (GameObject g in charactersInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+
+		foreach (GameObject g in npcsInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+	}
+	void printNumberOfGameObjects()
+	{
+		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
+	}
+
+	public bool SelectedPlayerInRoom()
+	{
+		if (this.charactersInRoom.Contains(Character.selectedCharacter))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public bool AnyCharacterInRoom()
+	{
+		if (this.charactersInRoom.Count > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public HashSet<GameObject> getNPCsInRoom()
+	{
+		return npcsInRoom;
 	}
 
 	/// <summary>

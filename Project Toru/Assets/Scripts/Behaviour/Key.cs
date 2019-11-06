@@ -11,18 +11,11 @@ namespace Assets.Domain.Behaviour
 	{
 		public int privateKey;
 
-		Key()
-		{
-			Debug.Log("made a key");
-		}
-
 		void OnTriggerEnter2D(Collider2D collision)
 		{
-			if (collision.CompareTag("Player"))
+			if (collision.CompareTag("Player") && collision.isTrigger)
 			{
-				collision.GetComponent<Character>().addItem(this);
-				this.gameObject.SetActive(false);
-				Debug.Log("You picked up a key");
+				collision.GetComponent<Character>().inventory.addItem(this);
 			}
 		}
 	}

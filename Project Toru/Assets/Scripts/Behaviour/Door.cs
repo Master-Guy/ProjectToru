@@ -15,10 +15,10 @@ public class Door : MonoBehaviour
 
 	bool closed = true;
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
-			if (collision.gameObject.GetComponent<Character>().hasKey(key) && closed)
+			if (collision.gameObject.GetComponent<Character>().HasKey(key) && closed)
 				Open();
 	}
 

@@ -8,6 +8,10 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
 	public new string name;
+	public Sprite UIIcon;
+	public float Weight;
+	public bool isStackable = false;
+	public float value;
 
 	void start()
 	{

@@ -33,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6209381211620940934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1, y: 1.1, z: -1.203346}
+  m_LocalPosition: {x: 7.1, y: 1.1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  inventory: {fileID: 0}
+  currentRoom: {fileID: 0}
+  MaxWeight: 20
 --- !u!114 &6209381211620940958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b0f6ea2a1bb9749bfe4ea019441ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedCharacter: {fileID: 0}
 --- !u!212 &6209381211620940959
 SpriteRenderer:
   m_ObjectHideFlags: 0
