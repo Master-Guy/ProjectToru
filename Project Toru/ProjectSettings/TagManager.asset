@@ -9,6 +9,8 @@ TagManager:
   - Room
   - Inventory
   - InventorySlotHolder
+  - PositionTarget
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -63,6 +65,9 @@ TagManager:
     locked: 0
   - name: Foreground Items
     uniqueID: 2965519193
+    locked: 0
+  - name: Foreground
+    uniqueID: 2338746139
     locked: 0
   - name: UI
     uniqueID: 117293569
