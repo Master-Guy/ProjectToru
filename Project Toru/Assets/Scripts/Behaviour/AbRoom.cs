@@ -1,10 +1,10 @@
-using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
-public class Room : MonoBehaviour, IPointerClickHandler
+public abstract class AbRoom : MonoBehaviour, IPointerClickHandler
 {
 	[SerializeField]
 	Tilemap walls = null;
@@ -29,10 +29,10 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
 
-	private bool roomHasCamera = false;
+	bool roomHasCamera = false;
 	CameraRoom cameraRoom;
 
-	public Room()
+	public AbRoom()
 	{
 		charactersInRoom = new HashSet<GameObject>();
 		npcsInRoom = new HashSet<GameObject>();
@@ -50,11 +50,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 			wallController.EnableLeftWall(false);
 		}
 
-		checkIfRoomHasACamera();
-	}
-
-	void checkIfRoomHasACamera()
-	{
 		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Room"))
 		{
 			if (obj.name.Equals("Security Room"))
@@ -82,20 +77,19 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.isTrigger)
+		if (other.CompareTag("Player"))
 		{
-			if (other.CompareTag("Player"))
+			charactersInRoom.Add(other.gameObject);
+
+			if (roomHasCamera)
 			{
-				charactersInRoom.Add(other.gameObject);
-				if(roomHasCamera)
-				{
-					cameraRoom.AlertGuard();
-				}
+				Debug.Log("Enterd room with Camera");
+				cameraRoom.AlertGuard();
 			}
-			if (other.CompareTag("NPC"))
-			{
-				npcsInRoom.Add(other.gameObject);
-			}
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Add(other.gameObject);
 		}
 	}
 
