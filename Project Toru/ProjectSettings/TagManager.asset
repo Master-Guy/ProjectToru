@@ -11,6 +11,7 @@ TagManager:
   - InventorySlotHolder
   - PositionTarget
   - Camera
+  - Security Room
   layers:
   - Default
   - TransparentFX

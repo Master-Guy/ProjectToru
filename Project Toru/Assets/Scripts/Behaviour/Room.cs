@@ -29,6 +29,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
 
+
 	public Room()
 	{
 		charactersInRoom = new HashSet<GameObject>();

@@ -50,5 +50,4 @@ public class Employee : NPC
 			this.statemachine.ChangeState(new Flee(this.escapePath, this.gameObject, this.animator));
 		}
 	}
-
 }

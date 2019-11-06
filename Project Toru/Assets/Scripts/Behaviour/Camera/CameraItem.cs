@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class CameraItem : MonoBehaviour
 {
-	private static CameraRoom  cameraRoom = new CameraRoom();
+	bool isEnabled = true;
 
-	bool isDisabled;
-
-	private void Awake()
-	{
-		isDisabled = false;
-	}
+	[SerializeField]
+	private CameraRoom securityRoom;
 
 	public void DisableCamera()
 	{
-		isDisabled = true;
+		isEnabled = false;
+	}
+
+	public void EnableCamera()
+	{
+		isEnabled = true;
 	}
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if(!isDisabled && other.isTrigger && other.tag.Equals("Player"))
+		if (isEnabled && other.isTrigger && other.tag.Equals("Player"))
 		{
-			Debug.Log("You have been seen");
-			cameraRoom.AlertGuard();
+			securityRoom.AlertGuard();
 		}
 	}
 }
