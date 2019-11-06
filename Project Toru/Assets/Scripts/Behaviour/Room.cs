@@ -17,15 +17,15 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	Tilemap background = null;
 
 	[SerializeField]
-	bool lightsOn;
+	bool lightsOn = true;
 
 	[SerializeField]
 	WallController wallController;
 
-	public Room LeftRoom;
-	public Room RightRoom;
+	public Room LeftRoom = null;
+	public Room RightRoom = null;
 
-	public Door door;
+	public Door door = null;
 
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);

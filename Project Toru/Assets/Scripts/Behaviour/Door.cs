@@ -8,10 +8,10 @@ public class Door : MonoBehaviour
 {
 
 	[SerializeField]
-	Collider2D collider;
+	Collider2D collider = null;
 
 	[SerializeField]
-	int key;
+	int key = -1;
 
 	bool closed = true;
 
