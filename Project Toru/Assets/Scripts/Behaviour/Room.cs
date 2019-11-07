@@ -55,16 +55,16 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 		if (LeftRoom == null)
 		{
-			cardReaderLeft.Hide();
+			cardReaderLeft?.Hide();
 		}
 
 		if (RightRoom == null)
 		{
-			cardReaderRight.Hide();
+			cardReaderRight?.Hide();
 		}
 
-		cardReaderLeft.AssignDoor(RightRoom?.door);
-		cardReaderRight.AssignDoor(door);
+		cardReaderLeft?.AssignDoor(LeftRoom?.door);
+		cardReaderRight?.AssignDoor(door);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
