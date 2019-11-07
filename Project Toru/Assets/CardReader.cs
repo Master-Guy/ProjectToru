@@ -66,6 +66,26 @@ public class CardReader : MonoBehaviour
 		currentColor = color;
 	}
 
+	public void SetColor(CardreaderColor color)
+	{
+		this.color = color;
+	}
+
+	public CardreaderColor GetColor()
+	{
+		return color;
+	}
+
+	public void SetStatus(bool status)
+	{
+		activated = status;
+	}
+
+	public bool GetStatus()
+	{
+		return activated;
+	}
+
 	enum CardreaderColor
 	{
 		Disabled,
