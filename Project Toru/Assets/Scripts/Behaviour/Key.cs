@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Key : Item
 {
-	public int privateKey;
+	public CardReader.CardreaderColor color = CardReader.CardreaderColor.Yellow;
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
