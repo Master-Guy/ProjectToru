@@ -109,7 +109,7 @@ public class CardReader : MonoBehaviour
 	/// <summary>
 	/// The colors of the cards and readers
 	/// </summary>
-	enum CardreaderColor
+	public enum CardreaderColor
 	{
 		Disabled,
 		Blue,
