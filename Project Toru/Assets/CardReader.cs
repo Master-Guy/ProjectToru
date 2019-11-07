@@ -106,6 +106,13 @@ public class CardReader : MonoBehaviour
 		return activated;
 	}
 
+	public void Hide()
+	{
+		this.GetComponent<SpriteRenderer>().enabled = false;
+		StatusIndicator.enabled = false;
+		ColorIndicator.enabled = false;
+	}
+
 	/// <summary>
 	/// The colors of the cards and readers
 	/// </summary>

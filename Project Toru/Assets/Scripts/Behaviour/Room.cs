@@ -18,6 +18,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	WallController wallController = null;
 
+	[SerializeField]
+	CardReader cardReaderLeft = null;
+
+	[SerializeField]
+	CardReader cardReaderRight = null;
+
 	public Room LeftRoom = null;
 	public Room RightRoom = null;
 
@@ -45,6 +51,16 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		if (LeftRoom != null && wallController != null)
 		{
 			wallController.EnableLeftWall(false);
+		}
+
+		if (LeftRoom == null)
+		{
+			cardReaderLeft.Hide();
+		}
+
+		if (RightRoom == null)
+		{
+			cardReaderRight.Hide();
 		}
 	}
 
@@ -129,6 +145,24 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public HashSet<GameObject> getNPCsInRoom()
 	{
 		return npcsInRoom;
+	}
+
+	/// <summary>
+	/// Returns the cardreader assigned to this room for the left door
+	/// </summary>
+	/// <returns>Returns CardReader object, can return NULL when not set</returns>
+	public CardReader GetCardReaderLeft()
+	{
+		return cardReaderLeft;
+	}
+
+	/// <summary>
+	/// Returns the cardreader assigned to this room for the left door
+	/// </summary>
+	/// <returns>Returns CardReader object, can return NULL when not set</returns>
+	public CardReader GetCardReaderRight()
+	{
+		return cardReaderRight;
 	}
 
 	/// <summary>
