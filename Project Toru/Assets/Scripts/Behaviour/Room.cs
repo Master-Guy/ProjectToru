@@ -43,26 +43,29 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	void Start()
 	{
+		// Check if roomsize is set
 		if (size.x == 0 || size.y == 0)
 		{
 			Debug.LogError("A room size must be set manualy");
 		}
 
-		if (LeftRoom != null && wallController != null)
+		// Enable Collider for leftwall
+		if (LeftRoom != null)
 		{
-			wallController.EnableLeftWall(false);
+			wallController?.EnableLeftWall(false);
 		}
 
+		// Hide CardReaders
 		if (LeftRoom == null)
 		{
 			cardReaderLeft?.Hide();
 		}
-
 		if (RightRoom == null)
 		{
 			cardReaderRight?.Hide();
 		}
 
+		// Tell Cardreaders which door is his door
 		cardReaderLeft?.AssignDoor(LeftRoom?.door);
 		cardReaderRight?.AssignDoor(door);
 	}

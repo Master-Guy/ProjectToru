@@ -34,6 +34,11 @@ public class CardReader : MonoBehaviour
 		}
 	}
 
+
+	/// <summary>
+	/// For now, when a reader is hit, check door
+	/// </summary>
+	/// <param name="collision"></param>
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
@@ -47,6 +52,10 @@ public class CardReader : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Let parent assign a door to this reader
+	/// </summary>
+	/// <param name="door">The door that this reader must control</param>
 	public void AssignDoor(Door door)
 	{
 		this.door = door;
