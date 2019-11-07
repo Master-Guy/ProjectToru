@@ -5,18 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Domain.Behaviour
+public class Key : Item
 {
-	public class Key : Item
-	{
-		public int privateKey;
+	public int privateKey;
 
-		void OnTriggerEnter2D(Collider2D collision)
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
-			if (collision.CompareTag("Player") && collision.isTrigger)
-			{
-				collision.GetComponent<Character>().inventory.addItem(this);
-			}
+			collision.GetComponent<Character>().inventory.addItem(this);
 		}
 	}
 }
