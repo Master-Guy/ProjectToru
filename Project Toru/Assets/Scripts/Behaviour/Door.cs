@@ -29,6 +29,7 @@ public class Door : MonoBehaviour
 
 		StartCoroutine(WaitForAnimationEndTimer());
 
+		Debug.Log("OPEN");
 		return true;
 	}
 
