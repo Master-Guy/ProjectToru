@@ -32,6 +32,10 @@ public class CardReader : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Update the visual appearance of the cardreader
+	/// Gets called by Update() when needed
+	/// </summary>
 	void UpdateColor()
 	{
 		// Update Status indicator
@@ -66,26 +70,45 @@ public class CardReader : MonoBehaviour
 		currentColor = color;
 	}
 
+	/// <summary>
+	/// Sets color of card by CardreaderColor
+	/// </summary>
+	/// <param name="color">The color to set to, will be updated directly</param>
 	public void SetColor(CardreaderColor color)
 	{
 		this.color = color;
 	}
 
+	/// <summary>
+	/// Get current color of reader
+	/// </summary>
+	/// <returns>Returns current color of reader</returns>
 	public CardreaderColor GetColor()
 	{
 		return color;
 	}
 
+	/// <summary>
+	/// Sets status (on or off)
+	/// </summary>
+	/// <param name="status">The status, true = green/active, false = red/active</param>
 	public void SetStatus(bool status)
 	{
 		activated = status;
 	}
 
+	/// <summary>
+	/// Returns current activation status
+	/// </summary>
+	/// <returns>Returns current activation status</returns>
 	public bool GetStatus()
 	{
 		return activated;
 	}
 
+	/// <summary>
+	/// The colors of the cards and readers
+	/// </summary>
 	enum CardreaderColor
 	{
 		Disabled,
