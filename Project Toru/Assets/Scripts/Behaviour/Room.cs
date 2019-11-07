@@ -63,7 +63,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 			cardReaderRight?.Hide();
 		}
 
-		cardReaderLeft?.AssignDoor(RightRoom?.door);
+		cardReaderLeft?.AssignDoor(LeftRoom?.door);
 		cardReaderRight?.AssignDoor(door);
 	}
 
