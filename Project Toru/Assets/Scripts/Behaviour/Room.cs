@@ -35,6 +35,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
 
+	private bool roomHasCamera = false;
+	CameraRoom cameraRoom;
+
 	public Room()
 	{
 		charactersInRoom = new HashSet<GameObject>();
@@ -68,6 +71,27 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		// Tell Cardreaders which door is his door
 		cardReaderLeft?.AssignDoor(LeftRoom?.door);
 		cardReaderRight?.AssignDoor(door);
+
+		checkIfRoomHasACamera();
+	}
+
+	void checkIfRoomHasACamera()
+	{
+		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			if (obj.name.Equals("Security Room"))
+			{
+				cameraRoom = obj.GetComponent<CameraRoom>();
+			}
+		}
+
+		foreach (Transform t in gameObject.transform)
+		{
+			if (t.name.Equals("Camera"))
+			{
+				roomHasCamera = true;
+			}
+		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -75,30 +99,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		if (eventData.button == PointerEventData.InputButton.Right)
 		{
 			Debug.Log("Right Mouse Button Clicked on: " + name);
-		}
-	}
-
-	public void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			charactersInRoom.Add(other.gameObject);
-		}
-		if (other.CompareTag("NPC"))
-		{
-			npcsInRoom.Add(other.gameObject);
-		}
-	}
-
-	public void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			charactersInRoom.Remove(other.gameObject);
-		}
-		if (other.CompareTag("NPC"))
-		{
-			npcsInRoom.Remove(other.gameObject);
 		}
 	}
 
@@ -124,6 +124,37 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	void printNumberOfGameObjects()
 	{
 		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.isTrigger)
+		{
+			if (other.CompareTag("Player"))
+			{
+				charactersInRoom.Add(other.gameObject);
+				if (roomHasCamera)
+				{
+					cameraRoom.AlertGuard();
+				}
+			}
+			if (other.CompareTag("NPC"))
+			{
+				npcsInRoom.Add(other.gameObject);
+			}
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Remove(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Remove(other.gameObject);
+		}
 	}
 
 	public bool SelectedPlayerInRoom()
@@ -153,24 +184,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public HashSet<GameObject> getNPCsInRoom()
 	{
 		return npcsInRoom;
-	}
-
-	/// <summary>
-	/// Returns the cardreader assigned to this room for the left door
-	/// </summary>
-	/// <returns>Returns CardReader object, can return NULL when not set</returns>
-	public CardReader GetCardReaderLeft()
-	{
-		return cardReaderLeft;
-	}
-
-	/// <summary>
-	/// Returns the cardreader assigned to this room for the left door
-	/// </summary>
-	/// <returns>Returns CardReader object, can return NULL when not set</returns>
-	public CardReader GetCardReaderRight()
-	{
-		return cardReaderRight;
 	}
 
 	/// <summary>

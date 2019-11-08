@@ -64,6 +64,7 @@ public class CardReader : MonoBehaviour
 	/// <param name="door">The door that this reader must control</param>
 	public void AssignDoor(Door door)
 	{
+		Debug.Log("SETTING");
 		this.door = door;
 	}
 
