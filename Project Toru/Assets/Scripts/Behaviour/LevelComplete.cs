@@ -13,23 +13,25 @@ public class LevelComplete : MonoBehaviour
 
 	bool won = false;
 	bool lose = false;
+	bool BlockFan = false;
 
 	private void Update()
 	{
-		if(won)
+		if (won || BlockFan)
 		{
 			GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + -0.1f, transform.position.y));
 		}
 
-		if(lose)
+		if (lose)
 		{
-			GameObject obj =  Instantiate(copsPrefab, new Vector3(copsSpawnPoint.transform.position.x - 0.5f, copsSpawnPoint.transform.position.y - 0.5f, 0), Quaternion.identity);
+			GameObject obj = Instantiate(copsPrefab, new Vector3(copsSpawnPoint.transform.position.x - 0.5f, copsSpawnPoint.transform.position.y - 0.5f, 0), Quaternion.identity);
 			copsList.Add(obj);
 			lose = false;
 			Invoke("sceneSwitcherLose", 5);
+			BlockFan = true;
 		}
 
-		foreach(GameObject move in copsList)
+		foreach (GameObject move in copsList)
 		{
 			move.GetComponent<Rigidbody2D>().MovePosition(new Vector2(move.transform.position.x + 0.1f, move.transform.position.y));
 		}
