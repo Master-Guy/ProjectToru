@@ -86,4 +86,16 @@ public class Inventory : MonoBehaviour
 
 		return currentWeight;
 	}
+
+	public float getMoney()
+	{
+		foreach(Item i in inv)
+		{
+			if(i.GetType().Name == "Money")
+			{
+				return i.value;
+			}
+		}
+		return 0;
+	}
 }
