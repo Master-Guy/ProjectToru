@@ -12,15 +12,5 @@ public class Item : MonoBehaviour
 	public float Weight;
 	public bool isStackable = false;
 	public float value;
-
-	void start()
-	{
-
-	}
-
-	private void Update()
-	{
-		
-	}
 }
 

@@ -19,6 +19,8 @@ public class CardReader : MonoBehaviour
 	[SerializeField]
 	SpriteRenderer ColorIndicator = null;
 
+	Door door = null;
+
 	void Start()
 	{
 		UpdateColor();
@@ -30,6 +32,33 @@ public class CardReader : MonoBehaviour
 		{
 			UpdateColor();
 		}
+	}
+
+
+	/// <summary>
+	/// For now, when a reader is hit, check door
+	/// </summary>
+	/// <param name="collision"></param>
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player"))
+		{
+			Debug.Log("Checking Key");
+			if (collision.gameObject.GetComponent<Character>().HasKey(color))
+			{
+				door.Open();
+				this.SetStatus(true);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Let parent assign a door to this reader
+	/// </summary>
+	/// <param name="door">The door that this reader must control</param>
+	public void AssignDoor(Door door)
+	{
+		this.door = door;
 	}
 
 	/// <summary>
@@ -104,6 +133,19 @@ public class CardReader : MonoBehaviour
 	public bool GetStatus()
 	{
 		return activated;
+	}
+
+	public bool OpenDoor(Key key)
+	{
+
+		return false;
+	}
+
+	public void Hide()
+	{
+		this.GetComponent<SpriteRenderer>().enabled = false;
+		StatusIndicator.enabled = false;
+		ColorIndicator.enabled = false;
 	}
 
 	/// <summary>

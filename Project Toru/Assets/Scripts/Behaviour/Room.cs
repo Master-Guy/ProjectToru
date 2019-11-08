@@ -18,6 +18,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	WallController wallController = null;
 
+	[SerializeField]
+	CardReader cardReaderLeft = null;
+
+	[SerializeField]
+	CardReader cardReaderRight = null;
+
 	public Room LeftRoom = null;
 	public Room RightRoom = null;
 
@@ -37,15 +43,31 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	void Start()
 	{
+		// Check if roomsize is set
 		if (size.x == 0 || size.y == 0)
 		{
 			Debug.LogError("A room size must be set manualy");
 		}
 
-		if (LeftRoom != null && wallController != null)
+		// Enable Collider for leftwall
+		if (LeftRoom != null)
 		{
-			wallController.EnableLeftWall(false);
+			wallController?.EnableLeftWall(false);
 		}
+
+		// Hide CardReaders
+		if (LeftRoom == null)
+		{
+			cardReaderLeft?.Hide();
+		}
+		if (RightRoom == null)
+		{
+			cardReaderRight?.Hide();
+		}
+
+		// Tell Cardreaders which door is his door
+		cardReaderLeft?.AssignDoor(LeftRoom?.door);
+		cardReaderRight?.AssignDoor(door);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -129,6 +151,24 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public HashSet<GameObject> getNPCsInRoom()
 	{
 		return npcsInRoom;
+	}
+
+	/// <summary>
+	/// Returns the cardreader assigned to this room for the left door
+	/// </summary>
+	/// <returns>Returns CardReader object, can return NULL when not set</returns>
+	public CardReader GetCardReaderLeft()
+	{
+		return cardReaderLeft;
+	}
+
+	/// <summary>
+	/// Returns the cardreader assigned to this room for the left door
+	/// </summary>
+	/// <returns>Returns CardReader object, can return NULL when not set</returns>
+	public CardReader GetCardReaderRight()
+	{
+		return cardReaderRight;
 	}
 
 	/// <summary>
