@@ -21,12 +21,12 @@ public class StairsBehaviour : MonoBehaviour
 		// Hide stairs when floor is not connected
 		if (Upstair == null && GoUpStairs != null)
 		{
-			GoUpStairs.Disable();
+			GoUpStairs?.Disable();
 		}
 
 		if (Downstairs == null && GoUpStairs != null)
 		{
-			GoDownStairs.Disable();
+			GoDownStairs?.Disable();
 		}
 	}
 
@@ -42,7 +42,7 @@ public class StairsBehaviour : MonoBehaviour
 
 		// Find PositionTarget
 		// We need to get the Downstairs target, because the character must end there.
-		return GoDownStairs.GetTarget();
+		return GoDownStairs?.GetTarget();
 	}
 
 	/// <summary>
@@ -57,7 +57,7 @@ public class StairsBehaviour : MonoBehaviour
 
 		// Find PositionTarget
 		// We need to get the Downstairs target, because the character must end there.
-		return GoUpStairs.GetTarget();
+		return GoUpStairs?.GetTarget();
 	}
 
 	/// <summary>
@@ -68,6 +68,8 @@ public class StairsBehaviour : MonoBehaviour
 	/// <param name="collider">The character collider</param>
 	public void UseStairs(bool GoUp, Collider2D collider)
 	{
+
+		if (Upstair == null || Downstairs == null) return;
 
 		Transform target = (GoUp ? Upstair.GetUpTarget() : Downstairs.GetDownTarget());
 
