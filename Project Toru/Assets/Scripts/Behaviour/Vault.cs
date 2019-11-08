@@ -8,6 +8,7 @@ public class Vault : MonoBehaviour
 	Collider2D collider = null;
 
 	public Door door = null;
+	public GameObject money = null;
 
 	bool closed = true;
 
@@ -17,6 +18,7 @@ public class Vault : MonoBehaviour
 			if (collision.gameObject.GetComponent<Character>() && closed)
 			{
 				Open();
+				collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
 			}
 	}
 
