@@ -13,7 +13,6 @@ namespace Assets.Scripts.Behaviour
 	{
 		const string OptionWindowName = "OptionDialogue";
 
-		[SerializeField]
 		List<Option> Options;
 
 		[SerializeField]
@@ -22,17 +21,13 @@ namespace Assets.Scripts.Behaviour
 		[SerializeField]
 		string Description = string.Empty;
 
-		EventWindow OWindow;
+		public List<Item> items;
 		Room Parent;
 
 
 		void Start()
 		{
-			Options = new List<Option>()
-			{
-				new getInformation()
-			};
-			OWindow = GameObject.Find(OptionWindowName).GetComponent<EventWindow>();
+			Options = GetComponentsInChildren<Option>().ToList();
 		}
 
 		void Update()
@@ -43,13 +38,13 @@ namespace Assets.Scripts.Behaviour
 		void OnTriggerEnter2D(Collider2D collision)
 		{
 			if (collision.CompareTag("Player") && collision.isTrigger)	// check if character has a destination, if so check if it is this
-				OWindow.AddEvent(new Options.Event(Description, gameObject, Options, collision.GetComponent<Character>()));
+				CurrentEventWindow.Current.AddEvent(new Options.Event(Description, gameObject, Options, collision.GetComponent<Character>()));
 		}
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			if (collision.CompareTag("Player") && collision.isTrigger)  // check if character has a destination, if so check if it is this
-				OWindow.RemoveEvent(gameObject, collision.GetComponent<Character>());
+				CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
 		}
 
 		public void OnPointerClick(PointerEventData eventData)

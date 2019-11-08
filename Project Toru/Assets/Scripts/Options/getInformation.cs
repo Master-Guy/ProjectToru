@@ -9,9 +9,6 @@ namespace Assets.Scripts.Options
 {
 	class getInformation : Option
 	{
-		public getInformation() : base("search for information") {	}
-		public getInformation(string description) : base(description) { }
-
 		public override void Activate(Character c)
 		{
 			// TODO gather information

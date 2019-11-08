@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Options
 {
-	public abstract class Option
+	public abstract class Option : MonoBehaviour
 	{
+		[SerializeField]
 		private readonly string Description;
 		public Skills? Prerequisite = null;
 
-		public Option(string desc)
-		{
-			Description = desc;
-		}
 
 		public string getInfo()
 		{

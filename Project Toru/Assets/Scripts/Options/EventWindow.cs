@@ -9,6 +9,11 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Options
 {
+	static class CurrentEventWindow
+	{
+		public static EventWindow Current;
+	}
+
 	public enum EventTextType
 	{
 		options,
@@ -29,6 +34,7 @@ namespace Assets.Scripts.Options
 			EventQueue = new List<Event>();
 			gameObject.SetActive(false);
 			TMP = GetComponent<TextMeshProUGUI>();
+			CurrentEventWindow.Current = this;
 		}
 
 		public void Update()
