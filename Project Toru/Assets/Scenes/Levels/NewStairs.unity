@@ -3104,12 +3104,12 @@ PrefabInstance:
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.61
+      value: -5.71
       objectReference: {fileID: 0}
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.01
+      value: 1.26
       objectReference: {fileID: 0}
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
@@ -3345,7 +3345,7 @@ Transform:
   - {fileID: 112481950}
   - {fileID: 1662605921}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1520211439 stripped
 MonoBehaviour:
@@ -4120,6 +4120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b381df4fef305f0428f7e02df3556755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &2137362821 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: -4837203596732575606, guid: 5cffe221997a6423caf15ebd21d5453a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3593294846746019325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139789195
 GameObject:
   m_ObjectHideFlags: 0
@@ -4252,7 +4258,7 @@ PrefabInstance:
         type: 3}
       propertyPath: escapePath.Array.data[0]
       value: 
-      objectReference: {fileID: 1515407136}
+      objectReference: {fileID: 0}
     - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: escapePath.Array.data[1]
@@ -4277,25 +4283,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
-        type: 3}
-      propertyPath: collider
-      value: 
-      objectReference: {fileID: 1661008130}
     - target: {fileID: 3593294848373374211, guid: 5cffe221997a6423caf15ebd21d5453a,
         type: 3}
       propertyPath: m_Name
       value: vault
       objectReference: {fileID: 0}
+    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
+        type: 3}
+      propertyPath: collider
+      value: 
+      objectReference: {fileID: 2137362821}
     - target: {fileID: 3593294848373374205, guid: 5cffe221997a6423caf15ebd21d5453a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.53
+      value: 11.38
       objectReference: {fileID: 0}
     - target: {fileID: 3593294848373374205, guid: 5cffe221997a6423caf15ebd21d5453a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.12
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 3593294848373374205, guid: 5cffe221997a6423caf15ebd21d5453a,
         type: 3}
