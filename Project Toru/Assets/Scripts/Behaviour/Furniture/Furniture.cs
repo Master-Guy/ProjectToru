@@ -46,6 +46,12 @@ namespace Assets.Scripts.Behaviour
 				OWindow.AddEvent(new Options.Event(Description, gameObject, Options, collision.GetComponent<Character>()));
 		}
 
+		void OnTriggerExit2D(Collider2D collision)
+		{
+			if (collision.CompareTag("Player") && collision.isTrigger)  // check if character has a destination, if so check if it is this
+				OWindow.RemoveEvent(gameObject, collision.GetComponent<Character>());
+		}
+
 		public void OnPointerClick(PointerEventData eventData)
 		{
 			if (eventData.button == PointerEventData.InputButton.Right)

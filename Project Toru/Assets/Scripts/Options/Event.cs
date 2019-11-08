@@ -43,6 +43,19 @@ namespace Assets.Scripts.Options
 			return true;
 		}
 
+		/// <summary>
+		/// return the amount of actors left, -1 if the gameobject does not match
+		/// </summary>
+		/// <param name="E"></param>
+		/// <returns></returns>
+		public int Remove(GameObject g, Character c)
+		{
+			if (g != Object)
+				return -1;
+			Actors.Remove(c);
+			return Actors.Count;
+		}
+
 		private void BuildOptionShortList()
 		{
 			// return a list with options that have no prerequisite

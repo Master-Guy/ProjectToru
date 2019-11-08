@@ -12,7 +12,8 @@ namespace Assets.Scripts.Options
 	public enum EventTextType
 	{
 		options,
-		characters
+		characters,
+		extraAction
 	}
 
 	[RequireComponent(typeof(TMP_Text))]
@@ -57,13 +58,27 @@ namespace Assets.Scripts.Options
 				if (temp == 0)
 					EventQueue.RemoveAt(i);
 			}
-			DisplayNextOptions();
+
+			if (EventQueue.Count == 0)
+			{
+				gameObject.SetActive(false);
+				Time.timeScale = 1.0f;
+			}
+			else
+				DisplayNextOptions();
 		}
 
 		public void RemoveEvent(Event E)
 		{
 			EventQueue.Remove(E);
-			DisplayNextOptions();
+
+			if (EventQueue.Count == 0)
+			{
+				gameObject.SetActive(false);
+				Time.timeScale = 1.0f;
+			}
+			else
+				DisplayNextOptions();
 		}
 
 		void DisplayNextOptions()
@@ -109,6 +124,8 @@ namespace Assets.Scripts.Options
 				case EventTextType.characters:
 					EventQueue[0].ActivateOption(OptionIndex, LinkIndex);
 					goto default;
+
+					// TODO add possibility to do another action
 				default:
 					EventQueue.RemoveAt(0);
 
