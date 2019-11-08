@@ -69,13 +69,12 @@ public class StairsBehaviour : MonoBehaviour
 	public void UseStairs(bool GoUp, Collider2D collider)
 	{
 
-		if (Upstair == null || Downstairs == null) return;
-
-		Transform target = (GoUp ? Upstair.GetUpTarget() : Downstairs.GetDownTarget());
+		Transform target = (GoUp ? Upstair?.GetUpTarget() : Downstairs?.GetDownTarget());
 
 		if (target == null)
 		{
-			Debug.LogError("Stair Target is not set, illegal direction");
+			Debug.LogWarning("Stair Target is not set, illegal direction");
+			return;
 		}
 
 		// Move character
