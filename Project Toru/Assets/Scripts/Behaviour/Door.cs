@@ -9,7 +9,15 @@ public class Door : MonoBehaviour
 	[SerializeField]
 	Collider2D collider = null;
 
-	bool closed = true;
+	public bool closed = true;
+
+	void Start()
+	{
+		if (!closed)
+		{
+			Open();
+		}
+	}
 
 	public bool Close()
 	{
