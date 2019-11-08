@@ -1,42 +1,55 @@
-﻿using Assets.Domain.Behaviour;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Door : MonoBehaviour
 {
-	[SerializeField]
-	private Room roomLeft = null, roomRight = null;
 
 	[SerializeField]
-	private int key;
+	Collider2D collider = null;
 
-    private bool closed = true;
+	bool closed = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-	private void OnTriggerEnter2D(Collider2D collision)
+	public bool Close()
 	{
-        if (collision.CompareTag("Player"))
-            if (collision.gameObject.GetComponent<Character>().hasKey(key) && closed)
-                OpenDoor();
+		Debug.Log("Closing door");
+		closed = true;
+		GetComponent<Animator>().SetBool("openDoor", false);
+		collider.enabled = true;
+
+		return true;
 	}
 
-    private void OpenDoor()
-    {
-        Debug.Log("Opening door");
-        closed = false;
-        GetComponent<Animator>().SetBool("openDoor", true);
-        GetComponent<Collider2D>().enabled = false;
-    }
+	public bool Open()
+	{
+		Debug.Log("Opening door");
+		closed = false;
+		GetComponent<Animator>().SetBool("openDoor", true);
+
+		StartCoroutine(WaitForAnimationEndTimer());
+
+		return true;
+	}
+
+	IEnumerator WaitForAnimationEndTimer()
+	{
+		yield return new WaitForSeconds(0.5f);
+		collider.enabled = false;
+	}
+
+	public bool IsOpen()
+	{
+		return !closed;
+	}
+
+	public bool IsClosed()
+	{
+		return closed;
+	}
+
+	Room FindRoom()
+	{
+		return this.GetComponentInParent(typeof(Room)) as Room;
+	}
 }

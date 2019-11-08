@@ -1,5 +1,4 @@
-﻿using Assets.Domain.Behaviour;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum Skills
@@ -14,7 +13,8 @@ public class Character : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
-	private List<Item> inventory;
+	public Inventory inventory;
+
 	private bool didUseStair = false;
 	public List<Skills> skills = new List<Skills>();
 
@@ -22,10 +22,15 @@ public class Character : MonoBehaviour
 	private bool isDisabled;
 	private ParticleSystem ps;
 
-	Character()
-	{
-		inventory = new List<Item>();
-	}
+	private float timer = 0;
+	private float stairsDuration = 1;
+	private bool playerOnTheStairs = false;
+
+
+	public GameObject currentRoom;
+	public static GameObject selectedCharacter;
+
+	public float MaxWeight;
 
 	// Start is called before the first frame update
 	void Start()
@@ -35,17 +40,30 @@ public class Character : MonoBehaviour
 		isDisabled = true;
 		ps = GetComponent<ParticleSystem>();
 
-		if(cm == null)
-		{
-			cm = new CharacterManager();
-		}
+		inventory = new Inventory(MaxWeight);
+		AdjustOrderLayer();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+
+		if (playerOnTheStairs)
+		{
+			timer += Time.deltaTime;
+
+			if (timer > stairsDuration)
+			{
+				playerOnTheStairs = false;
+				timer = 0;
+				this.GetComponent<Renderer>().enabled = true;
+				this.enableMovement();
+			}
+		}
+
 		if (!isDisabled)
 		{
+			Camera.main.GetComponent<CameraBehaviour>().target = transform;
 			change = Vector3.zero;
 			change.x = Input.GetAxisRaw("Horizontal");
 			change.y = Input.GetAxisRaw("Vertical");
@@ -65,28 +83,26 @@ public class Character : MonoBehaviour
 			}
 
 			UpdateAnimationsAndMove();
+
 		}
 	}
 
-	public bool hasKey(int key)
+	public bool HasKey(CardReader.CardreaderColor color)
 	{
-		foreach(Item i in inventory)
+
+		foreach (Item i in inventory.getItemsList())
 		{
-			if (i is Key && ((Key)i).privateKey == key)
+			if (i is Key && ((Key)i).color == color)
 				return true;
 		}
 		return false;
-	}
-
-	public void addItem(Item i)
-	{
-		inventory.Add(i);
 	}
 
 	void UpdateAnimationsAndMove()
 	{
 		if (change != Vector3.zero)
 		{
+			AdjustOrderLayer();
 			MoveCharacter();
 			animator.SetFloat("moveX", change.x);
 			animator.SetFloat("moveY", change.y);
@@ -113,7 +129,9 @@ public class Character : MonoBehaviour
 	public void StairsTransistion()
 	{
 		didUseStair = true;
-		//Debug.Log("MovedStairs");
+		playerOnTheStairs = true;
+		this.GetComponent<Renderer>().enabled = false;
+		this.disableMovement();
 	}
 
 	public void enableMovement()
@@ -128,24 +146,26 @@ public class Character : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0))
+		{
 			cm.disableCharacterMovement();
+			selectedCharacter = this.gameObject;
 			enableMovement();
 			ps.Play();
+			inventory.UpdateUI();
 		}
 	}
-	void OnTriggerEnter(Collider other)
+
+	void AdjustOrderLayer()
 	{
-		if (other.tag.Equals("Player"))
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
 		{
-			if (this.transform.position.y > other.transform.position.y)
-			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, -2);
-			}
-			else
-			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, -1);
-			}
+			currentRoom = other.gameObject;
 		}
 	}
 }

@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 using Assets.Scripts.Behaviour;
@@ -7,45 +8,68 @@ using System.Collections.Generic;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
-
-	// Note: The 
 	[SerializeField]
-	public Theme theme = null;
+	Tilemap walls = null;
 
 	[SerializeField]
-	private Tilemap walls = null;
+	Tilemap background = null;
 
 	[SerializeField]
-	private Tilemap background = null;
+	bool lightsOn = true;
 
 	[SerializeField]
-	private bool lightsOn;
+	WallController wallController = null;
 
 	[SerializeField]
-	public Vector2 size = new Vector2(1, 1);
+	CardReader cardReaderLeft = null;
+
+	[SerializeField]
+	CardReader cardReaderRight = null;
+
+	public Room LeftRoom = null;
+	public Room RightRoom = null;
+
+	public Door door = null;
+
+	public HashSet<GameObject> charactersInRoom;
+	public HashSet<GameObject> npcsInRoom;
+
+	[SerializeField]
+	Vector2Int size = new Vector2Int(0, 0);
+
+	public Room()
+	{
+		charactersInRoom = new HashSet<GameObject>();
+		npcsInRoom = new HashSet<GameObject>();
+	}
 
 	void Start()
 	{
-		GenerateBackground();
-	}
-
-	void Update()
-	{
-
-	}
-
-	private void GenerateBackground()
-	{
-		if (lightsOn && background.size.x == 0)
+		// Check if roomsize is set
+		if (size.x == 0 || size.y == 0)
 		{
-			for (int i = 0; i < walls.size.x; i++)
-			{
-				for (int j = 1; j < walls.size.y; j++)
-				{
-					background.SetTile(new Vector3Int(i, j, 0), theme.center);
-				}
-			}
+			Debug.LogError("A room size must be set manualy");
 		}
+
+		// Enable Collider for leftwall
+		if (LeftRoom != null)
+		{
+			wallController?.EnableLeftWall(false);
+		}
+
+		// Hide CardReaders
+		if (LeftRoom == null)
+		{
+			cardReaderLeft?.Hide();
+		}
+		if (RightRoom == null)
+		{
+			cardReaderRight?.Hide();
+		}
+
+		// Tell Cardreaders which door is his door
+		cardReaderLeft?.AssignDoor(LeftRoom?.door);
+		cardReaderRight?.AssignDoor(door);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -54,5 +78,116 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		{
 			Debug.Log("Right Mouse Button Clicked on: " + name);
 		}
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Add(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Add(other.gameObject);
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Remove(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Remove(other.gameObject);
+		}
+	}
+
+	void OnMouseDown()
+	{
+		printNumberOfGameObjects();
+	}
+
+	void printGameObjects()
+	{
+		foreach (GameObject g in charactersInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+
+		foreach (GameObject g in npcsInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+	}
+	void printNumberOfGameObjects()
+	{
+		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
+	}
+
+	public bool SelectedPlayerInRoom()
+	{
+		if (this.charactersInRoom.Contains(Character.selectedCharacter))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public bool AnyCharacterInRoom()
+	{
+		if (this.charactersInRoom.Count > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public HashSet<GameObject> getNPCsInRoom()
+	{
+		return npcsInRoom;
+	}
+
+	/// <summary>
+	/// Returns the cardreader assigned to this room for the left door
+	/// </summary>
+	/// <returns>Returns CardReader object, can return NULL when not set</returns>
+	public CardReader GetCardReaderLeft()
+	{
+		return cardReaderLeft;
+	}
+
+	/// <summary>
+	/// Returns the cardreader assigned to this room for the left door
+	/// </summary>
+	/// <returns>Returns CardReader object, can return NULL when not set</returns>
+	public CardReader GetCardReaderRight()
+	{
+		return cardReaderRight;
+	}
+
+	/// <summary>
+	/// This function returns the current position seen from bottom left
+	/// </summary>
+	/// <returns>Returns current position from bottom left</returns>
+	public Vector3Int GetPosition()
+	{
+		return Vector3Int.FloorToInt(this.gameObject.transform.localPosition);
+	}
+
+	/// <summary>
+	/// This function returns the size of the room set by level designer
+	/// </summary>
+	/// <returns>Returns current size of room</returns>
+	public Vector2Int GetSize()
+	{
+		return size;
 	}
 }

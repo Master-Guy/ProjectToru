@@ -5,25 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Domain.Behaviour
+public class Key : Item
 {
-	public class Key : Item
+
+	// Key access is defined by color
+	public CardReader.CardreaderColor color = CardReader.CardreaderColor.Yellow;
+
+	void OnTriggerEnter2D(Collider2D collision)
 	{
-		public int privateKey;
-
-		Key()
+		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
-			Debug.Log("made a key");
-		}
-
-		void OnTriggerEnter2D(Collider2D collision)
-		{
-			if (collision.CompareTag("Player"))
-			{
-				collision.GetComponent<Character>().addItem(this);
-				this.gameObject.SetActive(false);
-				Debug.Log("You picked up a key");
-			}
+			collision.GetComponent<Character>().inventory.addItem(this);
 		}
 	}
 }

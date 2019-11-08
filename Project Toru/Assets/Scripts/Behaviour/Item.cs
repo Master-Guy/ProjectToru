@@ -8,15 +8,9 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
 	public new string name;
-
-	void start()
-	{
-
-	}
-
-	private void Update()
-	{
-		
-	}
+	public Sprite UIIcon;
+	public float Weight;
+	public bool isStackable = false;
+	public float value;
 }
 
