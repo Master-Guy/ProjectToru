@@ -61,7 +61,10 @@ public abstract class NPC : MonoBehaviour
 
     private void OnMouseOver()
     {
-        GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Outline");
+        if (currentRoom.SelectedPlayerInRoom())
+        {
+            GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Outline");
+        }
     }
 
     private void OnMouseExit()
