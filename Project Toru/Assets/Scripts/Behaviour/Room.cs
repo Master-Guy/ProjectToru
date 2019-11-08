@@ -18,6 +18,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	WallController wallController = null;
 
+	[SerializeField]
+	CardReader cardReaderLeft = null;
+
+	[SerializeField]
+	CardReader cardReaderRight = null;
+
 	public Room LeftRoom = null;
 	public Room RightRoom = null;
 
@@ -29,6 +35,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
 
+	private bool roomHasCamera = false;
+	CameraRoom cameraRoom;
+
 	public Room()
 	{
 		charactersInRoom = new HashSet<GameObject>();
@@ -37,14 +46,51 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	void Start()
 	{
+		// Check if roomsize is set
 		if (size.x == 0 || size.y == 0)
 		{
 			Debug.LogError("A room size must be set manualy");
 		}
 
-		if (LeftRoom != null && wallController != null)
+		// Enable Collider for leftwall
+		if (LeftRoom != null)
 		{
-			wallController.EnableLeftWall(false);
+			wallController?.EnableLeftWall(false);
+		}
+
+		// Hide CardReaders
+		if (LeftRoom == null)
+		{
+			cardReaderLeft?.Hide();
+		}
+		if (RightRoom == null)
+		{
+			cardReaderRight?.Hide();
+		}
+
+		// Tell Cardreaders which door is his door
+		cardReaderLeft?.AssignDoor(LeftRoom?.door);
+		cardReaderRight?.AssignDoor(door);
+
+		checkIfRoomHasACamera();
+	}
+
+	void checkIfRoomHasACamera()
+	{
+		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			if (obj.name.Equals("Security Room"))
+			{
+				cameraRoom = obj.GetComponent<CameraRoom>();
+			}
+		}
+
+		foreach (Transform t in gameObject.transform)
+		{
+			if (t.name.Equals("Camera"))
+			{
+				roomHasCamera = true;
+			}
 		}
 	}
 
@@ -56,33 +102,11 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-	public void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			charactersInRoom.Add(other.gameObject);
-		}
-		if (other.CompareTag("NPC"))
-		{
-			npcsInRoom.Add(other.gameObject);
-		}
-	}
-
-	public void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			charactersInRoom.Remove(other.gameObject);
-		}
-		if (other.CompareTag("NPC"))
-		{
-			npcsInRoom.Remove(other.gameObject);
-		}
-	}
-
 	void OnMouseDown()
 	{
 		printNumberOfGameObjects();
+
+		door.Close();
 	}
 
 	void printGameObjects()
@@ -100,6 +124,37 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	void printNumberOfGameObjects()
 	{
 		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.isTrigger)
+		{
+			if (other.CompareTag("Player"))
+			{
+				charactersInRoom.Add(other.gameObject);
+				if (roomHasCamera)
+				{
+					cameraRoom.AlertGuard();
+				}
+			}
+			if (other.CompareTag("NPC"))
+			{
+				npcsInRoom.Add(other.gameObject);
+			}
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			charactersInRoom.Remove(other.gameObject);
+		}
+		if (other.CompareTag("NPC"))
+		{
+			npcsInRoom.Remove(other.gameObject);
+		}
 	}
 
 	public bool SelectedPlayerInRoom()

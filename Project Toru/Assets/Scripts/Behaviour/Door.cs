@@ -1,5 +1,4 @@
-﻿using Assets.Domain.Behaviour;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,16 +9,14 @@ public class Door : MonoBehaviour
 	[SerializeField]
 	Collider2D collider = null;
 
-	[SerializeField]
-	int key = -1;
+	public bool closed = true;
 
-	bool closed = true;
-
-	void OnTriggerEnter2D(Collider2D collision)
+	void Start()
 	{
-		if (collision.CompareTag("Player"))
-			if (collision.gameObject.GetComponent<Character>().HasKey(key) && closed)
-				Open();
+		if (!closed)
+		{
+			Open();
+		}
 	}
 
 	public bool Close()
@@ -57,5 +54,10 @@ public class Door : MonoBehaviour
 	public bool IsClosed()
 	{
 		return closed;
+	}
+
+	Room FindRoom()
+	{
+		return this.GetComponentInParent(typeof(Room)) as Room;
 	}
 }

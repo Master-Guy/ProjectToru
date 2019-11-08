@@ -1,5 +1,4 @@
-﻿using Assets.Domain.Behaviour;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,12 +81,12 @@ public class Character : MonoBehaviour
 		}
 	}
 
-	public bool HasKey(int key)
+	public bool HasKey(CardReader.CardreaderColor color)
 	{
 
 		foreach (Item i in inventory.getItemsList())
 		{
-			if (i is Key && ((Key)i).privateKey == key)
+			if (i is Key && ((Key)i).color == color)
 				return true;
 		}
 		return false;
