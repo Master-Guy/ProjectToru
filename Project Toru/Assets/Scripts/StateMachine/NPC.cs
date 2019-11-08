@@ -58,4 +58,14 @@ public abstract class NPC : MonoBehaviour
 			currentRoom = other.gameObject.GetComponent<Room>();
 		}
 	}
+
+    private void OnMouseOver()
+    {
+        GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Outline");
+    }
+
+    private void OnMouseExit()
+    {
+        GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
+    }
 }
