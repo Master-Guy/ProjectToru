@@ -12,6 +12,8 @@ TagManager:
   - PositionTarget
   - Camera
   - Security Room
+  - levelComplete
+  - CopsSpawnPoint
   layers:
   - Default
   - TransparentFX

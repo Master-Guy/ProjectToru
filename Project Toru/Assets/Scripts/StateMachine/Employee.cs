@@ -6,6 +6,7 @@ using UnityEngine;
 public class Employee : NPC
 {
 	private bool surrender = false;
+    private bool fleeTrue = false;
 
 	public void Start()
 	{
@@ -19,7 +20,9 @@ public class Employee : NPC
 		this.statemachine.ExecuteStateUpdate();
 		AdjustOrderLayer();
 		FleeIfPossible();
-	}
+        showCountdown();
+
+    }
 
 	void OnMouseDown()
 	{
@@ -39,7 +42,7 @@ public class Employee : NPC
 			this.statemachine.ChangeState(new Surrender(this.animator));
 			Say("Don't shoot!");
 			dropBag();
-		}
+        }
 	}
 
 	void FleeIfPossible()
@@ -48,6 +51,22 @@ public class Employee : NPC
 		{
 			this.surrender = false;
 			this.statemachine.ChangeState(new Flee(this.escapePath, this.gameObject, this.animator));
-		}
+            fleeTrue = true;
+        }
 	}
+
+
+    void showCountdown()
+    {
+        if(fleeTrue)
+        {
+            Invoke("startCountDown", 5);
+        }
+        
+    }
+
+    void startCountDown()
+    {
+        Debug.Log("Calling the cops!");
+    }
 }

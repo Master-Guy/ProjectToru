@@ -48,6 +48,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	void Start()
 	{
+		// Check if roomsize is set
 		if (size.x == 0 || size.y == 0)
 		{
 			Debug.LogError("A room size must be set manualy");
@@ -56,8 +57,22 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		// Enable Collider for leftwall
 		if (LeftRoom != null)
 		{
-			wallController.EnableLeftWall(false);
+			wallController?.EnableLeftWall(false);
 		}
+
+		// Hide CardReaders
+		if (LeftRoom == null)
+		{
+			cardReaderLeft?.Hide();
+		}
+		if (RightRoom == null)
+		{
+			cardReaderRight?.Hide();
+		}
+
+		// Tell Cardreaders which door is his door
+		cardReaderLeft?.AssignDoor(LeftRoom?.door);
+		cardReaderRight?.AssignDoor(door);
 
 		checkIfRoomHasACamera();
 	}
@@ -89,6 +104,30 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
+	void OnMouseDown()
+	{
+		printNumberOfGameObjects();
+
+		door.Close();
+	}
+
+	void printGameObjects()
+	{
+		foreach (GameObject g in charactersInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+
+		foreach (GameObject g in npcsInRoom)
+		{
+			Debug.Log(g.ToString());
+		}
+	}
+	void printNumberOfGameObjects()
+	{
+		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
+	}
+
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.isTrigger)
@@ -96,7 +135,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 			if (other.CompareTag("Player"))
 			{
 				charactersInRoom.Add(other.gameObject);
-				if(roomHasCamera)
+				if (roomHasCamera)
 				{
 					cameraRoom.AlertGuard();
 				}
@@ -118,28 +157,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		{
 			npcsInRoom.Remove(other.gameObject);
 		}
-	}
-
-	void OnMouseDown()
-	{
-		printNumberOfGameObjects();
-	}
-
-	void printGameObjects()
-	{
-		foreach (GameObject g in charactersInRoom)
-		{
-			Debug.Log(g.ToString());
-		}
-
-		foreach (GameObject g in npcsInRoom)
-		{
-			Debug.Log(g.ToString());
-		}
-	}
-	void printNumberOfGameObjects()
-	{
-		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
 	}
 
 	public bool SelectedPlayerInRoom()

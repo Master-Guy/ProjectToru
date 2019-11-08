@@ -23,5 +23,12 @@ public class CameraRoom : MonoBehaviour
 				npc.GetComponent<NPC>().Say("I am warned!");
 			}
 		}
+
+		Invoke("AlertCops", 10);
+	}
+
+	void AlertCops()
+	{
+		GameObject.FindGameObjectWithTag("levelComplete").GetComponent<LevelComplete>().EnableLose();
 	}
 }

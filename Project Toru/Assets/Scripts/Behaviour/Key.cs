@@ -11,7 +11,7 @@ public class Key : Item
 	// Key access is defined by color
 	public CardReader.CardreaderColor color = CardReader.CardreaderColor.Yellow;
 
-	void Update()
+	void Start()
 	{
 
 		SpriteRenderer renderer = GetComponentInParent<SpriteRenderer>();

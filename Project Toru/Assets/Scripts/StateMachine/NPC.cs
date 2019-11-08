@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class NPC : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public abstract class NPC : MonoBehaviour
 	[NonSerialized]
 	public Animator animator;
 
-	public void dropBag()
+    public void dropBag()
 	{
 		foreach (GameObject g in bag)
 		{

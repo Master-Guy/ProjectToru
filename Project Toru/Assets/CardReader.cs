@@ -44,7 +44,13 @@ public class CardReader : MonoBehaviour
 		if (collision.CompareTag("Player"))
 		{
 			Debug.Log("Checking Key");
-			if (collision.gameObject.GetComponent<Character>().HasKey(color))
+
+			if (color == CardreaderColor.Disabled)
+			{
+				door.Open();
+				this.SetStatus(true);
+			}
+			else if (collision.gameObject.GetComponent<Character>().HasKey(color))
 			{
 				door.Open();
 				this.SetStatus(true);
@@ -58,6 +64,7 @@ public class CardReader : MonoBehaviour
 	/// <param name="door">The door that this reader must control</param>
 	public void AssignDoor(Door door)
 	{
+		Debug.Log("SETTING");
 		this.door = door;
 	}
 
