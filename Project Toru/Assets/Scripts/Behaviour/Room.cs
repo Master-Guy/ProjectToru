@@ -37,6 +37,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	[SerializeField]
 	Vector2Int size = new Vector2Int(0, 0);
 
+	private bool roomHasCamera = false;
+	CameraRoom cameraRoom;
+
 	public Room()
 	{
 		charactersInRoom = new HashSet<GameObject>();
@@ -45,7 +48,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	void Start()
 	{
-		// Check if roomsize is set
 		if (size.x == 0 || size.y == 0)
 		{
 			Debug.LogError("A room size must be set manualy");
@@ -54,22 +56,29 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		// Enable Collider for leftwall
 		if (LeftRoom != null)
 		{
-			wallController?.EnableLeftWall(false);
+			wallController.EnableLeftWall(false);
 		}
 
-		// Hide CardReaders
-		if (LeftRoom == null)
+		checkIfRoomHasACamera();
+	}
+
+	void checkIfRoomHasACamera()
+	{
+		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Room"))
 		{
-			cardReaderLeft?.Hide();
-		}
-		if (RightRoom == null)
-		{
-			cardReaderRight?.Hide();
+			if (obj.name.Equals("Security Room"))
+			{
+				cameraRoom = obj.GetComponent<CameraRoom>();
+			}
 		}
 
-		// Tell Cardreaders which door is his door
-		cardReaderLeft?.AssignDoor(LeftRoom?.door);
-		cardReaderRight?.AssignDoor(door);
+		foreach (Transform t in gameObject.transform)
+		{
+			if (t.name.Equals("Camera"))
+			{
+				roomHasCamera = true;
+			}
+		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -82,13 +91,20 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.CompareTag("Player"))
+		if (other.isTrigger)
 		{
-			charactersInRoom.Add(other.gameObject);
-		}
-		if (other.CompareTag("NPC"))
-		{
-			npcsInRoom.Add(other.gameObject);
+			if (other.CompareTag("Player"))
+			{
+				charactersInRoom.Add(other.gameObject);
+				if(roomHasCamera)
+				{
+					cameraRoom.AlertGuard();
+				}
+			}
+			if (other.CompareTag("NPC"))
+			{
+				npcsInRoom.Add(other.gameObject);
+			}
 		}
 	}
 
@@ -153,24 +169,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public HashSet<GameObject> getNPCsInRoom()
 	{
 		return npcsInRoom;
-	}
-
-	/// <summary>
-	/// Returns the cardreader assigned to this room for the left door
-	/// </summary>
-	/// <returns>Returns CardReader object, can return NULL when not set</returns>
-	public CardReader GetCardReaderLeft()
-	{
-		return cardReaderLeft;
-	}
-
-	/// <summary>
-	/// Returns the cardreader assigned to this room for the left door
-	/// </summary>
-	/// <returns>Returns CardReader object, can return NULL when not set</returns>
-	public CardReader GetCardReaderRight()
-	{
-		return cardReaderRight;
 	}
 
 	/// <summary>
