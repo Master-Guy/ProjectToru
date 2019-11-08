@@ -47,8 +47,33 @@ namespace Assets.Scripts.Options
 			DisplayNextOptions();
 		}
 
+		public void RemoveEvent(GameObject g, Character c)
+		{
+			int temp;
+			for (int i = 0; i < EventQueue.Count; i++) {
+				temp = EventQueue[i].Remove(g, c);
+				if (temp > 0)
+					break;
+				if (temp == 0)
+					EventQueue.RemoveAt(i);
+			}
+			DisplayNextOptions();
+		}
+
+		public void RemoveEvent(Event E)
+		{
+			EventQueue.Remove(E);
+			DisplayNextOptions();
+		}
+
 		void DisplayNextOptions()
 		{
+			if (EventQueue.Count == 0)
+			{
+				gameObject.SetActive(false);
+				Time.timeScale = 1.0f;
+				return;
+			}
 			gameObject.SetActive(true);
 			Time.timeScale = 0.2f;
 
@@ -87,13 +112,7 @@ namespace Assets.Scripts.Options
 				default:
 					EventQueue.RemoveAt(0);
 
-					if (EventQueue.Count == 0)
-					{
-						gameObject.SetActive(false);
-						Time.timeScale = 1.0f;
-					}
-					else
-						DisplayNextOptions();
+					DisplayNextOptions();
 
 					break;
 			}
