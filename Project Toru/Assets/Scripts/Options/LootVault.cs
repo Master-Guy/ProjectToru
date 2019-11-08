@@ -19,8 +19,7 @@ namespace Assets.Scripts.Options
 
 		public override void Activate(Character C)
 		{
-			foreach(Item i in container.items)
-				C.inventory.addItem(i);
+			container.drop();
 		}
 	}
 }

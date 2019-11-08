@@ -11,28 +11,34 @@ namespace Assets.Scripts.Behaviour
 {
 	public class Furniture : MonoBehaviour, IPointerClickHandler
 	{
-		const string OptionWindowName = "OptionDialogue";
-
-		List<Option> Options;
-
 		[SerializeField]
 		bool Passable;
 
 		[SerializeField]
 		string Description = string.Empty;
 
-		public List<Item> items;
+		List<Option> Options;
+		List<Item> items;
 		Room Parent;
 
 
 		void Start()
 		{
 			Options = GetComponentsInChildren<Option>().ToList();
+			items = GetComponentsInChildren<Item>().ToList();
+			foreach (Item i in items)
+				i.enabled = false;
 		}
 
 		void Update()
 		{
 
+		}
+
+		public void drop()
+		{
+			foreach (Item i in items)
+				i.enabled = true;
 		}
 
 		void OnTriggerEnter2D(Collider2D collision)

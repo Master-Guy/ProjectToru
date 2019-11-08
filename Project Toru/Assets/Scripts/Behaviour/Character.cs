@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
 	private bool didUseStair = false;
 	public List<Skills> skills = new List<Skills>();
 
-	private static CharacterManager cm;
+	private static CharacterManager cm = new CharacterManager();
 	private bool isDisabled;
 	private ParticleSystem ps;
 

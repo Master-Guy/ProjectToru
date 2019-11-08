@@ -22,6 +22,7 @@ namespace Assets.Scripts.Options
 	}
 
 	[RequireComponent(typeof(TMP_Text))]
+	[RequireComponent(typeof(BoxCollider2D))]
 	public class EventWindow : MonoBehaviour, IPointerClickHandler
 	{
 		List<Event> EventQueue;
@@ -64,27 +65,13 @@ namespace Assets.Scripts.Options
 				if (temp == 0)
 					EventQueue.RemoveAt(i);
 			}
-
-			if (EventQueue.Count == 0)
-			{
-				gameObject.SetActive(false);
-				Time.timeScale = 1.0f;
-			}
-			else
-				DisplayNextOptions();
+			DisplayNextOptions();
 		}
 
 		public void RemoveEvent(Event E)
 		{
 			EventQueue.Remove(E);
-
-			if (EventQueue.Count == 0)
-			{
-				gameObject.SetActive(false);
-				Time.timeScale = 1.0f;
-			}
-			else
-				DisplayNextOptions();
+			DisplayNextOptions();
 		}
 
 		void DisplayNextOptions()
@@ -114,8 +101,11 @@ namespace Assets.Scripts.Options
 		public void OnPointerClick(PointerEventData eventData)
 		{
 			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
+			Debug.Log("click " + LinkIndex);
 			if (LinkIndex == -1)
+			{
 				return;
+			}
 
 			switch (TextType)
 			{

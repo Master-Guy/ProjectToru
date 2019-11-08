@@ -10,7 +10,7 @@ namespace Assets.Scripts.Options
 	public abstract class Option : MonoBehaviour
 	{
 		[SerializeField]
-		private readonly string Description;
+		private string Description;
 		public Skills? Prerequisite = null;
 
 
