@@ -27,7 +27,7 @@ namespace Assets.Scripts.Behaviour
 			Options = GetComponentsInChildren<Option>().ToList();
 			items = GetComponentsInChildren<Item>().ToList();
 			foreach (Item i in items)
-				i.enabled = false;
+				i.gameObject.SetActive(false);
 		}
 
 		void Update()
@@ -38,7 +38,7 @@ namespace Assets.Scripts.Behaviour
 		public void drop()
 		{
 			foreach (Item i in items)
-				i.enabled = true;
+				i.gameObject.SetActive(true);
 		}
 
 		void OnTriggerEnter2D(Collider2D collision)
