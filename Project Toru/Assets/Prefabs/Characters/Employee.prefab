@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1329448103
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -3555098256961693778, guid: 896be2e5d09deb343844e0f84f5c60a5,
     type: 3}
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &4947826929547256570
 BoxCollider2D:
@@ -145,9 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3185d39ac0868af46a91beea8ac49336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bag: []
   TextBox: {fileID: 8285807996838187758}
   escapePath: []
-  bag: []
 --- !u!95 &6188662567543495645
 Animator:
   serializedVersion: 3
