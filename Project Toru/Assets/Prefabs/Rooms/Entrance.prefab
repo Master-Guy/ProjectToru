@@ -451,8 +451,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 189804213
-  m_SortingLayer: 0
+  m_SortingLayerID: -1329448103
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -895,8 +895,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1956221157
-  m_SortingLayer: 6
+  m_SortingLayerID: -1329448103
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1051,11 +1051,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9035884668655751477}
     m_Modifications:
-    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
-        type: 3}
-      propertyPath: m_Name
-      value: Keycard Reader
-      objectReference: {fileID: 0}
     - target: {fileID: 1141346909789194614, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1110,6 +1105,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
+        type: 3}
+      propertyPath: m_Name
+      value: Keycard Reader
       objectReference: {fileID: 0}
     - target: {fileID: 6677825790325537141, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
@@ -1218,6 +1218,11 @@ PrefabInstance:
       propertyPath: collider
       value: 
       objectReference: {fileID: 5775528775708929379}
+    - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655983, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -1227,11 +1232,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58961c0690de64e5cb99ecac92510057, type: 3}
