@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/StairsTest.unity
     guid: 2de5127b6cd747f419777e485d79c807
+  - enabled: 1
+    path: Assets/Scenes/LevelEnd/Fail.unity
+    guid: 1a03ff553e2c3a547a5b89d794c67ae6
+  - enabled: 1
+    path: Assets/Scenes/LevelEnd/Complete.unity
+    guid: 4003aa58fbbbea34396ba239b1de4e3e
+  - enabled: 1
+    path: Assets/Scenes/Levels/NewStairs.unity
+    guid: b0107b700ec34460b8dd4899b95a08da
   m_configObjects: {}

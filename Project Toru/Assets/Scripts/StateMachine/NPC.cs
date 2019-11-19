@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class NPC : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public abstract class NPC : MonoBehaviour
 	[NonSerialized]
 	public Animator animator;
 
-	public void dropBag()
+    public void dropBag()
 	{
 		foreach (GameObject g in bag)
 		{
@@ -57,4 +58,17 @@ public abstract class NPC : MonoBehaviour
 			currentRoom = other.gameObject.GetComponent<Room>();
 		}
 	}
+
+    private void OnMouseOver()
+    {
+        if (currentRoom.SelectedPlayerInRoom())
+        {
+            GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Outline");
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
+    }
 }

@@ -30,9 +30,9 @@ public class ColorZughy
 	// public static Color skyblue = new Color(TODO, TODO, TODO, 1f); // #dff6f5
 	// public static Color lightcyan = new Color(TODO, TODO, TODO, 1f); // #8aebf1
 	public static Color cyan = new Color(0.157f, 0.8f, 0.875f, 1f); // #28ccdf
-																	// public static Color blue = new Color(TODO, TODO, TODO, 1f); // #28ccdf
-																	// public static Color darkblue = new Color(TODO, TODO, TODO, 1f); // #28ccdf
-																	// public static Color darkdarkblue = new Color(TODO, TODO, TODO, 1f); // #39314b
+	public static Color blue = new Color(0.541f, 0.922f, 0.945f, 1f); // #28ccdf
+																	  // public static Color darkblue = new Color(TODO, TODO, TODO, 1f); // #28ccdf
+																	  // public static Color darkdarkblue = new Color(TODO, TODO, TODO, 1f); // #39314b
 
 	// Purple (2 colors)
 	// public static Color darkpurple = new Color(TODO, TODO, TODO, 1f); // #564064
