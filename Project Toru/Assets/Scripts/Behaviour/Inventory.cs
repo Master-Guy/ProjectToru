@@ -5,97 +5,105 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-	//Assign a Item List
-	private HashSet<Item> inv;
+    //Assign a Item List
+    private HashSet<Item> inv;
 
-	//Create's a static InventoryUI manager
-	private static InventoryUI INVUI = new InventoryUI();
+    //Create's a static InventoryUI manager
+    private InventoryUI INVUI;
 
-	public float MaxWeight;
+    public float MaxWeight;
 
-	//Constructor - Creates a Item List
-	public Inventory(float MaxWeight)
-	{
-		this.MaxWeight = MaxWeight;
+    //Constructor - Creates a Item List
+    public Inventory()
+    {
+        inv = new HashSet<Item>();
+    }
 
-		inv = new HashSet<Item>();
-	}
+    public void Start()
+    {
+        INVUI = gameObject.AddComponent(typeof(InventoryUI)) as InventoryUI;
+    }
 
-	//Add an item to the Inventory
-	public void addItem(Item item)
-	{
-		if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
-		{
-			bool Found = false;
-			if (item.isStackable)
-			{
-				foreach (Item i in inv)
-				{
-					if (i.GetType().Equals(item.GetType()) && !Found)
-					{
-						i.value += item.value;
-						Found = true;
-					}
-				}
-			}
+    public void SetMaxWeight(float MaxWeight)
+    {
+        this.MaxWeight = MaxWeight;
+    }
 
-			if (!Found)
-			{
-				inv.Add(item);
-			}
+    //Add an item to the Inventory
+    public void addItem(Item item)
+    {
+        if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
+        {
+            bool Found = false;
+            if (item.isStackable)
+            {
+                foreach (Item i in inv)
+                {
+                    if (i.GetType().Equals(item.GetType()) && !Found)
+                    {
+                        i.value += item.value;
+                        Found = true;
+                    }
+                }
+            }
 
-		    UpdateUI();
-			Destroy(item.gameObject);
-		}
-	}
+            if (!Found)
+            {
+                inv.Add(item);
+            }
 
-	//Removes an item from the inventory
-	public void removeItem(Item item)
-	{
-		inv.Remove(item);
-		UpdateUI();
-	}
+            UpdateUI();
+            Destroy(item.gameObject);
+        }
+    }
 
-	//Get the list of Items
-	public HashSet<Item> getItemsList()
-	{
-		return inv;
-	}
+    //Removes an item from the inventory
+    public void removeItem(Item item)
+    {
+        inv.Remove(item);
+        UpdateUI();
+    }
 
-	//If needed show the UI
-	public void UpdateUI()
-	{
-		if (inv.Count == 0)
-		{
-			INVUI.hideInv(inv);
-		} 
-		else
-		{
-			INVUI.showInv(inv);
-		}
-	}
+    //Get the list of Items
+    public HashSet<Item> getItemsList()
+    {
+        return inv;
+    }
 
-	private float getWeightOfInventory()
-	{
-		float currentWeight = 0;
+    //If needed show the UI
+    public void UpdateUI()
+    {
+        if (inv.Count == 0)
+        {
+            INVUI.hideInv(inv);
+        }
+        else
+        {
+            INVUI.showInv(inv);
+        }
+    }
 
-		foreach(Item i in inv)
-		{
-			currentWeight += i.Weight;
-		}
+    private float getWeightOfInventory()
+    {
+        float currentWeight = 0;
 
-		return currentWeight;
-	}
+        foreach (Item i in inv)
+        {
+            currentWeight += i.Weight;
+        }
 
-	public float getMoney()
-	{
-		foreach(Item i in inv)
-		{
-			if(i.GetType().Name == "Money")
-			{
-				return i.value;
-			}
-		}
-		return 0;
-	}
+        return currentWeight;
+    }
+
+    public float getMoney()
+    {
+        foreach (Item i in inv)
+        {
+            if (i.GetType().Name == "Money")
+            {
+                return i.value;
+            }
+        }
+        return 0;
+    }
 }
