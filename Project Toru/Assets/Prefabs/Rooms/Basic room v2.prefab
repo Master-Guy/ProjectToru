@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6142108685739541563}
   - component: {fileID: 2376349019585700647}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2398,9 +2398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b381df4fef305f0428f7e02df3556755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walls: {fileID: 0}
-  background: {fileID: 1758127718735961169}
-  lightsOn: 0
   wallController: {fileID: 2376349019585700647}
   cardReaderLeft: {fileID: 8183396585026017501}
   cardReaderRight: {fileID: 8481900793061936897}
@@ -2441,6 +2438,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9035884668655751477}
     m_Modifications:
+    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
+        type: 3}
+      propertyPath: m_Name
+      value: Keycard Reader Door R
+      objectReference: {fileID: 0}
     - target: {fileID: 1141346909789194614, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2495,11 +2497,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
-        type: 3}
-      propertyPath: m_Name
-      value: Keycard Reader Door R
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06f5823b051a543e48768d169abc141c, type: 3}
@@ -2625,6 +2622,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9035884668655751477}
     m_Modifications:
+    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
+        type: 3}
+      propertyPath: m_Name
+      value: Keycard Reader Door L
+      objectReference: {fileID: 0}
     - target: {fileID: 1141346909789194614, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2679,11 +2681,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
-        type: 3}
-      propertyPath: m_Name
-      value: Keycard Reader Door L
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06f5823b051a543e48768d169abc141c, type: 3}
