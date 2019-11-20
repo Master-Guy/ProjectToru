@@ -5,11 +5,11 @@ using UnityEngine;
 public class WallController : MonoBehaviour
 {
 
-	[SerializeField]
-	GameObject LeftWall;
+    [SerializeField]
+    GameObject LeftWall = null;
 
-	public void EnableLeftWall(bool enable)
-	{
-		LeftWall.SetActive(enable);
-	}
+    public void EnableLeftWall(bool enable)
+    {
+        LeftWall?.SetActive(enable);
+    }
 }
