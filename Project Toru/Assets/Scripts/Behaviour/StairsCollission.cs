@@ -18,7 +18,7 @@ public class StairsCollission : MonoBehaviour
     TilemapRenderer tilemapRenderer = null;
 
     [SerializeField]
-    Collider2D wallCollider = null;
+    Collider2D noStairsCollider = null;
 
     [SerializeField]
     Collider2D DisabledStairsBarrier = null;
@@ -31,14 +31,14 @@ public class StairsCollission : MonoBehaviour
     public void Enable()
     {
         tilemapRenderer.enabled = true;
-        wallCollider.enabled = true;
+        noStairsCollider.enabled = true;
         DisabledStairsBarrier.enabled = false;
     }
 
     public void Disable()
     {
         tilemapRenderer.enabled = false;
-        wallCollider.enabled = false;
+        noStairsCollider.enabled = false;
         DisabledStairsBarrier.enabled = true;
     }
 
