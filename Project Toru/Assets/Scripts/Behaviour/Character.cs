@@ -1,12 +1,7 @@
-﻿using Assets.Domain.Behaviour;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-static class SelectedCharacter
-{
-	static Character Selected;
-}
 public class Character : MonoBehaviour
 {
 	public float speed;
@@ -14,64 +9,94 @@ public class Character : MonoBehaviour
 	private Vector3 change;
 	private Animator animator;
 
-	private List<Item> inventory;
-	private bool didUseStair = false;
+	public Inventory inventory;
 
-	Character()
-	{
-		inventory = new List<Item>();
-	}
+	private bool didUseStair = false;
+	private static CharacterManager cm = new CharacterManager();
+	private bool isDisabled;
+	private ParticleSystem ps;
+
+	private float timer = 0;
+	private float stairsDuration = 1;
+	private bool playerOnTheStairs = false;
+
+
+	public GameObject currentRoom;
+	public static GameObject selectedCharacter;
+
+	public float MaxWeight;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
+		isDisabled = true;
+		ps = GetComponent<ParticleSystem>();
+
+		inventory = new Inventory(MaxWeight);
+		AdjustOrderLayer();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		change = Vector3.zero;
-		change.x = Input.GetAxisRaw("Horizontal");
-		change.y = Input.GetAxisRaw("Vertical");
 
-		// If player releases UP, reset Stair
-		if (didUseStair && change.y > 0)
+		if (playerOnTheStairs)
 		{
-			change.y = 0;
+			timer += Time.deltaTime;
 
+			if (timer > stairsDuration)
+			{
+				playerOnTheStairs = false;
+				timer = 0;
+				this.GetComponent<Renderer>().enabled = true;
+				this.enableMovement();
+			}
 		}
 
-
-		// If player wants to go up, ignore movement
-		else if (didUseStair && change.y <= 0)
+		if (!isDisabled)
 		{
-			didUseStair = false;
-		}
+			Camera.main.GetComponent<CameraBehaviour>().target = transform;
+			change = Vector3.zero;
+			change.x = Input.GetAxisRaw("Horizontal");
+			change.y = Input.GetAxisRaw("Vertical");
 
-		UpdateAnimationsAndMove();
+			// If player releases UP, reset Stair
+			if (didUseStair && change.y > 0)
+			{
+				change.y = 0;
+
+			}
+
+
+			// If player wants to go up, ignore movement
+			else if (didUseStair && change.y <= 0)
+			{
+				didUseStair = false;
+			}
+
+			UpdateAnimationsAndMove();
+
+		}
 	}
 
-	public bool hasKey(int key)
+	public bool HasKey(CardReader.CardreaderColor color)
 	{
-		foreach(Item i in inventory)
+
+		foreach (Item i in inventory.getItemsList())
 		{
-			if (i is Key && ((Key)i).privateKey == key)
+			if (i is Key && ((Key)i).color == color)
 				return true;
 		}
 		return false;
-	}
-
-	public void addItem(Item i)
-	{
-		inventory.Add(i);
 	}
 
 	void UpdateAnimationsAndMove()
 	{
 		if (change != Vector3.zero)
 		{
+			AdjustOrderLayer();
 			MoveCharacter();
 			animator.SetFloat("moveX", change.x);
 			animator.SetFloat("moveY", change.y);
@@ -98,6 +123,43 @@ public class Character : MonoBehaviour
 	public void StairsTransistion()
 	{
 		didUseStair = true;
-		//Debug.Log("MovedStairs");
+		playerOnTheStairs = true;
+		this.GetComponent<Renderer>().enabled = false;
+		this.disableMovement();
+	}
+
+	public void enableMovement()
+	{
+		isDisabled = false;
+	}
+
+	public void disableMovement()
+	{
+		isDisabled = true;
+	}
+
+	void OnMouseDown()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			cm.disableCharacterMovement();
+			selectedCharacter = this.gameObject;
+			enableMovement();
+			ps.Play();
+			inventory.UpdateUI();
+		}
+	}
+
+	void AdjustOrderLayer()
+	{
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject;
+		}
 	}
 }

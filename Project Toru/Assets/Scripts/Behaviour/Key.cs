@@ -5,25 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Domain.Behaviour
+public class Key : Item
 {
-	public class Key : Item
+
+	// Key access is defined by color
+	public CardReader.CardreaderColor color = CardReader.CardreaderColor.Yellow;
+
+	void Start()
 	{
-		public int privateKey;
 
-		Key()
+		SpriteRenderer renderer = GetComponentInParent<SpriteRenderer>();
+
+		switch (color)
 		{
-			Debug.Log("made a key");
+			case CardReader.CardreaderColor.Blue:
+				renderer.color = ColorZughy.cyan;
+				break;
+			case CardReader.CardreaderColor.Yellow:
+				// The color is already yellow
+				break;
+			case CardReader.CardreaderColor.Purple:
+				renderer.color = ColorZughy.purple;
+				break;
+			case CardReader.CardreaderColor.Disabled:
+				Debug.LogError("KEy can't be 'Disabled'");
+				break;
 		}
+	}
 
-		void OnTriggerEnter2D(Collider2D collision)
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
-			if (collision.CompareTag("Player"))
-			{
-				collision.GetComponent<Character>().addItem(this);
-				this.gameObject.SetActive(false);
-				Debug.Log("You picked up a key");
-			}
+			collision.GetComponent<Character>().inventory.addItem(this);
 		}
 	}
 }
