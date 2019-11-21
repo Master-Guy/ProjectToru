@@ -30,7 +30,6 @@ public class Door : MonoBehaviour
 
     public bool Open()
     {
-        Debug.Log("Opening door");
         closed = false;
         GetComponent<Animator>().SetBool("openDoor", true);
 
