@@ -8,7 +8,7 @@ public class Node
 
 	private Room nodeRoom;
 
-	private Node leftNode, rightNode, upStairs;
+	private Node leftNode, rightNode, upStairs, downStairs;
 
 	public static List<Room> vissited = new List<Room>();
 	public static List<Node> node = new List<Node>();
@@ -26,6 +26,7 @@ public class Node
 		goLeft();
 		goRight();
 		goUpStairs();
+		goDownStairs();
 	}
 
 	private bool goLeft()
@@ -54,7 +55,27 @@ public class Node
 		{
 			if (nodeRoom.GetComponent<StairsBehaviour>().Upstair != null)
 			{
+				if (vissited.Contains(nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>())) {
+					return true;
+				}
 				upStairs = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private bool goDownStairs()
+	{
+		if (nodeRoom.GetComponent<StairsBehaviour>() != null)
+		{
+			if (nodeRoom.GetComponent<StairsBehaviour>().Downstairs != null)
+			{
+				if (vissited.Contains(nodeRoom.GetComponent<StairsBehaviour>().Downstairs.GetComponent<Room>()))
+				{
+					return true;
+				}
+				downStairs = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Downstairs.GetComponent<Room>());
 				return false;
 			}
 		}
