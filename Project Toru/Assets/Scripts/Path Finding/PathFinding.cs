@@ -11,7 +11,7 @@ public class PathFinding : MonoBehaviour
 	private void Start()
 	{
 		//TestScript
-		CalculateRoute(startRoom, endRoom);
+		//CalculateRoute(startRoom, endRoom);
 	}
 
 	public List<Node> CalculateRoute(Room startRoom, Room endRoom)
