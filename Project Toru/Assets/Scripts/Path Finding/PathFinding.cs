@@ -12,6 +12,7 @@ public class PathFinding : MonoBehaviour
 
 	private void Awake()
 	{
+		//Initialize variables
 		openList = new List<Node>();
 		closedList = new List<Node>();
 
