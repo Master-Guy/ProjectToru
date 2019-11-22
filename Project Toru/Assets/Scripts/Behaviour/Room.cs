@@ -203,4 +203,14 @@ public class Room : MonoBehaviour, IPointerClickHandler
     {
         return size;
     }
+
+	public CardReader GetCardReaderLeft()
+	{
+		return this.cardReaderLeft;
+	}
+
+	public CardReader GetCardReaderRight()
+	{
+		return this.cardReaderRight;
+	}
 }

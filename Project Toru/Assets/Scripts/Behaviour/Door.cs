@@ -58,4 +58,9 @@ public class Door : MonoBehaviour
     {
         return this.GetComponentInParent(typeof(Room)) as Room;
     }
+
+	public int isOpenOrHasTheRightKey(Item i)
+	{
+		return 1;
+	}
 }

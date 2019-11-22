@@ -18,18 +18,20 @@ public class Node
 		this.parent = parent;
 		this.nodeRoom = NodeRoom;
 
+		
+
 		vissited.Add(this.nodeRoom);
 		node.Add(this);
 
 		Debug.Log("Room: " + nodeRoom.name);
 
-		goLeft();
-		goRight();
-		goUpStairs();
-		goDownStairs();
+		GoLeft();
+		GoRight();
+		GoUpStairs();
+		GoDownStairs();
 	}
 
-	private bool goLeft()
+	private bool GoLeft()
 	{
 		if (nodeRoom.LeftRoom == null || vissited.Contains(nodeRoom.LeftRoom))
 		{
@@ -39,7 +41,7 @@ public class Node
 		return false;
 	}
 
-	private bool goRight()
+	private bool GoRight()
 	{
 		if (nodeRoom.RightRoom == null || vissited.Contains(nodeRoom.RightRoom))
 		{
@@ -49,7 +51,7 @@ public class Node
 		return false;
 	}
 
-	private bool goUpStairs()
+	private bool GoUpStairs()
 	{
 		if(nodeRoom.GetComponent<StairsBehaviour>() != null)
 		{
@@ -65,8 +67,8 @@ public class Node
 		return true;
 	}
 
-	private bool goDownStairs()
-	{
+	private bool GoDownStairs()
+	{ 
 		if (nodeRoom.GetComponent<StairsBehaviour>() != null)
 		{
 			if (nodeRoom.GetComponent<StairsBehaviour>().Downstairs != null)
@@ -80,5 +82,10 @@ public class Node
 			}
 		}
 		return true;
+	}
+
+	public Room GetRoom()
+	{
+		return nodeRoom;
 	}
 }
