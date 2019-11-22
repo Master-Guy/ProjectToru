@@ -8,17 +8,17 @@ public class Node
 
 	private Room nodeRoom;
 
-	private Node leftNode, rightNode, upStairs, downStairs;
+	public Node left, right, up, down;
 
 	public static List<Room> vissited = new List<Room>();
 	public static List<Node> node = new List<Node>();
+
+	public int cost;
 
 	public Node(Node parent, Room NodeRoom)
 	{
 		this.parent = parent;
 		this.nodeRoom = NodeRoom;
-
-		
 
 		vissited.Add(this.nodeRoom);
 		node.Add(this);
@@ -37,7 +37,7 @@ public class Node
 		{
 			return true;
 		}
-		leftNode = new Node(this, nodeRoom.LeftRoom);
+		left = new Node(this, nodeRoom.LeftRoom);
 		return false;
 	}
 
@@ -47,7 +47,7 @@ public class Node
 		{
 			return true;
 		}
-		rightNode = new Node(this, nodeRoom.RightRoom);
+		right = new Node(this, nodeRoom.RightRoom);
 		return false;
 	}
 
@@ -60,7 +60,7 @@ public class Node
 				if (vissited.Contains(nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>())) {
 					return true;
 				}
-				upStairs = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>());
+				up = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>());
 				return false;
 			}
 		}
@@ -77,7 +77,7 @@ public class Node
 				{
 					return true;
 				}
-				downStairs = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Downstairs.GetComponent<Room>());
+				down = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Downstairs.GetComponent<Room>());
 				return false;
 			}
 		}
@@ -88,4 +88,9 @@ public class Node
 	{
 		return nodeRoom;
 	}
+
+	public bool canLeft() { return left == null; }
+	public bool canRight() { return right == null; }
+	public bool canUp() { return up == null; }
+	public bool canDown() { return down == null; }
 }

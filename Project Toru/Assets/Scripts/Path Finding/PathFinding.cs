@@ -10,6 +10,8 @@ public class PathFinding : MonoBehaviour
 	private List<Node> closedList;
 	private List<Room> path;
 
+	private double distance;
+
 	private void Awake()
 	{
 		//Initialize variables
@@ -38,7 +40,29 @@ public class PathFinding : MonoBehaviour
 	{
 		List<Node> nodes = Node.node;
 
+		Node currentNode = startNode;
 
+		distance = 0.00;
+
+		for(int i = 0; i < 10; i++)
+		{
+			if(currentNode.canLeft())
+			{
+				Calculate(currentNode.left, endNode);
+			}
+			if (currentNode.canRight())
+			{
+				Calculate(currentNode.right, endNode);
+			}
+			if (currentNode.canUp())
+			{
+				Calculate(currentNode.up, endNode);
+			}
+			if (currentNode.canDown())
+			{
+				Calculate(currentNode.down, endNode);
+			}
+		}
 	}
 
 	private Node GetNodFromRoom(Room r)
@@ -53,6 +77,16 @@ public class PathFinding : MonoBehaviour
 		return null;
 	}
 
+	private double Calculate(Node next, Node end)
+	{
+		double currentDistance = Vector3.Distance(next.GetRoom().gameObject.transform.position, end.GetRoom().gameObject.transform.position);
+		if(distance > currentDistance)
+		{
+			distance = currentDistance;
+		}
+		return distance;
+	}
+
 	private bool PlayerHasColor(Node n, Character ch)
 	{
 		foreach(Key i in ch.inventory.getItemsList())
@@ -63,5 +97,13 @@ public class PathFinding : MonoBehaviour
 			}
 		}
 		return false;
+	}
+
+	private void ClearCost()
+	{
+		foreach(Node n in Node.node)
+		{
+			n.cost = 0;
+		}
 	}
 }
