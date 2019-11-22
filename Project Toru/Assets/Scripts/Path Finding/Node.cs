@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Node
 {
-	private Node parent;
+	public Node parent;
 
 	private Room nodeRoom;
 
@@ -12,8 +12,8 @@ public class Node
 
 	public static List<Room> vissited = new List<Room>();
 	public static List<Node> node = new List<Node>();
-
-	public int cost;
+	public static Room endRoom;
+	public static Node endNode;
 
 	public Node(Node parent, Room NodeRoom)
 	{
@@ -23,12 +23,19 @@ public class Node
 		vissited.Add(this.nodeRoom);
 		node.Add(this);
 
-		Debug.Log("Room: " + nodeRoom.name);
+		//Debug.Log("Room: " + nodeRoom.name);
 
-		GoLeft();
-		GoRight();
-		GoUpStairs();
-		GoDownStairs();
+		if (nodeRoom.name.Equals(endRoom.name))
+		{
+			endNode = this;
+		}
+		else
+		{
+			GoLeft();
+			GoRight();
+			GoUpStairs();
+			GoDownStairs();
+		}
 	}
 
 	private bool GoLeft()
@@ -88,9 +95,4 @@ public class Node
 	{
 		return nodeRoom;
 	}
-
-	public bool canLeft() { return left == null; }
-	public bool canRight() { return right == null; }
-	public bool canUp() { return up == null; }
-	public bool canDown() { return down == null; }
 }
