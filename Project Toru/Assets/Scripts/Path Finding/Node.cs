@@ -6,14 +6,14 @@ public class Node
 {
 	public Node parent;
 
-	private Room nodeRoom;
-
-	public Node left, right, up, down;
-
 	public static List<Room> vissited = new List<Room>();
 	public static List<Node> node = new List<Node>();
 	public static Room endRoom;
 	public static Node endNode;
+
+	public Room nodeRoom;
+
+	Node left, right, up, down;
 
 	public Node(Node parent, Room NodeRoom)
 	{
@@ -22,8 +22,6 @@ public class Node
 
 		vissited.Add(this.nodeRoom);
 		node.Add(this);
-
-		//Debug.Log("Room: " + nodeRoom.name);
 
 		if (nodeRoom.name.Equals(endRoom.name))
 		{
@@ -89,10 +87,5 @@ public class Node
 			}
 		}
 		return true;
-	}
-
-	public Room GetRoom()
-	{
-		return nodeRoom;
 	}
 }

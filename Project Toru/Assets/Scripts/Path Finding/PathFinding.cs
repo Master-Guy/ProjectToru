@@ -6,25 +6,41 @@ public class PathFinding : MonoBehaviour
 {
 	public Room startRoom, endRoom;
 
+	public List<Node> path;
+
 	private void Start()
+	{
+		//TestScript
+		CalculateRoute(startRoom, endRoom);
+	}
+
+	public List<Node> CalculateRoute(Room startRoom, Room endRoom)
 	{
 		Node.endRoom = endRoom;
 
 		new Node(null, startRoom);
 
-		Loop(Node.endNode);
+		return GetPathToList(Node.endNode);
 	}
 
-	private void Loop(Node n)
+	private List<Node> GetPathToList(Node n)
 	{
 		Node current = n;
 
-		Debug.Log(current.GetRoom().name);
+		path = new List<Node>();
+
+		path.Add(n);
+
+		Debug.Log("Path: " + n.nodeRoom.name);
 
 		while (current.parent != null)
 		{
 			current = current.parent;
-			Debug.Log(current.GetRoom().name);
+			path.Add(current);
+
+			Debug.Log("Path: " + current.nodeRoom.name);
 		}
+
+		return path;
 	}
 }

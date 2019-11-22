@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startRoom: {fileID: 564594256}
-  endRoom: {fileID: 560675009}
+  endRoom: {fileID: 512528639}
 --- !u!4 &240556238
 Transform:
   m_ObjectHideFlags: 0
