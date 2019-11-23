@@ -2,19 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFinding : MonoBehaviour
+public class PathFinding
 {
 	public Room startRoom, endRoom;
 
 	public List<Node> path;
 
-	private void Start()
+	public List<Vector3> CalculateTransforms(Room startRoom, Room endRoom)
 	{
-		//TestScript
-		//CalculateRoute(startRoom, endRoom);
+		List<Vector3> path = new List<Vector3>();
+
+		List<Node> route = CalculateRoute(startRoom, endRoom);
+
+		Debug.Log("Route size:" + route.Count);
+
+		for(int i = 0; i < route.Count; i++)
+		{
+			Debug.Log("Loop");
+
+			List<Vector3> localTransforms = new List<Vector3>();
+
+			//Normal room
+			if(route[i].nodeRoom.getStairScript() == null)
+			{
+				localTransforms = getRoomTransform(route[i]);
+			}
+			else
+			{
+				localTransforms = getStairTransform(route[i]);
+			}
+
+			path.AddRange(localTransforms);
+		}
+
+		return path;
 	}
 
-	public List<Node> CalculateRoute(Room startRoom, Room endRoom)
+	private List<Node> CalculateRoute(Room startRoom, Room endRoom)
 	{
 		Node.endRoom = endRoom;
 
@@ -31,16 +55,50 @@ public class PathFinding : MonoBehaviour
 
 		path.Add(n);
 
-		Debug.Log("Path: " + n.nodeRoom.name);
-
 		while (current.parent != null)
 		{
 			current = current.parent;
 			path.Add(current);
-
-			Debug.Log("Path: " + current.nodeRoom.name);
 		}
-
 		return path;
+	}
+
+	private List<Vector3> getRoomTransform(Node n)
+	{
+		List<Vector3> local = new List<Vector3>();
+		if (n.parent != null)
+		{
+			//Go left
+			if (n.nodeRoom.transform.position.x > n.parent.nodeRoom.transform.position.x)
+			{
+				local.Add(new Vector3(n.nodeRoom.transform.position.x, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
+				return local;
+			}
+			//Go Right
+			local.Add(new Vector3(n.nodeRoom.transform.position.x + n.nodeRoom.GetSize().x, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
+			return local;
+		}
+		return local;
+	}
+
+	private List<Vector3> getStairTransform(Node n)
+	{
+		List<Vector3> local = new List<Vector3>();
+
+		if (n.parent != null)
+		{
+			//Go down
+			if (n.nodeRoom.transform.position.y > n.parent.nodeRoom.transform.position.y)
+			{
+				local.Add(new Vector3(n.nodeRoom.transform.position.x + 2, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
+				local.Add(new Vector3(n.nodeRoom.transform.position.x + 2, n.nodeRoom.transform.position.y + 2, n.nodeRoom.transform.position.z));
+				return local;
+			}
+			//Go Up
+			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
+			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 3, n.nodeRoom.transform.position.z));
+			return local;
+		}
+		return local;
 	}
 }

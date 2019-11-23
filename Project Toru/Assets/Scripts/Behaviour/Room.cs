@@ -213,4 +213,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	{
 		return this.cardReaderRight;
 	}
+
+	public StairsBehaviour getStairScript()
+	{
+		return gameObject.GetComponent<StairsBehaviour>();
+	}
 }

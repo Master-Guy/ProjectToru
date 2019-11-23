@@ -8,7 +8,7 @@ public class TestScript : MonoBehaviour
 
 	PathFinding pf;
 
-	List<Node> path;
+	List<Vector3> path;
 
 	Animator animator;
 
@@ -23,36 +23,19 @@ public class TestScript : MonoBehaviour
 
 		pf = new PathFinding();
 
-		path = pf.CalculateRoute(endRoom, startRoom);
+		path = pf.CalculateTransforms(endRoom, startRoom);
+
+		Debug.Log("Path size: " + path.Count);
 	}
 
 	public void Update()
 	{
-		Vector3 newPosition = new Vector3(path[current].nodeRoom.transform.position.x + 5, path[current].nodeRoom.transform.position.y + 1, path[current].nodeRoom.transform.position.z);
+		Vector3 newPosition = path[current];
 
 		if (gameObject.transform.position == newPosition)
 		{
-			if (current < path.Count - 1)
-			{
-				current++;
-			}
+			current++;
 		}
-
 		transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * speed);
-
-		change = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * speed);
-		change.Normalize();
-		if (change != Vector3.zero)
-		{
-			animator.SetFloat("moveX", change.x);
-			animator.SetFloat("moveY", change.y);
-			animator.SetBool("moving", true);
-		}
-		else
-		{
-			animator.SetBool("moving", false);
-		}
 	}
-
-
 }

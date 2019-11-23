@@ -27,6 +27,10 @@ public class Node
 		{
 			endNode = this;
 		}
+		/*else if(nodeRoom.door.IsClosed())
+		{
+			endNode = parent;
+		}*/
 		else
 		{
 			GoLeft();
