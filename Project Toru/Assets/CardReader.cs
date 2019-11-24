@@ -43,8 +43,6 @@ public class CardReader : MonoBehaviour
 	{
 		if (collision.CompareTag("Player"))
 		{
-			Debug.Log("Checking Key");
-
 			if (color == CardreaderColor.Disabled)
 			{
 				door.Open();

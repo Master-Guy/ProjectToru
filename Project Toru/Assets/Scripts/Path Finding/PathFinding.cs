@@ -14,34 +14,30 @@ public class PathFinding
 
 		List<Node> route = CalculateRoute(startRoom, endRoom);
 
-		//route.Reverse();
-
-		foreach(Node n in route)
-		{
-			Debug.Log(n.nodeRoom.name);
-		}
+		route.Reverse();
 
 		for (int i = 0; i < route.Count; i++)
 		{
 			List<Vector3> localTransforms = new List<Vector3>();
 
-			//Normal room
-			if (route[i].nodeRoom.getStairScript() == null)
+			if(route[i].parent != null)
 			{
-				localTransforms = getRoomTransform(route[i]);
-			}
-			else
-			{
-				if (route[i].nodeRoom.getStairScript().Upstair != null)
+				//Normal room
+				if(route[i].parent.nodeRoom.getStairScript() == null)
 				{
-					//stairs
+					localTransforms = getRoomTransform(route[i].parent);
+				}
+				if(route[i].nodeRoom.getStairScript() != null && route[i].parent.nodeRoom.getStairScript() != null)
+				{
 					localTransforms = getStairTransform(route[i]);
 				}
+				
 			}
 
 			path.AddRange(localTransforms);
 		}
 
+		path.Reverse();
 		return path;
 	}
 
@@ -75,16 +71,29 @@ public class PathFinding
 		List<Vector3> local = new List<Vector3>();
 		if (n.parent != null)
 		{
-			//Go left
-			if (n.nodeRoom.transform.position.x > n.parent.nodeRoom.transform.position.x)
+			//Go left in reverse
+			if (n.nodeRoom.transform.position.x < n.parent.nodeRoom.transform.position.x)
 			{
-				local.Add(new Vector3(n.nodeRoom.transform.position.x, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
-				return local;
+				local.Add(new Vector3(n.parent.nodeRoom.transform.position.x + .5f, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
 			}
-			//Go Right
-			local.Add(new Vector3(n.nodeRoom.transform.position.x + n.nodeRoom.GetSize().x, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
-			return local;
+			else
+			{
+				//Go Right in reverse
+				local.Add(new Vector3(n.parent.nodeRoom.transform.position.x + n.parent.nodeRoom.GetSize().x - 0.5f, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
+			}
 		}
+		return local;
+	}
+
+	private List<Vector3> getStairTransform2(Node n)
+	{
+		List<Vector3> local = new List<Vector3>();
+
+		if(n.nodeRoom.transform.position.y < n.nodeRoom.transform.position.y)
+		{
+
+		}
+
 		return local;
 	}
 
@@ -94,17 +103,20 @@ public class PathFinding
 
 		if (n.parent != null)
 		{
-			//Go down
-			if (n.nodeRoom.transform.position.y > n.parent.nodeRoom.transform.position.y)
+			//Go UP
+			if (n.nodeRoom.transform.position.y < n.parent.nodeRoom.transform.position.y)
 			{
-				local.Add(new Vector3(n.nodeRoom.transform.position.x + 2, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
-				local.Add(new Vector3(n.nodeRoom.transform.position.x + 2, n.nodeRoom.transform.position.y + 2, n.nodeRoom.transform.position.z));
-				return local;
+				Debug.Log("Go Up");
+				local.Add(new Vector3(n.parent.nodeRoom.transform.position.x + 5, n.parent.nodeRoom.transform.position.y + 2f, n.nodeRoom.transform.position.z));
+				local.Add(new Vector3(n.parent.nodeRoom.transform.position.x + 5, n.parent.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
 			}
-			//Go Up
-			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
-			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 1.9f, n.nodeRoom.transform.position.z));
-			return local;
+			else
+			{
+				//Go Down
+				Debug.Log("Go down");
+				local.Add(new Vector3(n.parent.nodeRoom.transform.position.x + 2, n.nodeRoom.transform.position.y + 2, n.nodeRoom.transform.position.z));
+				local.Add(new Vector3(n.parent.nodeRoom.transform.position.x + 2, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
+			}
 		}
 		return local;
 	}

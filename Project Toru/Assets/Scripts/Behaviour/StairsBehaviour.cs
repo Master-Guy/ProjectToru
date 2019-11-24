@@ -89,7 +89,6 @@ public class StairsBehaviour : MonoBehaviour
 
 		if (character != null)
 		{
-			Debug.Log("Character is using stairs");
 			character.StairsTransistion();
 		}
 	}

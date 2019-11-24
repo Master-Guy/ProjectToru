@@ -420,7 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoom: {fileID: 564594256}
   endRoom: {fileID: 512528639}
-  speed: 3
+  current: 0
 --- !u!1001 &512528635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3459,12 +3459,12 @@ PrefabInstance:
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.92
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}

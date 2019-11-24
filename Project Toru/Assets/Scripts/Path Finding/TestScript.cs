@@ -14,7 +14,7 @@ public class TestScript : MonoBehaviour
 
 	Vector3 change;
 
-	int current = 0;
+	public int current = 0;
 
 	public void Start()
 	{
@@ -24,7 +24,7 @@ public class TestScript : MonoBehaviour
 
 		path = pf.CalculateTransforms(endRoom, startRoom);
 
-		foreach(Vector3 v in path)
+		foreach (Vector3 v in path)
 		{
 			Debug.Log(v.x + " - " + v.y);
 		}
@@ -36,12 +36,14 @@ public class TestScript : MonoBehaviour
 		{
 			Vector3 newPosition = path[current];
 
-			if ((transform.position - path[current]).sqrMagnitude < 1 * 1)
+			if(path.Count < current)
 			{
-				if (current < path.Count - 1)
-				{
-					current++;
-				}
+				current = path.Count;
+			}
+
+			if(transform.position == newPosition)
+			{
+				current++;
 			}
 			transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 		}

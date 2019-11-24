@@ -130,6 +130,9 @@ public class Character : MonoBehaviour
         playerOnTheStairs = true;
         this.GetComponent<Renderer>().enabled = false;
         this.disableMovement();
+
+		//Test for pathfinding
+		GetComponent<TestScript>().current++;
     }
 
     public void enableMovement()

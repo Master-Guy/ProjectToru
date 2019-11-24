@@ -27,10 +27,6 @@ public class Node
 		{
 			endNode = this;
 		}
-		/*else if(nodeRoom.door.IsClosed())
-		{
-			endNode = parent;
-		}*/
 		else
 		{
 			GoLeft();
@@ -91,5 +87,14 @@ public class Node
 			}
 		}
 		return true;
+	}
+
+	public Node getChild(Node n)
+	{
+		if (left.Equals(n)) { return left;  }
+		if (right.Equals(n)) { return right; }
+		if (up.Equals(n)) { return up; }
+		if (down.Equals(n)) { return down; }
+		return null;
 	}
 }
