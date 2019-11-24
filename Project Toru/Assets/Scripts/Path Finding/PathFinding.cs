@@ -14,22 +14,29 @@ public class PathFinding
 
 		List<Node> route = CalculateRoute(startRoom, endRoom);
 
-		Debug.Log("Route size:" + route.Count);
+		//route.Reverse();
 
-		for(int i = 0; i < route.Count; i++)
+		foreach(Node n in route)
 		{
-			Debug.Log("Loop");
+			Debug.Log(n.nodeRoom.name);
+		}
 
+		for (int i = 0; i < route.Count; i++)
+		{
 			List<Vector3> localTransforms = new List<Vector3>();
 
 			//Normal room
-			if(route[i].nodeRoom.getStairScript() == null)
+			if (route[i].nodeRoom.getStairScript() == null)
 			{
 				localTransforms = getRoomTransform(route[i]);
 			}
 			else
 			{
-				localTransforms = getStairTransform(route[i]);
+				if (route[i].nodeRoom.getStairScript().Upstair != null)
+				{
+					//stairs
+					localTransforms = getStairTransform(route[i]);
+				}
 			}
 
 			path.AddRange(localTransforms);
@@ -96,7 +103,7 @@ public class PathFinding
 			}
 			//Go Up
 			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 1, n.nodeRoom.transform.position.z));
-			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 3, n.nodeRoom.transform.position.z));
+			local.Add(new Vector3(n.nodeRoom.transform.position.x + 5, n.nodeRoom.transform.position.y + 1.9f, n.nodeRoom.transform.position.z));
 			return local;
 		}
 		return local;

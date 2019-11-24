@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
 
     private float timer = 0;
     private float stairsDuration = 1;
-    private bool playerOnTheStairs = false;
+    public bool playerOnTheStairs = false;
 
 
     public GameObject currentRoom;

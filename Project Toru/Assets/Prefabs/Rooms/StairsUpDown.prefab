@@ -1931,7 +1931,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5, y: 3}
+  m_Offset: {x: 5, y: 2.8132076}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1942,7 +1942,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.25}
+  m_Size: {x: 2, y: 0.62358475}
   m_EdgeRadius: 0
 --- !u!61 &6803085255862147021
 BoxCollider2D:
@@ -3342,6 +3342,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6641824183735609056}
     m_Modifications:
+    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
+        type: 3}
+      propertyPath: m_Name
+      value: Keycard Reader R
+      objectReference: {fileID: 0}
     - target: {fileID: 1141346909789194614, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3397,11 +3402,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
-        type: 3}
-      propertyPath: m_Name
-      value: Keycard Reader R
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06f5823b051a543e48768d169abc141c, type: 3}
 --- !u!4 &765070500507605562 stripped
@@ -3429,6 +3429,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6641824183735609056}
     m_Modifications:
+    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
+        type: 3}
+      propertyPath: m_Name
+      value: Keycard Reader L
+      objectReference: {fileID: 0}
     - target: {fileID: 1141346909789194614, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3483,11 +3488,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
-        type: 3}
-      propertyPath: m_Name
-      value: Keycard Reader L
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06f5823b051a543e48768d169abc141c, type: 3}
@@ -3581,11 +3581,6 @@ PrefabInstance:
       propertyPath: collider
       value: 
       objectReference: {fileID: 7193484020114034785}
-    - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655983, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -3595,6 +3590,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58961c0690de64e5cb99ecac92510057, type: 3}

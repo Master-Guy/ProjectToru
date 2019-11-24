@@ -15,7 +15,6 @@ public class TestScript : MonoBehaviour
 	Vector3 change;
 
 	int current = 0;
-	public float speed;
 
 	public void Start()
 	{
@@ -25,17 +24,26 @@ public class TestScript : MonoBehaviour
 
 		path = pf.CalculateTransforms(endRoom, startRoom);
 
-		Debug.Log("Path size: " + path.Count);
+		foreach(Vector3 v in path)
+		{
+			Debug.Log(v.x + " - " + v.y);
+		}
 	}
 
 	public void Update()
 	{
-		Vector3 newPosition = path[current];
-
-		if (gameObject.transform.position == newPosition)
+		if (!GetComponent<Character>().playerOnTheStairs)
 		{
-			current++;
+			Vector3 newPosition = path[current];
+
+			if ((transform.position - path[current]).sqrMagnitude < 1 * 1)
+			{
+				if (current < path.Count - 1)
+				{
+					current++;
+				}
+			}
+			transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 		}
-		transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * speed);
 	}
 }
