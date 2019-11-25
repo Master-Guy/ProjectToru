@@ -71,4 +71,10 @@ public abstract class NPC : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
     }
+
+	// all generic states below
+	public void PingPong()
+	{
+		this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
+	}
 }
