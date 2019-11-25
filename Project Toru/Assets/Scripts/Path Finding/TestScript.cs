@@ -4,48 +4,82 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-	public Room startRoom, endRoom;
-
 	PathFinding pf;
 
 	List<Vector3> path;
 
 	Animator animator;
 
-	Vector3 change;
-
 	public int current = 0;
+
+	public void Awake()
+	{
+		path = new List<Vector3>();
+	}
 
 	public void Start()
 	{
 		animator = GetComponent<Animator>();
 
 		pf = new PathFinding();
-
-		path = pf.CalculateTransforms(endRoom, startRoom);
-
-		foreach (Vector3 v in path)
-		{
-			Debug.Log(v.x + " - " + v.y);
-		}
 	}
 
 	public void Update()
 	{
-		if (!GetComponent<Character>().playerOnTheStairs)
+		if(Input.GetMouseButtonDown(1))
 		{
-			Vector3 newPosition = path[current];
-
-			if(path.Count < current)
-			{
-				current = path.Count;
-			}
-
-			if(transform.position == newPosition)
-			{
-				current++;
-			}
-			transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Plane plane = new Plane (Vector3.forward, transform.position);
+			float dist = 0;
+			if (plane.Raycast(ray, out dist))
+			{	
+				Vector3 pos = ray.GetPoint(dist);
+				if (getCoRoom(pos) != null)
+				{
+					current = 0;
+					path.Clear();
+					pos = new Vector2(pos.x, getCoRoom(pos).transform.position.y + 1);
+					path = pf.CalculateTransforms(getCoRoom(pos), GetComponent<Character>().currentRoom.GetComponent<Room>());
+					path.Add(pos);
+				}
+			}		
 		}
+
+
+		if (path.Count > 0)
+		{
+			if (!GetComponent<Character>().playerOnTheStairs)
+			{
+				Vector3 newPosition = path[current];
+
+				if (transform.position == newPosition)
+				{
+					current++;
+				}
+				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
+			}
+
+			if (current >= path.Count)
+			{
+				current = 0;
+				path.Clear();
+			}
+		}
+	}
+
+	private Room getCoRoom(Vector2 loc)
+	{
+		Room r;
+
+		foreach(GameObject v in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			r = v.GetComponent<Room>();
+
+			if (loc.x >= v.transform.position.x && loc.x < v.transform.position.x + r.GetPosition().x && loc.y > r.GetPosition().y && loc.y < r.GetPosition().y + r.GetSize().y)
+			{
+				return r;
+			} 
+		}
+		return null;
 	}
 }

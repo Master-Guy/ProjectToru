@@ -219,4 +219,9 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	{
 		return gameObject.GetComponent<StairsBehaviour>();
 	}
+
+	public bool isRoom()
+	{
+		return !gameObject.GetComponent<StairsBehaviour>();
+	}
 }
