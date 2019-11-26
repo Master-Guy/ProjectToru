@@ -85,8 +85,12 @@ namespace Assets.Scripts.Options
 				Time.timeScale = 1.0f;
 				return;
 			}
+
 			gameObject.SetActive(true);
-			Time.timeScale = 0.2f;
+			EventQueue = EventQueue.OrderBy(o => o.priority).ToList();
+			
+			// slows down time depending on priority in 4 steps from full speed to 20 percent speed
+			Time.timeScale = 0.2f + (float)(0.8f * Math.Floor(4f / Math.Min(EventQueue[0].priority, 4)));
 
 			TMP.text = EventQueue[0].GetOptionText();
 			TextType = EventTextType.options;

@@ -15,13 +15,23 @@ namespace Assets.Scripts.Options
 		List<Character> ActorShortList = new List<Character>();
 		List<Option> Options;
 		List<Option> OptionShortList = new List<Option>();
+		public int priority = 0;
 
-		public Event(string s, GameObject g, List<Option> o, Character c)
+		public Event(string description, GameObject gameobject, List<Option> options, Character actor, int priority)
 		{
-			Description = s;
-			Object = g;
-			Options = o;
-			Actors.Add(c);
+			Description = description;
+			Object = gameobject;
+			Options = options;
+			Actors.Add(actor);
+			this.priority = priority;
+		}
+
+		public Event(string description, GameObject gameobject, List<Option> options, Character actor)
+		{
+			Description = description;
+			Object = gameobject;
+			Options = options;
+			Actors.Add(actor);
 		}
 
 		/// <summary>
@@ -40,6 +50,7 @@ namespace Assets.Scripts.Options
 			foreach (var a in E.Options)
 				if (!Options.Contains(a))
 					Options.Add(a);
+			priority = Math.Max(priority, E.priority);
 			return true;
 		}
 
