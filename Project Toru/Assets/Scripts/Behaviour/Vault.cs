@@ -5,7 +5,10 @@ using UnityEngine;
 public class Vault : MonoBehaviour
 {
     [SerializeField]
-    Collider2D collider = null;
+    Collider2D vaultCollider = null;
+
+    public Door door = null;
+    public GameObject money = null;
 
     bool closed = true;
 
@@ -15,6 +18,7 @@ public class Vault : MonoBehaviour
             if (collision.gameObject.GetComponent<Character>() && closed)
             {
                 Open();
+                collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
             }
     }
 
@@ -24,6 +28,9 @@ public class Vault : MonoBehaviour
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);
 
+        door.Close();
+
+
         StartCoroutine(WaitForAnimationEndTimer());
         return true;
     }
@@ -31,7 +38,7 @@ public class Vault : MonoBehaviour
     IEnumerator WaitForAnimationEndTimer()
     {
         yield return new WaitForSeconds(0.5f);
-        collider.enabled = false;
+        vaultCollider.enabled = false;
     }
 
     public bool IsOpen()

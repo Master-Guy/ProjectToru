@@ -24,7 +24,7 @@ public class CameraRoom : MonoBehaviour
 			}
 		}
 
-		Invoke("AlertCops", 10);
+		Invoke("AlertCops", 18);
 	}
 
 	void AlertCops()

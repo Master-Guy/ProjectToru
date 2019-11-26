@@ -451,8 +451,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 189804213
-  m_SortingLayer: 0
+  m_SortingLayerID: -1329448103
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -895,8 +895,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1956221157
-  m_SortingLayer: 6
+  m_SortingLayerID: -1329448103
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 953247212168581849}
   - component: {fileID: 3766027214064442151}
   m_Layer: 0
-  m_Name: keycard_reader_0
+  m_Name: Keycard Reader Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,9 +1034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b381df4fef305f0428f7e02df3556755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walls: {fileID: 0}
-  background: {fileID: 0}
-  lightsOn: 0
   wallController: {fileID: 2376349019585700647}
   cardReaderLeft: {fileID: 0}
   cardReaderRight: {fileID: 2008879952413551165}
