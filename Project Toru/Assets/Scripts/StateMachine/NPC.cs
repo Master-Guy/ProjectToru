@@ -27,6 +27,10 @@ public abstract class NPC : MonoBehaviour
     [NonSerialized]
     public Animator animator = null;
 
+    [NonSerialized]
+    public CharacterStats stats;
+
+
     public void dropBag()
     {
         foreach (GameObject g in bag)
