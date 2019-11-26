@@ -18,17 +18,20 @@ namespace Assets.Scripts.Options
 	{
 		options,
 		characters,
-		extraAction
+		extraOption,
+		result
 	}
 
-	[RequireComponent(typeof(TMP_Text))]
+	[RequireComponent(typeof(TextMeshProUGUI))]
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class EventWindow : MonoBehaviour, IPointerClickHandler
 	{
+		private string ResultMessage, DoAnotherActionString = "Do you want to do anything else?" + Environment.NewLine + "  < link > yes </ link > " + Environment.NewLine + "< link > no </ link >";
+
 		List<Event> EventQueue;
 		TextMeshProUGUI TMP;
 		EventTextType TextType;
-		int OptionIndex;
+		int OptionIndex, ActorCount;
 
 		public void Start()
 		{
@@ -89,6 +92,11 @@ namespace Assets.Scripts.Options
 			TextType = EventTextType.options;
 		}
 
+		private void BuildResult()
+		{
+			TMP.text = ResultMessage + Environment.NewLine + "< link > continue </ link >";
+		}
+
 		public void OnMouseOver()
 		{
 			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
@@ -101,7 +109,6 @@ namespace Assets.Scripts.Options
 		public void OnPointerClick(PointerEventData eventData)
 		{
 			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
-			Debug.Log("click " + LinkIndex);
 			if (LinkIndex == -1)
 			{
 				return;
@@ -110,7 +117,8 @@ namespace Assets.Scripts.Options
 			switch (TextType)
 			{
 				case EventTextType.options:
-					if (EventQueue[0].ActivateOption(LinkIndex))
+					ActorCount = EventQueue[0].ActivateOption(LinkIndex, ref ResultMessage);
+					if (ActorCount == 1)
 						goto default;
 
 					TMP.text = EventQueue[0].GetActorText();
@@ -118,11 +126,32 @@ namespace Assets.Scripts.Options
 					OptionIndex = LinkIndex;
 					break;
 				case EventTextType.characters:
-					EventQueue[0].ActivateOption(OptionIndex, LinkIndex);
+					EventQueue[0].ActivateOption(OptionIndex, LinkIndex, ref ResultMessage);
+					ActorCount--;
+					if(ActorCount == 0)
+						goto default;
+
+					TMP.text = DoAnotherActionString;
+					TextType = EventTextType.extraOption;
+					break;
+				case EventTextType.extraOption:
+					if (LinkIndex == 1)
+						goto default;
+
+					DisplayNextOptions();
+					break;
+				case EventTextType.result:
+					ResultMessage = null;
 					goto default;
 
-					// TODO add possibility to do another action
 				default:
+					if (ResultMessage == null)
+					{
+						BuildResult();
+						TextType = EventTextType.result;
+						break;
+					}
+
 					EventQueue.RemoveAt(0);
 
 					DisplayNextOptions();

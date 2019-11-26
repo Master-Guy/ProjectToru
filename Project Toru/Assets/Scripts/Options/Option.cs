@@ -10,15 +10,20 @@ namespace Assets.Scripts.Options
 	public abstract class Option : MonoBehaviour
 	{
 		[SerializeField]
-		private string Description;
+		private string Description, Result;
 		public Skills? Prerequisite = null;
 
 
-		public string getInfo()
+		public virtual string getInfo()
 		{
 			return Description;
 		}
 
-		public abstract void Activate(Character c);
+		/// <summary>
+		/// activates this action
+		/// </summary>
+		/// <param name="c"></param>
+		/// <returns>should return a result message if neccesary</returns>
+		public abstract string Activate(Character c);
 	}
 }

@@ -109,18 +109,18 @@ namespace Assets.Scripts.Options
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		public bool ActivateOption(int index)
+		public int ActivateOption(int index, ref string result)
 		{
 			BuildActorShortList(OptionShortList[index]);
-			if (ActorShortList.Count > 1)
-				return false;
-			OptionShortList[index].Activate(ActorShortList[0]);
-			return true;
+			if (ActorShortList.Count == 1)
+				result = OptionShortList[index].Activate(ActorShortList[0]);
+			return ActorShortList.Count;
 		}
 
-		public void ActivateOption(int indexOption, int indexCharacter)
+		public void ActivateOption(int indexOption, int indexCharacter, ref string result)
 		{
-			OptionShortList[indexOption].Activate(ActorShortList[indexCharacter]);
+			result = OptionShortList[indexOption].Activate(ActorShortList[indexCharacter]);
+			Actors.RemoveAt(indexCharacter);
 		}
 	}
 }
