@@ -163,4 +163,9 @@ public class CardReader : MonoBehaviour
 		Yellow
 	}
 
+	public Door getDoor()
+	{
+		return door;
+	}
+
 }

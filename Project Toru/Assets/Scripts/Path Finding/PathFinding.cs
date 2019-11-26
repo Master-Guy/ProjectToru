@@ -4,44 +4,30 @@ using UnityEngine;
 
 public class PathFinding
 {
-	public Room startRoom, endRoom;
-
-	public List<Node> path;
+	private List<Node> pathN;
 
 	public List<Vector3> CalculateTransforms(Room startRoom, Room endRoom)
 	{
-		List<Vector3> path = new List<Vector3>();
+		List<Vector3> pathR = new List<Vector3>();
 
 		List<Node> route = CalculateRoute(startRoom, endRoom);
 
 		for (int i = 0; i < route.Count; i++)
 		{
-
 			List<Vector3> localTransforms = new List<Vector3>();
 
 			if (i == route.Count - 1)
 			{
 				//Do Nothing
 			}
-			else if (route[i].nodeRoom.isRoom() && route[i].parent.nodeRoom.isRoom())
-			{
-				//Normal room to normalRoom
-				localTransforms = getRoomTransform(route[i], null);
-			}
-			else if(route[i].nodeRoom.isRoom() && !route[i].parent.nodeRoom.isRoom())
-			{
-				//Stair to normalRoom
-				localTransforms = getRoomTransform(route[i], null);
-			}
 			else if(!route[i].nodeRoom.isRoom() && !route[i].parent.nodeRoom.isRoom())
 			{
 				//Stair to Stair
-				localTransforms = getStairTransform(route[i], null);
+				localTransforms = getStairTransform(route[i]);
 			}
-
-			path.AddRange(localTransforms);
+			pathR.AddRange(localTransforms);
 		}
-		return path;
+		return pathR;
 	}
 
 	private List<Node> CalculateRoute(Room startRoom, Room endRoom)
@@ -60,80 +46,33 @@ public class PathFinding
 	{
 		Node current = n;
 
-		path = new List<Node>();
+		pathN = new List<Node>();
 
-		path.Add(n);
+		pathN.Add(n);
 
 		while (current.parent != null)
 		{
 			current = current.parent;
-			path.Add(current);
+			pathN.Add(current);
 		}
-		return path;
+		return pathN;
 	}
 
-	private List<Vector3> getRoomTransform(Node n, Node l)
+	private List<Vector3> getStairTransform(Node n)
 	{
 		List<Vector3> local = new List<Vector3>();
 
-		if (l == null)
+		if (n.nodeRoom.GetPosition().y < n.parent.nodeRoom.GetPosition().y)
 		{
-			if (n.nodeRoom.GetPosition().x < n.parent.nodeRoom.GetPosition().x)
-			{
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 1, n.nodeRoom.GetPosition().y + 1));
-			}
-			else
-			{
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + n.nodeRoom.GetSize().x - 1, n.nodeRoom.GetPosition().y + 1));
-			}
+			//Go up
+			local.Add(new Vector3(n.nodeRoom.GetPosition().x + 5, n.nodeRoom.GetPosition().y + 1));
+			local.Add(new Vector3(n.nodeRoom.GetPosition().x + 5, n.nodeRoom.GetPosition().y + 2));
 		}
 		else
 		{
-			if (n.nodeRoom.GetPosition().x > l.nodeRoom.GetPosition().x)
-			{
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 1, n.nodeRoom.GetPosition().y + 1));
-			}
-			else
-			{
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + n.nodeRoom.GetSize().x - 1, n.nodeRoom.GetPosition().y +  + 1));
-			}
-		}
-		return local;
-	}
-
-	private List<Vector3> getStairTransform(Node n, Node l)
-	{
-		List<Vector3> local = new List<Vector3>();
-
-		if (l == null)
-		{
-			if (n.nodeRoom.GetPosition().y < n.parent.nodeRoom.GetPosition().y)
-			{
-				//Go up
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 5, n.nodeRoom.GetPosition().y + 1));
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 5, n.nodeRoom.GetPosition().y + 2));
-			}
-			else
-			{
-				//Go down
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 2, n.nodeRoom.GetPosition().y + 1));
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 2, n.nodeRoom.GetPosition().y + 2));
-			}
-		}
-		else
-		{
-			if (n.nodeRoom.GetPosition().y > l.nodeRoom.GetPosition().y)
-			{
-				//Go up
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 5, l.nodeRoom.GetPosition().y + 1));
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 5, l.nodeRoom.GetPosition().y + 2));
-			}
-			else
-			{
-				//Go down
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 2, l.nodeRoom.GetPosition().y + 1));
-				local.Add(new Vector3(n.nodeRoom.GetPosition().x + 2, l.nodeRoom.GetPosition().y + 2));
-			}
+			//Go down
+			local.Add(new Vector3(n.nodeRoom.GetPosition().x + 2, n.nodeRoom.GetPosition().y + 1));
+			local.Add(new Vector3(n.nodeRoom.GetPosition().x + 2, n.nodeRoom.GetPosition().y + 2));
 		}
 		return local;
 	}

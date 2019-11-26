@@ -71,4 +71,24 @@ public abstract class NPC : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
     }
+
+	public Room getRoom()
+	{
+		return currentRoom;
+	}
+
+	public bool HasKey(CardReader.CardreaderColor color)
+	{
+		foreach (GameObject i in bag)
+		{
+			if(i.GetComponent<Key>())
+			{
+				if (i.GetComponent<Key>().color == color)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

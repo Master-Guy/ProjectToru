@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
             }
 
             UpdateUI();
-            Destroy(item.gameObject);
+            Character.Destroy(item.gameObject);
         }
     }
 

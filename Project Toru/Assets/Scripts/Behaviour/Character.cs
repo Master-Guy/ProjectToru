@@ -87,7 +87,6 @@ public class Character : MonoBehaviour
 
     public bool HasKey(CardReader.CardreaderColor color)
     {
-
         foreach (Item i in inventory.getItemsList())
         {
             if (i is Key && ((Key)i).color == color)
@@ -132,7 +131,7 @@ public class Character : MonoBehaviour
         this.disableMovement();
 
 		//Test for pathfinding
-		GetComponent<TestScript>().current++;
+		GetComponent<ExecutePathFinding>().current++;
     }
 
     public void enableMovement()
