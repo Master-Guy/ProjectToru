@@ -16,20 +16,12 @@ public class PathFinding
 
 		for (int i = 0; i < route.Count; i++)
 		{
-			Debug.Log(route[i].nodeRoom.name);
 
 			List<Vector3> localTransforms = new List<Vector3>();
 
 			if (i == route.Count - 1)
 			{
-				/*if (route[i].nodeRoom.isRoom() && route[i - 1].nodeRoom.isRoom())
-				{
-					localTransforms = getStairTransform(route[i], route[i - 1]);
-				}
-				else
-				{
-					localTransforms = getRoomTransform(route[i], route[i - 1]);
-				}*/
+				//Do Nothing
 			}
 			else if (route[i].nodeRoom.isRoom() && route[i].parent.nodeRoom.isRoom())
 			{
