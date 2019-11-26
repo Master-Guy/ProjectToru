@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ public class Character : MonoBehaviour
 
     public float MaxWeight;
 
+	public GameObject firePoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +41,8 @@ public class Character : MonoBehaviour
 
         inventory = gameObject.AddComponent(typeof(Inventory)) as Inventory;
         inventory.SetMaxWeight(MaxWeight);
+
+		firePoint = transform.GetChild(0).gameObject;
 
         AdjustOrderLayer();
     }
@@ -102,6 +107,7 @@ public class Character : MonoBehaviour
         {
             AdjustOrderLayer();
             MoveCharacter();
+			FlipFirePoint();
             animator.SetFloat("moveX", change.x);
             animator.SetFloat("moveY", change.y);
             animator.SetBool("moving", true);
@@ -118,7 +124,21 @@ public class Character : MonoBehaviour
         }
     }
 
-    void MoveCharacter()
+	private void FlipFirePoint()
+	{
+		if(change.x > 0)
+		{
+			firePoint.transform.rotation = Quaternion.Euler(0,0,0);
+			firePoint.transform.position = transform.position + new Vector3(1, 0);
+		}
+		if(change.x < 0)
+		{
+			firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+			firePoint.transform.position = transform.position + new Vector3(-1, 0);
+		}
+	}
+
+	void MoveCharacter()
     {
         change.Normalize();
         myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);

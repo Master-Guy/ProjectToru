@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2157518552967300748}
   - component: {fileID: 916964115179061163}
   - component: {fileID: 5832977297094538437}
+  - component: {fileID: 1381812995163818562}
   m_Layer: 8
   m_Name: Guard
   m_TagString: NPC
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1329448103
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7809785511404226330, guid: e89ca0f92a37d494489f85b218a0975a,
+  m_Sprite: {fileID: 8426817888908902439, guid: 4ab478a4794b4d848a374ad17de8c9d3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -167,6 +168,20 @@ MonoBehaviour:
   bag: []
   TextBox: {fileID: 3145244995637311128}
   escapePath: []
+--- !u!114 &1381812995163818562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157518552967300744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  health: 100
 --- !u!1 &3055178034262385717
 GameObject:
   m_ObjectHideFlags: 0

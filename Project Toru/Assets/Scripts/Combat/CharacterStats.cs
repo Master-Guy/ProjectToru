@@ -13,6 +13,7 @@ public class CharacterStats : MonoBehaviour
         if(health <= 0)
         {
             Destroy(this.gameObject);
+			Debug.Log(gameObject.name + " has died");
         }
     }
 }

@@ -120,38 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &13404870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2510886674794060566, guid: bf95452cd57984e5ca8bc794c6b27c55,
-    type: 3}
-  m_PrefabInstance: {fileID: 1414436462}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &13404871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13404870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
-  health: 100
---- !u!114 &13404872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13404870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2fea436af59ce9439738c46dd3bc9d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &13619022
 GameObject:
   m_ObjectHideFlags: 0
@@ -25109,6 +25077,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 331170021}
     m_Modifications:
+    - target: {fileID: 5914886995292432195, guid: 2cc6f720fa5b1e949ac7211adec0f899,
+        type: 3}
+      propertyPath: m_Name
+      value: Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 5914886995292432192, guid: 2cc6f720fa5b1e949ac7211adec0f899,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25163,11 +25136,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5914886995292432195, guid: 2cc6f720fa5b1e949ac7211adec0f899,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc6f720fa5b1e949ac7211adec0f899, type: 3}
@@ -26243,19 +26211,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b381df4fef305f0428f7e02df3556755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2045103264 stripped
+--- !u!1 &2034788036 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157518552967300744, guid: da2de1742a1501f418579f94f0d27c46,
+  m_CorrespondingSourceObject: {fileID: 4947826929547256574, guid: cef2cc5444238334dadd6abbae014fad,
     type: 3}
-  m_PrefabInstance: {fileID: 9205071104568381931}
+  m_PrefabInstance: {fileID: 2142363198}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2045103265
+--- !u!114 &2034788043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045103264}
+  m_GameObject: {fileID: 2034788036}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
@@ -26530,6 +26498,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5832977297094538437, guid: da2de1742a1501f418579f94f0d27c46,
         type: 3}
+      propertyPath: escapePath.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832977297094538437, guid: da2de1742a1501f418579f94f0d27c46,
+        type: 3}
       propertyPath: escapePath.Array.data[0]
       value: 
       objectReference: {fileID: 1722593120}
@@ -26602,6 +26575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
+      objectReference: {fileID: 9100000, guid: 66ca50098f1b050438a287e9aece3bc2, type: 2}
+    - target: {fileID: 2157518552967300467, guid: da2de1742a1501f418579f94f0d27c46,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da2de1742a1501f418579f94f0d27c46, type: 3}
