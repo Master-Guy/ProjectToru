@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
     //Assign a Item List
     private HashSet<Item> inv;
 
     //Create's a static InventoryUI manager
-    private InventoryUI INVUI;
+    private static InventoryUI INVUI = new InventoryUI();
 
     public float MaxWeight;
 
     //Constructor - Creates a Item List
-    public Inventory()
+    public Inventory(float MaxWeight)
     {
+		this.MaxWeight = MaxWeight;
         inv = new HashSet<Item>();
-    }
-
-    public void Start()
-    {
-        INVUI = gameObject.AddComponent(typeof(InventoryUI)) as InventoryUI;
     }
 
     public void SetMaxWeight(float MaxWeight)

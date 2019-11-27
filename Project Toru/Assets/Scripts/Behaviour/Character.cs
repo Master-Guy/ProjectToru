@@ -35,8 +35,7 @@ public class Character : MonoBehaviour
         isDisabled = true;
         ps = GetComponent<ParticleSystem>();
 
-       inventory = gameObject.AddComponent(typeof(Inventory)) as Inventory;
-       inventory.SetMaxWeight(MaxWeight);
+		inventory = new Inventory(MaxWeight);
 
         AdjustOrderLayer();
     }
