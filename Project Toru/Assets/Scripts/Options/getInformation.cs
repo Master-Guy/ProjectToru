@@ -9,10 +9,10 @@ namespace Assets.Scripts.Options
 {
 	class getInformation : Option
 	{
-		public override void Activate(Character c)
+		public override string Activate(Character c)
 		{
 			// TODO gather information
-			Debug.Log("information found by " + c.name);
+			return "information found by " + c.name;
 		}
 	}
 }

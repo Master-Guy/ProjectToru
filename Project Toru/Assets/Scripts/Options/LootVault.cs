@@ -17,9 +17,10 @@ namespace Assets.Scripts.Options
 			container = GetComponentInParent<Furniture>();
 		}
 
-		public override void Activate(Character C)
+		public override string Activate(Character C)
 		{
 			container.drop();
+			return null;
 		}
 	}
 }

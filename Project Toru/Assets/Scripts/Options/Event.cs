@@ -11,18 +11,24 @@ namespace Assets.Scripts.Options
 	{
 		[SerializeField]
 		string Description;
-		[SerializeField]
 		GameObject Object;
-		[SerializeField]
 		List<Character> Actors = new List<Character>();
-		[SerializeField]
 		List<Character> ActorShortList = new List<Character>();
 		[SerializeField]
 		List<Option> Options;
-		[SerializeField]
 		List<Option> OptionShortList = new List<Option>();
 		[SerializeField]
 		public int priority = 0;
+
+		public void Start()
+		{
+			Object = gameObject;
+		}
+
+		public void AddActor(Character C)
+		{
+			Actors.Add(C);
+		}
 
 		/// <summary>
 		/// returns true if events were merged
