@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Behaviour
 {
+	[RequireComponent(typeof(Options.Event))]
 	public class Furniture : MonoBehaviour, IPointerClickHandler
 	{
 		[SerializeField]
@@ -17,14 +18,12 @@ namespace Assets.Scripts.Behaviour
 		[SerializeField]
 		string Description = string.Empty;
 
-		List<Option> Options;
 		List<Item> items;
 		Room Parent;
 
 
 		void Start()
 		{
-			Options = GetComponentsInChildren<Option>().ToList();
 			items = GetComponentsInChildren<Item>().ToList();
 			foreach (Item i in items)
 				i.gameObject.SetActive(false);
@@ -39,12 +38,6 @@ namespace Assets.Scripts.Behaviour
 		{
 			foreach (Item i in items)
 				i.gameObject.SetActive(true);
-		}
-
-		void OnTriggerEnter2D(Collider2D collision)
-		{
-			if (collision.CompareTag("Player") && collision.isTrigger)	// check if character has a destination, if so check if it is this
-				CurrentEventWindow.Current.AddEvent(new Options.Event(Description, gameObject, Options, collision.GetComponent<Character>()));
 		}
 
 		void OnTriggerExit2D(Collider2D collision)

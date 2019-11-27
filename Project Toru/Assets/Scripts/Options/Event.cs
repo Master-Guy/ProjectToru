@@ -7,32 +7,22 @@ using UnityEngine;
 
 namespace Assets.Scripts.Options
 {
-	public class Event
+	public class Event : MonoBehaviour
 	{
+		[SerializeField]
 		string Description;
+		[SerializeField]
 		GameObject Object;
+		[SerializeField]
 		List<Character> Actors = new List<Character>();
+		[SerializeField]
 		List<Character> ActorShortList = new List<Character>();
+		[SerializeField]
 		List<Option> Options;
+		[SerializeField]
 		List<Option> OptionShortList = new List<Option>();
+		[SerializeField]
 		public int priority = 0;
-
-		public Event(string description, GameObject gameobject, List<Option> options, Character actor, int priority)
-		{
-			Description = description;
-			Object = gameobject;
-			Options = options;
-			Actors.Add(actor);
-			this.priority = priority;
-		}
-
-		public Event(string description, GameObject gameobject, List<Option> options, Character actor)
-		{
-			Description = description;
-			Object = gameobject;
-			Options = options;
-			Actors.Add(actor);
-		}
 
 		/// <summary>
 		/// returns true if events were merged

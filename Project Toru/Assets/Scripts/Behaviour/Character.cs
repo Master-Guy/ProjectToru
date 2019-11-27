@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Options;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum Skills
@@ -169,5 +170,9 @@ public class Character : MonoBehaviour
         {
             currentRoom = other.gameObject;
         }
-    }
+
+		var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+		if(e != null)
+			CurrentEventWindow.Current.AddEvent(e);
+	}
 }
