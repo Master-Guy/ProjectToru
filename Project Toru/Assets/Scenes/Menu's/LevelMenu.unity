@@ -1240,7 +1240,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -175}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &595009578
 GameObject:
@@ -1858,6 +1858,9 @@ MonoBehaviour:
   LevelOneButton: {fileID: 987443716}
   LevelTwoButton: {fileID: 347650919}
   LevelThreeButton: {fileID: 79900832}
+  LevelFourButton: {fileID: 15786327}
+  LevelFiveButton: {fileID: 1144713299}
+  LevelSixButton: {fileID: 1863397858}
 --- !u!4 &888613213
 Transform:
   m_ObjectHideFlags: 0
