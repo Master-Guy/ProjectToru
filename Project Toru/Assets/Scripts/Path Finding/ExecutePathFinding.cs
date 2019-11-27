@@ -68,25 +68,29 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		return null;
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		checkDoorClosed(other);
-	}
-
-	private void OnTriggerStay2D(Collider2D other)
-	{
-		checkDoorClosed(other);
-	}
-
-	private void checkDoorClosed(Collider2D other)
+	public void checkDoorClosed(Collider2D other)
 	{
 		if (other.gameObject.GetComponent<CardReader>())
 		{
 			if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
 			{
-				if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()))
+				if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()))
 				{
 					other.gameObject.GetComponent<CardReader>().getDoor().Open();
+				}
+				else if (gameObject.GetComponent<NPC>())
+				{
+					if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()))
+					{
+						other.gameObject.GetComponent<CardReader>().getDoor().Open();
+					}
+					else
+					{
+						if (path.Count != 0)
+						{
+							path.Clear();
+						}
+					}
 				}
 				else
 				{

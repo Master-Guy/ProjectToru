@@ -12,7 +12,6 @@ public class Character : MonoBehaviour
     public Inventory inventory;
 
     private bool didUseStair = false;
-    private static CharacterManager cm;
     private bool isDisabled;
     private ParticleSystem ps;
 
@@ -26,18 +25,18 @@ public class Character : MonoBehaviour
 
     public float MaxWeight;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cm = gameObject.AddComponent(typeof(CharacterManager)) as CharacterManager;
+	private static Character current;
 
+	// Start is called before the first frame update
+	void Start()
+    {
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isDisabled = true;
         ps = GetComponent<ParticleSystem>();
 
-        inventory = gameObject.AddComponent(typeof(Inventory)) as Inventory;
-        inventory.SetMaxWeight(MaxWeight);
+       inventory = gameObject.AddComponent(typeof(Inventory)) as Inventory;
+       inventory.SetMaxWeight(MaxWeight);
 
         AdjustOrderLayer();
     }
@@ -81,11 +80,15 @@ public class Character : MonoBehaviour
             }
 
             UpdateAnimationsAndMove();
-
         }
     }
 
-    public bool HasKey(CardReader.CardreaderColor color)
+	public Character getCurrentCharacter()
+	{
+		return current;
+	}
+
+	public bool HasKey(CardReader.CardreaderColor color)
     {
         foreach (Item i in inventory.getItemsList())
         {
@@ -148,11 +151,18 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            cm.disableCharacterMovement();
-            selectedCharacter = this.gameObject;
-            enableMovement();
-            ps.Play();
-            inventory.UpdateUI();
+			if(current == null)
+			{
+				current = this;
+				current.enableMovement();
+			}
+			else
+			{
+				current.disableMovement();
+				current = this;
+				current.enableMovement();
+			}
+			inventory.UpdateUI();
         }
     }
 

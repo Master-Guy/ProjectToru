@@ -12,31 +12,43 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 
 	private void MousePointInput()
 	{
-		if (Input.GetMouseButtonDown(1))
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			Plane plane = new Plane(Vector3.forward, transform.position);
-			float dist = 0;
-			if (plane.Raycast(ray, out dist))
+		if(GetComponent<Character>().Equals(GetComponent<Character>().getCurrentCharacter())) {
+			if (Input.GetMouseButtonDown(1))
 			{
-				Vector3 pos = ray.GetPoint(dist);
-				Room positionRoom = getCoRoom(pos);
-
-				if (positionRoom != null)
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Plane plane = new Plane(Vector3.forward, transform.position);
+				float dist = 0;
+				if (plane.Raycast(ray, out dist))
 				{
-					current = 0;
-					path.Clear();
-					pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
+					Vector3 pos = ray.GetPoint(dist);
+					Room positionRoom = getCoRoom(pos);
 
-					Room characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
-
-					if (!positionRoom.Equals(characterRoom))
+					if (positionRoom != null)
 					{
-						path = pf.CalculateTransforms(positionRoom, characterRoom);
+						current = 0;
+						path.Clear();
+						pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
+
+						Room characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+
+						if (!positionRoom.Equals(characterRoom))
+						{
+							path = pf.CalculateTransforms(positionRoom, characterRoom);
+						}
+						path.Add(pos);
 					}
-					path.Add(pos);
 				}
 			}
 		}
 	}
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		checkDoorClosed(other);
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		checkDoorClosed(other);
+	}
+
 }
