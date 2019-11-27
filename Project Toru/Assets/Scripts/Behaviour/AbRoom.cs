@@ -129,7 +129,7 @@ public abstract class AbRoom : MonoBehaviour, IPointerClickHandler
 
     public bool SelectedPlayerInRoom()
     {
-        if (this.charactersInRoom.Contains(Character.selectedCharacter))
+        if (this.charactersInRoom.Contains(Character.selectedCharacter.gameObject))
         {
             return true;
         }

@@ -160,14 +160,14 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	public bool SelectedPlayerInRoom()
 	{
-		if (this.charactersInRoom.Contains(Character.selectedCharacter))
+		if (Character.selectedCharacter != null)
 		{
-			return true;
+			if (this.charactersInRoom.Contains(Character.selectedCharacter.gameObject))
+			{
+				return true;
+			}
 		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 
 	public bool AnyCharacterInRoom()

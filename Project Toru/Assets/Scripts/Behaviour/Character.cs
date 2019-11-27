@@ -21,11 +21,10 @@ public class Character : MonoBehaviour
 
 
     public GameObject currentRoom;
-    public static GameObject selectedCharacter;
 
     public float MaxWeight;
 
-	private static Character current;
+	public static Character selectedCharacter;
 
 	// Start is called before the first frame update
 	void Start()
@@ -59,7 +58,7 @@ public class Character : MonoBehaviour
 
         if (!isDisabled)
         {
-            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+            //Camera.main.GetComponent<CameraBehaviour>().target = transform;
             change = Vector3.zero;
             change.x = Input.GetAxisRaw("Horizontal");
             change.y = Input.GetAxisRaw("Vertical");
@@ -84,7 +83,7 @@ public class Character : MonoBehaviour
 
 	public Character getCurrentCharacter()
 	{
-		return current;
+		return selectedCharacter;
 	}
 
 	public bool HasKey(CardReader.CardreaderColor color)
@@ -132,7 +131,7 @@ public class Character : MonoBehaviour
         this.GetComponent<Renderer>().enabled = false;
         this.disableMovement();
 
-		//Test for pathfinding
+		//Go to next transform in pathfinding
 		GetComponent<ExecutePathFinding>().current++;
     }
 
@@ -150,16 +149,16 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-			if(current == null)
+			if(selectedCharacter == null)
 			{
-				current = this;
-				current.enableMovement();
+				selectedCharacter = this;
+				selectedCharacter.enableMovement();
 			}
 			else
 			{
-				current.disableMovement();
-				current = this;
-				current.enableMovement();
+				selectedCharacter.disableMovement();
+				selectedCharacter = this;
+				selectedCharacter.enableMovement();
 			}
 			inventory.UpdateUI();
         }

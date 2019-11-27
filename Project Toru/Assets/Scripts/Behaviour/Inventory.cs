@@ -13,6 +13,8 @@ public class Inventory
 
     public float MaxWeight;
 
+	private Character ch;
+
     //Constructor - Creates a Item List
     public Inventory(float MaxWeight)
     {
@@ -49,7 +51,6 @@ public class Inventory
             }
 
             UpdateUI();
-            Character.Destroy(item.gameObject);
         }
     }
 
