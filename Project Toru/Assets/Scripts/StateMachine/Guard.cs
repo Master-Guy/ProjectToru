@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Guard : NPC
 {
-	private bool flee = false;
+    Weapon weapon;
+    GameObject firePoint;
 
     void Start()
     {
-		startingPosition = transform.position;
+        startingPosition = transform.position;
+        weapon = GetComponent<Weapon>();
         stats = GetComponent<CharacterStats>();
 		animator = GetComponent<Animator>();
-		PingPong();
+        firePoint = transform.GetChild(1).gameObject;
+        PingPong();
 	}
 
     void Update()
@@ -19,10 +22,9 @@ public class Guard : NPC
 		this.statemachine.ExecuteStateUpdate();
 		AdjustOrderLayer();
 
-		if(stats.health < 100 && !flee)
+		if(stats.currentHealth < stats.maxHealth)
 		{
-			this.statemachine.ChangeState(new Flee(this.escapePath, this.gameObject, this.animator));
-			flee = true;
+            this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint,this.animator));
 		}
 	}
 

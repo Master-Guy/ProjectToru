@@ -8,23 +8,23 @@ public class Weapon : MonoBehaviour
 	public Transform firePoint;
 	public GameObject bullet;
 
-    // Start is called before the first frame update
-    void Start()
+    public float RateOfFire;
+    private float Timer = 0;
+
+    private void Update()
     {
-		
+        if(Timer > 0)
+        {
+            Timer -= Time.deltaTime;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-		if (Input.GetMouseButtonDown(1))
-		{
-			Shoot();
-		}
-	}
-
-	private void Shoot()
+    public void Shoot()
 	{
-		Instantiate(bullet, firePoint.position, firePoint.rotation);
+        if(Timer <= 0)
+        {
+            Timer = RateOfFire;
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+        }
 	}
 }

@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
 	public float speed = 20;
 	public Rigidbody2D rb;
+    public bulletOwner owner;
 
     void Start()
     {
@@ -15,11 +16,16 @@ public class Bullet : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.CompareTag("NPC"))
+		if (other.CompareTag("NPC") && owner != bulletOwner.NPC)
 		{
-			other.GetComponent<CharacterStats>().TakeDamage(20);
+			other.GetComponent<CharacterStats>().TakeDamage(50);
 			DestroyObject();
 		}
+        if (other.CompareTag("Player") && owner != bulletOwner.Player)
+        {
+            other.GetComponent<CharacterStats>().TakeDamage(10);
+            DestroyObject();
+        }
 		if (other.CompareTag("Walls"))
 		{
 			DestroyObject();
@@ -30,4 +36,10 @@ public class Bullet : MonoBehaviour
 	{
 		Destroy(this.gameObject);
 	}
+}
+
+public enum bulletOwner
+{
+    Player,
+    NPC
 }

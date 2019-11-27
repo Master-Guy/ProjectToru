@@ -28,6 +28,7 @@ public class Character : MonoBehaviour
     public float MaxWeight;
 
 	public GameObject firePoint;
+    public Weapon weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class Character : MonoBehaviour
         inventory.SetMaxWeight(MaxWeight);
 
 		firePoint = transform.GetChild(0).gameObject;
+        weapon = GetComponent<Weapon>();
 
         AdjustOrderLayer();
     }
@@ -88,6 +90,11 @@ public class Character : MonoBehaviour
             UpdateAnimationsAndMove();
 
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            weapon.Shoot();
+        }
     }
 
     public bool HasKey(CardReader.CardreaderColor color)
@@ -129,13 +136,25 @@ public class Character : MonoBehaviour
 		if(change.x > 0)
 		{
 			firePoint.transform.rotation = Quaternion.Euler(0,0,0);
-			firePoint.transform.position = transform.position + new Vector3(1, 0);
-		}
+			firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
 		if(change.x < 0)
 		{
 			firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-			firePoint.transform.position = transform.position + new Vector3(-1, 0);
-		}
+			firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if(change.y > 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+        }
+        if(change.y < 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+        }
 	}
 
 	void MoveCharacter()

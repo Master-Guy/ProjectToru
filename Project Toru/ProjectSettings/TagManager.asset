@@ -70,6 +70,9 @@ TagManager:
   - name: Foreground Items
     uniqueID: 2965519193
     locked: 0
+  - name: Guns
+    uniqueID: 1310341817
+    locked: 0
   - name: UI
     uniqueID: 117293569
     locked: 0
