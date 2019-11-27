@@ -90,7 +90,7 @@ namespace Assets.Scripts.Options
 			EventQueue = EventQueue.OrderBy(o => o.priority).ToList();
 			
 			// slows down time depending on priority in 4 steps from full speed to 20 percent speed
-			Time.timeScale = 0.2f + (float)(0.8f * Math.Floor(4f / Math.Min(EventQueue[0].priority, 4)));
+			Time.timeScale = 0.2f + (float)(0.8f * Math.Floor(Math.Min(EventQueue[0].priority, 4) / 4f));
 
 			TMP.text = EventQueue[0].GetOptionText();
 			TextType = EventTextType.options;

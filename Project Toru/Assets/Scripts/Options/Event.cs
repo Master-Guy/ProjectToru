@@ -27,7 +27,8 @@ namespace Assets.Scripts.Options
 
 		public void AddActor(Character C)
 		{
-			Actors.Add(C);
+			if(!Actors.Contains(C))
+				Actors.Add(C);
 		}
 
 		/// <summary>
