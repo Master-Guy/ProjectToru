@@ -31,8 +31,8 @@ public abstract class NPC : MonoBehaviour
     {
         foreach (GameObject g in bag)
         {
-            Instantiate(g, new Vector3(transform.position.x - 0.5f, transform.position.y - 0.5f, 0), Quaternion.identity);
-        }
+			Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + UnityEngine.Random.Range(0.2f, 1.20f), 0), Quaternion.identity);
+		}
     }
 
     public void Say(string text)
@@ -71,4 +71,24 @@ public abstract class NPC : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
     }
+
+	public Room getRoom()
+	{
+		return currentRoom;
+	}
+
+	public bool HasKey(CardReader.CardreaderColor color)
+	{
+		foreach (GameObject i in bag)
+		{
+			if(i.GetComponent<Key>())
+			{
+				if (i.GetComponent<Key>().color == color)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

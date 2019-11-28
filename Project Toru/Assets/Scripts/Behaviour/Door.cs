@@ -30,7 +30,6 @@ public class Door : MonoBehaviour
 
     public bool Open()
     {
-        Debug.Log("Opening door");
         closed = false;
         GetComponent<Animator>().SetBool("openDoor", true);
 
@@ -59,4 +58,9 @@ public class Door : MonoBehaviour
     {
         return this.GetComponentInParent(typeof(Room)) as Room;
     }
+
+	public int isOpenOrHasTheRightKey(Item i)
+	{
+		return 1;
+	}
 }

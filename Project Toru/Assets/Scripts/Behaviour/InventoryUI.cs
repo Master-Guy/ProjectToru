@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI
 {
     private GameObject inventory;
 
@@ -15,28 +15,23 @@ public class InventoryUI : MonoBehaviour
 
     public InventoryUI()
     {
+		//Get the objects needed to create the UI
+		inventory = GameObject.FindGameObjectWithTag("Inventory");
+		slotHolder = GameObject.FindGameObjectWithTag("InventorySlotHolder");
 
-    }
+		//Collects and create the slots needed
+		allSlots = slotHolder.transform.childCount;
+		slots = new GameObject[allSlots];
 
-    public void Start()
-    {
-        //Get the objects needed to create the UI
-        inventory = GameObject.FindGameObjectWithTag("Inventory");
-        slotHolder = GameObject.FindGameObjectWithTag("InventorySlotHolder");
+		//For loop to set the GameObjects
+		for (int i = 0; i < allSlots; i++)
+		{
+			slots[i] = slotHolder.transform.GetChild(i).gameObject;
+		}
 
-        //Collects and create the slots needed
-        allSlots = slotHolder.transform.childCount;
-        slots = new GameObject[allSlots];
-
-        //For loop to set the GameObjects
-        for (int i = 0; i < allSlots; i++)
-        {
-            slots[i] = slotHolder.transform.GetChild(i).gameObject;
-        }
-
-        //Hides the inventory on Scene load
-        inventory.SetActive(false);
-    }
+		//Hides the inventory on Scene load
+		inventory.SetActive(false);
+	}
 
     public void showInv(HashSet<Item> inv)
     {

@@ -67,7 +67,6 @@ public class Employee : NPC
 
     void startCountDown()
     {
-        Debug.Log("Calling the cops!");
     }
 
 }
