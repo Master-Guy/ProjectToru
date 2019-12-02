@@ -98,7 +98,7 @@ namespace Assets.Scripts.Options
 
 		private void BuildResult()
 		{
-			TMP.text = ResultMessage + Environment.NewLine + "< link > continue </ link >";
+			TMP.text = ResultMessage + Environment.NewLine + "<link> continue </link>";
 		}
 
 		public void OnMouseOver()
@@ -149,7 +149,7 @@ namespace Assets.Scripts.Options
 					goto default;
 
 				default:
-					if (ResultMessage == null)
+					if (ResultMessage != null)
 					{
 						BuildResult();
 						TextType = EventTextType.result;
