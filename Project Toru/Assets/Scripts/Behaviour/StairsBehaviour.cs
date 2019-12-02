@@ -73,7 +73,6 @@ public class StairsBehaviour : MonoBehaviour
 
 		if (target == null)
 		{
-			Debug.LogWarning("Stair Target is not set, illegal direction");
 			return;
 		}
 
@@ -89,7 +88,6 @@ public class StairsBehaviour : MonoBehaviour
 
 		if (character != null)
 		{
-			Debug.Log("Character is using stairs");
 			character.StairsTransistion();
 		}
 	}

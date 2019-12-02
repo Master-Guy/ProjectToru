@@ -16,33 +16,30 @@ public class Character : MonoBehaviour
     public Inventory inventory;
 
     private bool didUseStair = false;
-    private static CharacterManager cm;
     private bool isDisabled;
     private ParticleSystem ps;
 	public List<Skills> skills = new List<Skills>();
 
     private float timer = 0;
     private float stairsDuration = 1;
-    private bool playerOnTheStairs = false;
+    public bool playerOnTheStairs = false;
 
 
     public GameObject currentRoom;
-    public static GameObject selectedCharacter;
 
     public float MaxWeight;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cm = gameObject.AddComponent(typeof(CharacterManager)) as CharacterManager;
+	public static Character selectedCharacter;
 
+	// Start is called before the first frame update
+	void Start()
+    {
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isDisabled = true;
         ps = GetComponent<ParticleSystem>();
 
-        inventory = gameObject.AddComponent(typeof(Inventory)) as Inventory;
-        inventory.SetMaxWeight(MaxWeight);
+		inventory = new Inventory(MaxWeight);
 
         AdjustOrderLayer();
     }
@@ -66,7 +63,7 @@ public class Character : MonoBehaviour
 
         if (!isDisabled)
         {
-            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+            //Camera.main.GetComponent<CameraBehaviour>().target = transform;
             change = Vector3.zero;
             change.x = Input.GetAxisRaw("Horizontal");
             change.y = Input.GetAxisRaw("Vertical");
@@ -86,13 +83,16 @@ public class Character : MonoBehaviour
             }
 
             UpdateAnimationsAndMove();
-
         }
     }
 
-    public bool HasKey(CardReader.CardreaderColor color)
-    {
+	public Character getCurrentCharacter()
+	{
+		return selectedCharacter;
+	}
 
+	public bool HasKey(CardReader.CardreaderColor color)
+    {
         foreach (Item i in inventory.getItemsList())
         {
             if (i is Key && ((Key)i).color == color)
@@ -135,6 +135,9 @@ public class Character : MonoBehaviour
         playerOnTheStairs = true;
         this.GetComponent<Renderer>().enabled = false;
         this.disableMovement();
+
+		//Go to next transform in pathfinding
+		GetComponent<ExecutePathFinding>().current++;
     }
 
     public void enableMovement()
@@ -151,11 +154,18 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            cm.disableCharacterMovement();
-            selectedCharacter = this.gameObject;
-            enableMovement();
-            ps.Play();
-            inventory.UpdateUI();
+			if(selectedCharacter == null)
+			{
+				selectedCharacter = this;
+				selectedCharacter.enableMovement();
+			}
+			else
+			{
+				selectedCharacter.disableMovement();
+				selectedCharacter = this;
+				selectedCharacter.enableMovement();
+			}
+			inventory.UpdateUI();
         }
     }
 
