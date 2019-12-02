@@ -4,33 +4,20 @@ using UnityEngine;
 
 public class CharacterUI : MonoBehaviour
 {
-    List<GameObject> players;
+    public GameObject prefab;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(transform.GetChild(0).name);
         int loop = 0;
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
         {
+            GameObject spawn = Instantiate(prefab);
+            spawn.transform.SetParent(transform.GetChild(0));
+           
             Sprite s = obj.GetComponent<SpriteRenderer>().sprite;
             transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().AddCharacter(obj.GetComponent<Character>());
             transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().setSprite(s);
-            transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().SelectCharacter();
             loop++;
         }
-
-        UpdateUI();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void UpdateUI()
-    {
-        
     }
 }

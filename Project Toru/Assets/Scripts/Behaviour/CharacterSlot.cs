@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CharacterSlot : MonoBehaviour
 {
     public Sprite icon;
-    Character character;
+    public Character character;
 
     public void AddCharacter(Character newCharacter)
     {
@@ -23,9 +23,12 @@ public class CharacterSlot : MonoBehaviour
     }
 
     public void SelectCharacter()
-    { 
-        Character.selectedCharacter = character.gameObject;
-        Debug.Log("Character Selected!" + Character.selectedCharacter);
+    {
+        if (Character.selectedCharacter != null)
+        {
+            Character.selectedCharacter.disableMovement();
+        }
+        Character.selectedCharacter = character;
+        character.enableMovement();
     }
-
 }
