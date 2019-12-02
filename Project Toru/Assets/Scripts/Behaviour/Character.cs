@@ -81,11 +81,6 @@ public class Character : MonoBehaviour
         }
     }
 
-	public Character getCurrentCharacter()
-	{
-		return selectedCharacter;
-	}
-
 	public bool HasKey(CardReader.CardreaderColor color)
     {
         foreach (Item i in inventory.getItemsList())
