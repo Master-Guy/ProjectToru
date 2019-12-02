@@ -42,6 +42,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(selectedCharacter == this)
+        {
+            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+        }
 
         if (playerOnTheStairs)
         {
@@ -149,18 +153,13 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-			if(selectedCharacter == null)
-			{
-				selectedCharacter = this;
-				selectedCharacter.enableMovement();
-			}
-			else
-			{
-				selectedCharacter.disableMovement();
-				selectedCharacter = this;
-				selectedCharacter.enableMovement();
-			}
-			inventory.UpdateUI();
+            if (selectedCharacter != null)
+            {
+                selectedCharacter.disableMovement();
+            }
+            selectedCharacter = this;
+            this.enableMovement();
+            inventory.UpdateUI();
         }
     }
 
