@@ -1,7 +1,11 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Options;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum Skills
+{
+	hacker
+}
 public class Character : MonoBehaviour
 {
     public float speed;
@@ -14,6 +18,7 @@ public class Character : MonoBehaviour
     private bool didUseStair = false;
     private bool isDisabled;
     private ParticleSystem ps;
+	public List<Skills> skills = new List<Skills>();
 
     private float timer = 0;
     private float stairsDuration = 1;
@@ -174,5 +179,12 @@ public class Character : MonoBehaviour
         {
             currentRoom = other.gameObject;
         }
-    }
+
+		var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+		if(e != null)
+		{
+			e.AddActor(this);
+			CurrentEventWindow.Current.AddEvent(e);
+		}
+	}
 }
