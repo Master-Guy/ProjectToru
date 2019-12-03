@@ -35,7 +35,7 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 						{
 							characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
 						}
-						catch (UnassignedReferenceException e)
+						catch (UnassignedReferenceException)
 						{
 							characterRoom = GetEntranceRoom();
 
