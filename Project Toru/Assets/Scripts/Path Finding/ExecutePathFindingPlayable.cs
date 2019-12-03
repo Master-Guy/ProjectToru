@@ -18,15 +18,17 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				Plane plane = new Plane(Vector3.forward, transform.position);
 				float dist = 0;
+
 				if (plane.Raycast(ray, out dist))
 				{
 					Vector3 pos = ray.GetPoint(dist);
 					Room positionRoom = getCoRoom(pos);
 
+					current = 0;
+					path.Clear();
+
 					if (positionRoom != null)
 					{
-						current = 0;
-						path.Clear();
 						pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
 
 						Room characterRoom;
@@ -48,9 +50,40 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 						}
 						path.Add(pos);
 					}
+					else
+					{
+						Debug.Log("Outside");
+						//Code for inside to outside
+						try
+						{
+							Debug.Log("Outside to inside");
+							path = pf.CalculateTransforms(GetEntranceRoomToOutside(pos), GetComponent<Character>().currentRoom.GetComponent<Room>());
+						} catch(UnassignedReferenceException)
+						{
+
+						}
+
+						//Code for outside pathfinding;
+						path.Add(pos);
+					}
 				}
 			}
 		}
+	}
+
+	private Room GetEntranceRoomToOutside(Vector2 pos)
+	{
+		foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			Room r = room.GetComponent<Room>();
+
+			if (r.name.StartsWith("Entrance"))
+			{
+				Debug.Log("Entrance Found!");
+				return r;
+			}
+		}
+		return null;
 	}
 
 	private Room GetEntranceRoom()
