@@ -52,17 +52,12 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 					}
 					else
 					{
-						Debug.Log("Outside");
 						//Code for inside to outside
 						try
 						{
-							Debug.Log("Outside to inside");
 							path = pf.CalculateTransforms(GetEntranceRoomToOutside(pos), GetComponent<Character>().currentRoom.GetComponent<Room>());
-						} catch(UnassignedReferenceException)
-						{
-
 						}
-
+						catch (UnassignedReferenceException) {}
 						//Code for outside pathfinding;
 						path.Add(pos);
 					}
@@ -79,7 +74,6 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 
 			if (r.name.StartsWith("Entrance"))
 			{
-				Debug.Log("Entrance Found!");
 				return r;
 			}
 		}
