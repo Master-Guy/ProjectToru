@@ -60,22 +60,8 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		{
 			r = v.GetComponent<Room>();
 
-/*			Debug.Log(r.name);
-			Debug.Log(loc.x + " - " + loc.y);
-			Debug.Log("loc x: " + loc.x + " > " + r.transform.position.x);
-			Debug.Log("loc y: " + loc.y + " > " + r.transform.position.y);
-			Debug.Log("loc x: " + loc.x + " < " + (Math.Round(r.transform.position.x) + (int)r.GetSize().x));
-			Debug.Log("loc y: " + loc.y + " < " + (Math.Round(r.transform.position.y) + (int)r.GetSize().y));
-			Debug.Log("-----------------------");
-
 			if (loc.x >= r.transform.position.x && loc.x <= (Math.Round(r.transform.position.x) + (int)r.GetSize().x) && loc.y >= r.transform.position.y && loc.y <= (Math.Round(r.transform.position.y) + (int)r.GetSize().y))
 			{
-				return r;
-			}*/
-
-			if (loc.x > r.transform.position.x && loc.x < (r.transform.position.x + r.GetPosition().x) && Math.Round(loc.y) > (int)(r.GetPosition().y) && Math.Round(loc.y) < (Math.Round(r.transform.position.y) + (int)r.GetSize().y))
-			{
-				//Debug.Log("Return: " + r.name);
 				return r;
 			}
 		}

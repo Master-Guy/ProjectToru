@@ -29,7 +29,18 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 						path.Clear();
 						pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
 
-						Room characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+						Room characterRoom;
+
+						try
+						{
+							characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+						}
+						catch (UnassignedReferenceException e)
+						{
+							characterRoom = GetEntranceRoom();
+
+							path.Add(new Vector2(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1));
+						}
 
 						if (!positionRoom.Equals(characterRoom))
 						{
@@ -41,6 +52,21 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 			}
 		}
 	}
+
+	private Room GetEntranceRoom()
+	{
+		foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			Room r = room.GetComponent<Room>();
+
+			if(r.name.StartsWith("Entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
+			{
+				return r;
+			}
+		}
+		return null;
+	}
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		checkDoorClosed(other);
@@ -50,5 +76,4 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 	{
 		checkDoorClosed(other);
 	}
-
 }
