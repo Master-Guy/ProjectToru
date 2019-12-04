@@ -892,7 +892,7 @@ PrefabInstance:
         type: 3}
       propertyPath: RightRoom
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1191215262}
     - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}
       propertyPath: size.x
