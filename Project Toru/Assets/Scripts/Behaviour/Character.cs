@@ -42,7 +42,6 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (playerOnTheStairs)
         {
             timer += Time.deltaTime;
@@ -56,7 +55,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        if (!isDisabled)
+        if (!isDisabled && this.Equals(selectedCharacter))
         {
             //Camera.main.GetComponent<CameraBehaviour>().target = transform;
             change = Vector3.zero;
