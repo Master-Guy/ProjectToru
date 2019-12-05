@@ -52,16 +52,22 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 					}
 					else
 					{
+						Room entranceRoom = GetEntranceRoomToOutside(pos);
+
 						//Code for inside to outside
 						try
 						{
-							if (GetEntranceRoomToOutside(pos) != null)
+							if (entranceRoom != null)
 							{
-								path = pf.CalculateTransforms(GetEntranceRoomToOutside(pos), GetComponent<Character>().currentRoom.GetComponent<Room>());
-								path.Add(pos);
+								path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
+								path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
 							}
 						}
-						catch (UnassignedReferenceException) { path.Add(pos); }
+						catch (UnassignedReferenceException)
+						{
+							//Outside to outside code
+							path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
+						}
 					}
 				}
 			}
