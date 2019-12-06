@@ -1,7 +1,11 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Options;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum Skills
+{
+	hacker
+}
 public class Character : MonoBehaviour
 {
     public float speed;
@@ -14,6 +18,7 @@ public class Character : MonoBehaviour
     private bool didUseStair = false;
     private bool isDisabled;
     private ParticleSystem ps;
+	public List<Skills> skills = new List<Skills>();
 
     private float timer = 0;
     private float stairsDuration = 1;
@@ -42,6 +47,11 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(selectedCharacter == this)
+        {
+            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+        }
+
         if (playerOnTheStairs)
         {
             timer += Time.deltaTime;
@@ -55,7 +65,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        if (!isDisabled && this.Equals(selectedCharacter))
+        if (!isDisabled)
         {
             //Camera.main.GetComponent<CameraBehaviour>().target = transform;
             change = Vector3.zero;
@@ -79,6 +89,11 @@ public class Character : MonoBehaviour
             UpdateAnimationsAndMove();
         }
     }
+
+	public Character getCurrentCharacter()
+	{
+		return selectedCharacter;
+	}
 
 	public bool HasKey(CardReader.CardreaderColor color)
     {
@@ -143,18 +158,13 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-			if(selectedCharacter == null)
-			{
-				selectedCharacter = this;
-				selectedCharacter.enableMovement();
-			}
-			else
-			{
-				selectedCharacter.disableMovement();
-				selectedCharacter = this;
-				selectedCharacter.enableMovement();
-			}
-			inventory.UpdateUI();
+            if (selectedCharacter != null)
+            {
+                selectedCharacter.disableMovement();
+            }
+            selectedCharacter = this;
+            this.enableMovement();
+            inventory.UpdateUI();
         }
     }
 
@@ -169,5 +179,12 @@ public class Character : MonoBehaviour
         {
             currentRoom = other.gameObject;
         }
-    }
+
+		var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+		if(e != null)
+		{
+			e.AddActor(this);
+			CurrentEventWindow.Current.AddEvent(e);
+		}
+	}
 }
