@@ -145,9 +145,6 @@ public class Character : MonoBehaviour
 
         //Go to next transform in pathfinding
         GetComponent<ExecutePathFinding>().current++;
-
-        // GameAnalytics Test
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level01", "player01", "stairs", 0);
     }
 
     public void enableMovement()
