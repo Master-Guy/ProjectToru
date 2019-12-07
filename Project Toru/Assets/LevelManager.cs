@@ -40,6 +40,10 @@ public class LevelManager : MonoBehaviour
                     Debug.Log("Toggling FPS Monitor");
                     FPSMonitor.SetActive(!FPSMonitor.activeSelf);
                 }
+                else
+                {
+                    Debug.LogWarning("No FPS Monitor connected to level");
+                }
             }
         }
     }
