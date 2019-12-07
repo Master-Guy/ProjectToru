@@ -16,11 +16,32 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     int levelIndex = 0;
 
+    [SerializeField]
+    bool enableFPSMonitor = true;
+
+    [SerializeField]
+    GameObject FPSMonitor = null;
+
     // Start is called before the first frame update
     void Start()
     {
         scene = SceneManager.GetActiveScene();
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + levelIndex.ToString(), this.GetLevelName());
+    }
+
+    void Update()
+    {
+        if (enableFPSMonitor == true)
+        {
+            if (Input.GetKeyDown("tab"))
+            {
+                if (FPSMonitor != null)
+                {
+                    Debug.Log("Toggling FPS Monitor");
+                    FPSMonitor.SetActive(!FPSMonitor.activeSelf);
+                }
+            }
+        }
     }
 
     void OnDestroy()
