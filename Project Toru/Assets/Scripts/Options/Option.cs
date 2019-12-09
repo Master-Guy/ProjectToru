@@ -7,23 +7,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.Options
 {
-	public abstract class Option : MonoBehaviour
-	{
-		[SerializeField]
-		private string Description;
-		public Skills? Prerequisite = null;
+    public abstract class Option : MonoBehaviour
+    {
+        [SerializeField]
+        private string Description = null;
 
+        public Skills? Prerequisite = null;
 
-		public virtual string getInfo()
-		{
-			return Description;
-		}
+        public virtual string getInfo()
+        {
+            return Description;
+        }
 
-		/// <summary>
-		/// activates this action
-		/// </summary>
-		/// <param name="c"></param>
-		/// <returns>should return a result message if neccesary</returns>
-		public abstract string Activate(Character c);
-	}
+        /// <summary>
+        /// activates this action
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns>should return a result message if neccesary</returns>
+        public abstract string Activate(Character c);
+    }
 }
