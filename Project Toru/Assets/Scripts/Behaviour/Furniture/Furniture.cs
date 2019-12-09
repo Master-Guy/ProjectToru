@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Options;
+using Assets.Scripts.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
