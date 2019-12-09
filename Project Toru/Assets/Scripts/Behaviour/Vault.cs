@@ -24,7 +24,6 @@ public class Vault : MonoBehaviour
 
     public bool Open()
     {
-        Debug.Log("You open the vault and take the gold.");
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);
 
