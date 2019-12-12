@@ -66,7 +66,7 @@ public class InventoryUI
 
 	public void UpdateMoneyUI()
 	{
-		GameObject.FindGameObjectWithTag("InventoryMoney").transform.GetChild(0).GetComponent<TextMesh>().text = "Money: " + GetTotalMoney();
+		GameObject.FindGameObjectWithTag("InventoryMoney").GetComponent<TMPro.TextMeshProUGUI>().text = "$" + GetTotalMoney();
 	}
 
 	public float GetTotalMoney()
