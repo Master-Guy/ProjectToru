@@ -26724,22 +26724,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: vault
       objectReference: {fileID: 0}
-    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
-        type: 3}
-      propertyPath: collider
-      value: 
-      objectReference: {fileID: 2137362821}
-    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
-        type: 3}
-      propertyPath: door
-      value: 
-      objectReference: {fileID: 1891424338}
-    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
-        type: 3}
-      propertyPath: money
-      value: 
-      objectReference: {fileID: 6706966753871349064, guid: 6a1473e49c90bb141998184284a57518,
-        type: 3}
     - target: {fileID: 3593294848373374205, guid: 5cffe221997a6423caf15ebd21d5453a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26795,5 +26779,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
+        type: 3}
+      propertyPath: collider
+      value: 
+      objectReference: {fileID: 2137362821}
+    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1891424338}
+    - target: {fileID: -509118977466015214, guid: 5cffe221997a6423caf15ebd21d5453a,
+        type: 3}
+      propertyPath: money
+      value: 
+      objectReference: {fileID: 6706966753871349064, guid: 6a1473e49c90bb141998184284a57518,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cffe221997a6423caf15ebd21d5453a, type: 3}

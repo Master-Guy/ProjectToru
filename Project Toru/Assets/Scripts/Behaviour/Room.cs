@@ -40,16 +40,30 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	private bool roomHasCamera = false;
 	CameraRoom cameraRoom;
 
-	public Room()
+    FogOfWar fogOfWar;
+
+    [SerializeField]
+    bool discovered = false;
+
+    public Room()
 	{
 		charactersInRoom = new HashSet<GameObject>();
 		npcsInRoom = new HashSet<GameObject>();
 	}
 
 	void Start()
-	{
-		// Check if roomsize is set
-		if (!name.StartsWith("Entrance"))
+    {
+        // Initializing the fogOfWar. Doing this in Room() causes a crash.
+        fogOfWar = this.gameObject.GetComponentInChildren<FogOfWar>();
+
+        // Hide this room behind a fog of war.
+        if (fogOfWar)
+        {
+            ShowFogOfWar();
+        }
+
+        // Check if roomsize is set
+        if (!name.StartsWith("Entrance"))
 		{
 			if (size.x == 0 || size.y == 0)
 			{
@@ -138,7 +152,10 @@ public class Room : MonoBehaviour, IPointerClickHandler
 			if (other.CompareTag("Player"))
 			{
 				charactersInRoom.Add(other.gameObject);
-				if (roomHasCamera)
+
+                HideFogOfWar();
+
+                if (roomHasCamera)
 				{
 					cameraRoom.AlertGuard();
 				}
@@ -228,4 +245,18 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	{
 		return !gameObject.GetComponent<StairsBehaviour>();
 	}
+    
+    private void ShowFogOfWar()
+    {
+        if (!discovered)
+        {
+            fogOfWar.GetComponent<Renderer>().enabled = true;
+        }
+    }
+
+    private void HideFogOfWar()
+    {
+        fogOfWar.GetComponent<Renderer>().enabled = false;
+        discovered = true;
+    }
 }
