@@ -20,7 +20,6 @@ public class Door : MonoBehaviour
 
     public bool Close()
     {
-        Debug.Log("Closing door");
         closed = true;
         GetComponent<Animator>().SetBool("openDoor", false);
         doorCollider.enabled = true;
