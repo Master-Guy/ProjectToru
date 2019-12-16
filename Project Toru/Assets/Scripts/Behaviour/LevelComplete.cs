@@ -24,6 +24,8 @@ public class LevelComplete : MonoBehaviour
             condition.name = "CharacterMustEnterVan";
             condition.required = true;
 
+
+
             LevelDirector.Instance().AddCondition(condition);
         }
 
@@ -88,7 +90,7 @@ public class LevelComplete : MonoBehaviour
                 //Invoke("sceneSwitherWin", 3);
             }
 
-            LevelDirector.Instance().FinalizeLevel();
+            LevelDirector.Instance().FinishLevel();
         }
     }
 
