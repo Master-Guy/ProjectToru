@@ -26,7 +26,7 @@ public class LevelCondition
         {
             if (_name != "")
             {
-                Debug.LogWarning("LevelCondition name cannot be changed, define a new one.");
+                Debug.LogWarning("LevelCondition name cannot be changed, define a new one. -> '" + value + "'");
                 return;
             }
 
@@ -36,9 +36,9 @@ public class LevelCondition
                 return;
             }
 
-            if (LevelDirector.Instance().Condition(value) != null)
+            if (LevelDirector.Condition(value) != null)
             {
-                Debug.LogWarning("LevelCondition name already used.");
+                Debug.LogWarning("LevelCondition name already used. -> '" + value + "'");
                 return;
             }
 
@@ -89,12 +89,12 @@ public class LevelCondition
 
     public void Commit()
     {
-        LevelDirector.Instance().AddCondition(this);
+        LevelDirector.AddCondition(this);
     }
 
 
     public void Revoke()
     {
-        LevelDirector.Instance().RemoveCondition(this.name);
+        LevelDirector.RemoveCondition(this.name);
     }
 }

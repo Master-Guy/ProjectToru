@@ -6,24 +6,24 @@ using GameAnalyticsSDK;
 
 public delegate void ConditionHandlerDelegate(LevelCondition condition);
 
-public class LevelDirector
+public class LevelDirector : MonoBehaviour
 {
 
-    // SINGLETON
-    // Making LevelDirector unable to instanciate
-    private LevelDirector()
-    {
+    //// SINGLETON
+    //// Making LevelDirector unable to instanciate
+    //private LevelDirector()
+    //{
 
-    }
+    //}
 
-    // Static LevelDirector instance
-    private static LevelDirector instance = new LevelDirector();
+    //// Static LevelDirector instance
+    //private static LevelDirector instance = new LevelDirector();
 
-    // Function to get instance
-    public static LevelDirector Instance()
-    {
-        return instance;
-    }
+    //// Function to get instance
+    //public static LevelDirector Instance()
+    //{
+    //    return instance;
+    //}
 
 
     //public void Reset()
@@ -33,10 +33,9 @@ public class LevelDirector
     //}
 
 
-    Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
+    static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
 
-
-    public void AddCondition(LevelCondition condition)
+    public static void AddCondition(LevelCondition condition)
     {
 
         if (condition.name == "")
@@ -45,7 +44,7 @@ public class LevelDirector
             return;
         }
 
-        if (this.Condition(condition.name) == null)
+        if (Condition(condition.name) == null)
         {
             Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
@@ -57,7 +56,7 @@ public class LevelDirector
 
     }
 
-    public void RemoveCondition(string conditionName)
+    public static void RemoveCondition(string conditionName)
     {
 
         if (conditionName == "")
@@ -66,7 +65,7 @@ public class LevelDirector
             return;
         }
 
-        if (this.Condition(conditionName) == null)
+        if (Condition(conditionName) == null)
         {
             Debug.LogWarning("Condition '" + conditionName + "' that must be removed already does not exists");
             return;
@@ -77,7 +76,7 @@ public class LevelDirector
 
     }
 
-    public LevelCondition Condition(string name)
+    public static LevelCondition Condition(string name)
     {
         if (conditions.ContainsKey(name))
         {
@@ -87,7 +86,7 @@ public class LevelDirector
         return null;
     }
 
-    public void FinishLevel()
+    public static void FinishLevel()
     {
 
     }

@@ -14,7 +14,6 @@ public class Van : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         LevelCondition condition = new LevelCondition();
         condition.name = "AllCharactersMustBeInVan";
         condition.fullfillHandler = (LevelCondition c) =>
@@ -28,7 +27,7 @@ public class Van : MonoBehaviour
             // Move Van
             GetComponent<Van>().drive = true;
 
-            LevelDirector.Instance().FinishLevel();
+            LevelDirector.FinishLevel();
             Invoke("sceneSwitherWin", 3);
         };
 
@@ -53,7 +52,7 @@ public class Van : MonoBehaviour
 
         if (1 == characters.Count)
         {
-            LevelDirector.Instance().Condition("AllCharactersMustBeInVan").Fullfill();
+            LevelDirector.Condition("AllCharactersMustBeInVan").Fullfill();
         }
     }
 
