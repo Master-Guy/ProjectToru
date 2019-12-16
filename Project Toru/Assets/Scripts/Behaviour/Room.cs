@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
+using Assets.Scripts.Behaviour;
+using System;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
-	[SerializeField]
-	Tilemap walls = null;
+	//[SerializeField]
+	//Tilemap walls = null;
 
-	[SerializeField]
-	Tilemap background = null;
+	//[SerializeField]
+	//Tilemap background = null;
 
-	[SerializeField]
-	bool lightsOn = true;
+	//[SerializeField]
+	//bool lightsOn = true;
 
 	[SerializeField]
 	WallController wallController = null;
@@ -47,9 +49,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	void Start()
 	{
 		// Check if roomsize is set
-		if (size.x == 0 || size.y == 0)
+		if (!name.StartsWith("Entrance"))
 		{
-			Debug.LogError("A room size must be set manualy");
+			if (size.x == 0 || size.y == 0)
+			{
+				Debug.LogError("A room size must be set manualy");
+			}
 		}
 
 		// Enable Collider for leftwall
@@ -159,14 +164,14 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	public bool SelectedPlayerInRoom()
 	{
-		if (this.charactersInRoom.Contains(Character.selectedCharacter))
+		if (Character.selectedCharacter != null)
 		{
-			return true;
+			if (this.charactersInRoom.Contains(Character.selectedCharacter.gameObject))
+			{
+				return true;
+			}
 		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 
 	public bool AnyCharacterInRoom()
@@ -202,5 +207,25 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	public Vector2Int GetSize()
 	{
 		return size;
+	}
+
+	public CardReader GetCardReaderLeft()
+	{
+		return this.cardReaderLeft;
+	}
+
+	public CardReader GetCardReaderRight()
+	{
+		return this.cardReaderRight;
+	}
+
+	public StairsBehaviour getStairScript()
+	{
+		return gameObject.GetComponent<StairsBehaviour>();
+	}
+
+	public bool isRoom()
+	{
+		return !gameObject.GetComponent<StairsBehaviour>();
 	}
 }

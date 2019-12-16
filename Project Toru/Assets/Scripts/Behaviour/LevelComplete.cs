@@ -6,64 +6,78 @@ using UnityEngine.SceneManagement;
 public class LevelComplete : MonoBehaviour
 {
 
-	public GameObject copsSpawnPoint;
-	public GameObject copsPrefab;
+    public GameObject copsSpawnPoint = null;
+    public GameObject copsPrefab = null;
 
-	private List<GameObject> copsList = new List<GameObject>();
+    public Collider2D rigidbodyCollider = null;
 
-	bool won = false;
-	bool lose = false;
-	bool BlockFan = false;
+    private List<GameObject> copsList = new List<GameObject>();
 
-	private void Update()
-	{
-		if (won || BlockFan)
-		{
-			GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + -0.1f, transform.position.y));
-		}
+    bool won = false;
+    bool lose = false;
+    bool BlockFan = false;
 
-		if (lose)
-		{
-			GameObject obj = Instantiate(copsPrefab, new Vector3(copsSpawnPoint.transform.position.x - 0.5f, copsSpawnPoint.transform.position.y - 0.5f, 0), Quaternion.identity);
-			copsList.Add(obj);
-			lose = false;
-			Invoke("sceneSwitcherLose", 5);
-			BlockFan = true;
-		}
 
-		foreach (GameObject move in copsList)
-		{
-			move.GetComponent<Rigidbody2D>().MovePosition(new Vector2(move.transform.position.x + 0.1f, move.transform.position.y));
-		}
-	}
+    private void Update()
+    {
+        if (won || BlockFan)
+        {
 
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		Character ch = collision.GetComponent<Character>();
+            // Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
+            rigidbodyCollider.enabled = false;
 
-		if (collision.isTrigger && ch != null)
-		{
-			if (ch.inventory.getMoney() > 0)
-			{
-				collision.gameObject.SetActive(false);
-				won = true;
-				Invoke("sceneSwitherWin", 3);
-			}
-		}
-	}
+            // RigidBody is static by default, to prevent Van from moving by character
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-	void sceneSwitherWin()
-	{
-		SceneManager.LoadScene("Complete");
-	}
+            // Move Van
+            GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + -0.1f, transform.position.y));
+            GetComponent<LevelManager>().LevelEndSuccess();
+        }
 
-	void sceneSwitcherLose()
-	{
-		SceneManager.LoadScene("Fail");
-	}
+        if (lose)
+        {
+            GameObject obj = Instantiate(copsPrefab, new Vector3(copsSpawnPoint.transform.position.x - 0.5f, copsSpawnPoint.transform.position.y - 0.5f, 0), Quaternion.identity);
+            copsList.Add(obj);
+            lose = false;
+            Invoke("sceneSwitcherLose", 5);
+            BlockFan = true;
 
-	public void EnableLose()
-	{
-		lose = true;
-	}
+            GetComponent<LevelManager>().LevelEndFail();
+        }
+
+        foreach (GameObject move in copsList)
+        {
+            move.GetComponent<Rigidbody2D>().MovePosition(new Vector2(move.transform.position.x + 0.1f, move.transform.position.y));
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Character ch = collision.GetComponent<Character>();
+
+        if (collision.isTrigger && ch != null)
+        {
+            if (ch.inventory.getMoney() > 0)
+            {
+                collision.gameObject.SetActive(false);
+                won = true;
+                Invoke("sceneSwitherWin", 3);
+            }
+        }
+    }
+
+    void sceneSwitherWin()
+    {
+        SceneManager.LoadScene("Complete");
+    }
+
+    void sceneSwitcherLose()
+    {
+        SceneManager.LoadScene("Fail");
+    }
+
+    public void EnableLose()
+    {
+        lose = true;
+    }
 }

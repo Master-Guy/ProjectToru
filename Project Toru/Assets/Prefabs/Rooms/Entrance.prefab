@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 953247212168581849}
   - component: {fileID: 3766027214064442151}
   m_Layer: 0
-  m_Name: keycard_reader_0
+  m_Name: Keycard Reader Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,9 +1034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b381df4fef305f0428f7e02df3556755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walls: {fileID: 0}
-  background: {fileID: 0}
-  lightsOn: 0
   wallController: {fileID: 2376349019585700647}
   cardReaderLeft: {fileID: 0}
   cardReaderRight: {fileID: 2008879952413551165}
@@ -1051,6 +1048,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9035884668655751477}
     m_Modifications:
+    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
+        type: 3}
+      propertyPath: m_Name
+      value: Keycard Reader
+      objectReference: {fileID: 0}
     - target: {fileID: 1141346909789194614, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1105,11 +1107,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279177651976490480, guid: 06f5823b051a543e48768d169abc141c,
-        type: 3}
-      propertyPath: m_Name
-      value: Keycard Reader
       objectReference: {fileID: 0}
     - target: {fileID: 6677825790325537141, guid: 06f5823b051a543e48768d169abc141c,
         type: 3}
@@ -1218,11 +1215,6 @@ PrefabInstance:
       propertyPath: collider
       value: 
       objectReference: {fileID: 5775528775708929379}
-    - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655983, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -1232,6 +1224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58961c0690de64e5cb99ecac92510057, type: 3}
