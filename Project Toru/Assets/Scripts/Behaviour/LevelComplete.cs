@@ -60,7 +60,7 @@ public class LevelComplete : MonoBehaviour
             Invoke("sceneSwitcherLose", 5);
             BlockFan = true;
 
-            GetComponent<LevelManager>().LevelEndFail();
+            //GetComponent<LevelManager>().LevelEndFail();
         }
 
         foreach (GameObject move in copsList)

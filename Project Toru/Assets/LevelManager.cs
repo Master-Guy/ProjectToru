@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     GameObject FPSMonitor = null;
 
+    static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
+
     void Start()
     {
         //LevelDirector.Instance().Reset();
@@ -55,7 +57,16 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
+    static LevelManager _instance;
+
+    public static LevelManager Instance()
+    {
+        if (_instance == null)
+        {
+            _instance = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        }
+        return _instance;
+    }
 
     public static void AddCondition(LevelCondition condition)
     {
@@ -118,29 +129,19 @@ public class LevelManager : MonoBehaviour
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Undefined, "level" + levelIndex.ToString(), this.GetLevelName());
     }
 
-    public void LevelEndSuccess()
-    {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + levelIndex.ToString(), this.GetLevelName());
-    }
+    //public void LevelEndSuccess()
+    //{
+    //    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + levelIndex.ToString(), this.GetLevelName());
+    //}
 
-    public void LevelEndFail()
-    {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + levelIndex.ToString(), this.GetLevelName());
-    }
+    //public void LevelEndFail()
+    //{
+    //    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + levelIndex.ToString(), this.GetLevelName());
+    //}
 
     public string GetLevelName()
     {
         return (levelNameOverride != "") ? levelNameOverride : scene.name;
-    }
-
-    public NPC[] GetNPCS()
-    {
-        return GetComponents<NPC>();
-    }
-
-    public Character[] GetCharacters()
-    {
-        return GetComponents<Character>();
     }
 
     public BuildingBehaviour GetBuilding()
