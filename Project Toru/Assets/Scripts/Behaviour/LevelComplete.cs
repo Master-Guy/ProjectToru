@@ -23,21 +23,21 @@ public class LevelComplete : MonoBehaviour
             LevelCondition condition = new LevelCondition();
             condition.name = "CharacterMustEnterVan";
             condition.required = true;
-            condition.fullfillHandler = (LevelCondition c) =>
-            {
+            //condition.fullfillHandler = (LevelCondition c) =>
+            //{
 
-                //// Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
-                //rigidbodyCollider.enabled = false;
+            //    //// Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
+            //    //rigidbodyCollider.enabled = false;
 
-                //// RigidBody is static by default, to prevent Van from moving by character
-                //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            //    //// RigidBody is static by default, to prevent Van from moving by character
+            //    //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-                //// Move Van
-                //GetComponent<Van>().drive = true;
+            //    //// Move Van
+            //    //GetComponent<Van>().drive = true;
 
-                //LevelDirector.Instance().FinishLevel();
-                //Invoke("sceneSwitherWin", 3);
-            };
+            //    //LevelDirector.Instance().FinishLevel();
+            //    //Invoke("sceneSwitherWin", 3);
+            //};
 
             condition.Commit(); // Or: 
                                 // LevelDirector.Instance().AddCondition(condition);
@@ -76,7 +76,7 @@ public class LevelComplete : MonoBehaviour
 
         if (collision.isTrigger && ch != null)
         {
-            LevelDirector.Instance().Condition("CharacterMustEnterVan").Fullfill();
+            LevelManager.Condition("CharacterMustEnterVan").Fullfill();
             GetComponent<Van>().EnterCharacter(ch);
 
             //if (ch.inventory.getMoney() > 0)
