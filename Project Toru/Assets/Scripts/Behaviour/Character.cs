@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Options;
+using Assets.Scripts.Options;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -183,6 +183,7 @@ public class Character : MonoBehaviour
             currentRoom = other.gameObject;
         }
 
+<<<<<<< HEAD
         var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
         if (e != null)
         {
@@ -191,3 +192,13 @@ public class Character : MonoBehaviour
         }
     }
 }
+=======
+		var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+		if(e != null)
+		{
+			e.AddActor(this);
+			CurrentEventWindow.Current.AddEvent(e);
+		}
+	}
+}
+>>>>>>> develop
