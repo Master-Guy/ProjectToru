@@ -30,7 +30,7 @@ MonoBehaviour:
   secretKey:
   - 558d2d123a67a222fd477f2c01144b220aa4451e
   Build:
-  - 1
+  - 2
   SelectedPlatformStudio:
   - 
   SelectedPlatformGame:
@@ -62,7 +62,7 @@ MonoBehaviour:
   - Items
   - Empty
   LastCreatedGamePlatform: -1
-  Platforms: 01000000
+  Platforms: 11000000
   CurrentInspectorState: 1
   ClosedHints: 
   DisplayHints: 0
