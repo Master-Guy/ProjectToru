@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
         inventory.SetMaxWeight(MaxWeight);
 
 		firePoint = transform.GetChild(0).gameObject;
-        weapon = GetComponent<Weapon>();
+        weapon = firePoint.GetComponent<Weapon>();
 
         AdjustOrderLayer();
     }

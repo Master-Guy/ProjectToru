@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public float damage;
     public float maxHealth;
     [NonSerialized]
     public float currentHealth;

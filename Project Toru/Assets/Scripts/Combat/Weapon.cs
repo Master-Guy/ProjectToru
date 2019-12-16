@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-	public Transform firePoint;
 	public GameObject bullet;
 
-    public float RateOfFire;
+    public float damage = 10;
+    public float RoundsPerMinute = 300;
     private float Timer = 0;
+
+    private void Start()
+    {
+        bullet.GetComponent<Bullet>().weapon = this;
+    }
 
     private void Update()
     {
@@ -23,8 +28,8 @@ public class Weapon : MonoBehaviour
 	{
         if(Timer <= 0)
         {
-            Timer = RateOfFire;
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            Timer = 60 / RoundsPerMinute;
+            Instantiate(bullet, transform.position, transform.rotation);
         }
 	}
 }
