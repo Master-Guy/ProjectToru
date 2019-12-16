@@ -49,9 +49,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	void Start()
 	{
 		// Check if roomsize is set
-		if (size.x == 0 || size.y == 0)
+		if (!name.StartsWith("Entrance"))
 		{
-			Debug.LogError("A room size must be set manualy");
+			if (size.x == 0 || size.y == 0)
+			{
+				Debug.LogError("A room size must be set manualy");
+			}
 		}
 
 		// Enable Collider for leftwall

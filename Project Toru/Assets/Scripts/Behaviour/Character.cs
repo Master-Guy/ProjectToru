@@ -1,10 +1,13 @@
-﻿using Assets.Scripts.Options;
+using Assets.Scripts.Options;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using GameAnalyticsSDK;
+
 public enum Skills
 {
-	hacker
+    hacker
 }
 public class Character : MonoBehaviour
 {
@@ -18,7 +21,7 @@ public class Character : MonoBehaviour
     private bool didUseStair = false;
     private bool isDisabled;
     private ParticleSystem ps;
-	public List<Skills> skills = new List<Skills>();
+    public List<Skills> skills = new List<Skills>();
 
     private float timer = 0;
     private float stairsDuration = 1;
@@ -29,17 +32,17 @@ public class Character : MonoBehaviour
 
     public float MaxWeight;
 
-	public static Character selectedCharacter;
+    public static Character selectedCharacter;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isDisabled = true;
         ps = GetComponent<ParticleSystem>();
 
-		inventory = new Inventory(MaxWeight);
+        inventory = new Inventory(MaxWeight);
 
         AdjustOrderLayer();
     }
@@ -47,7 +50,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(selectedCharacter == this)
+        if (selectedCharacter == this)
         {
             Camera.main.GetComponent<CameraBehaviour>().target = transform;
         }
@@ -90,12 +93,12 @@ public class Character : MonoBehaviour
         }
     }
 
-	public Character getCurrentCharacter()
-	{
-		return selectedCharacter;
-	}
+    public Character getCurrentCharacter()
+    {
+        return selectedCharacter;
+    }
 
-	public bool HasKey(CardReader.CardreaderColor color)
+    public bool HasKey(CardReader.CardreaderColor color)
     {
         foreach (Item i in inventory.getItemsList())
         {
@@ -140,8 +143,8 @@ public class Character : MonoBehaviour
         this.GetComponent<Renderer>().enabled = false;
         this.disableMovement();
 
-		//Go to next transform in pathfinding
-		GetComponent<ExecutePathFinding>().current++;
+        //Go to next transform in pathfinding
+        GetComponent<ExecutePathFinding>().current++;
     }
 
     public void enableMovement()
@@ -180,11 +183,11 @@ public class Character : MonoBehaviour
             currentRoom = other.gameObject;
         }
 
-		var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
-		if(e != null)
-		{
-			e.AddActor(this);
-			CurrentEventWindow.Current.AddEvent(e);
-		}
-	}
+        var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+        if (e != null)
+        {
+            e.AddActor(this);
+            CurrentEventWindow.Current.AddEvent(e);
+        }
+    }
 }

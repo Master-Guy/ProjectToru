@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using GameAnalyticsSDK;
+
 public class Inventory
 {
     //Assign a Item List
@@ -13,12 +15,12 @@ public class Inventory
 
     public float MaxWeight;
 
-	private Character ch;
+    private Character ch;
 
     //Constructor - Creates a Item List
     public Inventory(float MaxWeight)
     {
-		this.MaxWeight = MaxWeight;
+        this.MaxWeight = MaxWeight;
         inv = new HashSet<Item>();
     }
 
