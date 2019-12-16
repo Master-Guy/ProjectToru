@@ -20,14 +20,14 @@ public class SelectLevelManager : MonoBehaviour
         //mainMenuButton.onClick.AddListener(delegate { OnMainMenuClick(); });
         LevelOneButton.onClick.AddListener(delegate { OnLevelOneClick(); });
         LevelTwoButton.onClick.AddListener(delegate { OnLevelTwoClick(); });
-        LevelThreeButton.onClick.AddListener(delegate { OnLevelThreeClick(); });
+        //LevelThreeButton.onClick.AddListener(delegate { OnLevelThreeClick(); });
 
-        LevelOneButton.onClick.AddListener(delegate { OnLevelClick("One"); });
-        LevelTwoButton.onClick.AddListener(delegate { OnLevelClick("Two"); });
-        LevelThreeButton.onClick.AddListener(delegate { OnLevelClick("Three"); });
-        LevelFourButton.onClick.AddListener(delegate { OnLevelClick("Four"); });
-        LevelFiveButton.onClick.AddListener(delegate { OnLevelClick("Five"); });
-        LevelSixButton.onClick.AddListener(delegate { OnLevelClick("Six"); });
+        //LevelOneButton.onClick.AddListener(delegate { OnLevelClick("One"); });
+        //LevelTwoButton.onClick.AddListener(delegate { OnLevelClick("Two"); });
+        //LevelThreeButton.onClick.AddListener(delegate { OnLevelClick("Three"); });
+        //LevelFourButton.onClick.AddListener(delegate { OnLevelClick("Four"); });
+        //LevelFiveButton.onClick.AddListener(delegate { OnLevelClick("Five"); });
+        //LevelSixButton.onClick.AddListener(delegate { OnLevelClick("Six"); });
     }
 
     public void OnLevelClick(string s)
@@ -45,7 +45,7 @@ public class SelectLevelManager : MonoBehaviour
 
     public void OnLevelTwoClick()
     {
-        SceneManager.LoadScene("NewStairs");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void OnLevelThreeClick()
