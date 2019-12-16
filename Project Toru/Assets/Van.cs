@@ -27,7 +27,7 @@ public class Van : MonoBehaviour
             // Move Van
             GetComponent<Van>().drive = true;
 
-            LevelDirector.FinishLevel();
+            LevelManager.FinishLevel();
             Invoke("sceneSwitherWin", 3);
         };
 
@@ -52,7 +52,7 @@ public class Van : MonoBehaviour
 
         if (1 == characters.Count)
         {
-            LevelDirector.Condition("AllCharactersMustBeInVan").Fullfill();
+            LevelManager.Condition("AllCharactersMustBeInVan").Fullfill();
         }
     }
 

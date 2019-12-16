@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void ConditionHandlerDelegate(LevelCondition condition);
+
 public class LevelCondition
 {
     public LevelCondition()
@@ -36,7 +38,7 @@ public class LevelCondition
                 return;
             }
 
-            if (LevelDirector.Condition(value) != null)
+            if (LevelManager.Condition(value) != null)
             {
                 Debug.LogWarning("LevelCondition name already used. -> '" + value + "'");
                 return;
@@ -89,12 +91,12 @@ public class LevelCondition
 
     public void Commit()
     {
-        LevelDirector.AddCondition(this);
+        LevelManager.AddCondition(this);
     }
 
 
     public void Revoke()
     {
-        LevelDirector.RemoveCondition(this.name);
+        LevelManager.RemoveCondition(this.name);
     }
 }

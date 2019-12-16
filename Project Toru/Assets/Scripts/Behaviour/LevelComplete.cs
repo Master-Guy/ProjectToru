@@ -76,7 +76,7 @@ public class LevelComplete : MonoBehaviour
 
         if (collision.isTrigger && ch != null)
         {
-            LevelDirector.Condition("CharacterMustEnterVan").Fullfill();
+            LevelManager.Condition("CharacterMustEnterVan").Fullfill();
             GetComponent<Van>().EnterCharacter(ch);
 
             //if (ch.inventory.getMoney() > 0)

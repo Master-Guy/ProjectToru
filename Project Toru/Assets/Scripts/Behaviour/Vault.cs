@@ -21,7 +21,7 @@ public class Vault : MonoBehaviour
             condition.name = "CharacterMustHaveMoney";
             condition.required = true;
 
-            LevelDirector.AddCondition(condition);
+            LevelManager.AddCondition(condition);
         }
     }
 
@@ -39,7 +39,7 @@ public class Vault : MonoBehaviour
     {
         Debug.Log("You open the vault and take the gold.");
 
-        LevelDirector.Condition("CharacterMustHaveMoney").Fullfill();
+        LevelManager.Condition("CharacterMustHaveMoney").Fullfill();
 
         GameAnalytics.NewDesignEvent("VaultOpened");
         //GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewStairs");
