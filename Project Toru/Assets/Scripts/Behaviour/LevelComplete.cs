@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class LevelComplete : MonoBehaviour
 {
 
-    public GameObject copsSpawnPoint;
-    public GameObject copsPrefab;
+    public GameObject copsSpawnPoint = null;
+    public GameObject copsPrefab = null;
+
+    public Collider2D rigidbodyCollider = null;
 
     private List<GameObject> copsList = new List<GameObject>();
 
@@ -15,10 +17,19 @@ public class LevelComplete : MonoBehaviour
     bool lose = false;
     bool BlockFan = false;
 
+
     private void Update()
     {
         if (won || BlockFan)
         {
+
+            // Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
+            rigidbodyCollider.enabled = false;
+
+            // RigidBody is static by default, to prevent Van from moving by character
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+            // Move Van
             GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + -0.1f, transform.position.y));
             GetComponent<LevelManager>().LevelEndSuccess();
         }

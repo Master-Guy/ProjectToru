@@ -35,7 +35,6 @@ public class Vault : MonoBehaviour
 
         door.Close();
 
-
         StartCoroutine(WaitForAnimationEndTimer());
         return true;
     }
