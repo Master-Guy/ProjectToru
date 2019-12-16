@@ -17,8 +17,26 @@ public class LevelComplete : MonoBehaviour
     bool lose = false;
     bool BlockFan = false;
 
+    void Start()
+    {
+        {
+            LevelCondition condition = new LevelCondition();
+            condition.name = "CharacterMustEnterVan";
+            condition.required = true;
 
-    private void Update()
+            LevelDirector.Instance().AddCondition(condition);
+        }
+
+        {
+            LevelCondition condition = new LevelCondition();
+            condition.name = "CharacterMustHaveMoney";
+            condition.required = true;
+
+            LevelDirector.Instance().AddCondition(condition);
+        }
+    }
+
+    void Update()
     {
         if (won || BlockFan)
         {
@@ -55,14 +73,22 @@ public class LevelComplete : MonoBehaviour
     {
         Character ch = collision.GetComponent<Character>();
 
+
         if (collision.isTrigger && ch != null)
         {
+            LevelDirector.Instance().Condition("CharacterMustEnterVan").Fullfill();
+
+
             if (ch.inventory.getMoney() > 0)
             {
-                collision.gameObject.SetActive(false);
-                won = true;
-                Invoke("sceneSwitherWin", 3);
+                LevelDirector.Instance().Condition("CharacterMustHaveMoney").Fullfill();
+
+                //collision.gameObject.SetActive(false);
+                //won = true;
+                //Invoke("sceneSwitherWin", 3);
             }
+
+            LevelDirector.Instance().FinalizeLevel();
         }
     }
 
