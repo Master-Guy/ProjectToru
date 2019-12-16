@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(selectedCharacter == this)
+        if (selectedCharacter == this)
         {
             Camera.main.GetComponent<CameraBehaviour>().target = transform;
         }

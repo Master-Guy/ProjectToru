@@ -14,6 +14,8 @@ public class LevelComplete : MonoBehaviour
 	bool won = false;
 	bool lose = false;
 	bool BlockFan = false;
+    bool hasMoney = false;
+    bool allCharacters = false;
 
 	private void Update()
 	{
@@ -43,13 +45,42 @@ public class LevelComplete : MonoBehaviour
 
 		if (collision.isTrigger && ch != null)
 		{
-			if (ch.inventory.getMoney() > 0)
-			{
-				collision.gameObject.SetActive(false);
-				won = true;
-				Invoke("sceneSwitherWin", 3);
-			}
-		}
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (ch.inventory.getMoney() <= 0)
+                {
+                    collision.gameObject.SetActive(false);
+                    if (obj.activeInHierarchy)
+                    {
+                        Debug.Log("You need the money and all characters to escape!");
+                    } else
+                    {
+                        allCharacters = true;
+                        if (hasMoney)
+                        {
+                            won = true;
+                            Invoke("sceneSwitherWin", 3);
+                        }
+                    }
+                }
+
+                if (ch.inventory.getMoney() > 0)
+                {
+                    hasMoney = true;
+                    collision.gameObject.SetActive(false);
+                    if (obj.activeInHierarchy)
+                    {
+                        Debug.Log("You need all the characters to escape!");
+                    }
+                    
+                    if (!obj.activeInHierarchy && allCharacters)
+                    {
+                        won = true;
+                        Invoke("sceneSwitherWin", 3);
+                    }
+                }
+            }
+        }
 	}
 
 	void sceneSwitherWin()
