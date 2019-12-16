@@ -39,8 +39,7 @@ public class LevelComplete : MonoBehaviour
             //    //Invoke("sceneSwitherWin", 3);
             //};
 
-            condition.Commit(); // Or: 
-                                // LevelDirector.Instance().AddCondition(condition);
+            LevelManager.AddCondition(condition);
         }
     }
 

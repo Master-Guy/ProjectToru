@@ -14,8 +14,9 @@ public class Van : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LevelCondition condition = new LevelCondition();
+        LevelConditionInt condition = new LevelConditionInt();
         condition.name = "AllCharactersMustBeInVan";
+        condition.targetValue = 1;
         condition.fullfillHandler = (LevelCondition c) =>
         {
             // Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
@@ -31,8 +32,8 @@ public class Van : MonoBehaviour
             Invoke("sceneSwitherWin", 3);
         };
 
-        condition.Commit(); // Or: 
-                            // LevelDirector.Instance().AddCondition(condition);
+
+        LevelManager.AddCondition(condition);
 
     }
 

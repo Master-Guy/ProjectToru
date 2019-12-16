@@ -51,7 +51,7 @@ public class LevelCondition
 
     public bool required = false;
 
-    private bool _fullfilled = false;
+    protected bool _fullfilled = false;
     public bool fullfilled
     {
         get
@@ -60,7 +60,7 @@ public class LevelCondition
         }
     }
 
-    private bool _failed = false;
+    protected bool _failed = false;
     public bool failed
     {
         get
@@ -68,12 +68,11 @@ public class LevelCondition
             return _failed;
         }
     }
-    //public bool endOnFail = false;
 
     public ConditionHandlerDelegate fullfillHandler = null;
     public ConditionHandlerDelegate failHandler = null;
 
-    public void Fullfill()
+    public virtual void Fullfill()
     {
         Debug.Log(name + " fullfilled");
         _fullfilled = true;
@@ -89,14 +88,24 @@ public class LevelCondition
         failHandler?.Invoke(this);
     }
 
-    public void Commit()
-    {
-        LevelManager.AddCondition(this);
-    }
-
-
     public void Revoke()
     {
         LevelManager.RemoveCondition(this.name);
+    }
+}
+
+public class LevelConditionInt : LevelCondition
+{
+    public int value;
+    public int targetValue = -1;
+
+    public override void Fullfill()
+    {
+        value++;
+        if (value == targetValue)
+        {
+            _fullfilled = true;
+            fullfillHandler?.Invoke(this);
+        }
     }
 }
