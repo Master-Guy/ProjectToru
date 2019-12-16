@@ -45,6 +45,14 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown("t"))
+        {
+            foreach (LevelCondition condition in conditions.Values)
+            {
+                Debug.Log(condition.name + "\tRequired: " + condition.required + "\tFullfulled: " + condition.fullfilled + "\tFailed: " + condition.failed);
+            }
+        }
     }
 
     static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
@@ -102,12 +110,8 @@ public class LevelManager : MonoBehaviour
 
     public static void FinishLevel()
     {
-
+        Debug.LogWarning("DOET NOG NIKS");
     }
-
-
-
-
 
     void OnDestroy()
     {
