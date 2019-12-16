@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4159666075906911369}
   - component: {fileID: 4159666075906911477}
   - component: {fileID: 4159666075906911370}
+  - component: {fileID: 387400159743707279}
   m_Layer: 0
   m_Name: Van
   m_TagString: levelComplete
@@ -147,6 +148,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &387400159743707279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159666075906911374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910de473640a3401da13ca73c7a40e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelNameOverride: 
+  levelIndex: 0
+  enableFPSMonitor: 1
+  FPSMonitor: {fileID: 0}
 --- !u!1 &5892932175819450184
 GameObject:
   m_ObjectHideFlags: 0
