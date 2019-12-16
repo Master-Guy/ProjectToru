@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 using GameAnalyticsSDK;
 
-
 public class LevelManager : MonoBehaviour
 {
     Scene scene;

@@ -9,7 +9,7 @@ public class LevelComplete : MonoBehaviour
     public GameObject copsSpawnPoint = null;
     public GameObject copsPrefab = null;
 
-    public Collider2D rigidbodyCollider = null;
+
 
     private List<GameObject> copsList = new List<GameObject>();
 
@@ -23,18 +23,24 @@ public class LevelComplete : MonoBehaviour
             LevelCondition condition = new LevelCondition();
             condition.name = "CharacterMustEnterVan";
             condition.required = true;
+            condition.fullfillHandler = (LevelCondition c) =>
+            {
 
+                //// Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
+                //rigidbodyCollider.enabled = false;
 
+                //// RigidBody is static by default, to prevent Van from moving by character
+                //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-            LevelDirector.Instance().AddCondition(condition);
-        }
+                //// Move Van
+                //GetComponent<Van>().drive = true;
 
-        {
-            LevelCondition condition = new LevelCondition();
-            condition.name = "CharacterMustHaveMoney";
-            condition.required = true;
+                //LevelDirector.Instance().FinishLevel();
+                //Invoke("sceneSwitherWin", 3);
+            };
 
-            LevelDirector.Instance().AddCondition(condition);
+            condition.Commit(); // Or: 
+                                // LevelDirector.Instance().AddCondition(condition);
         }
     }
 
@@ -43,15 +49,7 @@ public class LevelComplete : MonoBehaviour
         if (won || BlockFan)
         {
 
-            // Remove collider, when RigidBody bodytype is Dynamic, the collider is interacting with the game boundary
-            rigidbodyCollider.enabled = false;
 
-            // RigidBody is static by default, to prevent Van from moving by character
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-
-            // Move Van
-            GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + -0.1f, transform.position.y));
-            GetComponent<LevelManager>().LevelEndSuccess();
         }
 
         if (lose)
@@ -79,18 +77,16 @@ public class LevelComplete : MonoBehaviour
         if (collision.isTrigger && ch != null)
         {
             LevelDirector.Instance().Condition("CharacterMustEnterVan").Fullfill();
+            GetComponent<Van>().EnterCharacter(ch);
 
+            //if (ch.inventory.getMoney() > 0)
+            //{
+            //    LevelDirector.Instance().Condition("CharacterMustHaveMoney").Fullfill();
 
-            if (ch.inventory.getMoney() > 0)
-            {
-                LevelDirector.Instance().Condition("CharacterMustHaveMoney").Fullfill();
-
-                //collision.gameObject.SetActive(false);
-                //won = true;
-                //Invoke("sceneSwitherWin", 3);
-            }
-
-            LevelDirector.Instance().FinishLevel();
+            //    //collision.gameObject.SetActive(false);
+            //    //won = true;
+            //    //Invoke("sceneSwitherWin", 3);
+            //}
         }
     }
 

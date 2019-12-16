@@ -14,6 +14,17 @@ public class Vault : MonoBehaviour
 
     bool closed = true;
 
+    public void Start()
+    {
+        {
+            LevelCondition condition = new LevelCondition();
+            condition.name = "CharacterMustHaveMoney";
+            condition.required = true;
+
+            LevelDirector.Instance().AddCondition(condition);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -27,8 +38,11 @@ public class Vault : MonoBehaviour
     public bool Open()
     {
         Debug.Log("You open the vault and take the gold.");
+
+        LevelDirector.Instance().Condition("CharacterMustHaveMoney").Fullfill();
+
         GameAnalytics.NewDesignEvent("VaultOpened");
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewStairs");
+        //GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewStairs");
 
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);

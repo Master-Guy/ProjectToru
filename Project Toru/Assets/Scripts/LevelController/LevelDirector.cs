@@ -47,13 +47,33 @@ public class LevelDirector
 
         if (this.Condition(condition.name) == null)
         {
-            Debug.Log("Adding Condition");
+            Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
         }
         else
         {
             Debug.LogWarning("Condition with name '" + condition.name + "' already exists");
         }
+
+    }
+
+    public void RemoveCondition(string conditionName)
+    {
+
+        if (conditionName == "")
+        {
+            Debug.LogError("Condition name cannot be empty");
+            return;
+        }
+
+        if (this.Condition(conditionName) == null)
+        {
+            Debug.LogWarning("Condition '" + conditionName + "' that must be removed already does not exists");
+            return;
+        }
+
+        conditions.Remove(conditionName);
+        Debug.Log("Condition with name '" + conditionName + "' removed");
 
     }
 
