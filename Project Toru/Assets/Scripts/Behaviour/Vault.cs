@@ -55,4 +55,11 @@ public class Vault : MonoBehaviour
         return closed;
     }
 
+	void MousePointInput()
+	{
+		if (Input.GetMouseButtonDown(1))
+		{
+			Debug.Log("Click");
+		}
+	}
 }

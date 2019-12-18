@@ -22,54 +22,82 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 				if (plane.Raycast(ray, out dist))
 				{
 					Vector3 pos = ray.GetPoint(dist);
-					Room positionRoom = getCoRoom(pos);
 
-					current = 0;
-					path.Clear();
+					Debug.Log("Search");
 
-					if (positionRoom != null)
+					if (GetFurniture(pos) != null)
 					{
-						pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
-
-						Room characterRoom;
-
-						try
-						{
-							characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
-						}
-						catch (UnassignedReferenceException)
-						{
-							characterRoom = GetEntranceRoom();
-
-							path.Add(new Vector2(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1));
-						}
-
-						if (!positionRoom.Equals(characterRoom))
-						{
-							path = pf.CalculateTransforms(positionRoom, characterRoom);
-						}
-						path.Add(pos);
+						Debug.Log("Gevonden!");
 					}
-					else
-					{
-						Room entranceRoom = GetEntranceRoomToOutside(pos);
 
-						//Code for inside to outside
-						try
-						{
-							if (entranceRoom != null)
-							{
-								path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
-								path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
-							}
-						}
-						catch (UnassignedReferenceException)
-						{
-							//Outside to outside code
-							path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
-						}
-					}
+					NonFurniture(pos);
 				}
+			}
+		}
+	}
+
+	private Vault GetFurniture(Vector2 pos)
+	{
+		foreach (GameObject furniture in GameObject.FindGameObjectsWithTag("Furniture"))
+		{
+			Vault v = furniture.GetComponent<Vault>();
+
+			if(pos.x > v.transform.position.x && pos.x < (v.transform.position.x + v.transform.GetComponent<RectTransform>().rect.width) && pos.y > v.transform.position.y && pos.y < (v.transform.position.y + v.transform.GetComponent<RectTransform>().rect.height))
+			{
+				Debug.Log("Gevonden !!");
+				return v;
+			}
+		}
+		return null;
+	}
+
+	public void NonFurniture(Vector3 pos)
+	{
+		Room positionRoom = getCoRoom(pos);
+
+		current = 0;
+		path.Clear();
+
+		if (positionRoom != null)
+		{
+			pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
+
+			Room characterRoom;
+
+			try
+			{
+				characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+			}
+			catch (UnassignedReferenceException)
+			{
+				characterRoom = GetEntranceRoom();
+
+				path.Add(new Vector2(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1));
+			}
+
+			if (!positionRoom.Equals(characterRoom))
+			{
+				path = pf.CalculateTransforms(positionRoom, characterRoom);
+			}
+			path.Add(pos);
+		}
+		else
+		{
+			Room entranceRoom = GetEntranceRoomToOutside(pos);
+
+			//Code for inside to outside
+			try
+			{
+				if (entranceRoom != null)
+				{
+					path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
+					path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
+				}
+			}
+			catch (UnassignedReferenceException)
+			{
+				//Outside to outside code
+				path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
 			}
 		}
 	}
