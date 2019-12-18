@@ -1,53 +1,90 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
     public GameObject pauseMenuPrefab;
-    private Canvas _c;
+    public GameObject settingsPrefab;
+    private bool paused = false;
+    public Button resumeButton;
+    public Button optionsButton;
+    public Button quitButton;
+    public Button backButton;
 
-    private Canvas SceneCanvas
+    public void Start()
     {
-        get
-        {
-            if (_c == null)
-            {
-                _c = FindObjectOfType<Canvas>();
+        pauseMenuPrefab.SetActive(false);
+        settingsPrefab.SetActive(false);
 
-                if (_c == null)
-                {
-                    _c = Instantiate(new Canvas());
-                }
-            }
-
-            return _c;
-        }
+        resumeButton.onClick.AddListener(delegate { OnResumeClick(); });
+        optionsButton.onClick.AddListener(delegate { OnOptionsClick(); });
+        quitButton.onClick.AddListener(delegate { OnQuitClick(); });
+        backButton.onClick.AddListener(delegate { OnBackClick(); });
     }
 
-    private GameObject pauseMenuInstance;
-
-   public void OpenMenu()
+    public void OpenMenu()
     {
-        if (pauseMenuInstance == null)
-        {
-            Instantiate(pauseMenuPrefab, SceneCanvas.transform);
-        } else
-        {
-            pauseMenuInstance.SetActive(true);
-        }
-    }
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0)
+        if(paused)
         {
             Time.timeScale = 0;
-            OpenMenu();
+            pauseMenuPrefab.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
+            pauseMenuPrefab.SetActive(false);
         }
+    }
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!settingsPrefab.activeInHierarchy)
+            {
+                if (paused)
+                {
+                    paused = false;
+                }
+                else
+                {
+                    paused = true;
+                }
+                OpenMenu();
+            }
+            else
+            {
+                OnBackClick();
+            }
+        }
+
+    }
+
+    public void OnResumeClick()
+    {
+        paused = false;
+        OpenMenu();
+    }
+
+    public void OnOptionsClick()
+    {
+        pauseMenuPrefab.SetActive(false);
+
+        settingsPrefab.SetActive(true);
+    }
+
+    public void OnQuitClick()
+    {
+        Application.Quit();
+    }
+
+    public void OnBackClick()
+    {
+        settingsPrefab.SetActive(false);
+        pauseMenuPrefab.SetActive(true);
     }
 
 }
