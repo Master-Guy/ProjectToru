@@ -197,7 +197,7 @@ MonoBehaviour:
   speed: 6
   inventory: {fileID: 0}
   currentRoom: {fileID: 0}
-  MaxWeight: 0
+  MaxWeight: 100
   firePoint: {fileID: 0}
   weapon: {fileID: 0}
 --- !u!114 &2510886674794060569

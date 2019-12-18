@@ -19,10 +19,12 @@ public class CharacterStats : MonoBehaviour
         currentHealth -= damage;
         if(currentHealth <= 0)
         {
+            NPC npc = this.gameObject.GetComponent<NPC>();
+            if(npc != null)
+            {
+                npc.dropBag();
+            }
             Destroy(this.gameObject);
-			Debug.Log(gameObject.name + " has died");
         }
-
-        Debug.Log(gameObject.name + " has " + currentHealth + " health.");
     }
 }
