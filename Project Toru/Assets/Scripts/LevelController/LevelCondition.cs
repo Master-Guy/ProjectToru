@@ -11,11 +11,6 @@ public class LevelCondition
 
     }
 
-    public LevelCondition(bool required)
-    {
-        this.required = required;
-    }
-
     // Name instance
     private string _name = "";
     public string name
@@ -47,9 +42,6 @@ public class LevelCondition
             _name = value;
         }
     }
-
-
-    public bool required = false;
 
     protected bool _fullfilled = false;
     public bool fullfilled

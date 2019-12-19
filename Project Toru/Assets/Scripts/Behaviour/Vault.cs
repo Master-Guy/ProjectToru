@@ -19,7 +19,6 @@ public class Vault : MonoBehaviour
         {
             LevelCondition condition = new LevelCondition();
             condition.name = "CharacterMustHaveMoney";
-            condition.required = true;
 
             LevelManager.AddCondition(condition);
         }
@@ -60,7 +59,6 @@ public class Vault : MonoBehaviour
         {
             LevelCondition condition = new LevelCondition();
             condition.name = "CharacterMustHaveKeyInVaultRoom";
-            condition.required = true;
 
             condition.failHandler = (LevelCondition c) =>
             {

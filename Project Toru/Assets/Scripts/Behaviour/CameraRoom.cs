@@ -26,7 +26,6 @@ public class CameraRoom : MonoBehaviour
             {
                 LevelCondition condition = new LevelCondition();
                 condition.name = "GuardCalled_CharacterMustBeInVanBeforeArrival";
-                condition.required = true;
 
                 condition.failHandler = (LevelCondition c) =>
                 {

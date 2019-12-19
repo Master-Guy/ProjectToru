@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
         {
             foreach (LevelCondition condition in conditions.Values)
             {
-                Debug.Log(condition.name + "\tRequired: " + condition.required + "\tFullfulled: " + condition.fullfilled + "\tFailed: " + condition.failed);
+                Debug.Log(condition.name + "\tFullfulled: " + condition.fullfilled + "\tFailed: " + condition.failed);
             }
         }
     }
