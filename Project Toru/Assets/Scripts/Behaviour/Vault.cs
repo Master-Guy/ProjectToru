@@ -32,6 +32,15 @@ public class Vault : MonoBehaviour
             {
                 Open();
                 collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
+
+                if (collision.gameObject.GetComponent<Character>().HasKey(CardReader.CardreaderColor.Blue))
+                {
+                    LevelManager.Condition("CharacterMustHaveKeyInVaultRoom").Fullfill();
+                }
+                else
+                {
+                    LevelManager.Condition("CharacterMustHaveKeyInVaultRoom").Fail();
+                }
             }
     }
 
@@ -46,6 +55,23 @@ public class Vault : MonoBehaviour
 
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);
+
+
+        {
+            LevelCondition condition = new LevelCondition();
+            condition.name = "CharacterMustHaveKeyInVaultRoom";
+            condition.required = true;
+
+            condition.failHandler = (LevelCondition c) =>
+            {
+                Debug.Log("Player got stuck");
+                LevelManager.FinishLevel();
+            };
+
+            LevelManager.AddCondition(condition);
+        }
+
+
 
         door.Close();
 

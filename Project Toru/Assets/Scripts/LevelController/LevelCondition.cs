@@ -28,7 +28,7 @@ public class LevelCondition
         {
             if (_name != "")
             {
-                Debug.LogWarning("LevelCondition name cannot be changed, define a new one. -> '" + value + "'");
+                Debug.LogWarning("LevelCondition name cannot be changed, define a new one if needed. -> '" + value + "'");
                 return;
             }
 

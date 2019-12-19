@@ -121,8 +121,30 @@ public class LevelManager : MonoBehaviour
 
     public static void FinishLevel()
     {
-        Debug.LogWarning("DOET NOG NIKS");
+        Debug.Log("Doet nog niks!!");
     }
+
+    public static bool AllConditionsFullfilled()
+    {
+        foreach (var condition in conditions.Values)
+        {
+            if (!condition.fullfilled) return false;
+        }
+
+        return true;
+    }
+
+    public static bool AnyConditionFailed()
+    {
+
+        foreach (var condition in conditions.Values)
+        {
+            if (condition.failed) return true;
+        }
+
+        return false;
+    }
+
 
     void OnDestroy()
     {
