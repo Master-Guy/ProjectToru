@@ -763,6 +763,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6696491881226293851, guid: fe29bb8aafb274f03856e12a68db393a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
+      objectReference: {fileID: 0}
     - target: {fileID: 8513253477087706233, guid: fe29bb8aafb274f03856e12a68db393a,
         type: 3}
       propertyPath: Downstairs
@@ -923,6 +928,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696491881226293851, guid: fe29bb8aafb274f03856e12a68db393a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 8513253477087706233, guid: fe29bb8aafb274f03856e12a68db393a,
         type: 3}
@@ -1637,6 +1647,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: L0 Stairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696491881226293851, guid: fe29bb8aafb274f03856e12a68db393a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 8513253477087706233, guid: fe29bb8aafb274f03856e12a68db393a,
         type: 3}
@@ -26620,11 +26635,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entrance
       objectReference: {fileID: 0}
+    - target: {fileID: 9035884668655751474, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
+      objectReference: {fileID: 0}
     - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}
       propertyPath: RightRoom
       value: 
       objectReference: {fileID: 1901486378}
+    - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: size.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: size.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26792,32 +26822,32 @@ PrefabInstance:
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -200
+      value: 780
       objectReference: {fileID: 0}
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -100
+      value: 440
       objectReference: {fileID: 0}
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4418833140638335722, guid: ff144ef9d1db0314c91d789fea8a37aa,
         type: 3}
