@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Options;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ExecutePathFindingPlayable : ExecutePathFinding
 {
+	public GameObject targetFurniture;
+
 	public void Update()
 	{
 		MousePointInput();
@@ -23,35 +26,33 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 				{
 					Vector3 pos = ray.GetPoint(dist);
 
-					Debug.Log("Search");
+					Debug.Log(pos.x);
+					Debug.Log(pos.y);
 
-					if (GetFurniture(pos) != null)
-					{
-						Debug.Log("Gevonden!");
-					}
+					targetFurniture = GetFurniture(pos);
 
-					NonFurniture(pos);
+					PathFinding(pos);
 				}
 			}
 		}
 	}
 
-	private Vault GetFurniture(Vector2 pos)
+	private GameObject GetFurniture(Vector3 pos)
 	{
 		foreach (GameObject furniture in GameObject.FindGameObjectsWithTag("Furniture"))
 		{
 			Vault v = furniture.GetComponent<Vault>();
 
-			if(pos.x > v.transform.position.x && pos.x < (v.transform.position.x + v.transform.GetComponent<RectTransform>().rect.width) && pos.y > v.transform.position.y && pos.y < (v.transform.position.y + v.transform.GetComponent<RectTransform>().rect.height))
+			if(pos.x > v.transform.position.x && pos.x < (v.transform.position.x + v.GetComponent<RectTransform>().rect.width) && pos.y > v.transform.position.y && pos.y < (v.transform.position.y + v.GetComponent<RectTransform>().rect.height))
 			{
 				Debug.Log("Gevonden !!");
-				return v;
+				return furniture;
 			}
 		}
 		return null;
 	}
 
-	public void NonFurniture(Vector3 pos)
+	public void PathFinding(Vector3 pos)
 	{
 		Room positionRoom = getCoRoom(pos);
 
@@ -130,13 +131,34 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 		return null;
 	}
 
+	private void CheckFurnitureTarget(Collider2D other)
+	{
+		if (targetFurniture != null)
+		{
+			var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+			if (e != null)
+			{
+				Debug.Log("Pathfinding");
+				e.AddActor(GetComponent<Character>());
+				CurrentEventWindow.Current.AddEvent(e);
+			}
+		}
+	}
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		checkDoorClosed(other);
+
+		CheckFurnitureTarget(other);
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
 		checkDoorClosed(other);
+	}
+
+	public bool checkForFurnitureCollider()
+	{
+		return (path.Count == 0 && targetFurniture == null);
 	}
 }

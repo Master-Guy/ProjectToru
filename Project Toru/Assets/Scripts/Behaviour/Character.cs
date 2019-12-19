@@ -184,8 +184,9 @@ public class Character : MonoBehaviour
         }
 
         var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
-        if (e != null)
+        if (e != null && GetComponent<ExecutePathFindingPlayable>().checkForFurnitureCollider())
         {
+            Debug.Log("Lopend");
             e.AddActor(this);
             CurrentEventWindow.Current.AddEvent(e);
         }
