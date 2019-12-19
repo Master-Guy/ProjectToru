@@ -28,10 +28,14 @@ public class Van : MonoBehaviour
             // Move Van
             GetComponent<Van>().drive = true;
 
-            LevelManager.EndLevel("You got away", "But the idea is that you steal some money...", 3);
-
-
-            //Invoke("sceneSwitherWin", 3);
+            if (LevelManager.Condition("CharacterMustHaveMoney").fullfilled)
+            {
+                LevelManager.EndLevel("Good job!", "You got some loot and you are not caught!", 3);
+            }
+            else
+            {
+                LevelManager.EndLevel("You got away", "But the idea is that you steal some money...", 3);
+            }
         };
 
 
