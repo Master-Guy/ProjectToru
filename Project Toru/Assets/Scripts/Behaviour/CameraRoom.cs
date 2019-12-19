@@ -33,8 +33,7 @@ public class CameraRoom : MonoBehaviour
                     Debug.Log("Player is caught");
 
                     // RELEASE THE KRA.. COPS
-                    Cops cops = FindObjectOfType<Cops>();
-                    cops?.Spawn();
+                    FindObjectOfType<Cops>()?.Spawn();
                 };
 
                 LevelManager.AddCondition(condition);

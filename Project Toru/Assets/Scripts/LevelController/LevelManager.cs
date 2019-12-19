@@ -124,6 +124,20 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Doet nog niks!!");
     }
 
+    public static void FailLevel(string title, string message, float FailAfterSeconds = 0f)
+    {
+        Instance().StartCoroutine(SegueToFailScene(title, message, FailAfterSeconds));
+    }
+
+    private static IEnumerator SegueToFailScene(string title, string message, float FailAfterSeconds)
+    {
+        yield return new WaitForSeconds(FailAfterSeconds);
+
+        LevelEndMessage.title = title;
+        LevelEndMessage.message = message;
+        SceneManager.LoadScene("Fail");
+    }
+
     public static bool AllConditionsFullfilled()
     {
         foreach (var condition in conditions.Values)
