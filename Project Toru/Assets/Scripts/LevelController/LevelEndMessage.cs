@@ -11,9 +11,15 @@ public static class LevelEndMessage
     public static string title;
     public static string message;
 
+    public static bool LevelSuccessfull = false;
+
+    public static int money;
+
     public static void Reset()
     {
         title = "";
         message = "";
+        LevelSuccessfull = false;
+        money = 0;
     }
 }

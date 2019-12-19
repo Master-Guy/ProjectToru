@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4159666075906911371}
   - component: {fileID: 3357494930098594450}
-  - component: {fileID: 4159666075906911368}
   - component: {fileID: 4159666075906911369}
   - component: {fileID: 4159666075906911477}
   - component: {fileID: 4159666075906911370}
@@ -50,21 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carCollider: {fileID: 3978048901469877679}
   drive: 0
---- !u!114 &4159666075906911368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4159666075906911374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd95f8aed8287a4b8beb8f804656ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  copsSpawnPoint: {fileID: 0}
-  copsPrefab: {fileID: 5571107624726318309, guid: 29c0bf4c7e6825a42ab76e3011dcb2d4,
-    type: 3}
 --- !u!61 &4159666075906911369
 BoxCollider2D:
   m_ObjectHideFlags: 0

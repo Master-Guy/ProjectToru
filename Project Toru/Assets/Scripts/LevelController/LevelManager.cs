@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
     string levelNameOverride = "";
 
     [SerializeField]
-    int levelIndex = 0;
+    public readonly int levelIndex = 0;
 
     [SerializeField]
     bool enableFPSMonitor = true;
@@ -81,6 +81,8 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
+
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), condition.name);
         }
         else
         {
@@ -126,6 +128,15 @@ public class LevelManager : MonoBehaviour
 
     private static IEnumerator SegueToFailScene(string title, string message, float FailAfterSeconds)
     {
+        if (AnyConditionFailed())
+        {
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
+        }
+        else
+        {
+            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
+        }
+
         yield return new WaitForSeconds(FailAfterSeconds);
 
         LevelEndMessage.title = title;
@@ -153,22 +164,6 @@ public class LevelManager : MonoBehaviour
 
         return false;
     }
-
-
-    void OnDestroy()
-    {
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Undefined, "level" + levelIndex.ToString(), this.GetLevelName());
-    }
-
-    //public void LevelEndSuccess()
-    //{
-    //    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + levelIndex.ToString(), this.GetLevelName());
-    //}
-
-    //public void LevelEndFail()
-    //{
-    //    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + levelIndex.ToString(), this.GetLevelName());
-    //}
 
     public string GetLevelName()
     {
