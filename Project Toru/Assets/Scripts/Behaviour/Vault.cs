@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using GameAnalyticsSDK;
+using Assets.Scripts.Behaviour;
 
-public class Vault : MonoBehaviour
+public class Vault : Furniture
 {
     [SerializeField]
     Collider2D vaultCollider = null;
@@ -26,7 +27,6 @@ public class Vault : MonoBehaviour
 
     public bool Open()
     {
-        Debug.Log("You open the vault and take the gold.");
         GameAnalytics.NewDesignEvent("VaultOpened");
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewStairs");
 
@@ -54,12 +54,4 @@ public class Vault : MonoBehaviour
     {
         return closed;
     }
-
-	void MousePointInput()
-	{
-		if (Input.GetMouseButtonDown(1))
-		{
-			Debug.Log("Click");
-		}
-	}
 }

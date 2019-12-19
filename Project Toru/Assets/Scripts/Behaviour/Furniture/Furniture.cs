@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 namespace Assets.Scripts.Behaviour
 {
 	[RequireComponent(typeof(Options.Event))]
-	public class Furniture : MonoBehaviour, IPointerClickHandler
+	public abstract class Furniture : MonoBehaviour, IPointerClickHandler
 	{
 		[SerializeField]
 		bool Passable;

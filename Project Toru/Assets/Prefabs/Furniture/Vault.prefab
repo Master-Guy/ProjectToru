@@ -122,7 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c87105968984e6ab2ce508c90cea03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vaultCollider: {fileID: 0}
+  Passable: 0
+  Description: 
+  vaultCollider: {fileID: 1909670225281376121}
   door: {fileID: 0}
   money: {fileID: 6706966753871349064, guid: 6a1473e49c90bb141998184284a57518, type: 3}
 --- !u!61 &1909670225281376121

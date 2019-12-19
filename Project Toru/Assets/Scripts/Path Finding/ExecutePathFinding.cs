@@ -17,6 +17,9 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public int current = 0;
 
+	[NonSerialized]
+	public GameObject targetFurniture;
+
 	public void Awake()
 	{
 		path = new List<Vector3>();
@@ -46,8 +49,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 			if (current >= path.Count)
 			{
-				current = 0;
-				path.Clear();
+				StopPathFinding();
 			}
 		}
 	}
@@ -70,36 +72,47 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 	public void checkDoorClosed(Collider2D other)
 	{
-		if (other.gameObject.GetComponent<CardReader>())
+		try
 		{
-			if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
+			if (other.gameObject.GetComponent<CardReader>())
 			{
-				if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
 				{
-					other.gameObject.GetComponent<CardReader>().getDoor().Open();
-				}
-				else if (gameObject.GetComponent<NPC>())
-				{
-					if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
 					{
 						other.gameObject.GetComponent<CardReader>().getDoor().Open();
+					}
+					else if (gameObject.GetComponent<NPC>())
+					{
+						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+						{
+							other.gameObject.GetComponent<CardReader>().getDoor().Open();
+						}
+						else
+						{
+							if (path.Count != 0)
+							{
+								StopPathFinding();
+							}
+						}
 					}
 					else
 					{
 						if (path.Count != 0)
 						{
-							path.Clear();
+							StopPathFinding();
 						}
-					}
-				}
-				else
-				{
-					if (path.Count != 0)
-					{
-						path.Clear();
 					}
 				}
 			}
 		}
+		catch (NullReferenceException) { }
+	}
+
+	public void StopPathFinding()
+	{
+		current = 0;
+		path.Clear();
+		targetFurniture = null;
 	}
 }

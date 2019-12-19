@@ -1,12 +1,11 @@
-﻿using Assets.Scripts.Options;
+﻿using Assets.Scripts.Behaviour;
+using Assets.Scripts.Options;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ExecutePathFindingPlayable : ExecutePathFinding
 {
-	public GameObject targetFurniture;
-
 	public void Update()
 	{
 		MousePointInput();
@@ -39,14 +38,12 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 
 	private GameObject GetFurniture(Vector3 pos)
 	{
-		foreach (GameObject furniture in GameObject.FindGameObjectsWithTag("Furniture"))
+		foreach (GameObject f in GameObject.FindGameObjectsWithTag("Furniture"))
 		{
-			Vault v = furniture.GetComponent<Vault>();
-
-			if(pos.x > v.transform.position.x && pos.x < (v.transform.position.x + v.GetComponent<RectTransform>().rect.width) && pos.y > v.transform.position.y && pos.y < (v.transform.position.y + v.GetComponent<RectTransform>().rect.height))
+			if(pos.x > f.transform.position.x && pos.x < (f.transform.position.x + f.GetComponent<RectTransform>().rect.width) && pos.y > f.transform.position.y && pos.y < (f.transform.position.y + f.GetComponent<RectTransform>().rect.height))
 			{
 				Debug.Log("Gevonden !!");
-				return furniture;
+				return f;
 			}
 		}
 		return null;

@@ -182,13 +182,18 @@ public class Character : MonoBehaviour
         {
             currentRoom = other.gameObject;
         }
-
-        var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
-        if (e != null && GetComponent<ExecutePathFindingPlayable>().checkForFurnitureCollider())
-        {
-            Debug.Log("Lopend");
-            e.AddActor(this);
-            CurrentEventWindow.Current.AddEvent(e);
-        }
     }
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		if (Input.GetMouseButtonDown(1))
+		{
+			var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+			if (e != null && GetComponent<ExecutePathFindingPlayable>().checkForFurnitureCollider())
+			{
+				e.AddActor(this);
+				CurrentEventWindow.Current.AddEvent(e);
+			}
+		}
+	}
 }
