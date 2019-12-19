@@ -119,12 +119,7 @@ public class LevelManager : MonoBehaviour
         return null;
     }
 
-    public static void FinishLevel()
-    {
-        Debug.Log("Doet nog niks!!");
-    }
-
-    public static void FailLevel(string title, string message, float FailAfterSeconds = 0f)
+    public static void EndLevel(string title, string message, float FailAfterSeconds = 0f)
     {
         Instance().StartCoroutine(SegueToFailScene(title, message, FailAfterSeconds));
     }

@@ -28,7 +28,7 @@ public class Van : MonoBehaviour
             // Move Van
             GetComponent<Van>().drive = true;
 
-            LevelManager.FailLevel("You got away", "But the idea is that you steal some money...", 3);
+            LevelManager.EndLevel("You got away", "But the idea is that you steal some money...", 3);
 
 
             //Invoke("sceneSwitherWin", 3);

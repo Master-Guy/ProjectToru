@@ -65,13 +65,11 @@ public class Vault : MonoBehaviour
             condition.failHandler = (LevelCondition c) =>
             {
                 Debug.Log("Player got stuck");
-                LevelManager.FinishLevel();
+                LevelManager.EndLevel("You got stuck", "You didn't plan a way out", 3);
             };
 
             LevelManager.AddCondition(condition);
         }
-
-
 
         door.Close();
 
