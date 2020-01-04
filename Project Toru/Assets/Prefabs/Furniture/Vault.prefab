@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7480228281970254624}
+  - component: {fileID: 204818349749587681}
   - component: {fileID: 1694405309394793201}
   - component: {fileID: 1694405309394793231}
   - component: {fileID: 6823359131251928545}
@@ -21,26 +21,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &7480228281970254624
-RectTransform:
+--- !u!4 &204818349749587681
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694405309394793200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1694405310051318999}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2.125, y: 3}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1694405309394793201
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Passable: 0
   Description: 
+  size: {x: 1, y: 2}
   vaultCollider: {fileID: 1909670225281376121}
   door: {fileID: 0}
   money: {fileID: 6706966753871349064, guid: 6a1473e49c90bb141998184284a57518, type: 3}
@@ -197,7 +193,7 @@ Transform:
   m_LocalPosition: {x: -1.1421852, y: -0.7419214, z: -1162.8445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7480228281970254624}
+  m_Father: {fileID: 204818349749587681}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1694405310051318998

@@ -18,12 +18,13 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 			if (Input.GetMouseButtonDown(1))
 			{
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				Plane plane = new Plane(Vector3.forward, transform.position);
-				float dist = 0;
+				Plane plane = new Plane(Vector3.forward, Character.selectedCharacter.transform.position);
+				float dist = 10;
 
 				if (plane.Raycast(ray, out dist))
 				{
-					Vector3 pos = ray.GetPoint(dist);
+					Vector2 pos = ray.GetPoint(dist);
+					//Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
 
 					Debug.Log(pos.x);
 					Debug.Log(pos.y);
@@ -40,7 +41,10 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 	{
 		foreach (GameObject f in GameObject.FindGameObjectsWithTag("Furniture"))
 		{
-			if(pos.x > f.transform.position.x && pos.x < (f.transform.position.x + f.GetComponent<RectTransform>().rect.width) && pos.y > f.transform.position.y && pos.y < (f.transform.position.y + f.GetComponent<RectTransform>().rect.height))
+			/*Debug.Log(f.transform.position.x);
+			Debug.Log(f.transform.position.y);*/
+
+			if(pos.x > f.transform.position.x && pos.x < (f.transform.position.x + f.GetComponent<Furniture>().GetSize().x) && pos.y > f.transform.position.y && pos.y < (f.transform.position.y + f.GetComponent<Furniture>().GetSize().y))
 			{
 				Debug.Log("Gevonden !!");
 				return f;

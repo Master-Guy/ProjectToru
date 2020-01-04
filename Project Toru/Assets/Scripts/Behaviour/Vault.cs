@@ -15,14 +15,16 @@ public class Vault : Furniture
 
     bool closed = true;
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            if (collision.gameObject.GetComponent<Character>() && closed)
-            {
-                Open();
-                collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
-            }
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player"))
+		{ 
+			if (collision.gameObject.GetComponent<Character>() && closed)
+			{
+				Open();
+				collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
+			}
+		}
     }
 
     public bool Open()

@@ -21,6 +21,8 @@ namespace Assets.Scripts.Behaviour
 		List<Item> items;
 		Room Parent;
 
+		[SerializeField]
+		Vector2Int size = new Vector2Int(0, 0);
 
 		void Start()
 		{
@@ -52,6 +54,11 @@ namespace Assets.Scripts.Behaviour
 			{
 				// TODO move character here
 			}
+		}
+
+		public Vector2Int GetSize()
+		{
+			return size;
 		}
 	}
 }
