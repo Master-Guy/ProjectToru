@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,8 +43,6 @@ public class CardReader : MonoBehaviour
 	{
 		if (collision.CompareTag("Player"))
 		{
-			//Debug.Log("Checking Key");
-
 			if (color == CardreaderColor.Disabled)
 			{
 				door.Open();
@@ -64,7 +62,6 @@ public class CardReader : MonoBehaviour
 	/// <param name="door">The door that this reader must control</param>
 	public void AssignDoor(Door door)
 	{
-		//Debug.Log("SETTING");
 		this.door = door;
 	}
 
@@ -164,6 +161,11 @@ public class CardReader : MonoBehaviour
 		Blue,
 		Purple,
 		Yellow
+	}
+
+	public Door getDoor()
+	{
+		return door;
 	}
 
 }

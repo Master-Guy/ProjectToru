@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +38,7 @@ public class Key : Item
 		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
 			collision.GetComponent<Character>().inventory.addItem(this);
+			Destroy(gameObject);
 		}
 	}
 }

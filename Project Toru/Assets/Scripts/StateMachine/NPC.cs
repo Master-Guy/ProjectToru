@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,8 +35,8 @@ public abstract class NPC : MonoBehaviour
     {
         foreach (GameObject g in bag)
         {
-            Instantiate(g, new Vector3(transform.position.x - 0.5f, transform.position.y - 0.5f, 0), Quaternion.identity);
-        }
+			Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + UnityEngine.Random.Range(0.2f, 1.20f), 0), Quaternion.identity);
+		}
     }
 
     public void Say(string text)
@@ -71,14 +71,33 @@ public abstract class NPC : MonoBehaviour
         }
     }
 
+	// all generic states below
+	public void PingPong()
+	{
+		this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
+	}
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
     }
 
-	// all generic states below
-	public void PingPong()
+	public Room getRoom()
 	{
-		this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
+		return currentRoom;
+	}
+
+	public bool HasKey(CardReader.CardreaderColor color)
+	{
+		foreach (GameObject i in bag)
+		{
+			if(i.GetComponent<Key>())
+			{
+				if (i.GetComponent<Key>().color == color)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

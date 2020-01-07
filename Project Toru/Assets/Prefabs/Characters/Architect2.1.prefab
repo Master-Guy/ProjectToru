@@ -15,10 +15,9 @@ GameObject:
   - component: {fileID: 2510886674794060571}
   - component: {fileID: 2510886674794060570}
   - component: {fileID: 2510886674794060574}
-  - component: {fileID: 2510886674794060569}
   - component: {fileID: 2510886674794060572}
   - component: {fileID: 2510886674794060575}
-  - component: {fileID: 2396690594181113463}
+  - component: {fileID: 4660946109321307049}
   m_Layer: 8
   m_Name: Architect2.1
   m_TagString: Player
@@ -34,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2510886674794060566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.01, y: 1.16, z: 0}
+  m_LocalPosition: {x: 3.01, y: 1.16, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -100098945
-  m_SortingLayer: 4
+  m_SortingLayerID: -1329448103
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 3461593138948554442, guid: 27836ef8addb84d46b79300e01a97e85,
     type: 3}
@@ -195,24 +194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  inventory: {fileID: 0}
+  playerOnTheStairs: 0
   currentRoom: {fileID: 0}
-  MaxWeight: 100
-  firePoint: {fileID: 0}
-  weapon: {fileID: 0}
---- !u!114 &2510886674794060569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510886674794060566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b0f6ea2a1bb9749bfe4ea019441ef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedCharacter: {fileID: 0}
+  MaxWeight: 20
 --- !u!198 &2510886674794060572
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4934,7 +4918,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2396690594181113463
+--- !u!114 &4660946109321307049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4943,7 +4927,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2510886674794060566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
+  m_Script: {fileID: 11500000, guid: ef39380b27c48f2408d9fea94143f2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100

@@ -1,7 +1,13 @@
 ﻿using System;
-using System.Collections;
+using Assets.Scripts.Options;
 using System.Collections.Generic;
 using UnityEngine;
+using GameAnalyticsSDK;
+
+public enum Skills
+{
+    hacker
+}
 
 public class Character : MonoBehaviour
 {
@@ -13,38 +19,36 @@ public class Character : MonoBehaviour
     public Inventory inventory;
 
     private bool didUseStair = false;
-    private static CharacterManager cm;
     private bool isDisabled;
     private ParticleSystem ps;
 
     private float timer = 0;
     private float stairsDuration = 1;
-    private bool playerOnTheStairs = false;
-
+    public bool playerOnTheStairs = false;
 
     public GameObject currentRoom;
-    public static GameObject selectedCharacter;
+    public static Character selectedCharacter;
 
     public float MaxWeight;
 
-	public GameObject firePoint;
+    public GameObject firePoint;
     public Weapon weapon;
+
+    public List<Skills> skills = new List<Skills>();
+
 
     // Start is called before the first frame update
     void Start()
     {
-        cm = gameObject.AddComponent(typeof(CharacterManager)) as CharacterManager;
-
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isDisabled = true;
         ps = GetComponent<ParticleSystem>();
 
-        inventory = gameObject.AddComponent(typeof(Inventory)) as Inventory;
-        inventory.SetMaxWeight(MaxWeight);
+        inventory = new Inventory(MaxWeight);
 
-		firePoint = transform.GetChild(0).gameObject;
-        weapon = firePoint.GetComponent<Weapon>();
+        weapon = GetComponentInChildren<Weapon>();
+        firePoint = weapon.gameObject;
 
         AdjustOrderLayer();
     }
@@ -52,6 +56,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (selectedCharacter == this)
+        {
+            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+        }
 
         if (playerOnTheStairs)
         {
@@ -68,7 +76,7 @@ public class Character : MonoBehaviour
 
         if (!isDisabled)
         {
-            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+            //Camera.main.GetComponent<CameraBehaviour>().target = transform;
             change = Vector3.zero;
             change.x = Input.GetAxisRaw("Horizontal");
             change.y = Input.GetAxisRaw("Vertical");
@@ -88,12 +96,13 @@ public class Character : MonoBehaviour
             }
 
             UpdateAnimationsAndMove();
+
+            if (Input.GetKey(KeyCode.F))
+            {
+                weapon.Shoot();
+            }
         }
 
-        if (Input.GetMouseButton(1))
-        {
-            weapon.Shoot();
-        }
     }
 
     public bool HasKey(CardReader.CardreaderColor color)
@@ -113,7 +122,7 @@ public class Character : MonoBehaviour
         {
             AdjustOrderLayer();
             MoveCharacter();
-			FlipFirePoint();
+            FlipFirePoint();
             animator.SetFloat("moveX", change.x);
             animator.SetFloat("moveY", change.y);
             animator.SetBool("moving", true);
@@ -130,33 +139,7 @@ public class Character : MonoBehaviour
         }
     }
 
-	private void FlipFirePoint()
-	{
-		if(change.x > 0)
-		{
-			firePoint.transform.rotation = Quaternion.Euler(0,0,0);
-			firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-        }
-		if(change.x < 0)
-		{
-			firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-			firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-        }
-        if(change.y > 0)
-        {
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-        }
-        if(change.y < 0)
-        {
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-        }
-	}
-
-	void MoveCharacter()
+    void MoveCharacter()
     {
         change.Normalize();
         myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
@@ -168,6 +151,9 @@ public class Character : MonoBehaviour
         playerOnTheStairs = true;
         this.GetComponent<Renderer>().enabled = false;
         this.disableMovement();
+
+        //Go to next transform in pathfinding
+        GetComponent<ExecutePathFinding>().current++;
     }
 
     public void enableMovement()
@@ -184,11 +170,39 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            cm.disableCharacterMovement();
-            selectedCharacter = this.gameObject;
-            enableMovement();
-            ps.Play();
+            if (selectedCharacter != null)
+            {
+                selectedCharacter.disableMovement();
+            }
+            selectedCharacter = this;
+            this.enableMovement();
             inventory.UpdateUI();
+        }
+    }
+
+    private void FlipFirePoint()
+    {
+        if (change.x > 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
+            firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if (change.x < 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+            firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if (change.y > 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+        }
+        if (change.y < 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
         }
     }
 
@@ -202,6 +216,13 @@ public class Character : MonoBehaviour
         if (other.CompareTag("Room"))
         {
             currentRoom = other.gameObject;
+        }
+
+        var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+        if (e != null)
+        {
+            e.AddActor(this);
+            CurrentEventWindow.Current.AddEvent(e);
         }
     }
 }

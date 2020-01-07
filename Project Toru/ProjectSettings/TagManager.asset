@@ -14,7 +14,9 @@ TagManager:
   - Security Room
   - levelComplete
   - CopsSpawnPoint
-  - Walls
+  - FPSMonitor
+  - InventoryMoney
+  - LevelManager
   layers:
   - Default
   - TransparentFX
