@@ -33,7 +33,7 @@ namespace Assets.Scripts.Behaviour
 
 		void Update()
 		{
-
+			OnClick();
 		}
 
 		public void drop()
@@ -52,7 +52,17 @@ namespace Assets.Scripts.Behaviour
 		{
 			if (eventData.button == PointerEventData.InputButton.Right)
 			{
-				// TODO move character here
+			}
+		}
+
+		public void OnClick()
+		{
+			if (Character.selectedCharacter != null)
+			{
+				if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
+				{
+					Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
+				}
 			}
 		}
 

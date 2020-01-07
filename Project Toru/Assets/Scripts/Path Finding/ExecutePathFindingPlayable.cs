@@ -24,33 +24,11 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 				if (plane.Raycast(ray, out dist))
 				{
 					Vector2 pos = ray.GetPoint(dist);
-					//Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-
-					Debug.Log(pos.x);
-					Debug.Log(pos.y);
-
-					targetFurniture = GetFurniture(pos);
 
 					PathFinding(pos);
 				}
 			}
 		}
-	}
-
-	private GameObject GetFurniture(Vector3 pos)
-	{
-		foreach (GameObject f in GameObject.FindGameObjectsWithTag("Furniture"))
-		{
-			/*Debug.Log(f.transform.position.x);
-			Debug.Log(f.transform.position.y);*/
-
-			if(pos.x > f.transform.position.x && pos.x < (f.transform.position.x + f.GetComponent<Furniture>().GetSize().x) && pos.y > f.transform.position.y && pos.y < (f.transform.position.y + f.GetComponent<Furniture>().GetSize().y))
-			{
-				Debug.Log("Gevonden !!");
-				return f;
-			}
-		}
-		return null;
 	}
 
 	public void PathFinding(Vector3 pos)
@@ -139,7 +117,6 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 			var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
 			if (e != null)
 			{
-				Debug.Log("Pathfinding");
 				e.AddActor(GetComponent<Character>());
 				CurrentEventWindow.Current.AddEvent(e);
 			}

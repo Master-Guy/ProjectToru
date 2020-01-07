@@ -114,5 +114,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		current = 0;
 		path.Clear();
 		targetFurniture = null;
+
+		Debug.Log("Clear");
 	}
 }
