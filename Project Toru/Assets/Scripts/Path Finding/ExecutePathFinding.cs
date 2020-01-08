@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Options;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,9 +48,26 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
 
-			if (current >= path.Count)
+			if (current == path.Count)
 			{
+				CallEventWindow();
+
 				StopPathFinding();
+			}
+		}
+	}
+
+	private void CallEventWindow()
+	{
+		if (targetFurniture != null)
+		{
+			var e = targetFurniture.GetComponent<Assets.Scripts.Options.Event>();
+			if (e != null)
+			{
+				e.AddActor(GetComponent<Character>());
+				CurrentEventWindow.Current.AddEvent(e);
+				targetFurniture.GetComponent<BoxCollider2D>().enabled = false;
+				targetFurniture = null;
 			}
 		}
 	}
@@ -113,8 +131,5 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	{
 		current = 0;
 		path.Clear();
-		targetFurniture = null;
-
-		Debug.Log("Clear");
 	}
 }

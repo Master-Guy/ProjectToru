@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 namespace Assets.Scripts.Behaviour
 {
 	[RequireComponent(typeof(Options.Event))]
-	public abstract class Furniture : MonoBehaviour, IPointerClickHandler
+	public abstract class Furniture : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
 	{
 		[SerializeField]
 		bool Passable;
@@ -52,6 +52,7 @@ namespace Assets.Scripts.Behaviour
 		{
 			if (eventData.button == PointerEventData.InputButton.Right)
 			{
+				Debug.Log("Right click");
 			}
 		}
 
@@ -59,9 +60,10 @@ namespace Assets.Scripts.Behaviour
 		{
 			if (Character.selectedCharacter != null)
 			{
-				if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
+				if (Input.GetMouseButtonDown(1) && EventSystem.current.IsPointerOverGameObject())
 				{
 					Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
+					Debug.Log("Selected: " + name);
 				}
 			}
 		}

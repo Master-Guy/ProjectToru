@@ -110,24 +110,9 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 		return null;
 	}
 
-	private void CheckFurnitureTarget(Collider2D other)
-	{
-		if (targetFurniture != null)
-		{
-			var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
-			if (e != null)
-			{
-				e.AddActor(GetComponent<Character>());
-				CurrentEventWindow.Current.AddEvent(e);
-			}
-		}
-	}
-
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		checkDoorClosed(other);
-
-		CheckFurnitureTarget(other);
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
