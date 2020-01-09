@@ -26,7 +26,7 @@ namespace Assets.Scripts.Options
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class EventWindow : MonoBehaviour, IPointerClickHandler
 	{
-		private string ResultMessage, DoAnotherActionString = "Do you want to do anything else?" + Environment.NewLine + "  < link > yes </ link > " + Environment.NewLine + "< link > no </ link >";
+		private string ResultMessage, DoAnotherActionString = "Do you want to do anything else?" + Environment.NewLine + " <link>yes</link>" + Environment.NewLine + " <link>no</link>";
 
 		List<Event> EventQueue;
 		TextMeshProUGUI TMP;
@@ -113,7 +113,7 @@ namespace Assets.Scripts.Options
 
 		private void BuildResult()
 		{
-			TMP.text = ResultMessage + Environment.NewLine + "<link> continue </link>";
+			TMP.text = ResultMessage + Environment.NewLine + " <link>continue</link>";
 		}
 		public void ChangeLinkColor(int LinkIndex, Color colorForLinkAndVert)
 		{
@@ -156,7 +156,7 @@ namespace Assets.Scripts.Options
 			{
 				case EventTextType.options:
 					ActorCount = EventQueue[0].ActivateOption(LinkIndex, ref ResultMessage);
-					if (ActorCount == 1)
+					if (ActorCount == 0)
 						goto default;
 
 					TMP.text = EventQueue[0].GetActorText();
