@@ -133,6 +133,8 @@ public class Character : MonoBehaviour
             selectedCharacter = this;
             this.enableMovement();
             inventory.UpdateUI();
+
+			FindObjectOfType<TutorialTrigger>().TriggerDialogue();
         }
     }
 
