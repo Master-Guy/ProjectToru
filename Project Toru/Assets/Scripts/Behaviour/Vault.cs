@@ -7,9 +7,6 @@ using Assets.Scripts.Behaviour;
 
 public class Vault : Furniture
 {
-    [SerializeField]
-    Collider2D vaultCollider = null;
-
     public Door door = null;
     public GameObject money = null;
 
@@ -44,7 +41,7 @@ public class Vault : Furniture
     IEnumerator WaitForAnimationEndTimer()
     {
         yield return new WaitForSeconds(0.5f);
-        vaultCollider.enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public bool IsOpen()

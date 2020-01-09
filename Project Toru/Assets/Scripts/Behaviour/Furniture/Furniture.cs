@@ -44,8 +44,11 @@ namespace Assets.Scripts.Behaviour
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
-			if (collision.CompareTag("Player") && collision.isTrigger)  // check if character has a destination, if so check if it is this
+			if (collision.CompareTag("Player") && collision.isTrigger)
+			{
+				//Known bug: Eventwindow is gone fast, will not click either
 				CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
+			}
 		}
 
 		public void OnMouseOver()
@@ -55,7 +58,6 @@ namespace Assets.Scripts.Behaviour
 				if (Input.GetMouseButtonDown(1))
 				{
 					Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
-					Debug.Log("Selected: " + name);
 				}
 			}
 		}

@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694405309394793200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -1, z: -1}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1694405310051318999}
@@ -120,7 +120,6 @@ MonoBehaviour:
   Passable: 0
   Description: 
   size: {x: 1, y: 2}
-  vaultCollider: {fileID: 1909670225281376121}
   door: {fileID: 0}
   money: {fileID: 6706966753871349064, guid: 6a1473e49c90bb141998184284a57518, type: 3}
 --- !u!61 &1909670225281376121
@@ -136,7 +135,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.30155945, y: 0.013304234}
+  m_Offset: {x: -0.34483814, y: -0.294734}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -147,7 +146,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5218811, y: 2.7960043}
+  m_Size: {x: 2.0700216, y: 3.4120808}
   m_EdgeRadius: 0
 --- !u!114 &1694405308677135751
 MonoBehaviour:

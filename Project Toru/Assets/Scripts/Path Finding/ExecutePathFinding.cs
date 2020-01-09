@@ -50,9 +50,6 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 			if (current == path.Count)
 			{
-				Debug.Log("Laatste");
-				Debug.Log(targetFurniture.name);
-
 				CallEventWindow();
 
 				StopPathFinding();
@@ -132,5 +129,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	{
 		current = 0;
 		path.Clear();
+
+		targetFurniture = null;
 	}
 }

@@ -40,7 +40,7 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 
 		if (positionRoom != null)
 		{
-			pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
+			pos = new Vector3(pos.x, positionRoom.transform.position.y + 1, -1);
 
 			Room characterRoom;
 
@@ -52,7 +52,7 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 			{
 				characterRoom = GetEntranceRoom();
 
-				path.Add(new Vector2(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1));
+				path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
 			}
 
 			if (!positionRoom.Equals(characterRoom))
@@ -71,13 +71,13 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 				if (entranceRoom != null)
 				{
 					path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
-					path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
+					path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
 				}
 			}
 			catch (UnassignedReferenceException)
 			{
 				//Outside to outside code
-				path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
+				path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
 			}
 		}
 	}
