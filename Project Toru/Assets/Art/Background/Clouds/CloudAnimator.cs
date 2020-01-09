@@ -20,12 +20,9 @@ public class CloudAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(sky.origin);
-        Debug.Log(sky.cellBounds.xMax);
-
         for (int i = 0; i < totalCloudsRendered; i++)
         {
-            GameObject cloud = Instantiate(clouds[Random.Range(0, clouds.Count)], new Vector3(Random.Range(sky.origin.x, 50), Random.Range(12, 19), 0), Quaternion.identity);
+            GameObject cloud = Instantiate(clouds[Random.Range(0, clouds.Count)], new Vector3(Random.Range(sky.origin.x, 50), Random.Range(5, 13), 0), Quaternion.identity);
             renderedClouds.Add(new Cloud(cloud));
         }
 
@@ -38,7 +35,7 @@ public class CloudAnimator : MonoBehaviour
         {
             if (cloud.cloud.transform.position.x > 50)
             {
-                cloud.cloud.transform.position = new Vector3(sky.origin.x, cloud.cloud.transform.position.y, 0);
+                cloud.cloud.transform.position = new Vector3(sky.origin.x, Random.Range(5, 13), 0);
             }
             cloud.cloud.transform.Translate(cloud.speed * Time.deltaTime, 0, 0);
         }
@@ -53,6 +50,6 @@ public struct Cloud
     public Cloud(GameObject cloud)
     {
         this.cloud = cloud;
-        this.speed = Random.Range(0.1f, 2f);
+        this.speed = Random.Range(0.1f, 1f);
     }
 }
