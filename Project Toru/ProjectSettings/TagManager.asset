@@ -17,6 +17,8 @@ TagManager:
   - FPSMonitor
   - InventoryMoney
   - LevelManager
+  - Walls
+  - Furniture
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backerbackground
+    uniqueID: 3490218283
+    locked: 0
   - name: Background
     uniqueID: 2126931023
     locked: 0
