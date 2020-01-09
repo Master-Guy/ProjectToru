@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Behaviour;
+using Assets.Scripts.Options;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,60 +18,66 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 			if (Input.GetMouseButtonDown(1))
 			{
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				Plane plane = new Plane(Vector3.forward, transform.position);
-				float dist = 0;
+				Plane plane = new Plane(Vector3.forward, Character.selectedCharacter.transform.position);
+				float dist = 10;
 
 				if (plane.Raycast(ray, out dist))
 				{
-					Vector3 pos = ray.GetPoint(dist);
-					Room positionRoom = getCoRoom(pos);
+					Vector2 pos = ray.GetPoint(dist);
 
-					current = 0;
-					path.Clear();
-
-					if (positionRoom != null)
-					{
-						pos = new Vector2(pos.x, positionRoom.transform.position.y + 1);
-
-						Room characterRoom;
-
-						try
-						{
-							characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
-						}
-						catch (UnassignedReferenceException)
-						{
-							characterRoom = GetEntranceRoom();
-
-							path.Add(new Vector2(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1));
-						}
-
-						if (!positionRoom.Equals(characterRoom))
-						{
-							path = pf.CalculateTransforms(positionRoom, characterRoom);
-						}
-						path.Add(pos);
-					}
-					else
-					{
-						Room entranceRoom = GetEntranceRoomToOutside(pos);
-
-						//Code for inside to outside
-						try
-						{
-							if (entranceRoom != null)
-							{
-								path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
-								path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
-							}
-						}
-						catch (UnassignedReferenceException)
-						{
-							//Outside to outside code
-							path.Add(new Vector2(pos.x, entranceRoom.transform.position.y + 1));
-						}
-					}
+					PathFinding(pos);
 				}
+			}
+		}
+	}
+
+	public void PathFinding(Vector3 pos)
+	{
+		Room positionRoom = getCoRoom(pos);
+
+		current = 0;
+		path.Clear();
+
+		if (positionRoom != null)
+		{
+			pos = new Vector3(pos.x, positionRoom.transform.position.y + 1, -1);
+
+			Room characterRoom;
+
+			try
+			{
+				characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+			}
+			catch (UnassignedReferenceException)
+			{
+				characterRoom = GetEntranceRoom();
+
+				path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
+			}
+
+			if (!positionRoom.Equals(characterRoom))
+			{
+				path = pf.CalculateTransforms(positionRoom, characterRoom);
+			}
+			path.Add(pos);
+		}
+		else
+		{
+			Room entranceRoom = GetEntranceRoomToOutside(pos);
+
+			//Code for inside to outside
+			try
+			{
+				if (entranceRoom != null)
+				{
+					path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
+					path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
+				}
+			}
+			catch (UnassignedReferenceException)
+			{
+				//Outside to outside code
+				path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
 			}
 		}
 	}
@@ -110,5 +118,10 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 	private void OnTriggerStay2D(Collider2D other)
 	{
 		checkDoorClosed(other);
+	}
+
+	public bool checkForFurnitureCollider()
+	{
+		return (path.Count == 0 && targetFurniture == null);
 	}
 }
