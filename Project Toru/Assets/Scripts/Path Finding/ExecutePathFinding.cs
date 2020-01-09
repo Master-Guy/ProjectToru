@@ -17,6 +17,10 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public int current = 0;
 
+
+	private Character character;
+	private Vector3 change;
+
 	public void Awake()
 	{
 		path = new List<Vector3>();
@@ -25,7 +29,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void Start()
 	{
 		animator = GetComponent<Animator>();
-
+		character = GetComponent<Character>();
 		pf = new PathFinding();
 	}
 
@@ -41,6 +45,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				{
 					current++;
 				}
+				change = Vector2.zero;
+				change = newPosition - transform.position;
+				character.change = this.change;
+
+
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
 
@@ -50,6 +59,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				path.Clear();
 			}
 		}
+		UpdateAnimations();
 	}
 
 	public Room getCoRoom(Vector2 loc)
@@ -101,5 +111,22 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void UpdateAnimations()
+	{
+		if(change != Vector3.zero)
+		{
+			animator.SetFloat("moveX", change.x);
+			animator.SetFloat("moveY", change.y);
+			animator.SetBool("moving", true);
+		}
+		else
+		{
+			/*animator.SetFloat("moveX", 0);
+			animator.SetFloat("moveY", 0);*/
+			animator.SetBool("moving", false);
+		}
+		change = Vector2.zero;
 	}
 }
