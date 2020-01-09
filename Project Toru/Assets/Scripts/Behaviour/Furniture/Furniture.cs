@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 namespace Assets.Scripts.Behaviour
 {
 	[RequireComponent(typeof(Options.Event))]
-	public abstract class Furniture : MonoBehaviour, IPointerClickHandler, IPointerDownHandler
+	public abstract class Furniture : MonoBehaviour
 	{
 		[SerializeField]
 		bool Passable;
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Behaviour
 
 		void Update()
 		{
-			OnClick();
+
 		}
 
 		public void drop()
@@ -48,19 +48,11 @@ namespace Assets.Scripts.Behaviour
 				CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
 		}
 
-		public void OnPointerClick(PointerEventData eventData)
+		public void OnMouseOver()
 		{
-			if (eventData.button == PointerEventData.InputButton.Right)
+			if (Character.selectedCharacter != null && GetComponent<Collider2D>().enabled)
 			{
-				Debug.Log("Right click");
-			}
-		}
-
-		public void OnClick()
-		{
-			if (Character.selectedCharacter != null)
-			{
-				if (Input.GetMouseButtonDown(1) && EventSystem.current.IsPointerOverGameObject())
+				if (Input.GetMouseButtonDown(1))
 				{
 					Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
 					Debug.Log("Selected: " + name);

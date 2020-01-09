@@ -50,6 +50,9 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 			if (current == path.Count)
 			{
+				Debug.Log("Laatste");
+				Debug.Log(targetFurniture.name);
+
 				CallEventWindow();
 
 				StopPathFinding();
@@ -61,13 +64,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	{
 		if (targetFurniture != null)
 		{
-			var e = targetFurniture.GetComponent<Assets.Scripts.Options.Event>();
+			var e = targetFurniture.gameObject.GetComponent<Assets.Scripts.Options.Event>();
 			if (e != null)
 			{
 				e.AddActor(GetComponent<Character>());
 				CurrentEventWindow.Current.AddEvent(e);
-				targetFurniture.GetComponent<BoxCollider2D>().enabled = false;
-				targetFurniture = null;
 			}
 		}
 	}
