@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4947826929547256570}
   - component: {fileID: 4521887051741011871}
   - component: {fileID: 6188662567543495645}
+  - component: {fileID: 6495987421405194056}
   m_Layer: 8
   m_Name: Employee
   m_TagString: NPC
@@ -167,6 +168,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6495987421405194056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947826929547256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &8285807996838187758
 GameObject:
   m_ObjectHideFlags: 0

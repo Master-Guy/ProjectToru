@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 namespace Assets.Scripts.Behaviour
 {
 	[RequireComponent(typeof(Options.Event))]
-	public class Furniture : MonoBehaviour, IPointerClickHandler
+	public abstract class Furniture : MonoBehaviour
 	{
 		[SerializeField]
 		bool Passable;
@@ -21,6 +21,8 @@ namespace Assets.Scripts.Behaviour
 		List<Item> items;
 		Room Parent;
 
+		[SerializeField]
+		Vector2Int size = new Vector2Int(0, 0);
 
 		void Start()
 		{
@@ -42,16 +44,27 @@ namespace Assets.Scripts.Behaviour
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
-			if (collision.CompareTag("Player") && collision.isTrigger)  // check if character has a destination, if so check if it is this
-				CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
+			if (collision.CompareTag("Player") && collision.isTrigger)
+			{
+				//Known bug: Eventwindow is gone fast, will not click either
+				//CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
+			}
 		}
 
-		public void OnPointerClick(PointerEventData eventData)
+		public void OnMouseOver()
 		{
-			if (eventData.button == PointerEventData.InputButton.Right)
+			if (Character.selectedCharacter != null && GetComponent<Collider2D>().enabled)
 			{
-				// TODO move character here
+				if (Input.GetMouseButtonDown(1))
+				{
+					Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
+				}
 			}
+		}
+
+		public Vector2Int GetSize()
+		{
+			return size;
 		}
 	}
 }

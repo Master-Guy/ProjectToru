@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2510886674794060572}
   - component: {fileID: 2510886674794060575}
   - component: {fileID: 4660946109321307049}
+  - component: {fileID: 8845129313483243389}
   m_Layer: 8
   m_Name: Architect2.1
   m_TagString: Player
@@ -194,9 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  change: {x: 0, y: 0, z: 0}
   playerOnTheStairs: 0
   currentRoom: {fileID: 0}
   MaxWeight: 20
+  firePoint: {fileID: 0}
+  weapon: {fileID: 0}
+  skills: 
 --- !u!198 &2510886674794060572
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4930,3 +4935,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef39380b27c48f2408d9fea94143f2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8845129313483243389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510886674794060566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
