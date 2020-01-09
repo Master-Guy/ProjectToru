@@ -26,24 +26,37 @@ namespace Assets.Scripts.Options
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class EventWindow : MonoBehaviour, IPointerClickHandler
 	{
-		private string ResultMessage, DoAnotherActionString = "Do you want to do anything else?" + Environment.NewLine + "  < link > yes </ link > " + Environment.NewLine + "< link > no </ link >";
+		private string ResultMessage, DoAnotherActionString = "Do you want to do anything else?" + Environment.NewLine + " <link>yes</link>" + Environment.NewLine + " <link>no</link>";
 
 		List<Event> EventQueue;
 		TextMeshProUGUI TMP;
 		EventTextType TextType;
-		int OptionIndex, ActorCount;
+		int OptionIndex, ActorCount, HoveringOver = -1;
+		GameObject Panel;
+		Color UnSelected = Color.black, Selected = Color.grey;
 
 		public void Start()
 		{
 			EventQueue = new List<Event>();
 			gameObject.SetActive(false);
+
+			Panel = gameObject.transform.parent.gameObject.transform.GetChild(0).gameObject;
+			Panel.SetActive(false);
 			TMP = GetComponent<TextMeshProUGUI>();
 			CurrentEventWindow.Current = this;
 		}
 
-		public void Update()
+		public void LateUpdate()
 		{
+			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
+			//if (LinkIndex == HoveringOver)
+			//	return;
 
+			if(HoveringOver != -1)
+				ChangeLinkColor(HoveringOver, UnSelected);
+			if(LinkIndex != -1)
+				ChangeLinkColor(LinkIndex, Selected);
+			HoveringOver = LinkIndex;
 		}
 
 		public void AddEvent(Event NewEvent)
@@ -82,11 +95,13 @@ namespace Assets.Scripts.Options
 			if (EventQueue.Count == 0)
 			{
 				gameObject.SetActive(false);
+				Panel.SetActive(false);
 				Time.timeScale = 1.0f;
 				return;
 			}
 
 			gameObject.SetActive(true);
+			Panel.SetActive(true);
 			EventQueue = EventQueue.OrderBy(o => o.priority).ToList();
 			
 			// slows down time depending on priority in 4 steps from full speed to 20 percent speed
@@ -98,16 +113,33 @@ namespace Assets.Scripts.Options
 
 		private void BuildResult()
 		{
-			TMP.text = ResultMessage + Environment.NewLine + "<link> continue </link>";
+			TMP.text = ResultMessage + Environment.NewLine + " <link>continue</link>";
 		}
-
-		public void OnMouseOver()
+		public void ChangeLinkColor(int LinkIndex, Color colorForLinkAndVert)
 		{
-			int LinkIndex = TMP_TextUtilities.FindIntersectingLink(TMP, Input.mousePosition, null); //Camera.main);
-			if (LinkIndex == -1)
-				return;
+			Debug.Log(LinkIndex);
+			var linkInfo = TMP.textInfo.linkInfo[LinkIndex];
 
-			// TODO highlight text
+			for (int i = 0; i < linkInfo.linkTextLength; i++)
+			{ // for each character in the link string
+				int characterIndex = linkInfo.linkTextfirstCharacterIndex + i; // the character index into the entire text
+				var charInfo = TMP.textInfo.characterInfo[characterIndex];
+				int meshIndex = charInfo.materialReferenceIndex; // Get the index of the material / sub text object used by this character.
+				int vertexIndex = charInfo.vertexIndex; // Get the index of the first vertex of this character.
+
+				Color32[] vertexColors = TMP.textInfo.meshInfo[meshIndex].colors32; // the colors for this character
+
+				if (charInfo.isVisible)
+				{
+					vertexColors[vertexIndex + 0] = colorForLinkAndVert;
+					vertexColors[vertexIndex + 1] = colorForLinkAndVert;
+					vertexColors[vertexIndex + 2] = colorForLinkAndVert;
+					vertexColors[vertexIndex + 3] = colorForLinkAndVert;
+				}
+			}
+
+			// Update Geometry
+			TMP.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
@@ -118,11 +150,13 @@ namespace Assets.Scripts.Options
 				return;
 			}
 
+			HoveringOver = -1;
+
 			switch (TextType)
 			{
 				case EventTextType.options:
 					ActorCount = EventQueue[0].ActivateOption(LinkIndex, ref ResultMessage);
-					if (ActorCount == 1)
+					if (ActorCount == 0)
 						goto default;
 
 					TMP.text = EventQueue[0].GetActorText();
