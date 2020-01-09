@@ -1,14 +1,14 @@
+﻿using System;
 using Assets.Scripts.Options;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using GameAnalyticsSDK;
 
 public enum Skills
 {
     hacker
 }
+
 public class Character : MonoBehaviour
 {
     public float speed;
@@ -21,18 +21,21 @@ public class Character : MonoBehaviour
     private bool didUseStair = false;
     private bool isDisabled;
     private ParticleSystem ps;
-    public List<Skills> skills = new List<Skills>();
 
     private float timer = 0;
     private float stairsDuration = 1;
     public bool playerOnTheStairs = false;
 
-
     public GameObject currentRoom;
+    public static Character selectedCharacter;
 
     public float MaxWeight;
 
-    public static Character selectedCharacter;
+    public GameObject firePoint;
+    public Weapon weapon;
+
+    public List<Skills> skills = new List<Skills>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,9 @@ public class Character : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
 
         inventory = new Inventory(MaxWeight);
+
+        weapon = GetComponentInChildren<Weapon>();
+        firePoint = weapon.gameObject;
 
         AdjustOrderLayer();
     }
@@ -90,16 +96,18 @@ public class Character : MonoBehaviour
             }
 
             UpdateAnimationsAndMove();
-        }
-    }
 
-    public Character getCurrentCharacter()
-    {
-        return selectedCharacter;
+            if (Input.GetKey(KeyCode.F))
+            {
+                weapon.Shoot();
+            }
+        }
+
     }
 
     public bool HasKey(CardReader.CardreaderColor color)
     {
+
         foreach (Item i in inventory.getItemsList())
         {
             if (i is Key && ((Key)i).color == color)
@@ -114,6 +122,7 @@ public class Character : MonoBehaviour
         {
             AdjustOrderLayer();
             MoveCharacter();
+            FlipFirePoint();
             animator.SetFloat("moveX", change.x);
             animator.SetFloat("moveY", change.y);
             animator.SetBool("moving", true);
@@ -168,6 +177,32 @@ public class Character : MonoBehaviour
             selectedCharacter = this;
             this.enableMovement();
             inventory.UpdateUI();
+        }
+    }
+
+    private void FlipFirePoint()
+    {
+        if (change.x > 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
+            firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if (change.x < 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+            firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if (change.y > 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+        }
+        if (change.y < 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
         }
     }
 
