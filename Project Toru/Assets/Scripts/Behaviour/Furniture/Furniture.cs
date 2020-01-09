@@ -47,7 +47,7 @@ namespace Assets.Scripts.Behaviour
 			if (collision.CompareTag("Player") && collision.isTrigger)
 			{
 				//Known bug: Eventwindow is gone fast, will not click either
-				CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
+				//CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
 			}
 		}
 
