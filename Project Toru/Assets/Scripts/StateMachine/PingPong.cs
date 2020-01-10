@@ -27,9 +27,9 @@ public class PingPong : IState
 
 		if(trans.position != change)
 		{
-			animator.SetBool("isMoving", true);
-			animator.SetFloat("changeX", change.x - trans.position.x);
-			animator.SetFloat("changeY", change.y - trans.position.y);
+			animator.SetBool("moving", true);
+			animator.SetFloat("moveX", change.x - trans.position.x);
+			animator.SetFloat("moveY", change.y - trans.position.y);
 			trans.position = change;
 		}
 
@@ -37,8 +37,8 @@ public class PingPong : IState
 
 	public void Exit()
 	{
-		animator.SetBool("isMoving", false);
-		animator.SetFloat("changeX", 0);
-		animator.SetFloat("changeY", 0);
+		animator.SetBool("moving", false);
+		animator.SetFloat("moveX", 0);
+		animator.SetFloat("moveY", 0);
 	}
 }
