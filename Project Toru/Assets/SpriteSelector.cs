@@ -48,7 +48,12 @@ public class SpriteSelector : MonoBehaviour
         // Swap out the sprite to be rendered by its name
         string[] words = this.spriteRenderer.sprite.name.Split('_');
 
-        this.spriteRenderer.sprite = this.spriteSheet[SpriteSheetName + "_" + words.Last<string>()];
+        Sprite sprite;
+        if (this.spriteSheet.TryGetValue(SpriteSheetName + "_" + words.Last<string>(), out sprite))
+        {
+            this.spriteRenderer.sprite = sprite;
+        }
+
     }
 
     // Loads the sprites from a sprite sheet
