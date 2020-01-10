@@ -12,11 +12,6 @@ public class SpriteSelector : MonoBehaviour
     private string LoadedSpriteSheetName;
 
 
-    // If exists, use spritesheet with gun
-    public bool enableGun = false;
-    private bool loadedGunState = false;
-
-
     // The dictionary containing all the sliced up sprites in the sprite sheet
     private Dictionary<string, Sprite> spriteSheet;
 
@@ -44,7 +39,7 @@ public class SpriteSelector : MonoBehaviour
     private void LateUpdate()
     {
         // Check if the sprite sheet name has changed (possibly manually in the inspector)
-        if (this.LoadedSpriteSheetName != this.SpriteSheetName || loadedGunState != enableGun)
+        if (this.LoadedSpriteSheetName != this.SpriteSheetName)
         {
             // Load the new sprite sheet
             this.LoadSpriteSheet();
@@ -62,27 +57,18 @@ public class SpriteSelector : MonoBehaviour
         // Load the sprites from a sprite sheet file (png). 
         // Note: The file specified must exist in a folder named Resources
         string path = spritesheetPath + this.SpriteSheetName;
-        if (enableGun)
-        {
-            path += "_gun";
-        }
 
         var sprites = Resources.LoadAll<Sprite>(path);
 
         // Remember the name of the sprite sheet in case it is changed later
         this.LoadedSpriteSheetName = this.SpriteSheetName;
 
-        // Update gun state
-        loadedGunState = enableGun;
-
         if (sprites.Count<Sprite>() == 0)
         {
-            Debug.Log("Warning, asset " + SpriteSheetName + " not found in Assets/Resources/" + path);
+            Debug.LogWarning("Asset " + SpriteSheetName + " not found in Assets/Resources/" + path);
             return;
         }
 
         this.spriteSheet = sprites.ToDictionary(x => x.name, x => x);
-
-
     }
 }

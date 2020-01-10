@@ -128,6 +128,132 @@ TextureImporter:
   - first:
       213: -7368513021720139733
     second: fat guy_41
+  - first:
+      213: 2686524219401736802
+    second: fat_guy_0
+  - first:
+      213: 5219791844662162582
+    second: fat_guy_1
+  - first:
+      213: 2842775676773479662
+    second: fat_guy_2
+  - first:
+      213: -2568353188182377715
+    second: fat_guy_3
+  - first:
+      213: 1333753498469339009
+    second: fat_guy_4
+  - first:
+      213: 1136794370421168382
+    second: fat_guy_5
+  - first:
+      213: -4432942228373913079
+    second: fat_guy_6
+  - first:
+      213: -7743439429288614747
+    second: fat_guy_7
+  - first:
+      213: -6766225829327805593
+    second: fat_guy_8
+  - first:
+      213: -6039944703237525336
+    second: fat_guy_9
+  - first:
+      213: 7154742629991777123
+    second: fat_guy_10
+  - first:
+      213: 4674759047513412780
+    second: fat_guy_11
+  - first:
+      213: 8306708884395903
+    second: fat_guy_12
+  - first:
+      213: -436458869307290314
+    second: fat_guy_13
+  - first:
+      213: -563158588431746519
+    second: fat_guy_14
+  - first:
+      213: -6996333376917889058
+    second: fat_guy_15
+  - first:
+      213: -280726248351252896
+    second: fat_guy_16
+  - first:
+      213: -5854615721759737347
+    second: fat_guy_17
+  - first:
+      213: -4842138143710936148
+    second: fat_guy_18
+  - first:
+      213: -1922584775400388188
+    second: fat_guy_19
+  - first:
+      213: 8181510273663287051
+    second: fat_guy_20
+  - first:
+      213: 8911671764231554953
+    second: fat_guy_21
+  - first:
+      213: -5897274783322745890
+    second: fat_guy_22
+  - first:
+      213: 4661903368525383156
+    second: fat_guy_23
+  - first:
+      213: -9167934608244886969
+    second: fat_guy_24
+  - first:
+      213: 3087211679191214401
+    second: fat_guy_25
+  - first:
+      213: -7118410562403762674
+    second: fat_guy_26
+  - first:
+      213: 2486185222053189568
+    second: fat_guy_27
+  - first:
+      213: -3392985139512324081
+    second: fat_guy_28
+  - first:
+      213: 466492251784330585
+    second: fat_guy_29
+  - first:
+      213: -8440695783727214475
+    second: fat_guy_30
+  - first:
+      213: 7609838690622298448
+    second: fat_guy_31
+  - first:
+      213: -6841307007407920897
+    second: fat_guy_32
+  - first:
+      213: -1960794176833638911
+    second: fat_guy_33
+  - first:
+      213: 4048714259748589972
+    second: fat_guy_34
+  - first:
+      213: -5121905211323890711
+    second: fat_guy_35
+  - first:
+      213: 449845768809274802
+    second: fat_guy_36
+  - first:
+      213: -2290555337930673656
+    second: fat_guy_37
+  - first:
+      213: -582099294961859496
+    second: fat_guy_38
+  - first:
+      213: -2834840606696113782
+    second: fat_guy_39
+  - first:
+      213: -970341610060044481
+    second: fat_guy_40
+  - first:
+      213: 5915090990575260623
+    second: fat_guy_41
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -236,7 +362,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fat guy_0
+      name: fat_guy_0
       rect:
         serializedVersion: 2
         x: 0
@@ -250,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52645d80b9df54bb5a37c747b8633d69
-      internalID: 5480885292674479631
+      spriteID: 0016d321d6c564a8b9abf2b6114509ae
+      internalID: 2686524219401736802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_1
+      name: fat_guy_1
       rect:
         serializedVersion: 2
         x: 16
@@ -271,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76af55e13b86941b1b463a6a707f0479
-      internalID: -845141986970554367
+      spriteID: bba6f68269e53473fb7190ffec81f2fa
+      internalID: 5219791844662162582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_2
+      name: fat_guy_2
       rect:
         serializedVersion: 2
         x: 32
@@ -292,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef0c8292f01ab472cb473539560e0b74
-      internalID: -67231648923536539
+      spriteID: 83e1692c021744d50906d36c45aa8b4a
+      internalID: 2842775676773479662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_3
+      name: fat_guy_3
       rect:
         serializedVersion: 2
         x: 48
@@ -313,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7fbb9ab4757847ed9c2562b265d10e4
-      internalID: 4132021890007891369
+      spriteID: ea2a5dd099b0a4610b8e8ef2ee8c1b08
+      internalID: -2568353188182377715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_4
+      name: fat_guy_4
       rect:
         serializedVersion: 2
         x: 96
@@ -334,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f9f8a0fd913c411fa2aa494c109d9f4
-      internalID: -7913826812050405725
+      spriteID: 7be01edf79c9d44bcb8722d77aba2b69
+      internalID: 1333753498469339009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_5
+      name: fat_guy_5
       rect:
         serializedVersion: 2
         x: 112
@@ -355,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed9581ab287f54cba9ac91c254dff4a8
-      internalID: -4261668893226048792
+      spriteID: cf4e466b3403e4438a95c34729c4ddfb
+      internalID: 1136794370421168382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_6
+      name: fat_guy_6
       rect:
         serializedVersion: 2
         x: 144
@@ -376,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d398893eb61e4036ac3103e14ccd416
-      internalID: -4933589739191168487
+      spriteID: 7669270060ec04c978b9ca7c956bdff3
+      internalID: -4432942228373913079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_7
+      name: fat_guy_7
       rect:
         serializedVersion: 2
         x: 160
@@ -397,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b2d43caf7ed24f4f824e3433244084c
-      internalID: -4996823331614128142
+      spriteID: bcc87024e6e5f4a37a7122ac10ca2ff8
+      internalID: -7743439429288614747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_8
+      name: fat_guy_8
       rect:
         serializedVersion: 2
         x: 176
@@ -418,14 +544,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17367b301901c4a6a8fd55adb83d93c8
-      internalID: 2430026818067783075
+      spriteID: 3cae633835f3c4477a60e807d9c536db
+      internalID: -6766225829327805593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_9
+      name: fat_guy_9
       rect:
         serializedVersion: 2
         x: 192
@@ -439,14 +565,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 626113460c0284353a4f8309f1897d6b
-      internalID: 3418352846089282777
+      spriteID: f476388b9808846a0aa6e31b1a845db3
+      internalID: -6039944703237525336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_10
+      name: fat_guy_10
       rect:
         serializedVersion: 2
         x: 0
@@ -460,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b6b74005c73c4dac8321846a899df33
-      internalID: -8706810016186975531
+      spriteID: 6a50071d93a9d4ea8a3af9240681ff94
+      internalID: 7154742629991777123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_11
+      name: fat_guy_11
       rect:
         serializedVersion: 2
         x: 16
@@ -481,14 +607,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06e9a46ae91f34cbc9cdc26cd817c42a
-      internalID: 5368487967781620495
+      spriteID: e0247556d8a3f489d8f8d97e3325340d
+      internalID: 4674759047513412780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_12
+      name: fat_guy_12
       rect:
         serializedVersion: 2
         x: 32
@@ -502,14 +628,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 494c942ccac1d4b649cf5e9b4a47ec63
-      internalID: 8937317860671245849
+      spriteID: da5fce683298c4a1db13116e91bbf28f
+      internalID: 8306708884395903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_13
+      name: fat_guy_13
       rect:
         serializedVersion: 2
         x: 48
@@ -523,14 +649,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c495543ab2033469a81444af8c0bac35
-      internalID: 6272298733297546128
+      spriteID: d9edde8d0b1c64883a2028384ecfbeaa
+      internalID: -436458869307290314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_14
+      name: fat_guy_14
       rect:
         serializedVersion: 2
         x: 64
@@ -544,14 +670,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9903c79b9543f459abb5e93ab8c4d946
-      internalID: -4757919370854471136
+      spriteID: cc7e8bd72dfb9469db5a07572708289f
+      internalID: -563158588431746519
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_15
+      name: fat_guy_15
       rect:
         serializedVersion: 2
         x: 96
@@ -565,14 +691,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbe96a5170ccd4534b6e8f1f0e6ed93f
-      internalID: -7370998913060481789
+      spriteID: 3ef32a7f9f7284b2ba2178b217e4d81c
+      internalID: -6996333376917889058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_16
+      name: fat_guy_16
       rect:
         serializedVersion: 2
         x: 112
@@ -586,14 +712,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0164bff2d0ee4329a6ffba4b1d60010
-      internalID: 2930588583899815340
+      spriteID: f31f3b0083e964c5f9f647df682171c6
+      internalID: -280726248351252896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_17
+      name: fat_guy_17
       rect:
         serializedVersion: 2
         x: 144
@@ -607,14 +733,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0706cc0fa63d45e7b711c5666db6697
-      internalID: 3406543366521996678
+      spriteID: 749707ad8962b4d33a1f51c891c31206
+      internalID: -5854615721759737347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_18
+      name: fat_guy_18
       rect:
         serializedVersion: 2
         x: 160
@@ -628,14 +754,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1a6da306490a4c1ab90c13afae8445f
-      internalID: -3043452339137646195
+      spriteID: 63034ea2aa8144da599305707d8c64c4
+      internalID: -4842138143710936148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_19
+      name: fat_guy_19
       rect:
         serializedVersion: 2
         x: 176
@@ -649,14 +775,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02a55adf0c42f4a889bdcb4485606364
-      internalID: -6848330658669592808
+      spriteID: 898067759f1f3445f9ad03deb5b57640
+      internalID: -1922584775400388188
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_20
+      name: fat_guy_20
       rect:
         serializedVersion: 2
         x: 192
@@ -670,14 +796,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 228228d97b3244f35a47e9aeb78d2756
-      internalID: 7915087674780488187
+      spriteID: 498dc2caa0e014adba9910a0ccc0d2a2
+      internalID: 8181510273663287051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_21
+      name: fat_guy_21
       rect:
         serializedVersion: 2
         x: 0
@@ -691,14 +817,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dbb2178b0a0949988ea7a660fff220c
-      internalID: -4531397200330182652
+      spriteID: 2e259264a2fed4b9eb3e2feed9b28b75
+      internalID: 8911671764231554953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_22
+      name: fat_guy_22
       rect:
         serializedVersion: 2
         x: 16
@@ -712,14 +838,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddf2ce03d3e5244df9c242c5cc9bc0fa
-      internalID: -5221515453995193110
+      spriteID: 7f0def3772a9c437994cfe52f3e22109
+      internalID: -5897274783322745890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_23
+      name: fat_guy_23
       rect:
         serializedVersion: 2
         x: 32
@@ -733,14 +859,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 335435cd7a98a46dba5a2b01f11a0051
-      internalID: -8337715314933716512
+      spriteID: e7860637d42354c27899a8b62183f8ee
+      internalID: 4661903368525383156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_24
+      name: fat_guy_24
       rect:
         serializedVersion: 2
         x: 48
@@ -754,14 +880,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ffbf2fe95d57476682cef648af8ab61
-      internalID: 1920767960985167718
+      spriteID: 84c840920edb84096ba6b75dc423dd42
+      internalID: -9167934608244886969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_25
+      name: fat_guy_25
       rect:
         serializedVersion: 2
         x: 96
@@ -775,14 +901,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ad1e4e98e3f14d6dbfb1f47111651b6
-      internalID: -1937522112999352695
+      spriteID: 2b1a71f20ad2e499db07b03d14842a73
+      internalID: 3087211679191214401
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_26
+      name: fat_guy_26
       rect:
         serializedVersion: 2
         x: 112
@@ -796,14 +922,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c1c3064e1fbd48e0b27fb0bb6d359ea
-      internalID: -1857131721742575789
+      spriteID: 7be0f628b53244586a782602a69da0f2
+      internalID: -7118410562403762674
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_27
+      name: fat_guy_27
       rect:
         serializedVersion: 2
         x: 144
@@ -817,14 +943,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76c290efdfcf44ab99c5a74471c06e49
-      internalID: 2612955289893142290
+      spriteID: 294c0dc7d796c468da02c1d4d8522db7
+      internalID: 2486185222053189568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_28
+      name: fat_guy_28
       rect:
         serializedVersion: 2
         x: 160
@@ -838,14 +964,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cc9bd2cae00c4adb8f8be7dabbc9b0c
-      internalID: -2002395516595584317
+      spriteID: 3d0d7b8da349c49c3919b5bdeb7feb61
+      internalID: -3392985139512324081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_29
+      name: fat_guy_29
       rect:
         serializedVersion: 2
         x: 176
@@ -859,14 +985,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13d2483ff55394e63a77d858a389fc7d
-      internalID: 5250555264951351633
+      spriteID: 105d3a5a9e5a241a688e5de1a87df680
+      internalID: 466492251784330585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_30
+      name: fat_guy_30
       rect:
         serializedVersion: 2
         x: 192
@@ -880,14 +1006,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71188179507434ca394abff6b1080588
-      internalID: 8530850213369693371
+      spriteID: 46d5443eb99e842b299e174ea04da824
+      internalID: -8440695783727214475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_31
+      name: fat_guy_31
       rect:
         serializedVersion: 2
         x: 0
@@ -901,14 +1027,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3f97983639b5453eadb5ad5deef0464
-      internalID: -6201028794288665499
+      spriteID: 28322740901214eb28ab731eabd5e17a
+      internalID: 7609838690622298448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_32
+      name: fat_guy_32
       rect:
         serializedVersion: 2
         x: 16
@@ -922,14 +1048,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6aab767d40991473b8d2c4235bcdb428
-      internalID: 159841905512798920
+      spriteID: 6e4899d3b59bd46fe91f5ba6aaad4afe
+      internalID: -6841307007407920897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_33
+      name: fat_guy_33
       rect:
         serializedVersion: 2
         x: 32
@@ -943,14 +1069,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1e513367d37445bfa505ddee027d4f4
-      internalID: 3947020894604727421
+      spriteID: 00b28a782ec974edd905151d67996e34
+      internalID: -1960794176833638911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_34
+      name: fat_guy_34
       rect:
         serializedVersion: 2
         x: 48
@@ -964,14 +1090,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5ec13a2101104404b59be6a7980a796
-      internalID: 4968889061722013232
+      spriteID: fe78c87ac007d4c8cb860fd4e44741b4
+      internalID: 4048714259748589972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_35
+      name: fat_guy_35
       rect:
         serializedVersion: 2
         x: 96
@@ -985,14 +1111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23dd8e99afa5d4037b6c938caf68223f
-      internalID: 542386934257962130
+      spriteID: b93ac6b2f3a13496a9e34f0b7c58d429
+      internalID: -5121905211323890711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_36
+      name: fat_guy_36
       rect:
         serializedVersion: 2
         x: 112
@@ -1006,14 +1132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abaa95ea878fd444cb7748ea013fddfe
-      internalID: -3080559291158202009
+      spriteID: ca533868395a34e77adada5c08927b43
+      internalID: 449845768809274802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_37
+      name: fat_guy_37
       rect:
         serializedVersion: 2
         x: 144
@@ -1027,14 +1153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee55eb192db4e4a33a99357ab21aea9a
-      internalID: -2262888244968767752
+      spriteID: f2de83f9128ee4401bc32982a420da27
+      internalID: -2290555337930673656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_38
+      name: fat_guy_38
       rect:
         serializedVersion: 2
         x: 160
@@ -1048,14 +1174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9ff04a3654a04ae8b5a6018e663104c
-      internalID: -5558787039233737972
+      spriteID: 193e1cedeb20f425d977c401e4ccf029
+      internalID: -582099294961859496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_39
+      name: fat_guy_39
       rect:
         serializedVersion: 2
         x: 176
@@ -1069,14 +1195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ede0f028f8d84e6d81caa49a99f1278
-      internalID: -5330280915584727999
+      spriteID: 9fa16c6b14d18498cac3a4f9073504b7
+      internalID: -2834840606696113782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_40
+      name: fat_guy_40
       rect:
         serializedVersion: 2
         x: 192
@@ -1090,14 +1216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab64416e5154a4fff8942d3f8151e251
-      internalID: 2386482073450970426
+      spriteID: 6151b5bd40b1f48d89bf1a12800eb985
+      internalID: -970341610060044481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fat guy_41
+      name: fat_guy_41
       rect:
         serializedVersion: 2
         x: 144
@@ -1111,8 +1237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc9f76f7a76ec4176a912f93941efdef
-      internalID: -7368513021720139733
+      spriteID: 7da9ddb9e8ef44154aac33424342cda0
+      internalID: 5915090990575260623
       vertices: []
       indices: 
       edges: []

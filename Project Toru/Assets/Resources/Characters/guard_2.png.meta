@@ -1,181 +1,343 @@
 fileFormatVersion: 2
-guid: 97285caa9ec63426d940b76638bff453
+guid: 6143b60f907ce4e71b8e5e4ef3b0cb6f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2276525478399547786
-    second: architectwithgun_0
+      213: -870784272918367189
+    second: guardwithgun_0
   - first:
-      213: 1116915833707064579
-    second: architectwithgun_1
+      213: 7857116676100999868
+    second: guardwithgun_1
   - first:
-      213: -4931116199767169678
-    second: architectwithgun_2
+      213: -2852668126267951412
+    second: guardwithgun_2
   - first:
-      213: -4878261869586954029
-    second: architectwithgun_3
+      213: -2769533320253098459
+    second: guardwithgun_3
   - first:
-      213: 3604822443364549893
-    second: architectwithgun_4
+      213: -6750264010206111146
+    second: guardwithgun_4
   - first:
-      213: -4423996372807343178
-    second: architectwithgun_5
+      213: -825111493008535960
+    second: guardwithgun_5
   - first:
-      213: 5450135399914992845
-    second: architectwithgun_6
+      213: -6046853985047591919
+    second: guardwithgun_6
   - first:
-      213: -8758694244668583218
-    second: architectwithgun_7
+      213: 4596431001357345515
+    second: guardwithgun_7
   - first:
-      213: 753277552635507630
-    second: architectwithgun_8
+      213: 9066029005259485918
+    second: guardwithgun_8
   - first:
-      213: 8335688317374777862
-    second: architectwithgun_9
+      213: 891846842584050509
+    second: guardwithgun_9
   - first:
-      213: 1416885346376556893
-    second: architectwithgun_10
+      213: -1308677463135550056
+    second: guardwithgun_10
   - first:
-      213: 5403690464116111169
-    second: architectwithgun_11
+      213: -2867188814301483058
+    second: guardwithgun_11
   - first:
-      213: 7767182765889060436
-    second: architectwithgun_12
+      213: 613552956997372297
+    second: guardwithgun_12
   - first:
-      213: -7919648339232132333
-    second: architectwithgun_13
+      213: -184766263473873279
+    second: guardwithgun_13
   - first:
-      213: -3539673218778186950
-    second: architectwithgun_14
+      213: -7613725368608232271
+    second: guardwithgun_14
   - first:
-      213: 2954617249366134796
-    second: architectwithgun_15
+      213: -5829978003249582447
+    second: guardwithgun_15
   - first:
-      213: 6069643854557864280
-    second: architectwithgun_16
+      213: 735741464023638365
+    second: guardwithgun_16
   - first:
-      213: -7494747771251426789
-    second: architectwithgun_17
+      213: 8745075611883054910
+    second: guardwithgun_17
   - first:
-      213: 2335298518994957670
-    second: architectwithgun_18
+      213: 9180360740796297140
+    second: guardwithgun_18
   - first:
-      213: -3296204045000407234
-    second: architectwithgun_19
+      213: -4009808750788455163
+    second: guardwithgun_19
   - first:
-      213: -1406506512271613167
-    second: architectwithgun_20
+      213: -4937690050662150376
+    second: guardwithgun_20
   - first:
-      213: 6792439906699239092
-    second: architectwithgun_21
+      213: -7585088596479226411
+    second: guardwithgun_21
   - first:
-      213: -3420149181979028587
-    second: architectwithgun_22
+      213: -121173909163872590
+    second: guardwithgun_22
   - first:
-      213: -6860935611858393
-    second: architectwithgun_23
+      213: -7557415165754274851
+    second: guardwithgun_23
   - first:
-      213: -3673551945183730660
-    second: architectwithgun_24
+      213: -7735189979881070364
+    second: guardwithgun_24
   - first:
-      213: 7064075873935943678
-    second: architectwithgun_25
+      213: 3944806630137955115
+    second: guardwithgun_25
   - first:
-      213: 5228233976386165686
-    second: architectwithgun_26
+      213: -2284826380725677227
+    second: guardwithgun_26
   - first:
-      213: 6294862301574725622
-    second: architectwithgun_27
+      213: 3407838067539207868
+    second: guardwithgun_27
   - first:
-      213: 9131430313807718720
-    second: architectwithgun_28
+      213: -5724068918138411893
+    second: guardwithgun_28
   - first:
-      213: 7365731854816744479
-    second: architectwithgun_29
+      213: 7312793051292218981
+    second: guardwithgun_29
   - first:
-      213: 7763973584091012858
-    second: architectwithgun_30
+      213: -911836451734373232
+    second: guardwithgun_30
   - first:
-      213: -6007356469388240476
-    second: architectwithgun_31
+      213: 8007406681351652999
+    second: guardwithgun_31
   - first:
-      213: -678488906493363985
-    second: architectwithgun_32
+      213: 5842494046792979739
+    second: guardwithgun_32
   - first:
-      213: -2924232543082790626
-    second: architectwithgun_33
+      213: 4265652299108329327
+    second: guardwithgun_33
   - first:
-      213: -5999284456515411692
-    second: architectwithgun_34
+      213: -6006090580830879655
+    second: guardwithgun_34
   - first:
-      213: 8827868380104857883
-    second: architectwithgun_35
+      213: 546394823776909974
+    second: guardwithgun_35
   - first:
-      213: 8218373393187282910
-    second: architectwithgun_36
+      213: -2911307228628847713
+    second: guardwithgun_36
   - first:
-      213: 6349628180320693775
-    second: architectwithgun_37
+      213: 2818994344328418792
+    second: guardwithgun_37
   - first:
-      213: 9087564233648700131
-    second: architectwithgun_38
+      213: -54971719643144020
+    second: guardwithgun_38
   - first:
-      213: 5759985224842028729
-    second: architectwithgun_39
+      213: 2430061448481831821
+    second: guardwithgun_39
   - first:
-      213: 512411173935783519
-    second: architectwithgun_40
+      213: 1776310481083313903
+    second: guardwithgun_40
   - first:
-      213: 749829136314672635
-    second: architectwithgun_41
+      213: -7545137839418838477
+    second: guardwithgun_41
   - first:
-      213: -1521869627137631352
-    second: architectwithgun_42
+      213: 330816746843483809
+    second: guardwithgun_42
   - first:
-      213: -4411241686476163418
-    second: architectwithgun_43
+      213: 7616004974148872076
+    second: guardwithgun_43
   - first:
-      213: 7992455980548620824
-    second: architectwithgun_44
+      213: -645771649124818842
+    second: guardwithgun_44
   - first:
-      213: -5652068530166326600
-    second: architectwithgun_45
+      213: 815992431682884616
+    second: guardwithgun_45
   - first:
-      213: 7511843983610323623
-    second: architectwithgun_46
+      213: 2265847926491830745
+    second: guardwithgun_46
   - first:
-      213: -4435074857442179876
-    second: architectwithgun_47
+      213: 8758095168022652668
+    second: guardwithgun_47
   - first:
-      213: 7803131501963804421
-    second: architectwithgun_48
+      213: 7544066969686101935
+    second: guardwithgun_48
   - first:
-      213: -9026612989841528081
-    second: architectwithgun_49
+      213: -847837573009724391
+    second: guardwithgun_49
   - first:
-      213: -8709729084044724354
-    second: architectwithgun_50
+      213: -2046317381533913381
+    second: guardwithgun_50
   - first:
-      213: 1137839710377290211
-    second: architectwithgun_51
+      213: 2782354050227434696
+    second: guardwithgun_51
   - first:
-      213: 6809345988925207479
-    second: architectwithgun_52
+      213: 5237961803937353678
+    second: guardwithgun_52
   - first:
-      213: 4392812189253684364
-    second: architectwithgun_53
+      213: 3331861526763612794
+    second: guardwithgun_53
   - first:
-      213: -1606943245268478981
-    second: architectwithgun_54
+      213: 3954578261592556000
+    second: guardwithgun_54
   - first:
-      213: -60708521936718056
-    second: architectwithgun_55
+      213: 5317358733705295281
+    second: guardwithgun_55
   - first:
-      213: 2885316526329682099
-    second: architectwithgun_56
+      213: -6907491856523382667
+    second: guard_2_0
   - first:
-      213: 4944329873876357479
-    second: architectwithgun_57
+      213: -253926081304798102
+    second: guard_2_1
+  - first:
+      213: -5658233029898404307
+    second: guard_2_2
+  - first:
+      213: 8563812076852117800
+    second: guard_2_3
+  - first:
+      213: 6435290769668481073
+    second: guard_2_4
+  - first:
+      213: 726694710567350714
+    second: guard_2_5
+  - first:
+      213: 2978189088479586648
+    second: guard_2_6
+  - first:
+      213: -2296586496032138252
+    second: guard_2_7
+  - first:
+      213: 9198306335665727179
+    second: guard_2_8
+  - first:
+      213: -5381251377135521119
+    second: guard_2_9
+  - first:
+      213: 2247709777225631054
+    second: guard_2_10
+  - first:
+      213: 6711772428880464837
+    second: guard_2_11
+  - first:
+      213: -2666981725121535538
+    second: guard_2_12
+  - first:
+      213: -6541475078508653186
+    second: guard_2_13
+  - first:
+      213: 5724048800623194183
+    second: guard_2_14
+  - first:
+      213: 8515056907712657094
+    second: guard_2_15
+  - first:
+      213: 6129506230811067181
+    second: guard_2_16
+  - first:
+      213: -6802271159114104663
+    second: guard_2_17
+  - first:
+      213: 7108590310549309113
+    second: guard_2_18
+  - first:
+      213: -1298338348266974778
+    second: guard_2_19
+  - first:
+      213: 4248706740270038373
+    second: guard_2_20
+  - first:
+      213: 7428248460215914509
+    second: guard_2_21
+  - first:
+      213: -8637054149354203436
+    second: guard_2_22
+  - first:
+      213: -342349775616602575
+    second: guard_2_23
+  - first:
+      213: -1699424545899564800
+    second: guard_2_24
+  - first:
+      213: -1991548356538971294
+    second: guard_2_25
+  - first:
+      213: 7406025568200569806
+    second: guard_2_26
+  - first:
+      213: 2698735025339142783
+    second: guard_2_27
+  - first:
+      213: -2029083636977407869
+    second: guard_2_28
+  - first:
+      213: -290752008688831723
+    second: guard_2_29
+  - first:
+      213: -8041759719057473302
+    second: guard_2_30
+  - first:
+      213: 7180800657097764265
+    second: guard_2_31
+  - first:
+      213: -494342299515375669
+    second: guard_2_32
+  - first:
+      213: -7757418379727098057
+    second: guard_2_33
+  - first:
+      213: 2537582257277806776
+    second: guard_2_34
+  - first:
+      213: -3412613621409549223
+    second: guard_2_35
+  - first:
+      213: 1700449587364477366
+    second: guard_2_36
+  - first:
+      213: -7560210165884407969
+    second: guard_2_37
+  - first:
+      213: 5284224050152892982
+    second: guard_2_38
+  - first:
+      213: 2387059499675974156
+    second: guard_2_39
+  - first:
+      213: 5333658178906875806
+    second: guard_2_40
+  - first:
+      213: -2803061483491229367
+    second: guard_2_41
+  - first:
+      213: -7168548467787003348
+    second: guard_2_42
+  - first:
+      213: -6805490495143486409
+    second: guard_2_43
+  - first:
+      213: 8960363051171600307
+    second: guard_2_44
+  - first:
+      213: 4247673095648990765
+    second: guard_2_45
+  - first:
+      213: 273546829962549436
+    second: guard_2_46
+  - first:
+      213: 11616482117037346
+    second: guard_2_47
+  - first:
+      213: 8459835036218584037
+    second: guard_2_48
+  - first:
+      213: -3305730144736228787
+    second: guard_2_49
+  - first:
+      213: 7118142818267920779
+    second: guard_2_50
+  - first:
+      213: 7928330655868012891
+    second: guard_2_51
+  - first:
+      213: 7709178884319692703
+    second: guard_2_52
+  - first:
+      213: 9046099253397953633
+    second: guard_2_53
+  - first:
+      213: -6864787830727158463
+    second: guard_2_54
+  - first:
+      213: -7430807311667430915
+    second: guard_2_55
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -284,7 +446,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: architectwithgun_0
+      name: guard_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -298,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfbcdf104b0584cb7b4e69ea0c25a81c
-      internalID: -2276525478399547786
+      spriteID: 98246ab447b1a49ea880b5417215dd11
+      internalID: -6907491856523382667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_1
+      name: guard_2_1
       rect:
         serializedVersion: 2
         x: 16
@@ -319,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75e81b0da20724a628eee76a728833b5
-      internalID: 1116915833707064579
+      spriteID: 60d776af7547f4b34a20dad50389a965
+      internalID: -253926081304798102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_2
+      name: guard_2_2
       rect:
         serializedVersion: 2
         x: 32
@@ -340,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba0248efb87f64ad3b4e8eb341ece349
-      internalID: -4931116199767169678
+      spriteID: 07dbe0e4cc9e5455c9de267ad7a3b244
+      internalID: -5658233029898404307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_3
+      name: guard_2_3
       rect:
         serializedVersion: 2
         x: 48
@@ -361,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b52820f2b19da43b182d7133b6df36f3
-      internalID: -4878261869586954029
+      spriteID: f4ffc3488a7284391985b52e692197c9
+      internalID: 8563812076852117800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_4
+      name: guard_2_4
       rect:
         serializedVersion: 2
         x: 96
@@ -382,14 +544,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c1cde457cd6d4f41a5be90bd0075f76
-      internalID: 3604822443364549893
+      spriteID: 303a66e8323d44d568079e743fe0ae45
+      internalID: 6435290769668481073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_5
+      name: guard_2_5
       rect:
         serializedVersion: 2
         x: 112
@@ -403,14 +565,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b9f74854f5404b97bd021603d9c8068
-      internalID: -4423996372807343178
+      spriteID: 19838d606a6f64b9da247f939f28d820
+      internalID: 726694710567350714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_6
+      name: guard_2_6
       rect:
         serializedVersion: 2
         x: 144
@@ -424,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2803d0c2e115b4d59adb40fdee691fe7
-      internalID: 5450135399914992845
+      spriteID: ed675ff92eb4a4e47845e6e1e1f41edf
+      internalID: 2978189088479586648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_7
+      name: guard_2_7
       rect:
         serializedVersion: 2
         x: 160
@@ -445,14 +607,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 143a423b1a1f847b68c51bf70a215acb
-      internalID: -8758694244668583218
+      spriteID: 8ec292d050a354cb3b44e3b0c05ed7af
+      internalID: -2296586496032138252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_8
+      name: guard_2_8
       rect:
         serializedVersion: 2
         x: 176
@@ -466,14 +628,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 043dc9755258e4844a3cde4a8c89a328
-      internalID: 753277552635507630
+      spriteID: 1a7242fa111644f0a838c04a1656aca5
+      internalID: 9198306335665727179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_9
+      name: guard_2_9
       rect:
         serializedVersion: 2
         x: 192
@@ -487,56 +649,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48ff23eb869584f7c9c2c92602a39216
-      internalID: 8335688317374777862
+      spriteID: 6d1685ea73b3e4b878cca4af996ed621
+      internalID: -5381251377135521119
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_10
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 224
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2663e75db5c243e2add8efd7ed017cf
-      internalID: 1416885346376556893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: architectwithgun_11
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 224
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a2799d0a11594b65975026f5a0df79e
-      internalID: 5403690464116111169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: architectwithgun_12
+      name: guard_2_10
       rect:
         serializedVersion: 2
         x: 0
@@ -550,14 +670,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94f1e43bef58942318834d2cc55eec3d
-      internalID: 7767182765889060436
+      spriteID: bb3ce602c610545589d2462157cee45d
+      internalID: 2247709777225631054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_13
+      name: guard_2_11
       rect:
         serializedVersion: 2
         x: 16
@@ -571,14 +691,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ba6e938184d4416fa9f85327a049e86
-      internalID: -7919648339232132333
+      spriteID: c8a2de25b0baa439cb50c0e069efe670
+      internalID: 6711772428880464837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_14
+      name: guard_2_12
       rect:
         serializedVersion: 2
         x: 32
@@ -592,14 +712,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3529c0ede4a484b3eb2000600bbef687
-      internalID: -3539673218778186950
+      spriteID: 7cc583f04c0bd4bdab1bd61b8e21d790
+      internalID: -2666981725121535538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_15
+      name: guard_2_13
       rect:
         serializedVersion: 2
         x: 48
@@ -613,14 +733,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c06316dbc3add421987e2e7ed8dcdf35
-      internalID: 2954617249366134796
+      spriteID: d79e3f1bc77d2430fbe725bcfc4499d4
+      internalID: -6541475078508653186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_16
+      name: guard_2_14
       rect:
         serializedVersion: 2
         x: 96
@@ -634,14 +754,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7bea824b7f0d41aaace1c6a6f850b4b
-      internalID: 6069643854557864280
+      spriteID: 021b00608d9e14f889c3ffc8280e7a52
+      internalID: 5724048800623194183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_17
+      name: guard_2_15
       rect:
         serializedVersion: 2
         x: 112
@@ -655,14 +775,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12d751b1c565645fba97c6ab8d091e3e
-      internalID: -7494747771251426789
+      spriteID: 45d61f499835640b99ac74f6e4c00777
+      internalID: 8515056907712657094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_18
+      name: guard_2_16
       rect:
         serializedVersion: 2
         x: 144
@@ -676,14 +796,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e67b2cfcc8200402d8081a1a7174c788
-      internalID: 2335298518994957670
+      spriteID: eab544265c66c4714bacfabaa15fbd2e
+      internalID: 6129506230811067181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_19
+      name: guard_2_17
       rect:
         serializedVersion: 2
         x: 160
@@ -697,14 +817,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0f8a7dae8d4840768ca166ebdbd5d89
-      internalID: -3296204045000407234
+      spriteID: f98584f62e5c04793985004e71aa117e
+      internalID: -6802271159114104663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_20
+      name: guard_2_18
       rect:
         serializedVersion: 2
         x: 176
@@ -718,14 +838,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e28de78037304e2ba6306e0b908f816
-      internalID: -1406506512271613167
+      spriteID: 213e7af4ff94942bcb1c8e5f9b9f47d0
+      internalID: 7108590310549309113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_21
+      name: guard_2_19
       rect:
         serializedVersion: 2
         x: 192
@@ -739,14 +859,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b319a4f63554465d8ac0e3b88725116
-      internalID: 6792439906699239092
+      spriteID: 31831c97f246e480899a15c01607d060
+      internalID: -1298338348266974778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_22
+      name: guard_2_20
       rect:
         serializedVersion: 2
         x: 0
@@ -760,14 +880,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22d98358449cc4612bae9c9ac5f9e088
-      internalID: -3420149181979028587
+      spriteID: bcf2d3461741c4768a6a658ddc720f0d
+      internalID: 4248706740270038373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_23
+      name: guard_2_21
       rect:
         serializedVersion: 2
         x: 16
@@ -781,14 +901,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c21f0cc78bd24c228eb7aafaba154d5
-      internalID: -6860935611858393
+      spriteID: 8aed56c5b1f9d47e380e3afd22048824
+      internalID: 7428248460215914509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_24
+      name: guard_2_22
       rect:
         serializedVersion: 2
         x: 32
@@ -802,14 +922,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cb22e30d775f4291be529fd2168c4ad
-      internalID: -3673551945183730660
+      spriteID: 4a9ee13576ca74d4f89851a1b351665d
+      internalID: -8637054149354203436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_25
+      name: guard_2_23
       rect:
         serializedVersion: 2
         x: 48
@@ -823,14 +943,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0122451924987413780945230b3cac20
-      internalID: 7064075873935943678
+      spriteID: 1d67ba81a648b4bf1acb6c339cd8539c
+      internalID: -342349775616602575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_26
+      name: guard_2_24
       rect:
         serializedVersion: 2
         x: 96
@@ -844,14 +964,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 166059f1edaea4e42bc25050464fa7d1
-      internalID: 5228233976386165686
+      spriteID: 3314326f0c3724690b104a854931ffd3
+      internalID: -1699424545899564800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_27
+      name: guard_2_25
       rect:
         serializedVersion: 2
         x: 112
@@ -865,14 +985,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c2200ed4d9af4c5a94a4543e5be31a7
-      internalID: 6294862301574725622
+      spriteID: d52ac3ef66e1e4f0fbfd3e250c67be3f
+      internalID: -1991548356538971294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_28
+      name: guard_2_26
       rect:
         serializedVersion: 2
         x: 144
@@ -886,14 +1006,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e02389bd99c3e4f93a6f20bf8e5c4d51
-      internalID: 9131430313807718720
+      spriteID: 381d7feabb97c41fbbfbc9cd78f9e62c
+      internalID: 7406025568200569806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_29
+      name: guard_2_27
       rect:
         serializedVersion: 2
         x: 160
@@ -907,14 +1027,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7da81ae71599a4be98a0a443900db480
-      internalID: 7365731854816744479
+      spriteID: 9672b83879b73429f95b33e93c26c903
+      internalID: 2698735025339142783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_30
+      name: guard_2_28
       rect:
         serializedVersion: 2
         x: 176
@@ -928,14 +1048,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abd2538a0bee844c8a8c372ebb301c59
-      internalID: 7763973584091012858
+      spriteID: 5fdf644e9552b4dddbd55286b5e047e9
+      internalID: -2029083636977407869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_31
+      name: guard_2_29
       rect:
         serializedVersion: 2
         x: 192
@@ -949,14 +1069,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91d9fab1d3b6643558c735bfad66c503
-      internalID: -6007356469388240476
+      spriteID: 296c61729a2a84efaa466f8e94894233
+      internalID: -290752008688831723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_32
+      name: guard_2_30
       rect:
         serializedVersion: 2
         x: 0
@@ -970,14 +1090,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11f38f55d7d9e4aafbc44044bfade0ba
-      internalID: -678488906493363985
+      spriteID: b533bcce407ad40828c26968c08d609e
+      internalID: -8041759719057473302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_33
+      name: guard_2_31
       rect:
         serializedVersion: 2
         x: 16
@@ -991,14 +1111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8472fb918d72a47e0bfc3f0325d926d4
-      internalID: -2924232543082790626
+      spriteID: 39b883441aa994182b132c941c4b7ff3
+      internalID: 7180800657097764265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_34
+      name: guard_2_32
       rect:
         serializedVersion: 2
         x: 32
@@ -1012,14 +1132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60d68b314a3ae42c2b2b0e3246390cfc
-      internalID: -5999284456515411692
+      spriteID: e34195357594845369d4a95a74e2adbd
+      internalID: -494342299515375669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_35
+      name: guard_2_33
       rect:
         serializedVersion: 2
         x: 48
@@ -1033,14 +1153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21cc7db40aa5a46399fa2c8c2b5d992c
-      internalID: 8827868380104857883
+      spriteID: e155ba0afe6f8420c885984df35fc61f
+      internalID: -7757418379727098057
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_36
+      name: guard_2_34
       rect:
         serializedVersion: 2
         x: 96
@@ -1054,14 +1174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 376e59956d0ed4ae3a569686dcedf83f
-      internalID: 8218373393187282910
+      spriteID: 886425e7641c14f4a892e46d06ec9e27
+      internalID: 2537582257277806776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_37
+      name: guard_2_35
       rect:
         serializedVersion: 2
         x: 112
@@ -1075,14 +1195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7a1bcbac57a245a7a88c77c85775405
-      internalID: 6349628180320693775
+      spriteID: 6877f672a57864761a0ffa90ad4e94e7
+      internalID: -3412613621409549223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_38
+      name: guard_2_36
       rect:
         serializedVersion: 2
         x: 144
@@ -1096,14 +1216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f599bab0cd05a48c9ba70acf5e4f92a0
-      internalID: 9087564233648700131
+      spriteID: 403ce700e0e2a442ca9456e7ecfa3591
+      internalID: 1700449587364477366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_39
+      name: guard_2_37
       rect:
         serializedVersion: 2
         x: 160
@@ -1117,14 +1237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbebd5299178545019f0bfa8fedeb175
-      internalID: 5759985224842028729
+      spriteID: 41643d9e0840f4710ab31485cf5f14f1
+      internalID: -7560210165884407969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_40
+      name: guard_2_38
       rect:
         serializedVersion: 2
         x: 176
@@ -1138,14 +1258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3106b7bb6f0d43f7b7655db8d52a043
-      internalID: 512411173935783519
+      spriteID: c716263f95cbd4f588aef2aadd645eb0
+      internalID: 5284224050152892982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_41
+      name: guard_2_39
       rect:
         serializedVersion: 2
         x: 192
@@ -1159,14 +1279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f62c3a1d2c414a9b870644022f7c2c3
-      internalID: 749829136314672635
+      spriteID: 0cb0ebbd69db14236b9d6c5ade84cb68
+      internalID: 2387059499675974156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_42
+      name: guard_2_40
       rect:
         serializedVersion: 2
         x: 0
@@ -1180,14 +1300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 934db8d20440f4dc89662a3d7e6f2299
-      internalID: -1521869627137631352
+      spriteID: 886ad6cc8a99742d6910a1b329e5b1e8
+      internalID: 5333658178906875806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_43
+      name: guard_2_41
       rect:
         serializedVersion: 2
         x: 16
@@ -1201,14 +1321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a9f12c6db5ab4412951c709d017d56c
-      internalID: -4411241686476163418
+      spriteID: c24cc67313e8a470792ed895b6e7ea5c
+      internalID: -2803061483491229367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_44
+      name: guard_2_42
       rect:
         serializedVersion: 2
         x: 32
@@ -1222,14 +1342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aace8e893b190472e9dccfcdbfff8605
-      internalID: 7992455980548620824
+      spriteID: d16a81492bb71455789bb97872903218
+      internalID: -7168548467787003348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_45
+      name: guard_2_43
       rect:
         serializedVersion: 2
         x: 48
@@ -1243,14 +1363,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9cf2ea26d3864fd7b38665a19c2fcc7
-      internalID: -5652068530166326600
+      spriteID: 66110f3d62d084c41ade00145b2917ce
+      internalID: -6805490495143486409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_46
+      name: guard_2_44
       rect:
         serializedVersion: 2
         x: 0
@@ -1264,14 +1384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25260c854720d4beab6eed7aae16cf32
-      internalID: 7511843983610323623
+      spriteID: 829bf75284e64435799d03077d0e5cbf
+      internalID: 8960363051171600307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_47
+      name: guard_2_45
       rect:
         serializedVersion: 2
         x: 16
@@ -1285,14 +1405,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6d5fdf50f85846ea90ff45d243a7449
-      internalID: -4435074857442179876
+      spriteID: 31e7f09f88be04893bdae7df6e43d908
+      internalID: 4247673095648990765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_48
+      name: guard_2_46
       rect:
         serializedVersion: 2
         x: 32
@@ -1306,14 +1426,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38e3ced9665b64c9087efb4b0004916f
-      internalID: 7803131501963804421
+      spriteID: 4e78412cf41ee4ab6abec78629ecf952
+      internalID: 273546829962549436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_49
+      name: guard_2_47
       rect:
         serializedVersion: 2
         x: 48
@@ -1327,14 +1447,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e8273acfa8644423bacef28c5fa9eb5
-      internalID: -9026612989841528081
+      spriteID: e7145d68afb1543a787a267b49af63d4
+      internalID: 11616482117037346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_50
+      name: guard_2_48
       rect:
         serializedVersion: 2
         x: 0
@@ -1348,14 +1468,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e6e030d88bd848a089ffd0a1bd87487
-      internalID: -8709729084044724354
+      spriteID: 70c78d4488b5443b197d488f92133721
+      internalID: 8459835036218584037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_51
+      name: guard_2_49
       rect:
         serializedVersion: 2
         x: 16
@@ -1369,14 +1489,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54690edd10ecd497b95436b5d70292bb
-      internalID: 1137839710377290211
+      spriteID: 1c009c8aec451479da87662e88dcfedc
+      internalID: -3305730144736228787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_52
+      name: guard_2_50
       rect:
         serializedVersion: 2
         x: 32
@@ -1390,14 +1510,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a4512bccf0aa4af1bb6a6e8a8f9d3b9
-      internalID: 6809345988925207479
+      spriteID: 7461ce2bfcb4f4d898b1ad991049192f
+      internalID: 7118142818267920779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_53
+      name: guard_2_51
       rect:
         serializedVersion: 2
         x: 48
@@ -1411,14 +1531,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 301da5d06dcfc4f39b517357e3526d74
-      internalID: 4392812189253684364
+      spriteID: 67ffe40ce0f1e423fb7acabd7f1f3ed1
+      internalID: 7928330655868012891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_54
+      name: guard_2_52
       rect:
         serializedVersion: 2
         x: 0
@@ -1432,14 +1552,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f31c29e3811884859a166f181a3cae4f
-      internalID: -1606943245268478981
+      spriteID: 60b1779801e1444e48691aa7c44152c2
+      internalID: 7709178884319692703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_55
+      name: guard_2_53
       rect:
         serializedVersion: 2
         x: 16
@@ -1453,14 +1573,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc2e6bb8f8457458fa6659398486b8b9
-      internalID: -60708521936718056
+      spriteID: cc720fbe87e3a442aadfbb2db9bc6fe2
+      internalID: 9046099253397953633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_56
+      name: guard_2_54
       rect:
         serializedVersion: 2
         x: 32
@@ -1474,14 +1594,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e617ddc19165e4e638ae7898982d5321
-      internalID: 2885316526329682099
+      spriteID: 61a6a95d19d2e4777810b600ed34a065
+      internalID: -6864787830727158463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: architectwithgun_57
+      name: guard_2_55
       rect:
         serializedVersion: 2
         x: 48
@@ -1495,8 +1615,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ed90e38e655c40c3b55bd4c281e328b
-      internalID: 4944329873876357479
+      spriteID: 7d581f69dcd9b49ceaf38ac013669abc
+      internalID: -7430807311667430915
       vertices: []
       indices: 
       edges: []

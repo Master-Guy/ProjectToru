@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2510886674794060565}
   - component: {fileID: 2510886674794060564}
   - component: {fileID: 2510886674794060567}
-  - component: {fileID: 5374054337773356472}
+  - component: {fileID: 3562011834027047211}
   - component: {fileID: 2510886674794060568}
   - component: {fileID: 2510886674794060571}
   - component: {fileID: 2510886674794060570}
@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4660946109321307049}
   - component: {fileID: 8845129313483243389}
   m_Layer: 8
-  m_Name: Architect
+  m_Name: Police
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -1329448103
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3461593138948554442, guid: 97285caa9ec63426d940b76638bff453,
+  m_Sprite: {fileID: 6715957911979874120, guid: 4ec4dc338b55e495da5b6ccbe24089ae,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,7 +110,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5374054337773356472
+--- !u!114 &3562011834027047211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e2e7c9077d14bd7a446c779621fc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteSheetName: Architect
+  SpriteSheetName: police
 --- !u!61 &2510886674794060568
 BoxCollider2D:
   m_ObjectHideFlags: 0
