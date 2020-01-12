@@ -6,8 +6,9 @@ using Assets.Scripts.Behaviour;
 
 public class Vault : Furniture
 {
-    public Door door = null;
     public GameObject money = null;
+	
+	public LevelScript levelScript = null;
 
     bool closed = true;
 
@@ -28,7 +29,8 @@ public class Vault : Furniture
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);
 
-        door.Close();
+		levelScript?.emit("vault_open");
+        // door.Close();
 
         StartCoroutine(WaitForAnimationEndTimer());
         return true;

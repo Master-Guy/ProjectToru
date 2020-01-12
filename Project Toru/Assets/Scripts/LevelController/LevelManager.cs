@@ -22,6 +22,13 @@ public class LevelManager : MonoBehaviour
     GameObject FPSMonitor = null;
 
     static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
+	
+	void Awake() {
+		if (!GameAnalytics.IsInitialized())
+		{
+			GameAnalytics.Initialize();
+		}
+	}
 
     void Start()
     {
