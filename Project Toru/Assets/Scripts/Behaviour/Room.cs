@@ -110,8 +110,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	void OnMouseDown()
 	{
 		printNumberOfGameObjects();
-
-		door.Close();
 	}
 
 	void printGameObjects()
