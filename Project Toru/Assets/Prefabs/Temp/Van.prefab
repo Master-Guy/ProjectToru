@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4159666075906911477}
   - component: {fileID: 4159666075906911370}
   m_Layer: 0
-  m_Name: TriggerLevelComplete
+  m_Name: Van
   m_TagString: levelComplete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,12 +44,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4159666075906911374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd95f8aed8287a4b8beb8f804656ddf, type: 3}
+  m_Script: {fileID: 11500000, guid: a2cba34e2c3674c18a1cab3436c5d9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copsSpawnPoint: {fileID: 4159666076280629518}
-  copsPrefab: {fileID: 5571107624726318309, guid: 29c0bf4c7e6825a42ab76e3011dcb2d4,
-    type: 3}
+  carCollider: {fileID: 4159666075906911369}
+  drive: 0
+  levelScript: {fileID: 0}
 --- !u!61 &4159666075906911369
 BoxCollider2D:
   m_ObjectHideFlags: 0

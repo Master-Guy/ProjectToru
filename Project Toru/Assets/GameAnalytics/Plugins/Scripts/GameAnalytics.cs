@@ -37,12 +37,19 @@ namespace GameAnalyticsSDK
             }
             private set{ _settings = value; }
         }
+		
+		// Add to see if GameAnalytics is already initialized
+		public static bool IsInitialized() {
+			return _hasInitializeBeenCalled;
+		}
 
         private static GameAnalytics _instance;
 
         #endregion
 
         private static bool _hasInitializeBeenCalled;
+		
+		
 
         #region unity derived methods
 
