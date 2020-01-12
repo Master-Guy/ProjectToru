@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 using Assets.Scripts.Behaviour;
 using System;
+using Assets.Scripts.Enums;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
@@ -53,46 +54,51 @@ public class Room : MonoBehaviour, IPointerClickHandler
 
 	void Start()
     {
+        //SetupRoom(); // Done by Building after setting up neighbours.
+	}
+
+    public virtual void SetupRoom()
+    {
         // Initializing the fogOfWar. Doing this in Room() causes a crash.
         fogOfWar = this.gameObject.GetComponentInChildren<FogOfWar>();
 
         // Hide this room behind a fog of war.
-        if (fogOfWar)
+        if (!discovered)
         {
             ShowFogOfWar();
         }
 
         // Check if roomsize is set
         if (!name.StartsWith("Entrance"))
-		{
-			if (size.x == 0 || size.y == 0)
-			{
-				Debug.LogError("A room size must be set manualy");
-			}
-		}
+        {
+            if (size.x == 0 || size.y == 0)
+            {
+                Debug.LogError("A room size must be set manualy");
+            }
+        }
 
-		// Enable Collider for leftwall
-		if (LeftRoom != null)
-		{
-			wallController?.EnableLeftWall(false);
-		}
+        // Enable Collider for leftwall
+        if (LeftRoom != null)
+        {
+            wallController?.EnableLeftWall(false);
+        }
 
-		// Hide CardReaders
-		if (LeftRoom == null)
-		{
-			cardReaderLeft?.Hide();
-		}
-		if (RightRoom == null)
-		{
-			cardReaderRight?.Hide();
-		}
+        // Hide CardReaders
+        if (LeftRoom == null)
+        {
+            cardReaderLeft?.Hide();
+        }
+        if (RightRoom == null)
+        {
+            cardReaderRight?.Hide();
+        }
 
-		// Tell Cardreaders which door is his door
-		cardReaderLeft?.AssignDoor(LeftRoom?.door);
-		cardReaderRight?.AssignDoor(door);
+        // Tell Cardreaders which door is his door
+        cardReaderLeft?.AssignDoor(LeftRoom?.door);
+        cardReaderRight?.AssignDoor(door);
 
-		checkIfRoomHasACamera();
-	}
+        checkIfRoomHasACamera();
+    }
 
 	void checkIfRoomHasACamera()
 	{
@@ -250,7 +256,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
     
     private void ShowFogOfWar()
     {
-        if (!discovered)
+        if (fogOfWar)
         {
             fogOfWar.GetComponent<Renderer>().enabled = true;
         }
@@ -262,6 +268,25 @@ public class Room : MonoBehaviour, IPointerClickHandler
         {
             fogOfWar.GetComponent<Renderer>().enabled = false;
             discovered = true;
+        }
+    }
+
+    public virtual void AddNeighbour(Direction direction, Room neighbour, bool callback = true)
+    {
+        if(callback)
+        {
+            neighbour.AddNeighbour(~direction, this, false);
+        }
+        switch (direction)
+        {
+            case Direction.Left:
+                LeftRoom = neighbour;
+                break;
+            case Direction.Right:
+                RightRoom = neighbour;
+                break;
+            default:
+                break;
         }
     }
 }
