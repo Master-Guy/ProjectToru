@@ -80,6 +80,9 @@ TagManager:
   - name: Guns
     uniqueID: 1310341817
     locked: 0
+  - name: FogOfWar
+    uniqueID: 3711346581
+    locked: 0
   - name: UI
     uniqueID: 117293569
     locked: 0

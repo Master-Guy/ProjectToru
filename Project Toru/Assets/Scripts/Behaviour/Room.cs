@@ -8,15 +8,6 @@ using System;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
-	//[SerializeField]
-	//Tilemap walls = null;
-
-	//[SerializeField]
-	//Tilemap background = null;
-
-	//[SerializeField]
-	//bool lightsOn = true;
-
 	[SerializeField]
 	WallController wallController = null;
 
@@ -40,16 +31,30 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	private bool roomHasCamera = false;
 	CameraRoom cameraRoom;
 
-	public Room()
+    FogOfWar fogOfWar;
+
+    [SerializeField]
+    bool discovered = false;
+
+    public Room()
 	{
 		charactersInRoom = new HashSet<GameObject>();
 		npcsInRoom = new HashSet<GameObject>();
 	}
 
 	void Start()
-	{
-		// Check if roomsize is set
-		if (!name.StartsWith("Entrance"))
+    {
+        // Initializing the fogOfWar. Doing this in Room() causes a crash.
+        fogOfWar = this.gameObject.GetComponentInChildren<FogOfWar>();
+
+        // Hide this room behind a fog of war.
+        if (fogOfWar)
+        {
+            ShowFogOfWar();
+        }
+
+        // Check if roomsize is set
+        if (!name.StartsWith("Entrance"))
 		{
 			if (size.x == 0 || size.y == 0)
 			{
@@ -129,14 +134,19 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
 	}
 
-	public void OnTriggerEnter2D(Collider2D other)
+	public virtual void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.isTrigger)
 		{
 			if (other.CompareTag("Player"))
 			{
 				charactersInRoom.Add(other.gameObject);
-				if (roomHasCamera)
+
+                HideFogOfWar();
+                LeftRoom?.HideFogOfWar();
+                RightRoom?.HideFogOfWar();
+
+                if (roomHasCamera)
 				{
 					cameraRoom.AlertGuard();
 				}
@@ -226,4 +236,21 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	{
 		return !gameObject.GetComponent<StairsBehaviour>();
 	}
+    
+    private void ShowFogOfWar()
+    {
+        if (!discovered)
+        {
+            fogOfWar.GetComponent<Renderer>().enabled = true;
+        }
+    }
+
+    public void HideFogOfWar()
+    {
+        if(fogOfWar)
+        {
+            fogOfWar.GetComponent<Renderer>().enabled = false;
+            discovered = true;
+        }
+    }
 }
