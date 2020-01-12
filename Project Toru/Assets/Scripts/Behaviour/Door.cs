@@ -60,6 +60,7 @@ public class Door : MonoBehaviour
 
 	public int isOpenOrHasTheRightKey(Item i)
 	{
+		Debug.LogWarning("This functions is not fully implemented");
 		return 1;
 	}
 }
