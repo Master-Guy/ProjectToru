@@ -124,4 +124,14 @@ public class BuildingBehaviour : MonoBehaviour
 		return bottomLeft;
 	}
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void DiscoverAllRooms()
+    {
+        foreach (Room room in rooms)
+        {
+            room.HideFogOfWar();
+        }
+    }
 }

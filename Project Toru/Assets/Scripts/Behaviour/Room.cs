@@ -145,7 +145,7 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		Debug.Log(charactersInRoom.Count + npcsInRoom.Count);
 	}
 
-	public void OnTriggerEnter2D(Collider2D other)
+	public virtual void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.isTrigger)
 		{
@@ -154,6 +154,8 @@ public class Room : MonoBehaviour, IPointerClickHandler
 				charactersInRoom.Add(other.gameObject);
 
                 HideFogOfWar();
+                LeftRoom?.HideFogOfWar();
+                RightRoom?.HideFogOfWar();
 
                 if (roomHasCamera)
 				{
@@ -254,9 +256,12 @@ public class Room : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void HideFogOfWar()
+    public void HideFogOfWar()
     {
-        fogOfWar.GetComponent<Renderer>().enabled = false;
-        discovered = true;
+        if(fogOfWar)
+        {
+            fogOfWar.GetComponent<Renderer>().enabled = false;
+            discovered = true;
+        }
     }
 }
