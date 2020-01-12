@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +26,10 @@ public abstract class NPC : MonoBehaviour
 
     [NonSerialized]
     public Animator animator = null;
+
+    [NonSerialized]
+    public CharacterStats stats;
+
 
     public void dropBag()
     {
@@ -67,6 +71,11 @@ public abstract class NPC : MonoBehaviour
         }
     }
 
+	// all generic states below
+	public void PingPong()
+	{
+		this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
+	}
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");

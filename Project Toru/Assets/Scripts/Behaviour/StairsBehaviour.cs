@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.Tilemaps;
-using UnityEngine.EventSystems;
-using Assets.Scripts.Enums;
-
+using UnityEngine.EventSystems;
+using Assets.Scripts.Enums;
+
 public class StairsBehaviour : Room
 {
 
@@ -21,20 +21,20 @@ public class StairsBehaviour : Room
         //SetupRoom();
 	}
 
-    public override void SetupRoom()
-    {
-        base.SetupRoom();
-
-        // Hide stairs when floor is not connected
-        if (Upstairs == null && GoUpStairs != null)
-        {
-            GoUpStairs?.Disable();
-        }
-
-        if (Downstairs == null && GoUpStairs != null)
-        {
-            GoDownStairs?.Disable();
-        }
+    public override void SetupRoom()
+    {
+        base.SetupRoom();
+
+        // Hide stairs when floor is not connected
+        if (Upstairs == null && GoUpStairs != null)
+        {
+            GoUpStairs?.Disable();
+        }
+
+        if (Downstairs == null && GoUpStairs != null)
+        {
+            GoDownStairs?.Disable();
+        }
     }
 
 	/// <summary>
@@ -97,21 +97,21 @@ public class StairsBehaviour : Room
 		{
 			character.StairsTransistion();
 		}
-	}
-
-    public override void AddNeighbour(Direction direction, Room neighbour, bool callback = true)
-    {
-        base.AddNeighbour(direction, neighbour, callback);
-        switch (direction)
-        {
-            case Direction.Up:
-                Upstairs = neighbour.getStairScript();
-                break;
-            case Direction.Down:
-                Downstairs = neighbour.getStairScript();
-                break;
-            default:
-                break;
-        }
-    }
+	}
+
+    public override void AddNeighbour(Direction direction, Room neighbour, bool callback = true)
+    {
+        base.AddNeighbour(direction, neighbour, callback);
+        switch (direction)
+        {
+            case Direction.Up:
+                Upstairs = neighbour.getStairScript();
+                break;
+            case Direction.Down:
+                Downstairs = neighbour.getStairScript();
+                break;
+            default:
+                break;
+        }
+    }
 }

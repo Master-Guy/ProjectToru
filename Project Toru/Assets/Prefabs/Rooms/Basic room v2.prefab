@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 1214099249711020074}
   m_Layer: 0
   m_Name: Collider Right
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -798,14 +798,14 @@ Tilemap:
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 9, y: 1, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
+  m_TileOrientation: 6
   m_TileOrientationMatrix:
-    e00: 1
+    e00: 1.01
     e01: 0
     e02: 0
     e03: 0
     e10: 0
-    e11: 1
+    e11: 1.01
     e12: 0
     e13: 0
     e20: 0
@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 5854148450727894747}
   m_Layer: 0
   m_Name: Collider Floor
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1737,14 +1737,14 @@ Tilemap:
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 9, y: 4, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
+  m_TileOrientation: 6
   m_TileOrientationMatrix:
-    e00: 1
+    e00: 1.01
     e01: 0
     e02: 0
     e03: 0
     e10: 0
-    e11: 1
+    e11: 1.01
     e12: 0
     e13: 0
     e20: 0
@@ -2085,7 +2085,7 @@ GameObject:
   - component: {fileID: 6659556305163008962}
   m_Layer: 0
   m_Name: Collider Left
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2764,14 +2764,14 @@ Tilemap:
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 9, y: 4, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
+  m_TileOrientation: 6
   m_TileOrientationMatrix:
-    e00: 1
+    e00: 1.01
     e01: 0
     e02: 0
     e03: 0
     e10: 0
-    e11: 1
+    e11: 1.01
     e12: 0
     e13: 0
     e20: 0
@@ -3008,6 +3008,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369414609990655981, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
