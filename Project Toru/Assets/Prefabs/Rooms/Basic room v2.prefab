@@ -2530,6 +2530,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door3D
       objectReference: {fileID: 0}
+    - target: {fileID: 2369414609990655981, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_LocalPosition.y
