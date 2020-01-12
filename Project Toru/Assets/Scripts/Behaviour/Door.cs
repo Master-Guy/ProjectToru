@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -60,6 +60,7 @@ public class Door : MonoBehaviour
 
 	public int isOpenOrHasTheRightKey(Item i)
 	{
+		Debug.LogWarning("This functions is not fully implemented");
 		return 1;
 	}
 }

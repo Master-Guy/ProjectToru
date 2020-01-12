@@ -8,15 +8,6 @@ using System;
 
 public class Room : MonoBehaviour, IPointerClickHandler
 {
-	//[SerializeField]
-	//Tilemap walls = null;
-
-	//[SerializeField]
-	//Tilemap background = null;
-
-	//[SerializeField]
-	//bool lightsOn = true;
-
 	[SerializeField]
 	WallController wallController = null;
 
@@ -124,8 +115,6 @@ public class Room : MonoBehaviour, IPointerClickHandler
 	void OnMouseDown()
 	{
 		printNumberOfGameObjects();
-
-		door.Close();
 	}
 
 	void printGameObjects()

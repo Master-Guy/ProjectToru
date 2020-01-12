@@ -1,12 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vault : MonoBehaviour
-{
-    [SerializeField]
-    Collider2D vaultCollider = null;
+using Assets.Scripts.Behaviour;
 
+public class Vault : Furniture
+{
     public Door door = null;
     public GameObject money = null;
 
@@ -15,11 +14,13 @@ public class Vault : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             if (collision.gameObject.GetComponent<Character>() && closed)
             {
                 Open();
                 collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
             }
+        }
     }
 
     public bool Open()
@@ -29,7 +30,6 @@ public class Vault : MonoBehaviour
 
         door.Close();
 
-
         StartCoroutine(WaitForAnimationEndTimer());
         return true;
     }
@@ -37,7 +37,7 @@ public class Vault : MonoBehaviour
     IEnumerator WaitForAnimationEndTimer()
     {
         yield return new WaitForSeconds(0.5f);
-        vaultCollider.enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public bool IsOpen()
@@ -49,5 +49,4 @@ public class Vault : MonoBehaviour
     {
         return closed;
     }
-
 }

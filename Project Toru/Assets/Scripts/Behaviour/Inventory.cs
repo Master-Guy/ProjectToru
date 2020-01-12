@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using GameAnalyticsSDK;
+
 public class Inventory
 {
     //Assign a Item List
@@ -13,12 +15,12 @@ public class Inventory
 
     public float MaxWeight;
 
-	private Character ch;
+    private Character ch;
 
     //Constructor - Creates a Item List
     public Inventory(float MaxWeight)
     {
-		this.MaxWeight = MaxWeight;
+        this.MaxWeight = MaxWeight;
         inv = new HashSet<Item>();
     }
 
@@ -32,15 +34,22 @@ public class Inventory
     {
         if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
         {
+            Debug.Log("1");
             bool Found = false;
             if (item.isStackable)
             {
+
+                Debug.Log("2");
                 foreach (Item i in inv)
                 {
+
+                    Debug.Log("3");
                     if (i.GetType().Equals(item.GetType()) && !Found)
                     {
                         i.value += item.value;
                         Found = true;
+
+                        Debug.Log("4");
                     }
                 }
             }
@@ -48,6 +57,8 @@ public class Inventory
             if (!Found)
             {
                 inv.Add(item);
+
+                Debug.Log("5");
             }
 
             UpdateUI();
