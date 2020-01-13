@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Assets.Scripts.Enums;
 
 public class BuildingBehaviour : MonoBehaviour
 {
@@ -32,7 +33,9 @@ public class BuildingBehaviour : MonoBehaviour
 	void Start()
 	{
 		CalculateBuilding();
-	}
+        GetAllRoomNeighbours();
+        SetupAllRooms();
+    }
 
 	/// <summary>
 	/// Calculates building dimentions
@@ -41,8 +44,12 @@ public class BuildingBehaviour : MonoBehaviour
 	void CalculateBuilding()
 	{
 
-		// Get rooms
-		rooms = grid.GetComponentsInChildren<Room>();
+        // Get rooms
+        Room[] tmpRooms = grid.GetComponentsInChildren<Room>();
+        StairsBehaviour[] tmpStairs = grid.GetComponentsInChildren<StairsBehaviour>();
+        rooms = new Room[tmpRooms.Length + tmpStairs.Length];
+        tmpRooms.CopyTo(rooms, 0);
+        tmpStairs.CopyTo(rooms, tmpRooms.Length);
 
 		// Calculate size of building
 		int left = int.MaxValue;
@@ -124,4 +131,42 @@ public class BuildingBehaviour : MonoBehaviour
 		return bottomLeft;
 	}
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void DiscoverAllRooms()
+    {
+        foreach (Room room in rooms)
+        {
+            room.HideFogOfWar();
+        }
+    }
+
+    private void GetAllRoomNeighbours()
+    {
+        foreach (Room room in rooms)
+        {
+            Vector3Int rightNeighbourPos = new Vector3Int(room.GetPosition().x + room.GetSize().x, room.GetPosition().y, 0);
+            Vector3Int aboveNeighbourPos = new Vector3Int(room.GetPosition().x, room.GetPosition().y + room.GetSize().y, 0);
+            foreach (Room possibleNeighbour in rooms)
+            {
+                if(possibleNeighbour.GetPosition() == rightNeighbourPos)
+                {
+                    possibleNeighbour.AddNeighbour(Direction.Left, room);
+                }
+                if(room.getStairScript() != null && possibleNeighbour.GetPosition() == aboveNeighbourPos)
+                {
+                    possibleNeighbour.AddNeighbour(Direction.Down, room);
+                }
+            }
+        }
+    }
+
+    private void SetupAllRooms()
+    {
+        foreach (Room room in rooms)
+        {
+            room.SetupRoom();
+        }
+    }
 }

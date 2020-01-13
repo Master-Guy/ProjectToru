@@ -38,8 +38,11 @@ public class InventoryUI
         //Character has his own inventory - Call function to set the inventory to the Inventory
         addInventoryToUI(inv);
 
-        //Show inventory
-        inventory.SetActive(true);
+		//Update money
+		UpdateMoneyUI();
+
+		//Show inventory
+		inventory.SetActive(true);
     }
 
     public void hideInv(HashSet<Item> inv)
@@ -60,4 +63,20 @@ public class InventoryUI
             slots[i].GetComponent<Mask>().showMaskGraphic = true;
         }
     }
+
+	public void UpdateMoneyUI()
+	{
+		GameObject.FindGameObjectWithTag("InventoryMoney").GetComponent<TMPro.TextMeshProUGUI>().text = "$" + GetTotalMoney();
+	}
+
+	public float GetTotalMoney()
+	{
+		float totalCash = 0;
+
+		foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+		{
+			totalCash += p.GetComponent<Character>().inventory.getMoney();
+		}
+		return totalCash;
+	}
 }

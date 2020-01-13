@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Options;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,13 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public int current = 0;
 
+	[NonSerialized]
+	public GameObject targetFurniture;
+
+
+	private Character character;
+	private Vector3 change;
+
 	public void Awake()
 	{
 		path = new List<Vector3>();
@@ -25,7 +33,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void Start()
 	{
 		animator = GetComponent<Animator>();
-
+		character = GetComponent<Character>();
 		pf = new PathFinding();
 	}
 
@@ -40,14 +48,34 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				if (transform.position == newPosition)
 				{
 					current++;
-				}
+				}
+				change = Vector2.zero;
+				change = newPosition - transform.position;
+				character.change = this.change;
+
+
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
 
-			if (current >= path.Count)
+			if (current == path.Count)
 			{
-				current = 0;
-				path.Clear();
+				CallEventWindow();
+
+				StopPathFinding();
+			}
+		}
+		UpdateAnimations();
+	}
+
+	private void CallEventWindow()
+	{
+		if (targetFurniture != null)
+		{
+			var e = targetFurniture.gameObject.GetComponent<Assets.Scripts.Options.Event>();
+			if (e != null)
+			{
+				e.AddActor(GetComponent<Character>());
+				CurrentEventWindow.Current.AddEvent(e);
 			}
 		}
 	}
@@ -60,22 +88,8 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		{
 			r = v.GetComponent<Room>();
 
-/*			Debug.Log(r.name);
-			Debug.Log(loc.x + " - " + loc.y);
-			Debug.Log("loc x: " + loc.x + " > " + r.transform.position.x);
-			Debug.Log("loc y: " + loc.y + " > " + r.transform.position.y);
-			Debug.Log("loc x: " + loc.x + " < " + (Math.Round(r.transform.position.x) + (int)r.GetSize().x));
-			Debug.Log("loc y: " + loc.y + " < " + (Math.Round(r.transform.position.y) + (int)r.GetSize().y));
-			Debug.Log("-----------------------");
-
 			if (loc.x >= r.transform.position.x && loc.x <= (Math.Round(r.transform.position.x) + (int)r.GetSize().x) && loc.y >= r.transform.position.y && loc.y <= (Math.Round(r.transform.position.y) + (int)r.GetSize().y))
 			{
-				return r;
-			}*/
-
-			if (loc.x > r.transform.position.x && loc.x < (r.transform.position.x + r.GetPosition().x) && Math.Round(loc.y) > (int)(r.GetPosition().y) && Math.Round(loc.y) < (Math.Round(r.transform.position.y) + (int)r.GetSize().y))
-			{
-				//Debug.Log("Return: " + r.name);
 				return r;
 			}
 		}
@@ -84,36 +98,65 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 	public void checkDoorClosed(Collider2D other)
 	{
-		if (other.gameObject.GetComponent<CardReader>())
+		try
 		{
-			if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
+			if (other.gameObject.GetComponent<CardReader>())
 			{
-				if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()))
+				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
 				{
-					other.gameObject.GetComponent<CardReader>().getDoor().Open();
-				}
-				else if (gameObject.GetComponent<NPC>())
-				{
-					if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()))
+					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
 					{
 						other.gameObject.GetComponent<CardReader>().getDoor().Open();
+					}
+					else if (gameObject.GetComponent<NPC>())
+					{
+						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+						{
+							other.gameObject.GetComponent<CardReader>().getDoor().Open();
+						}
+						else
+						{
+							if (path.Count != 0)
+							{
+								StopPathFinding();
+							}
+						}
 					}
 					else
 					{
 						if (path.Count != 0)
 						{
-							path.Clear();
+							StopPathFinding();
 						}
-					}
-				}
-				else
-				{
-					if (path.Count != 0)
-					{
-						path.Clear();
 					}
 				}
 			}
 		}
+		catch (NullReferenceException) { }
+	}
+
+	public void StopPathFinding()
+	{
+		current = 0;
+		path.Clear();
+
+		targetFurniture = null;
+	}
+
+	public void UpdateAnimations()
+	{
+		if(change != Vector3.zero)
+		{
+			animator.SetFloat("moveX", change.x);
+			animator.SetFloat("moveY", change.y);
+			animator.SetBool("moving", true);
+		}
+		else
+		{
+			/*animator.SetFloat("moveX", 0);
+			animator.SetFloat("moveY", 0);*/
+			animator.SetBool("moving", false);
+		}
+		change = Vector2.zero;
 	}
 }

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4947826929547256570}
   - component: {fileID: 4521887051741011871}
   - component: {fileID: 6188662567543495645}
+  - component: {fileID: 848469837743810261}
+  - component: {fileID: 6495987421405194056}
   m_Layer: 8
   m_Name: Employee
   m_TagString: NPC
@@ -74,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1329448103
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3555098256961693778, guid: 896be2e5d09deb343844e0f84f5c60a5,
+  m_Sprite: {fileID: -7675262176189822710, guid: 896be2e5d09deb343844e0f84f5c60a5,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -158,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 4947826929547256574}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 033d95449e271cc4b889ed5a769aecd8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 090c19fa2bd6e4884a950ab62bd13afa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -167,6 +169,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &848469837743810261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947826929547256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e2e7c9077d14bd7a446c779621fc81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteSheetName: employee
+--- !u!114 &6495987421405194056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947826929547256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &8285807996838187758
 GameObject:
   m_ObjectHideFlags: 0

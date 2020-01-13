@@ -402,3 +402,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Project Toru/Assets/Scripts/Shader.meta
+
+Project Toru/Assets/Scripts/Behaviour/FogOfWar.cs.meta
+
+*.meta

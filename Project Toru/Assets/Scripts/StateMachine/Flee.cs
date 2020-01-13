@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Flee : IState
 {
@@ -27,9 +27,9 @@ public class Flee : IState
 		if(arrayNumber == path.Length)
 		{
 			endReached = true;
-			animator.SetBool("isMoving", false);
-			animator.SetFloat("changeX", 0);
-			animator.SetFloat("changeY", 0);
+			animator.SetBool("moving", false);
+			animator.SetFloat("moveX", 0);
+			animator.SetFloat("moveY", 0);
 
 			if(path.Length > 0 && path[path.Length-1].name == "Despawn")
 			{
@@ -43,9 +43,9 @@ public class Flee : IState
 
 			if (trans.position != change)
 			{
-				animator.SetBool("isMoving", true);
-				animator.SetFloat("changeX", change.x - trans.position.x);
-				animator.SetFloat("changeY", change.y - trans.position.y);
+				animator.SetBool("moving", true);
+				animator.SetFloat("moveX", change.x - trans.position.x);
+				animator.SetFloat("moveY", change.y - trans.position.y);
 				trans.position = change;
 			}
 
