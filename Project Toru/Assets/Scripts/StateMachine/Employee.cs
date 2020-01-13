@@ -8,8 +8,6 @@ public class Employee : NPC
 	private bool surrender = false;
     private bool fleeTrue = false;
 
-    LevelComplete lc;
-
 	public void Start()
 	{
 		this.startingPosition = transform.position;
@@ -66,11 +64,6 @@ public class Employee : NPC
             fleeTrue = false;
         }
         
-    }
-
-    void startCountDown()
-    {
-        GameObject.FindGameObjectWithTag("levelComplete").GetComponent<LevelComplete>().EnableLose();
     }
 
 }

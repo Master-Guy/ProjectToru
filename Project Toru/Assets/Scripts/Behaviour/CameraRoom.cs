@@ -26,9 +26,4 @@ public class CameraRoom : MonoBehaviour
 
 		Invoke("AlertCops", 18);
 	}
-
-	void AlertCops()
-	{
-		GameObject.FindGameObjectWithTag("levelComplete").GetComponent<LevelComplete>().EnableLose();
-	}
 }
