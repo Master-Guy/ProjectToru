@@ -27,6 +27,10 @@ public abstract class NPC : MonoBehaviour
     [NonSerialized]
     public Animator animator = null;
 
+    [NonSerialized]
+    public CharacterStats stats;
+
+
     public void dropBag()
     {
         foreach (GameObject g in bag)
@@ -67,6 +71,11 @@ public abstract class NPC : MonoBehaviour
         }
     }
 
+	// all generic states below
+	public void PingPong()
+	{
+		this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
+	}
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");

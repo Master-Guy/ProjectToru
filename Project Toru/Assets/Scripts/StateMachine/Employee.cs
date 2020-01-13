@@ -31,10 +31,7 @@ public class Employee : NPC
         Surrender();
     }
 
-    void PingPong()
-    {
-        this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
-    }
+
 
     void Surrender()
     {
@@ -49,6 +46,8 @@ public class Employee : NPC
 
     void FleeIfPossible()
     {
+        if (currentRoom == null) return;
+
         if (!currentRoom.AnyCharacterInRoom() && surrender)
         {
             this.surrender = false;
@@ -69,6 +68,7 @@ public class Employee : NPC
 
     void startCountDown()
     {
+
     }
 
 }

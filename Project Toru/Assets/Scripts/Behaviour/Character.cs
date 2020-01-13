@@ -1,19 +1,19 @@
+﻿using System;
 using Assets.Scripts.Options;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using GameAnalyticsSDK;
 
 public enum Skills
 {
     hacker
 }
+
 public class Character : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D myRigidbody;
-    private Vector3 change;
+    public Vector3 change;
     private Animator animator;
 
     public Inventory inventory;
@@ -21,18 +21,21 @@ public class Character : MonoBehaviour
     private bool didUseStair = false;
     private bool isDisabled;
     private ParticleSystem ps;
-    public List<Skills> skills = new List<Skills>();
 
     private float timer = 0;
     private float stairsDuration = 1;
     public bool playerOnTheStairs = false;
 
-
     public GameObject currentRoom;
-
-    public float MaxWeight;
-
     public static Character selectedCharacter;
+
+    public float MaxWeight;
+
+    public GameObject firePoint;
+    public Weapon weapon;
+
+    public List<Skills> skills = new List<Skills>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,15 +47,17 @@ public class Character : MonoBehaviour
 
         inventory = new Inventory(MaxWeight);
 
+        weapon = GetComponentInChildren<Weapon>();
+
         AdjustOrderLayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (selectedCharacter == this)
-        {
-            Camera.main.GetComponent<CameraBehaviour>().target = transform;
+        if (selectedCharacter == this)
+        {
+            Camera.main.GetComponent<CameraBehaviour>().target = transform;
         }
 
         if (playerOnTheStairs)
@@ -69,71 +74,31 @@ public class Character : MonoBehaviour
         }
 
         if (!isDisabled)
-        {
-            //Camera.main.GetComponent<CameraBehaviour>().target = transform;
-            change = Vector3.zero;
-            change.x = Input.GetAxisRaw("Horizontal");
-            change.y = Input.GetAxisRaw("Vertical");
-
-            // If player releases UP, reset Stair
-            if (didUseStair && change.y > 0)
-            {
-                change.y = 0;
-
+        {
+			if (Input.GetKey(KeyCode.F))
+            {
+                weapon.Shoot();
             }
-
-
-            // If player wants to go up, ignore movement
-            else if (didUseStair && change.y <= 0)
-            {
-                didUseStair = false;
-            }
-
-            UpdateAnimationsAndMove();
-        }
-    }
-
-    public Character getCurrentCharacter()
-    {
-        return selectedCharacter;
-    }
-
+        }
+
+		AdjustOrderLayer();
+
+		if (weapon != null)
+		{
+			FlipFirePoint();
+		}
+
+	}
+
     public bool HasKey(CardReader.CardreaderColor color)
     {
+
         foreach (Item i in inventory.getItemsList())
         {
             if (i is Key && ((Key)i).color == color)
                 return true;
         }
         return false;
-    }
-
-    void UpdateAnimationsAndMove()
-    {
-        if (change != Vector3.zero)
-        {
-            AdjustOrderLayer();
-            MoveCharacter();
-            animator.SetFloat("moveX", change.x);
-            animator.SetFloat("moveY", change.y);
-            animator.SetBool("moving", true);
-        }
-        else if (didUseStair)
-        {
-            animator.SetBool("moving", false);
-            animator.SetFloat("moveY", -1);
-
-        }
-        else
-        {
-            animator.SetBool("moving", false);
-        }
-    }
-
-    void MoveCharacter()
-    {
-        change.Normalize();
-        myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
     }
 
     public void StairsTransistion()
@@ -143,7 +108,7 @@ public class Character : MonoBehaviour
         this.GetComponent<Renderer>().enabled = false;
         this.disableMovement();
 
-        //Go to next transform in pathfinding
+        //Go to next transform in pathfinding
         GetComponent<ExecutePathFinding>().current++;
     }
 
@@ -161,44 +126,53 @@ public class Character : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (selectedCharacter != null)
-            {
-                selectedCharacter.disableMovement();
-            }
-            selectedCharacter = this;
-            this.enableMovement();
+            if (selectedCharacter != null)
+            {
+                selectedCharacter.disableMovement();
+            }
+            selectedCharacter = this;
+            this.enableMovement();
             inventory.UpdateUI();
         }
-    }
-
+    }
+
+    private void FlipFirePoint()
+    {
+		GameObject firePoint = weapon.gameObject;
+        if (change.x > 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
+            firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if (change.x < 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+            firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        if (change.y > 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+        }
+        if (change.y < 0)
+        {
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+        }
+    }
+
     void AdjustOrderLayer()
     {
         GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
-    }
-
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Room"))
         {
             currentRoom = other.gameObject;
         }
-
-<<<<<<< HEAD
-        var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
-        if (e != null)
-        {
-            e.AddActor(this);
-            CurrentEventWindow.Current.AddEvent(e);
-        }
     }
 }
-=======
-		var e = other.gameObject.GetComponent<Assets.Scripts.Options.Event>();
-		if(e != null)
-		{
-			e.AddActor(this);
-			CurrentEventWindow.Current.AddEvent(e);
-		}
-	}
-}
->>>>>>> develop

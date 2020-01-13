@@ -23,9 +23,9 @@ namespace GameAnalyticsSDK
     {
         #region public values
 
-        private static Settings _settings;
+        private static GameAnalyticsSDK.Setup.Settings _settings;
 
-        public static Settings SettingsGA
+        public static GameAnalyticsSDK.Setup.Settings SettingsGA
         {
             get
             {
@@ -37,12 +37,19 @@ namespace GameAnalyticsSDK
             }
             private set{ _settings = value; }
         }
+		
+		// Add to see if GameAnalytics is already initialized
+		public static bool IsInitialized() {
+			return _hasInitializeBeenCalled;
+		}
 
         private static GameAnalytics _instance;
 
         #endregion
 
         private static bool _hasInitializeBeenCalled;
+		
+		
 
         #region unity derived methods
 
@@ -58,6 +65,16 @@ namespace GameAnalyticsSDK
         void OnDisable()
         {
             EditorApplication.hierarchyWindowItemOnGUI -= GameAnalytics.HierarchyWindowCallback;
+        }
+        #else
+        void OnEnable()
+        {
+            Application.logMessageReceived += GA_Debug.HandleLog;
+        }
+
+        void OnDisable()
+        {
+            Application.logMessageReceived -= GA_Debug.HandleLog;
         }
         #endif
 
@@ -78,8 +95,6 @@ namespace GameAnalyticsSDK
             _instance = this;
 
             DontDestroyOnLoad(gameObject);
-
-            Application.logMessageReceived += GA_Debug.HandleLog;
         }
 
         void OnDestroy()
@@ -116,7 +131,7 @@ namespace GameAnalyticsSDK
         {
             try
             {
-                _settings = (Settings)Resources.Load("GameAnalytics/Settings", typeof(Settings));
+                _settings = (GameAnalyticsSDK.Setup.Settings)Resources.Load("GameAnalytics/Settings", typeof(GameAnalyticsSDK.Setup.Settings));
                 GameAnalyticsSDK.State.GAState.Init();
 
 #if UNITY_EDITOR
@@ -141,7 +156,7 @@ namespace GameAnalyticsSDK
                         AssetDatabase.Refresh();
                     }
 
-                    var asset = ScriptableObject.CreateInstance<Settings>();
+                    var asset = ScriptableObject.CreateInstance<GameAnalyticsSDK.Setup.Settings>();
                     AssetDatabase.CreateAsset(asset, path);
                     AssetDatabase.Refresh();
 
@@ -177,7 +192,7 @@ namespace GameAnalyticsSDK
 
             int platformIndex = GetPlatformIndex();
 
-            GA_Wrapper.SetUnitySdkVersion("unity " + Settings.VERSION);
+            GA_Wrapper.SetUnitySdkVersion("unity " + GameAnalyticsSDK.Setup.Settings.VERSION);
             GA_Wrapper.SetUnityEngineVersion("unity " + GetUnityVersion());
 
             if(platformIndex >= 0)
