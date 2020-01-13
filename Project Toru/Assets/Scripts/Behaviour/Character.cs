@@ -55,11 +55,6 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selectedCharacter == this)
-        {
-            Camera.main.GetComponent<CameraBehaviour>().target = transform;
-        }
-
         if (playerOnTheStairs)
         {
             timer += Time.deltaTime;
@@ -133,6 +128,8 @@ public class Character : MonoBehaviour
             selectedCharacter = this;
             this.enableMovement();
             inventory.UpdateUI();
+
+			CameraBehaviour.freeLook = false;
         }
     }
 
