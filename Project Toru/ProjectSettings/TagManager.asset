@@ -17,6 +17,8 @@ TagManager:
   - FPSMonitor
   - InventoryMoney
   - LevelManager
+  - Walls
+  - Furniture
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backerbackground
+    uniqueID: 3490218283
+    locked: 0
   - name: Background
     uniqueID: 2126931023
     locked: 0
@@ -74,6 +79,9 @@ TagManager:
     locked: 0
   - name: Guns
     uniqueID: 1310341817
+    locked: 0
+  - name: FogOfWar
+    uniqueID: 3711346581
     locked: 0
   - name: UI
     uniqueID: 117293569

@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Tilemaps;
-using UnityEngine.EventSystems;
-
-public class StairsBehaviour : MonoBehaviour
+using UnityEngine.EventSystems;
+using Assets.Scripts.Enums;
+
+public class StairsBehaviour : Room
 {
 
-	public StairsBehaviour Upstair = null;
+	public StairsBehaviour Upstairs = null;
 	public StairsBehaviour Downstairs = null;
 
 	[SerializeField]
@@ -17,18 +18,24 @@ public class StairsBehaviour : MonoBehaviour
 
 	void Start()
 	{
-
-		// Hide stairs when floor is not connected
-		if (Upstair == null && GoUpStairs != null)
-		{
-			GoUpStairs?.Disable();
-		}
-
-		if (Downstairs == null && GoUpStairs != null)
-		{
-			GoDownStairs?.Disable();
-		}
+        //SetupRoom();
 	}
+
+    public override void SetupRoom()
+    {
+        base.SetupRoom();
+
+        // Hide stairs when floor is not connected
+        if (Upstairs == null && GoUpStairs != null)
+        {
+            GoUpStairs?.Disable();
+        }
+
+        if (Downstairs == null && GoUpStairs != null)
+        {
+            GoDownStairs?.Disable();
+        }
+    }
 
 	/// <summary>
 	/// Returns target for Go Up movement
@@ -69,7 +76,7 @@ public class StairsBehaviour : MonoBehaviour
 	public void UseStairs(bool GoUp, Collider2D collider)
 	{
 
-		Transform target = (GoUp ? Upstair?.GetUpTarget() : Downstairs?.GetDownTarget());
+		Transform target = (GoUp ? Upstairs?.GetUpTarget() : Downstairs?.GetDownTarget());
 
 		if (target == null)
 		{
@@ -90,5 +97,21 @@ public class StairsBehaviour : MonoBehaviour
 		{
 			character.StairsTransistion();
 		}
-	}
+	}
+
+    public override void AddNeighbour(Direction direction, Room neighbour, bool callback = true)
+    {
+        base.AddNeighbour(direction, neighbour, callback);
+        switch (direction)
+        {
+            case Direction.Up:
+                Upstairs = neighbour.getStairScript();
+                break;
+            case Direction.Down:
+                Downstairs = neighbour.getStairScript();
+                break;
+            default:
+                break;
+        }
+    }
 }

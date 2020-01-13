@@ -124,8 +124,11 @@ namespace Assets.Scripts.Options
         public int ActivateOption(int index, ref string result)
         {
             BuildActorShortList(OptionShortList[index]);
-            if (ActorShortList.Count == 1)
-                result = OptionShortList[index].Activate(ActorShortList[0]);
+			if (ActorShortList.Count == 1)
+			{
+				result = OptionShortList[index].Activate(ActorShortList[0]);
+				ActorShortList.RemoveAt(0);
+			}
             return ActorShortList.Count;
         }
 

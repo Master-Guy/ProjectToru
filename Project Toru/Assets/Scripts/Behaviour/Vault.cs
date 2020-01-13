@@ -2,37 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using GameAnalyticsSDK;
 using Assets.Scripts.Behaviour;
 
 public class Vault : Furniture
 {
-    public Door door = null;
     public GameObject money = null;
+	
+	public LevelScript levelScript = null;
 
     bool closed = true;
 
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.CompareTag("Player"))
-		{ 
-			if (collision.gameObject.GetComponent<Character>() && closed)
-			{
-				Open();
-				collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
-			}
-		}
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (collision.gameObject.GetComponent<Character>() && closed)
+            {
+                Open();
+                collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
+            }
+        }
     }
 
     public bool Open()
     {
-        GameAnalytics.NewDesignEvent("VaultOpened");
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "NewStairs");
-
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);
 
-        door.Close();
+		levelScript?.emit("vault_open");
+        // door.Close();
 
         StartCoroutine(WaitForAnimationEndTimer());
         return true;

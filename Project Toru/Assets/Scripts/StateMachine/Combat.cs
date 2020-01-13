@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,11 +66,11 @@ public class Combat : IState
     {
         if (direction == targetDirection.left)
         {
-            animator.SetFloat("changeX", -1);
+            animator.SetFloat("moveX", -1);
         }
         else
         {
-            animator.SetFloat("changeX", 1);
+            animator.SetFloat("moveX", 1);
         }
     }
 
