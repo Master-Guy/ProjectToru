@@ -60,12 +60,12 @@ public class Node
 	{
 		if(nodeRoom.GetComponent<StairsBehaviour>() != null)
 		{
-			if (nodeRoom.GetComponent<StairsBehaviour>().Upstair != null)
+			if (nodeRoom.GetComponent<StairsBehaviour>().Upstairs != null)
 			{
-				if (vissited.Contains(nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>())) {
+				if (vissited.Contains(nodeRoom.GetComponent<StairsBehaviour>().Upstairs.GetComponent<Room>())) {
 					return true;
 				}
-				up = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Upstair.GetComponent<Room>());
+				up = new Node(this, nodeRoom.GetComponent<StairsBehaviour>().Upstairs.GetComponent<Room>());
 				return false;
 			}
 		}
