@@ -24,9 +24,9 @@ public class PoliceCar : Car
 	
 	IEnumerator SpawnCop(Vector3 target)
     {
-        yield return new WaitForSeconds(Random.Range(0, 2));
+        yield return new WaitForSeconds(Random.Range(0f, 2f));
         
-		Vector3 spawnPosition = target + new Vector3(Random.Range(-1, 1), Random.Range(0, 1.5f), 0);		
+		Vector3 spawnPosition = target + new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1.5f), 0);		
 		Instantiate(policePrefab, spawnPosition, Quaternion.identity);
     }
 	
