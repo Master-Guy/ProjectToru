@@ -145,9 +145,6 @@ public class Character : MonoBehaviour
             this.enableMovement();
 
             inventory.UpdateUI();
-
-            CameraBehaviour.freeLook = false;
-            //FindObjectOfType<TutorialTrigger>().TriggerDialogue();
         }
     }
 

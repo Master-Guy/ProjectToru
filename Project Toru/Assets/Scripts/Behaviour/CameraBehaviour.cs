@@ -12,25 +12,22 @@ public class CameraBehaviour : MonoBehaviour
     public float minZoomDistance = 6;
     public float maxZoomDistance = 10;
 
-    public Vector2 topLeft;
-    public Vector2 bottomRight;
+    public Vector2 topLeft = new Vector2(-30,30);
+    public Vector2 bottomRight = new Vector2(30,-30);
 
     public static bool freeLook;
 
     private Vector3 change;
 
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         Move();
         Zoom();
-
-        if (!freeLook)
-        {
-            if (Character.selectedCharacter != null)
-            {
-                target = Character.selectedCharacter.transform;
-            }
-        }
 
         Vector3 borderCheck = CheckBorders();
         if (borderCheck != transform.position)
@@ -38,8 +35,13 @@ public class CameraBehaviour : MonoBehaviour
             transform.position = borderCheck;
         }
 
-    }
+        // Press Q to focus on the selected character
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            target = Character.selectedCharacter.transform;
+        }
 
+    }
     void LateUpdate()
     {
         if (target != null)
