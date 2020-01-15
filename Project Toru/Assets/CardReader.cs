@@ -152,20 +152,19 @@ public class CardReader : MonoBehaviour
 		ColorIndicator.enabled = false;
 	}
 
-	/// <summary>
-	/// The colors of the cards and readers
-	/// </summary>
-	public enum CardreaderColor
-	{
-		Disabled,
-		Blue,
-		Purple,
-		Yellow
-	}
-
 	public Door getDoor()
 	{
 		return door;
 	}
+}
 
+/// <summary>
+/// The colors of the cards and readers
+/// </summary>
+public enum CardreaderColor
+{
+    Disabled,
+    Blue,
+    Purple,
+    Yellow
 }
