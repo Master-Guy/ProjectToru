@@ -7,7 +7,7 @@ using Assets.Scripts.Behaviour;
 using System;
 using Assets.Scripts.Enums;
 
-public class Room : MonoBehaviour, IPointerClickHandler
+public class Room : MonoBehaviour//, IPointerClickHandler
 {
 	[SerializeField]
 	WallController wallController = null;
@@ -110,18 +110,18 @@ public class Room : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-	public void OnPointerClick(PointerEventData eventData)
+	/*public void OnPointerClick(PointerEventData eventData)
 	{
 		if (eventData.button == PointerEventData.InputButton.Right)
 		{
 			Debug.Log("Right Mouse Button Clicked on: " + name);
 		}
-	}
-
+	}*/
+	/*
 	void OnMouseDown()
 	{
 		printNumberOfGameObjects();
-	}
+	}*/
 
 	void printGameObjects()
 	{
