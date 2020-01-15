@@ -36,6 +36,8 @@ public class Character : MonoBehaviour
 
     public List<Skills> skills = new List<Skills>();
 
+    private bool outline = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,19 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (selectedCharacter == this && !outline)
+        {
+            Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
+            outline = true;
+        }
+
+        if (selectedCharacter != this)
+        {
+            Outline.RemoveOutline(this.gameObject);
+            outline = false;
+        }
+
+
         if (playerOnTheStairs)
         {
             timer += Time.deltaTime;
@@ -69,21 +84,19 @@ public class Character : MonoBehaviour
 
         if (!isDisabled)
         {
-			if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F))
             {
                 weapon.Shoot();
             }
         }
 
-		AdjustOrderLayer();
+        AdjustOrderLayer();
 
-		if (weapon != null)
-		{
-			FlipFirePoint();
-		}
-	}
-
-
+        if (weapon != null)
+        {
+            FlipFirePoint();
+        }
+    }
 
     public bool HasKey(CardReader.CardreaderColor color)
     {
@@ -123,7 +136,6 @@ public class Character : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (selectedCharacter != null)
-
             {
                 selectedCharacter.disableMovement();
             }
@@ -134,16 +146,14 @@ public class Character : MonoBehaviour
 
             inventory.UpdateUI();
 
-			CameraBehaviour.freeLook = false;
-			FindObjectOfType<TutorialTrigger>().TriggerDialogue();
+            CameraBehaviour.freeLook = false;
+            //FindObjectOfType<TutorialTrigger>().TriggerDialogue();
         }
     }
 
-
-
     private void FlipFirePoint()
     {
-		GameObject firePoint = weapon.gameObject;
+        GameObject firePoint = weapon.gameObject;
 
         if (change.x > 0)
         {
@@ -184,4 +194,5 @@ public class Character : MonoBehaviour
             currentRoom = other.gameObject;
         }
     }
+
 }
