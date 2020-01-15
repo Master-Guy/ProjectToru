@@ -7,12 +7,11 @@ public class PoliceSirenOverlay : MonoBehaviour
 {
     public Image policeSiren;
 
-    public float r;
-    public float g;
-    public float b;
-    public float a;
+    float r,g,b,a;
 
-    public bool flipBool = false;
+    bool flipBool = false;
+
+    public bool startSiren = false;
 
     private void Start()
     {
@@ -20,11 +19,17 @@ public class PoliceSirenOverlay : MonoBehaviour
         g = policeSiren.color.g;
         b = policeSiren.color.b;
         a = policeSiren.color.a;
+
+        a = 0f;
+        AdjustColor();
     }
 
     private void Update()
     {
-        AutomateSiren();
+        if (startSiren)
+        {
+            AutomateSiren();
+        }
     }
 
     public void AutomateSiren()
@@ -48,7 +53,8 @@ public class PoliceSirenOverlay : MonoBehaviour
         {
             policeSiren.transform.localRotation = Quaternion.Euler(0, 0, 0);
             flipBool = true;
-        } else
+        } 
+        else
         {
             policeSiren.transform.localRotation = Quaternion.Euler(0, 180, 0);
             flipBool = false;
