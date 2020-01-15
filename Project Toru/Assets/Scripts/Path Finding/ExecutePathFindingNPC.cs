@@ -11,7 +11,7 @@ public class ExecutePathFindingNPC : ExecutePathFinding
 
 	public void setPosTarget(Vector2 pos)
 	{
-		path = pf.CalculateTransforms(getCoRoom(pos), GetComponent<NPC>().getRoom());
+		path = pf.CalculateTransforms(getCoRoom(pos), GetComponent<NPC>().currentRoom);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)

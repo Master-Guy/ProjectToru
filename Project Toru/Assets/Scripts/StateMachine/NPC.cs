@@ -35,8 +35,8 @@ public abstract class NPC : MonoBehaviour
     {
         foreach (GameObject g in bag)
         {
-			Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + UnityEngine.Random.Range(0.2f, 1.20f), 0), Quaternion.identity);
-		}
+            Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + UnityEngine.Random.Range(0.2f, 1.20f), 0), Quaternion.identity);
+        }
     }
 
     public void Say(string text)
@@ -45,6 +45,7 @@ public abstract class NPC : MonoBehaviour
         TextBox.SetActive(true);
         Invoke("disableTextBox", 3);
     }
+
     private void disableTextBox()
     {
         TextBox.SetActive(false);
@@ -67,37 +68,31 @@ public abstract class NPC : MonoBehaviour
     {
         if (currentRoom.SelectedPlayerInRoom())
         {
-            GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Outline");
+            Outline.SetOutline(this.gameObject);
         }
     }
 
-	// all generic states below
-	public void PingPong()
-	{
-		this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
-	}
+    public void PingPong()
+    {
+        this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
+    }
     private void OnMouseExit()
     {
-        GetComponent<SpriteRenderer>().material = Resources.Load<Material>("Shaders/Sprite-Default");
+        Outline.RemoveOutline(this.gameObject);
     }
 
-	public Room getRoom()
-	{
-		return currentRoom;
-	}
-
-	public bool HasKey(CardreaderColor color)
-	{
-		foreach (GameObject i in bag)
-		{
-			if(i.GetComponent<Key>())
-			{
-				if (i.GetComponent<Key>().color == color)
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    public bool HasKey(CardreaderColor color)
+    {
+        foreach (GameObject i in bag)
+        {
+            if (i.GetComponent<Key>())
+            {
+                if (i.GetComponent<Key>().color == color)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
