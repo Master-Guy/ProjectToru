@@ -81,7 +81,7 @@ public abstract class NPC : MonoBehaviour
         Outline.RemoveOutline(this.gameObject);
     }
 
-    public bool HasKey(CardReader.CardreaderColor color)
+    public bool HasKey(CardreaderColor color)
     {
         foreach (GameObject i in bag)
         {
