@@ -61,7 +61,8 @@ public class Employee : NPC
     {
         if (fleeTrue)
         {
-            Invoke("startCountDown", 5);
+            Invoke("startCountDown", 8);
+            fleeTrue = false;
         }
 
     }

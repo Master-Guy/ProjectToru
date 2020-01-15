@@ -98,7 +98,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public bool HasKey(CardReader.CardreaderColor color)
+    public bool HasKey(CardreaderColor color)
     {
 
         foreach (Item i in inventory.getItemsList())
