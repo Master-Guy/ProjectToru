@@ -10,16 +10,19 @@ namespace Assets.Scripts.Options
 {
 	public class LootVault : Option
 	{
-		private Furniture container;
+		public GameObject money = null;
+
+		private Vault Vault;
 
 		public void Start()
 		{
-			container = GetComponentInParent<Furniture>();
+			Vault = GetComponentInParent<Vault>();
 		}
 
 		public override string Activate(Character C)
 		{
-			container.drop();
+			Vault.Open();
+			C.inventory.addItem(money.GetComponent<Money>());
 			return null;
 		}
 	}
