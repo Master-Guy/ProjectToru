@@ -69,21 +69,19 @@ public class Character : MonoBehaviour
 
         if (!isDisabled)
         {
-			if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F))
             {
                 weapon.Shoot();
             }
         }
 
-		AdjustOrderLayer();
+        AdjustOrderLayer();
 
-		if (weapon != null)
-		{
-			FlipFirePoint();
-		}
-	}
-
-
+        if (weapon != null)
+        {
+            FlipFirePoint();
+        }
+    }
 
     public bool HasKey(CardReader.CardreaderColor color)
     {
@@ -134,16 +132,14 @@ public class Character : MonoBehaviour
 
             inventory.UpdateUI();
 
-			CameraBehaviour.freeLook = false;
-			FindObjectOfType<TutorialTrigger>().TriggerDialogue();
+            CameraBehaviour.freeLook = false;
+            FindObjectOfType<TutorialTrigger>().TriggerDialogue();
         }
     }
 
-
-
     private void FlipFirePoint()
     {
-		GameObject firePoint = weapon.gameObject;
+        GameObject firePoint = weapon.gameObject;
 
         if (change.x > 0)
         {
