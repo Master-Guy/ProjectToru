@@ -11,50 +11,19 @@ public class SelectLevelManager : MonoBehaviour
     public Button LevelOneButton;
     public Button LevelTwoButton;
     public Button LevelThreeButton;
-    public Button LevelFourButton;
-    public Button LevelFiveButton;
-    public Button LevelSixButton;
 
     private void Start()
     {
-        //mainMenuButton.onClick.AddListener(delegate { OnMainMenuClick(); });
-        LevelOneButton.onClick.AddListener(delegate { OnLevelOneClick(); });
-        LevelTwoButton.onClick.AddListener(delegate { OnLevelTwoClick(); });
-        //LevelThreeButton.onClick.AddListener(delegate { OnLevelThreeClick(); });
-
-        //LevelOneButton.onClick.AddListener(delegate { OnLevelClick("One"); });
-        //LevelTwoButton.onClick.AddListener(delegate { OnLevelClick("Two"); });
-        //LevelThreeButton.onClick.AddListener(delegate { OnLevelClick("Three"); });
-        //LevelFourButton.onClick.AddListener(delegate { OnLevelClick("Four"); });
-        //LevelFiveButton.onClick.AddListener(delegate { OnLevelClick("Five"); });
-        //LevelSixButton.onClick.AddListener(delegate { OnLevelClick("Six"); });
+        mainMenuButton.onClick.AddListener(delegate 	{ OnLevelClick("MainMenu"); });
+        LevelOneButton.onClick.AddListener(delegate 	{ OnLevelClick("Level 0 - Tutorial"); });
+        LevelTwoButton.onClick.AddListener(delegate 	{ OnLevelClick("Level 1"); });
+        LevelThreeButton.onClick.AddListener(delegate 	{ OnLevelClick("Level 2"); });
     }
 
-    public void OnLevelClick(string s)
+    public void OnLevelClick(string scene)
     {
-        string sceneName = "Level" + s;
-        Debug.Log(sceneName);
+        Debug.Log("Loading" + scene);
 
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void OnLevelOneClick()
-    {
-        SceneManager.LoadScene("NewStairs");
-    }
-
-    public void OnLevelTwoClick()
-    {
-        SceneManager.LoadScene("Level 1");
-    }
-
-    public void OnLevelThreeClick()
-    {
-        SceneManager.LoadScene("NewStairs");
-    }
-
-    public void OnMainMenuClick()
-    {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(scene);
     }
 }
