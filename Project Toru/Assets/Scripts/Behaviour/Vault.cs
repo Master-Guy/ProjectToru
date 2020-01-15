@@ -9,7 +9,24 @@ public class Vault : Furniture
 	public GameObject money = null;
 	public LevelScript levelScript = null;
 
+    [SerializeField]
+    public CardreaderColor keycardColor = CardreaderColor.Disabled;
+    SpriteRenderer ColorIndicator = null;
+
     bool closed = true;
+
+
+    void Start()
+    {
+        foreach(Component comp in GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (comp.name == "Color Indicator")
+            {
+                ColorIndicator = (SpriteRenderer)comp;
+            }
+        }
+        UpdateColor();
+    }
 
     /*void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,5 +67,25 @@ public class Vault : Furniture
     public bool IsClosed()
     {
         return closed;
+    }
+
+    private void UpdateColor()
+    {
+        // Set color indicator
+        switch (keycardColor)
+        {
+            case CardreaderColor.Blue:
+                ColorIndicator.color = ColorZughy.cyan;
+                break;
+            case CardreaderColor.Purple:
+                ColorIndicator.color = ColorZughy.purple;
+                break;
+            case CardreaderColor.Yellow:
+                ColorIndicator.color = ColorZughy.yellow;
+                break;
+            default:
+                ColorIndicator.color = ColorZughy.grey;
+                break;
+        }
     }
 }
