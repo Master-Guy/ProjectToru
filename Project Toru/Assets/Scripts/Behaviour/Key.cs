@@ -9,7 +9,7 @@ public class Key : Item
 {
 
 	// Key access is defined by color
-	public CardReader.CardreaderColor color = CardReader.CardreaderColor.Yellow;
+	public CardreaderColor color = CardreaderColor.Yellow;
 
 	void Start()
 	{
@@ -18,16 +18,16 @@ public class Key : Item
 
 		switch (color)
 		{
-			case CardReader.CardreaderColor.Blue:
+			case CardreaderColor.Blue:
 				renderer.color = ColorZughy.cyan;
 				break;
-			case CardReader.CardreaderColor.Yellow:
+			case CardreaderColor.Yellow:
 				// The color is already yellow
 				break;
-			case CardReader.CardreaderColor.Purple:
+			case CardreaderColor.Purple:
 				renderer.color = ColorZughy.purple;
 				break;
-			case CardReader.CardreaderColor.Disabled:
+			case CardreaderColor.Disabled:
 				Debug.LogError("KEy can't be 'Disabled'");
 				break;
 		}

@@ -86,7 +86,7 @@ public abstract class NPC : MonoBehaviour
 		return currentRoom;
 	}
 
-	public bool HasKey(CardReader.CardreaderColor color)
+	public bool HasKey(CardreaderColor color)
 	{
 		foreach (GameObject i in bag)
 		{
