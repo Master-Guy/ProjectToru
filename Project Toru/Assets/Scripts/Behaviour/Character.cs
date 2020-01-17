@@ -36,6 +36,8 @@ public class Character : MonoBehaviour
 
     public List<Skills> skills = new List<Skills>();
 
+    private bool outline = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,19 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (selectedCharacter == this && !outline)
+        {
+            Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
+            outline = true;
+        }
+
+        if (selectedCharacter != this)
+        {
+            Outline.RemoveOutline(this.gameObject);
+            outline = false;
+        }
+
+
         if (playerOnTheStairs)
         {
             timer += Time.deltaTime;
@@ -121,7 +136,6 @@ public class Character : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (selectedCharacter != null)
-
             {
                 selectedCharacter.disableMovement();
             }
@@ -131,9 +145,6 @@ public class Character : MonoBehaviour
             this.enableMovement();
 
             inventory.UpdateUI();
-
-            CameraBehaviour.freeLook = false;
-            FindObjectOfType<TutorialTrigger>().TriggerDialogue();
         }
     }
 
@@ -180,4 +191,5 @@ public class Character : MonoBehaviour
             currentRoom = other.gameObject;
         }
     }
+
 }
