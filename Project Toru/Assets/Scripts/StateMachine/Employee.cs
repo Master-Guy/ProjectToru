@@ -14,7 +14,7 @@ public class Employee : NPC
     {
         this.startingPosition = transform.position;
         this.animator = GetComponent<Animator>();
-        PingPong();
+        //PingPong();
     }
 
     public void Update()
@@ -23,15 +23,12 @@ public class Employee : NPC
         AdjustOrderLayer();
         FleeIfPossible();
         showCountdown();
-
     }
 
     void OnMouseDown()
     {
         Surrender();
     }
-
-
 
     void Surrender()
     {
@@ -55,7 +52,6 @@ public class Employee : NPC
             fleeTrue = true;
         }
     }
-
 
     void showCountdown()
     {

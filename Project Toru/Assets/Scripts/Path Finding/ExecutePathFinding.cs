@@ -55,14 +55,15 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 				character.change = this.change;
 
-
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
 
 			if (current == path.Count)
 			{
-				CallEventWindow();
-
+				if (tag.Contains("Player"))
+				{ 
+					CallEventWindow();
+				}
 				StopPathFinding();
 			}
 		}

@@ -56,47 +56,48 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selectedCharacter == this && !outline)
-        {
-            Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
-            outline = true;
-        }
+		if (tag.Contains("Player"))
+		{
+			if (selectedCharacter == this && !outline)
+			{
+				Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
+				outline = true;
+			}
 
-        if (selectedCharacter != this)
-        {
-            Outline.RemoveOutline(this.gameObject);
-            outline = false;
-        }
+			if (selectedCharacter != this)
+			{
+				Outline.RemoveOutline(this.gameObject);
+				outline = false;
+			}
 
+			if (!isDisabled)
+			{
+				if (Input.GetKey(KeyCode.F))
+				{
+					weapon.Shoot();
+				}
+			}
 
-        if (playerOnTheStairs)
-        {
-            timer += Time.deltaTime;
+			AdjustOrderLayer();
 
-            if (timer > stairsDuration)
-            {
-                playerOnTheStairs = false;
-                timer = 0;
-                this.GetComponent<Renderer>().enabled = true;
-                this.enableMovement();
-            }
-        }
+			if (weapon != null)
+			{
+				FlipFirePoint();
+			}
+		}
 
-        if (!isDisabled)
-        {
-            if (Input.GetKey(KeyCode.F))
-            {
-                weapon.Shoot();
-            }
-        }
+		if (playerOnTheStairs)
+		{
+			timer += Time.deltaTime;
 
-        AdjustOrderLayer();
-
-        if (weapon != null)
-        {
-            FlipFirePoint();
-        }
-    }
+			if (timer > stairsDuration)
+			{
+				playerOnTheStairs = false;
+				timer = 0;
+				this.GetComponent<Renderer>().enabled = true;
+			}
+		}
+	}
 
     public bool HasKey(CardreaderColor color)
     {
@@ -114,35 +115,17 @@ public class Character : MonoBehaviour
         didUseStair = true;
         playerOnTheStairs = true;
         this.GetComponent<Renderer>().enabled = false;
-        this.disableMovement();
 
         //Go to next transform in pathfinding
 
         GetComponent<ExecutePathFinding>().current++;
     }
 
-    public void enableMovement()
-    {
-        isDisabled = false;
-    }
-
-    public void disableMovement()
-    {
-        isDisabled = true;
-    }
-
     void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && tag.Contains("Player"))
         {
-            if (selectedCharacter != null)
-            {
-                selectedCharacter.disableMovement();
-            }
-
             selectedCharacter = this;
-
-            this.enableMovement();
 
             inventory.UpdateUI();
         }
@@ -191,5 +174,4 @@ public class Character : MonoBehaviour
             currentRoom = other.gameObject;
         }
     }
-
 }

@@ -24,11 +24,6 @@ public class CharacterSlot : MonoBehaviour
 
     public void SelectCharacter()
     {
-        if (Character.selectedCharacter != null)
-        {
-            Character.selectedCharacter.disableMovement();
-        }
         Character.selectedCharacter = character;
-        character.enableMovement();
     }
 }
