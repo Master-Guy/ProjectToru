@@ -21,7 +21,6 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public GameObject targetFurniture;
 
-
 	private Character character;
 	private Vector3 change;
 
@@ -48,9 +47,12 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				if (transform.position == newPosition)
 				{
 					current++;
-				}
-				change = Vector2.zero;
-				change = newPosition - transform.position;
+				}
+
+				change = Vector2.zero;
+
+				change = newPosition - transform.position;
+
 				character.change = this.change;
 
 
@@ -143,20 +145,109 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		targetFurniture = null;
 	}
 
-	public void UpdateAnimations()
-	{
-		if(change != Vector3.zero)
-		{
-			animator.SetFloat("moveX", change.x);
-			animator.SetFloat("moveY", change.y);
-			animator.SetBool("moving", true);
-		}
-		else
-		{
-			/*animator.SetFloat("moveX", 0);
-			animator.SetFloat("moveY", 0);*/
-			animator.SetBool("moving", false);
-		}
-		change = Vector2.zero;
+	public void UpdateAnimations()
+	{
+		if(change != Vector3.zero)
+
+		{
+			animator.SetFloat("moveX", change.x);
+
+			animator.SetFloat("moveY", change.y);
+
+			animator.SetBool("moving", true);
+
+		}
+		else
+		{
+			/*animator.SetFloat("moveX", 0);
+
+			animator.SetFloat("moveY", 0);*/
+
+			animator.SetBool("moving", false);
+
+		}
+
+		change = Vector2.zero;
+	}
+
+	public void PathFinding(Vector3 pos)
+	{
+		Room positionRoom = getCoRoom(pos);
+
+		current = 0;
+		path.Clear();
+
+		if (positionRoom != null)
+		{
+			pos = new Vector3(pos.x, positionRoom.transform.position.y + 1, -1);
+
+			Room characterRoom;
+
+			try
+			{
+				characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+			}
+			catch (UnassignedReferenceException)
+			{
+				characterRoom = GetEntranceRoom();
+
+				path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
+			}
+
+			if (!positionRoom.Equals(characterRoom))
+			{
+				path = pf.CalculateTransforms(positionRoom, characterRoom);
+			}
+			path.Add(pos);
+		}
+		else
+		{
+			Room entranceRoom = GetEntranceRoomToOutside(pos);
+
+			//Code for inside to outside
+			try
+			{
+				if (entranceRoom != null)
+				{
+					path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
+					path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
+				}
+			}
+			catch (UnassignedReferenceException)
+			{
+				//Outside to outside code
+				path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
+			}
+		}
+	}
+
+	private Room GetEntranceRoomToOutside(Vector2 pos)
+	{
+		foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			Room r = room.GetComponent<Room>();
+
+			//TO-DO: Entrance room to other outside
+
+			if (r.name.StartsWith("Entrance") && pos.y > (r.transform.position.y + 0.1) && pos.y < (r.transform.position.y + 2))
+			{
+				return r;
+			}
+		}
+		return null;
+	}
+
+	private Room GetEntranceRoom()
+	{
+		foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			Room r = room.GetComponent<Room>();
+
+			if (r.name.StartsWith("Entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
+			{
+				return r;
+			}
+		}
+		return null;
 	}
 }
