@@ -238,7 +238,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 			//TO-DO: Entrance room to other outside
 
-			if (r.name.StartsWith("Entrance") && pos.y > (r.transform.position.y + 0.1) && pos.y < (r.transform.position.y + 2))
+			if (r.name.ToLower().Contains("entrance") && pos.y > (r.transform.position.y + 0.1) && pos.y < (r.transform.position.y + 2))
 			{
 				return r;
 			}
