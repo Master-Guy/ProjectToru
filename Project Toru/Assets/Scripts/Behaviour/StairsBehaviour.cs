@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Tilemaps;
-using UnityEngine.EventSystems;
-using Assets.Scripts.Enums;
-
+using UnityEngine.EventSystems;
+using Assets.Scripts.Enums;
+
 public class StairsBehaviour : Room
 {
-
 	public StairsBehaviour Upstairs = null;
 	public StairsBehaviour Downstairs = null;
 
@@ -21,20 +20,19 @@ public class StairsBehaviour : Room
         //SetupRoom();
 	}
 
-    public override void SetupRoom()
-    {
-        base.SetupRoom();
-
-        // Hide stairs when floor is not connected
-        if (Upstairs == null && GoUpStairs != null)
-        {
-            GoUpStairs?.Disable();
-        }
-
-        if (Downstairs == null && GoUpStairs != null)
-        {
-            GoDownStairs?.Disable();
-        }
+    public override void SetupRoom()
+    {
+        base.SetupRoom();
+        // Hide stairs when floor is not connected
+        if (Upstairs == null && GoUpStairs != null)
+        {
+            GoUpStairs?.Disable();
+        }
+
+        if (Downstairs == null && GoUpStairs != null)
+        {
+            GoDownStairs?.Disable();
+        }
     }
 
 	/// <summary>
@@ -43,7 +41,6 @@ public class StairsBehaviour : Room
 	/// <returns>Target set by GoDown</returns>
 	public Transform GetUpTarget()
 	{
-
 		// If GoUpstairs is not set, return null
 		if (GoDownStairs == null) return null;
 
@@ -58,7 +55,6 @@ public class StairsBehaviour : Room
 	/// <returns>Target set by GoUp</returns>
 	public Transform GetDownTarget()
 	{
-
 		// If GoUpstairs is not set, return null
 		if (GoUpStairs == null) return null;
 
@@ -75,7 +71,6 @@ public class StairsBehaviour : Room
 	/// <param name="collider">The character collider</param>
 	public void UseStairs(bool GoUp, Collider2D collider)
 	{
-
 		Transform target = (GoUp ? Upstairs?.GetUpTarget() : Downstairs?.GetDownTarget());
 
 		if (target == null)
@@ -91,27 +86,31 @@ public class StairsBehaviour : Room
 		GameObject gameobject = collider.gameObject;
 
 		// Check if this gameobject has an script Character
-		Character character = (Character)gameobject.GetComponent(typeof(Character));
+
+		// Check if this gameobject has an script Character
+		ExecutePathFinding character = (ExecutePathFinding)gameobject.GetComponent(typeof(ExecutePathFinding));
 
 		if (character != null)
 		{
 			character.StairsTransistion();
 		}
-	}
-
-    public override void AddNeighbour(Direction direction, Room neighbour, bool callback = true)
-    {
-        base.AddNeighbour(direction, neighbour, callback);
-        switch (direction)
-        {
-            case Direction.Up:
-                Upstairs = neighbour.getStairScript();
-                break;
-            case Direction.Down:
-                Downstairs = neighbour.getStairScript();
-                break;
-            default:
-                break;
-        }
-    }
+	}
+
+    public override void AddNeighbour(Direction direction, Room neighbour, bool callback = true)
+    {
+        base.AddNeighbour(direction, neighbour, callback);
+        switch (direction)
+        {
+            case Direction.Up:
+                Upstairs = neighbour.getStairScript();
+
+                break;
+            case Direction.Down:
+                Downstairs = neighbour.getStairScript();
+                break;
+
+            default:
+                break;
+        }
+    }
 }
