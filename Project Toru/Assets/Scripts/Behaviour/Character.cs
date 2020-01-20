@@ -62,7 +62,7 @@ public class Character : MonoBehaviour
 			outline = false;
 		}
 
-		if (GetComponent<ExecutePathFinding>().playerOnTheStairs)
+		if (this.Equals(selectedCharacter))
 		{
 			if (Input.GetKey(KeyCode.F))
 			{

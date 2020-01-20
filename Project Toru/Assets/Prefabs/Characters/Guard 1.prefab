@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 5737363311882916264}
   - component: {fileID: 5832977297094538437}
   - component: {fileID: 1381812995163818562}
+  - component: {fileID: 4569530733233667342}
   m_Layer: 8
-  m_Name: Guard
+  m_Name: Guard 1
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,6 +196,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &4569530733233667342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157518552967300744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85f12e8a350a140a227443b2f66d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3055178034262385717
 GameObject:
   m_ObjectHideFlags: 0
