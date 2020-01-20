@@ -25870,18 +25870,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19dd7c60b69e75144b126e1179d2f7f7, type: 3}
---- !u!114 &1338287382 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9126442303487778242, guid: 19dd7c60b69e75144b126e1179d2f7f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1338287381}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1338287383 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126442303776739614, guid: 19dd7c60b69e75144b126e1179d2f7f7,
@@ -25906,30 +25894,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1338287381}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1338287386 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9126442302866307800, guid: 19dd7c60b69e75144b126e1179d2f7f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1338287381}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1338287387 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9126442302908585661, guid: 19dd7c60b69e75144b126e1179d2f7f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1338287381}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1338287388 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9126442302388884893, guid: 19dd7c60b69e75144b126e1179d2f7f7,
@@ -26574,9 +26538,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   smoothing: 0.04
-  distance: 0
-  minDistance: 6
-  maxDistance: 12
+  zoomDistance: 0
+  minZoomDistance: 6
+  maxZoomDistance: 10
+  topLeft: {x: -30, y: 30}
+  bottomRight: {x: 30, y: -30}
 --- !u!81 &1555143276
 AudioListener:
   m_ObjectHideFlags: 0
@@ -26891,13 +26857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fullscreenToggle: {fileID: 1338287388}
-  resolutionDropdown: {fileID: 1338287387}
-  generalAudioSlider: {fileID: 1338287386}
-  musicSlider: {fileID: 1338287382}
-  applyButton: {fileID: 0}
   mainMenuButton: {fileID: 0}
-  generalSource: {fileID: 0}
-  musicSource: {fileID: 0}
 --- !u!114 &1761269952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27197,21 +27157,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Room
-      objectReference: {fileID: 0}
-    - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
-        type: 3}
-      propertyPath: RightRoom
-      value: 
-      objectReference: {fileID: 1901486378}
-    - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
-        type: 3}
-      propertyPath: size.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8669251148195207012, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
-        type: 3}
-      propertyPath: size.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9035884668655751477, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}

@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 9035884668655751477}
   - component: {fileID: 8669251148195207012}
   m_Layer: 0
-  m_Name: Entrance
+  m_Name: EntranceLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1040,7 +1040,8 @@ MonoBehaviour:
   LeftRoom: {fileID: 0}
   RightRoom: {fileID: 0}
   door: {fileID: 8811116169905011760}
-  size: {x: 9, y: 4}
+  size: {x: 1, y: 4}
+  discovered: 0
 --- !u!1001 &3921890524698410442
 PrefabInstance:
   m_ObjectHideFlags: 0
