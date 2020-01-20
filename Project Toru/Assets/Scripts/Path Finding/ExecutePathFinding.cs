@@ -265,7 +265,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	{
 		playerOnTheStairs = true;
 		GetComponent<Renderer>().enabled = false;
-		transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+
+		if (tag.Contains("Player"))
+		{
+			transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+		}
 
 		//Go to next transform in pathfinding
 		current++;
@@ -282,7 +286,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				playerOnTheStairs = false;
 				timer = 0;
 				this.GetComponent<Renderer>().enabled = true;
-				transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+
+				if (tag.Contains("Player"))
+				{
+					transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+				}
 			}
 		}
 	}
