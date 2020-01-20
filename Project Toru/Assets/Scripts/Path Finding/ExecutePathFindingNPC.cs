@@ -7,16 +7,27 @@ public class ExecutePathFindingNPC : ExecutePathFinding
 	private void Update()
 	{
 		WayPointsWalk();
+		HidePlayerOnStair();
 	}
 
-	public void setPosTarget(Vector2 pos)
+	public void setPosTarget(Vector3 pos)
 	{
-		path = pf.CalculateTransforms(getCoRoom(pos), GetComponent<NPC>().currentRoom);
+		PathFinding(pos);
+	}
+
+	public void setPosTarget(float x, float y)
+	{
+		PathFinding(new Vector3(x, y, 0));
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		checkDoorClosed(other);
+
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject.GetComponent<Room>();
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)

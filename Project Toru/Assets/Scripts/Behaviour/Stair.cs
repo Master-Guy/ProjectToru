@@ -48,8 +48,8 @@ public class Stair : MonoBehaviour
         // Get GameObject from collider
         GameObject gameobject = player.gameObject;
 
-        // Check if this gameobject has an script Character
-        Character character = (Character)gameobject.GetComponent(typeof(Character));
+		// Check if this gameobject has an script Character
+		ExecutePathFinding character = (ExecutePathFinding)gameobject.GetComponent(typeof(ExecutePathFinding));
 
         if (character != null)
         {

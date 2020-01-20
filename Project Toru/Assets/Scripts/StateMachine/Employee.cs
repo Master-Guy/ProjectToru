@@ -23,15 +23,12 @@ public class Employee : NPC
         AdjustOrderLayer();
         FleeIfPossible();
         showCountdown();
-
     }
 
     void OnMouseDown()
     {
         Surrender();
     }
-
-
 
     void Surrender()
     {
@@ -56,7 +53,6 @@ public class Employee : NPC
         }
     }
 
-
     void showCountdown()
     {
         if (fleeTrue)
@@ -64,12 +60,10 @@ public class Employee : NPC
             Invoke("startCountDown", 8);
             fleeTrue = false;
         }
-
     }
 
     void startCountDown()
     {
 
     }
-
 }
