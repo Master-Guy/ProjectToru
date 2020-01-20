@@ -10,6 +10,7 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 	{
 		MousePointInput();
 		WayPointsWalk();
+		HidePlayerOnStair();
 	}
 
 	private void MousePointInput()
@@ -36,6 +37,11 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		checkDoorClosed(other);
+
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject.GetComponent<Room>();
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)

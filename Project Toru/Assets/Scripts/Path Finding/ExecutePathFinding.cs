@@ -21,8 +21,18 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public GameObject targetFurniture;
 
-	private Character character;
-	private Vector3 change;
+	Character character;
+	Vector3 change;
+
+	//Character stair variables
+	float timer = 0;
+	float stairsDuration = 1;
+
+	[NonSerialized]
+	public bool playerOnTheStairs = false;
+
+	[NonSerialized]
+	public Room currentRoom;
 
 	public void Awake()
 	{
@@ -40,7 +50,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	{
 		if (path.Count > 0)
 		{
-			if (!GetComponent<Character>().playerOnTheStairs)
+			if (!playerOnTheStairs)
 			{
 				Vector3 newPosition = path[current];
 
@@ -53,7 +63,9 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 				change = newPosition - transform.position;
 
-				character.change = this.change;
+				if (tag.Contains("Player")) { 
+					character.change = this.change;
+				}
 
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
@@ -149,14 +161,12 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void UpdateAnimations()
 	{
 		if(change != Vector3.zero)
-
 		{
 			animator.SetFloat("moveX", change.x);
 
 			animator.SetFloat("moveY", change.y);
 
 			animator.SetBool("moving", true);
-
 		}
 		else
 		{
@@ -165,9 +175,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			animator.SetFloat("moveY", 0);*/
 
 			animator.SetBool("moving", false);
-
 		}
-
 		change = Vector2.zero;
 	}
 
@@ -186,7 +194,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 			try
 			{
-				characterRoom = GetComponent<Character>().currentRoom.GetComponent<Room>();
+				characterRoom = currentRoom;
 			}
 			catch (UnassignedReferenceException)
 			{
@@ -210,7 +218,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			{
 				if (entranceRoom != null)
 				{
-					path = pf.CalculateTransforms(entranceRoom, GetComponent<Character>().currentRoom.GetComponent<Room>());
+					path = pf.CalculateTransforms(entranceRoom, currentRoom);
 					path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
 				}
 			}
@@ -250,5 +258,30 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			}
 		}
 		return null;
+	}
+
+	//Character functions
+	public void StairsTransistion()
+	{
+		playerOnTheStairs = true;
+		GetComponent<Renderer>().enabled = false;
+
+		//Go to next transform in pathfinding
+		current++;
+	}
+
+	public void HidePlayerOnStair()
+	{
+		if (playerOnTheStairs)
+		{
+			timer += Time.deltaTime;
+
+			if (timer > stairsDuration)
+			{
+				playerOnTheStairs = false;
+				timer = 0;
+				this.GetComponent<Renderer>().enabled = true;
+			}
+		}
 	}
 }

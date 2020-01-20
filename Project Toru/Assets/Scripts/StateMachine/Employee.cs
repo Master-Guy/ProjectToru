@@ -14,7 +14,7 @@ public class Employee : NPC
     {
         this.startingPosition = transform.position;
         this.animator = GetComponent<Animator>();
-        //PingPong();
+        PingPong();
     }
 
     public void Update()
@@ -60,12 +60,10 @@ public class Employee : NPC
             Invoke("startCountDown", 8);
             fleeTrue = false;
         }
-
     }
 
     void startCountDown()
     {
 
     }
-
 }

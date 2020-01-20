@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class ExecutePathFindingNPC : ExecutePathFinding
 {
-	public Vector3 targetVector;
-	public bool test = true;
-
 	private void Update()
 	{
 		WayPointsWalk();
-
-		if(test)
-		{
-			PathFinding(targetVector);
-			test = false;
-		}
+		HidePlayerOnStair();
 	}
 
 	public void setPosTarget(Vector3 pos)
@@ -23,9 +15,19 @@ public class ExecutePathFindingNPC : ExecutePathFinding
 		PathFinding(pos);
 	}
 
+	public void setPosTarget(float x, float y)
+	{
+		PathFinding(new Vector3(x, y, 0));
+	}
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		checkDoorClosed(other);
+
+		if (other.CompareTag("Room"))
+		{
+			currentRoom = other.gameObject.GetComponent<Room>();
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
