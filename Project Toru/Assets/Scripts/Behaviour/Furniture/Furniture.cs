@@ -53,13 +53,20 @@ namespace Assets.Scripts.Behaviour
 
 		public void OnMouseOver()
 		{
-			if (Character.selectedCharacter != null && GetComponent<Collider2D>().enabled)
+			if (Character.selectedCharacter != null)
 			{
 				if (Input.GetMouseButtonDown(1))
 				{
-					Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
+					Invoke("setFurnitureTarget", 0.1f);
+					return;
 				}
 			}
+		}
+
+		private void setFurnitureTarget()
+		{
+
+			Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
 		}
 
 		public Vector2Int GetSize()

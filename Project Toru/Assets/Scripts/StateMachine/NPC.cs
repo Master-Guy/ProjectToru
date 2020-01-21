@@ -76,6 +76,7 @@ public abstract class NPC : MonoBehaviour
     {
         this.statemachine.ChangeState(new PingPong(this.startingPosition, this.gameObject, this.animator));
     }
+
     private void OnMouseExit()
     {
         Outline.RemoveOutline(this.gameObject);

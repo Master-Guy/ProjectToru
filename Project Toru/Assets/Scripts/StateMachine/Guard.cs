@@ -69,5 +69,4 @@ public class Guard : NPC
             firePoint.transform.position = transform.position + new Vector3(0, -.3f);
         }
     }
-
 }
