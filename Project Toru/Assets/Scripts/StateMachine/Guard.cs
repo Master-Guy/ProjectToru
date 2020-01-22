@@ -16,8 +16,11 @@ public class Guard : NPC
         startingPosition = transform.position;;
         stats = GetComponent<CharacterStats>();
 		animator = GetComponent<Animator>();
-        firePoint = transform.GetChild(1).gameObject;
-        weapon = firePoint.GetComponent<Weapon>();
+        weapon = GetComponentInChildren<Weapon>();
+        if(weapon != null)
+        {
+            firePoint = weapon.gameObject;
+        }
         PingPong();
 	}
 
@@ -35,7 +38,7 @@ public class Guard : NPC
         currentpos = transform.position;
         change = currentpos - lastpos;
 
-        if(change != Vector3.zero)
+        if(change != Vector3.zero && weapon != null)
         {
             FlipFirePoint();
         }
@@ -66,5 +69,4 @@ public class Guard : NPC
             firePoint.transform.position = transform.position + new Vector3(0, -.3f);
         }
     }
-
 }
