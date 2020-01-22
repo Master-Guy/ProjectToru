@@ -64,6 +64,6 @@ public class Employee : NPC
 
     void startCountDown()
     {
-
+		LevelManager.emit("EmployeeFleed");
     }
 }

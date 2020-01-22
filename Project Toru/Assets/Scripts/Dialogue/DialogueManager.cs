@@ -8,6 +8,8 @@ public class DialogueManager : MonoBehaviour
 {
 	public Text nameText, dialogueText;
 	
+	public bool DebugDisableDialogue = false;
+	
 	[SerializeField]
 	private Animator animator = null;
 
@@ -18,6 +20,9 @@ public class DialogueManager : MonoBehaviour
 
 	void Start()
 	{
+		if (DebugDisableDialogue) {
+			Debug.LogWarning("!!!!! Dialogue is disabled for debugging !!!!!");
+		}
 		animator = GetComponent<Animator>();
 	}
 	
@@ -41,10 +46,12 @@ public class DialogueManager : MonoBehaviour
 		
 		DialogueText dialogue = dialogues.Dequeue();
 		nameText.text = dialogue.name;	
-
-		foreach(string s in dialogue.sentences)
-		{
-			sentences.Enqueue(s);
+	
+		if (!DebugDisableDialogue) {
+			foreach(string s in dialogue.sentences)
+			{
+				sentences.Enqueue(s);
+			}
 		}
 
 		DisplayNextSentence();

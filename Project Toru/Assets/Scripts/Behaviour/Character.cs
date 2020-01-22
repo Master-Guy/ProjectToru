@@ -66,7 +66,8 @@ public class Character : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.F))
 			{
-				weapon.Shoot();
+				LevelManager.emit("PlayerHasUsedGun");
+				weapon?.Shoot();
 			}
 		}
 

@@ -193,13 +193,15 @@ public class LevelManager : MonoBehaviour
 	public static void emit(string eventString)
 	{
 		Debug.Log("Emitting " + eventString);
-		events[eventString]?.Invoke();
+		if (events.ContainsKey(eventString))
+			events[eventString]?.Invoke();
 	}
 	
 	public static void emit(string eventString, string value)
 	{
 		Debug.Log("Emitting " + eventString);
-		events_string[eventString]?.Invoke(value);
+		if (events_string.ContainsKey(eventString))
+			events_string[eventString]?.Invoke(value);
 	}
 	
 	public static void on(string eventString, LevelScriptCallback callback)

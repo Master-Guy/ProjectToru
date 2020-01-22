@@ -15,16 +15,6 @@ public class Level0 : LevelScript
 		/// Assigning Levelscripts to objects
 		
 		/// Assigning Conditions
-		/**
-		Example: 
-		{
-            LevelCondition condition = new LevelCondition();
-            condition.name = "CharacterMustEnterVan";
-
-            LevelManager.AddCondition(condition);
-        }
-		*/
-		
 		{
             LevelCondition condition = new LevelCondition();
             condition.name = "CharacterHasBeenSelected";
@@ -76,6 +66,23 @@ public class Level0 : LevelScript
 		
 		{
 			LevelCondition condition = new LevelCondition();
+			condition.name = "CharacterIsInRoomL0_R";
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+				DialogueText text = new DialogueText();
+				text.name = "Watch out!";
+				text.sentences.Add("The employee will call the cops when you enter the vaultroom");
+				text.sentences.Add("[Left Click] on the employee to keep him under shot");
+				text.sentences.Add("Press [F] to fire and try to kill the employee");
+				text.sentences.Add("... you don't have to kill him");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
 			condition.name = "FirstDoorOpenened";
 			
 			condition.failHandler = (LevelCondition c) => {
@@ -85,10 +92,6 @@ public class Level0 : LevelScript
 				text.sentences.Add("Maybe I can find something to open it");
 				
 				dialogueManager.QueueDialogue(text);
-			};
-			
-			condition.fullfillHandler = (LevelCondition c) => {
-				
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -115,6 +118,29 @@ public class Level0 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CopsTriggered";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				PoliceSiren.startSiren = true;
+				PoliceSiren.gameObject.SetActive(true);
+				
+				LevelManager.Delay(10, () => {
+					PoliceCar.speed = 8;
+				});
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CharacterIsInRoomVault";
+			
+			LevelManager.AddCondition(condition);
+		}
+		
 		/// Assigning callbacks
 		LevelManager.on("CharacterHasBeenSelected", () => {
 			LevelManager.Condition("CharacterHasBeenSelected").Fullfill();
@@ -127,8 +153,15 @@ public class Level0 : LevelScript
 		LevelManager.on("CharacterIsInRoom", (string value) => {
 			
 			if (value == "L0 Room L") {
-				Debug.Log("Ok");
 				LevelManager.Condition("CharacterIsInRoomL0_L").Fullfill();
+			}
+			
+			else if (value == "L0 Room R") {
+				LevelManager.Condition("CharacterIsInRoomL0_R").Fullfill();
+			}
+			
+			else if (value == "VaultRoom") {
+				LevelManager.emit("CharacterIsInVaultRoom");	
 			}
 		});
 		
@@ -148,6 +181,57 @@ public class Level0 : LevelScript
 			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
 		});
 		
+		LevelManager.on("PlayerHasUsedGun", () => {
+			LevelManager.Delay(3, () => {
+				
+				if (!LevelManager.Condition("CopsTriggered").fullfilled) {
+					DialogueText text = new DialogueText();
+					text.name = "O no";
+					text.sentences.Add("I think someone heard me shooting");
+					text.sentences.Add("I hear the police from a distance, I have to hurry");
+					
+					text.callback = () => {
+						LevelManager.Condition("CopsTriggered").Fullfill();	
+					};
+					
+					dialogueManager.QueueDialogue(text);
+				}
+			});
+		});
+		
+		LevelManager.on("EmployeeFleed", () => {
+			if (!LevelManager.Condition("CopsTriggered").fullfilled) {
+				DialogueText text = new DialogueText();
+				text.name = "O no";
+				text.sentences.Add("I think that employee has called the cops");
+				text.sentences.Add("I hear the police from a distance, I have to hurry");
+					
+				text.callback = () => {
+					LevelManager.Condition("CopsTriggered").Fullfill();
+				};
+				
+				dialogueManager.QueueDialogue(text);
+			}
+		});
+
+		LevelManager.on("CharacterIsInVaultRoom", () => {
+			//LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
+			
+			if (!LevelManager.Condition("CopsTriggered").fullfilled) {
+				DialogueText text = new DialogueText();
+				text.name = "O no";
+				text.sentences.Add("I hear the police from a distance, I have to hurry");
+				text.sentences.Add("I think that employee called the police");
+				
+				text.callback = () => {
+					LevelManager.Condition("CopsTriggered").Fullfill();
+				};
+				
+				dialogueManager.QueueDialogue(text);
+			}
+		});		
+		
+		
 		// Trigger first dialogue
 		LevelManager.Delay(2, () => {
 			
@@ -163,8 +247,6 @@ public class Level0 : LevelScript
 				text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
 				text.sentences.Add("Use [scroll] to zoom in and out");
 			}
-			
-			
 				
 			dialogueManager.QueueDialogue(text);
 		});
