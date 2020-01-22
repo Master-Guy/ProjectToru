@@ -93,6 +93,8 @@ public class Character : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			selectedCharacter = this;
+			
+			LevelManager.emit("CharacterHasBeenSelected");
 
 			inventory.UpdateUI();
 		}
@@ -139,6 +141,7 @@ public class Character : MonoBehaviour
 		if (other.CompareTag("Room"))
 		{
 			currentRoom = other.gameObject;
+			LevelManager.emit("CharacterIsInRoom", currentRoom.name);
 		}
 	}
 }

@@ -28,8 +28,6 @@ using GameAnalyticsSDK;
 /// </example>
 public class LevelManager : MonoBehaviour
 {
-
-	public delegate void LevelScriptCallback();
 	
     /// <summary>
     /// The current scene
@@ -186,7 +184,11 @@ public class LevelManager : MonoBehaviour
         return null;
     }
 
+	public delegate void LevelScriptCallback();
+	public delegate void LevelScriptCallbackString(string value);
+	
 	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
+	static Dictionary<string, LevelScriptCallbackString> events_string = new Dictionary<string, LevelScriptCallbackString>();
 	
 	public static void emit(string eventString)
 	{
@@ -194,9 +196,20 @@ public class LevelManager : MonoBehaviour
 		events[eventString]?.Invoke();
 	}
 	
+	public static void emit(string eventString, string value)
+	{
+		Debug.Log("Emitting " + eventString);
+		events_string[eventString]?.Invoke(value);
+	}
+	
 	public static void on(string eventString, LevelScriptCallback callback)
 	{
 		events.Add(eventString, callback);	
+	}
+	
+	public static void on(string eventString, LevelScriptCallbackString callback)
+	{
+		events_string.Add(eventString, callback);	
 	}
 	
 	public static void setLevel() {

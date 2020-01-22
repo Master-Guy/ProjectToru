@@ -67,7 +67,10 @@ public class LevelCondition
     public ConditionHandlerDelegate failHandler = null;
 
     public virtual void Fullfill()
-    {
+    {	
+		if (_fullfilled == true)
+			return;
+			
         Debug.Log(name + " fullfilled");
         _fullfilled = true;
 
@@ -77,7 +80,10 @@ public class LevelCondition
     }
 
     public void Fail()
-    {
+    {	
+		if (_failed == true)
+			return;
+			
         Debug.Log(name + " failed");
         _failed = true;
 

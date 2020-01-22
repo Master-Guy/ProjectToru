@@ -12,24 +12,38 @@ public class DialogueManager : MonoBehaviour
 	private Animator animator = null;
 
 	private Queue<string> sentences = new Queue<string>();
+	private Queue<DialogueText> dialogues = new Queue<DialogueText>();
+	
+	private DialogueText currentDialogue = null;
 
 	void Start()
 	{
 		animator = GetComponent<Animator>();
 	}
-
-	public void StartDialogue(DialogueText dialogue)
-	{
-		animator.SetBool("IsOpen", true);
-
-		nameText.text = dialogue.name;
-
-		sentences.Clear();
+	
+	public void QueueDialogue(DialogueText dialogue) {
 		
-		Debug.Log("Hello");
+		dialogues.Enqueue(dialogue);
+		
+		if (currentDialogue == null) {
+			currentDialogue = dialogue;
+			StartDialogue();
+		}
+	}
+	
+	public void StartDialogue()
+	{
+		if (dialogues.Count == 0) {
+			return;
+		}
+		
+		animator.SetBool("IsOpen", true);
+		
+		DialogueText dialogue = dialogues.Dequeue();
+		nameText.text = dialogue.name;	
+
 		foreach(string s in dialogue.sentences)
 		{
-			Debug.Log(s);
 			sentences.Enqueue(s);
 		}
 
@@ -62,6 +76,13 @@ public class DialogueManager : MonoBehaviour
 
 	private void EndDialogue()
 	{
+		sentences.Clear();
 		animator.SetBool("IsOpen", false);
+		LevelManager.Delay(0.2f, () => {
+			StartDialogue();
+			DialogueText oldCurrentDialogue = currentDialogue;
+			currentDialogue = null;
+			oldCurrentDialogue.callback?.Invoke();
+		});
 	}
 }
