@@ -7,16 +7,15 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
 	public Text nameText, dialogueText;
+	
+	[SerializeField]
+	private Animator animator = null;
 
-	private Animator animator;
-
-	private Queue<string> sentences;
+	private Queue<string> sentences = new Queue<string>();
 
 	void Start()
 	{
 		animator = GetComponent<Animator>();
-
-		sentences = new Queue<string>();
 	}
 
 	public void StartDialogue(DialogueText dialogue)
@@ -26,9 +25,11 @@ public class DialogueManager : MonoBehaviour
 		nameText.text = dialogue.name;
 
 		sentences.Clear();
-
+		
+		Debug.Log("Hello");
 		foreach(string s in dialogue.sentences)
 		{
+			Debug.Log(s);
 			sentences.Enqueue(s);
 		}
 

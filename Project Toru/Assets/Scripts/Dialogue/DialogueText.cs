@@ -8,5 +8,5 @@ public class DialogueText
 	public string name;
 
 	[TextArea(4,10)]
-	public string[] sentences;
+	public List<string> sentences = new List<string>();
 }

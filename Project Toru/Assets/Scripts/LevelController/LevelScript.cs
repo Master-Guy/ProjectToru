@@ -5,5 +5,9 @@ using UnityEngine;
 public class LevelScript : MonoBehaviour
 {
 	
-	// This class just exists because of the inheritance
+	protected DialogueManager dialogueManager = null;
+	
+	void Awake() {
+		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
+	}
 }
