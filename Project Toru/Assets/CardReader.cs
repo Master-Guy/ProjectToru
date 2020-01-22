@@ -50,8 +50,11 @@ public class CardReader : MonoBehaviour
 			}
 			else if (collision.gameObject.GetComponent<Character>().HasKey(color))
 			{
+				LevelManager.emit("PlayerTriedOpeningDoorSuccesfull");
 				door.Open();
 				this.SetStatus(true);
+			} else {
+				LevelManager.emit("PlayerTriedOpeningDoorButWasLocked");
 			}
 		}
 	}

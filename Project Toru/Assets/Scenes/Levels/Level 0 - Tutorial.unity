@@ -781,10 +781,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 3485136947023997620, guid: 38fab2aded75e0941b4d1b1e6d2f8f20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3485136947023997616, guid: 38fab2aded75e0941b4d1b1e6d2f8f20,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.48
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3485136947023997616, guid: 38fab2aded75e0941b4d1b1e6d2f8f20,
         type: 3}
@@ -24787,7 +24792,7 @@ PrefabInstance:
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.69
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}

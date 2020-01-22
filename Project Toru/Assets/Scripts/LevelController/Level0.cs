@@ -47,6 +47,13 @@ public class Level0 : LevelScript
 		
 		{
             LevelCondition condition = new LevelCondition();
+            condition.name = "PlayerDidUseCameraControls";
+
+            LevelManager.AddCondition(condition);
+        }
+		
+		{
+            LevelCondition condition = new LevelCondition();
             condition.name = "CharacterHasBeenMoved";
 
             LevelManager.AddCondition(condition);
@@ -59,11 +66,52 @@ public class Level0 : LevelScript
 				
 				DialogueText text = new DialogueText();
 				text.name = "Find the Vault";
-				text.sentences.Add("You are in the building...");
-				text.sentences.Add("Now try to find the vault");
+				text.sentences.Add("I am in the building...");
+				text.sentences.Add("Now I must try to find the vault");
 				
 				dialogueManager.QueueDialogue(text);
 			};
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "FirstDoorOpenened";
+			
+			condition.failHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "Locked";
+				text.sentences.Add("This door seems locked...");
+				text.sentences.Add("Maybe I can find something to open it");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerFoundKey";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "A Key!";
+				text.sentences.Add("I found a key!...");
+				
+				if (LevelManager.Condition("FirstDoorOpenened").failed) {
+					text.sentences.Add("Maybe it will open the door");
+				} else {
+					text.sentences.Add("For what can I use this?");
+				}
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
 			LevelManager.AddCondition(condition);
 		}
 		
@@ -84,7 +132,23 @@ public class Level0 : LevelScript
 			}
 		});
 		
-		// Go
+		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", () => {
+			LevelManager.Condition("FirstDoorOpenened").Fail();
+		});
+		
+		LevelManager.on("PlayerTriedOpeningDoorSuccesfull", () => {
+			LevelManager.Condition("FirstDoorOpenened").Fullfill();
+		});
+		
+		LevelManager.on("PlayerFoundKey", () => {
+			LevelManager.Condition("PlayerFoundKey").Fullfill();
+		});
+		
+		LevelManager.on("PlayerDidUseCameraControls", () => {
+			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
+		});
+		
+		// Trigger first dialogue
 		LevelManager.Delay(2, () => {
 			
 			DialogueText text = new DialogueText();
@@ -94,9 +158,13 @@ public class Level0 : LevelScript
 			if (!LevelManager.Condition("CharacterHasBeenSelected").fullfilled) {
 				text.sentences.Add("Select a character by clicking on him with your [left mouse]");
 			}
-			text.callback = () => {
-				
-			};
+			
+			if (!LevelManager.Condition("PlayerDidUseCameraControls").fullfilled) {
+				text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
+				text.sentences.Add("Use [scroll] to zoom in and out");
+			}
+			
+			
 				
 			dialogueManager.QueueDialogue(text);
 		});
