@@ -46,7 +46,7 @@ public class Vault : Furniture
         closed = false;
         GetComponent<Animator>().SetBool("OpenVault", true);
 
-		levelScript?.emit("vault_open");
+		LevelManager.emit("vault_open");
         // door.Close();
 
         StartCoroutine(WaitForAnimationEndTimer());

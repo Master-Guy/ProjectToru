@@ -10,6 +10,8 @@ public class Level0 : LevelScript
 	
 	void Start() {
 		
+		LevelManager.setLevel();
+		
 		/// Assigning Levelscripts to objects
 		//Ex: vault.levelScript = this;
 		

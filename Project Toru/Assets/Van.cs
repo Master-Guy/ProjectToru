@@ -36,7 +36,7 @@ public class Van : MonoBehaviour
 
         if (collision.isTrigger && ch != null)
         {
-			levelScript?.emit("CharacterEntersVan");
+			LevelManager.emit("CharacterEntersVan");
 			
             this.EnterCharacter(ch);
         }
@@ -49,7 +49,7 @@ public class Van : MonoBehaviour
 
         if (1 == characters.Count)
         {
-			levelScript?.emit("AllCharactersInVan");
+			LevelManager.emit("AllCharactersInVan");
         }
     }
 

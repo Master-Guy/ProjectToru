@@ -29,6 +29,8 @@ using GameAnalyticsSDK;
 public class LevelManager : MonoBehaviour
 {
 
+	public delegate void LevelScriptCallback();
+	
     /// <summary>
     /// The current scene
     /// </summary>
@@ -184,6 +186,23 @@ public class LevelManager : MonoBehaviour
         return null;
     }
 
+	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
+	
+	static public void emit(string eventString)
+	{
+		Debug.Log("Emitting " + eventString);
+		events[eventString]?.Invoke();
+	}
+	
+	static public void on(string eventString, LevelScriptCallback callback)
+	{
+		events.Add(eventString, callback);	
+	}
+	
+	static public void setLevel() {
+		events.Clear();
+	}
+	
     /// <summary>
     /// End level. For winning and losing
     /// The level is automaticly "won" when none of the conditions are failed.

@@ -15,9 +15,10 @@ public class Level1 : LevelScript
 	
 	void Start() {
 		
+		LevelManager.setLevel();
+		
 		/// Assigning Levelscripts to objects
-		vault.levelScript = this;
-		van.levelScript = this;
+		// 
 		
 		/// Assigning Conditions
 		{
@@ -53,15 +54,15 @@ public class Level1 : LevelScript
         }
 		
 		/// Assigning callbacks
-		on("vault_open", () => {
+		LevelManager.on("vault_open", () => {
 			vaultRoomDoor.Close();
 		});
 		
-		on("CharacterEntersVan", () => {
+		LevelManager.on("CharacterEntersVan", () => {
 			LevelManager.Condition("CharacterMustEnterVan").Fullfill();
 		});
 		
-		on("AllCharactersInVan", () => {
+		LevelManager.on("AllCharactersInVan", () => {
 			LevelManager.Condition("AllCharactersMustBeInVan").Fullfill();
 		});
 		
