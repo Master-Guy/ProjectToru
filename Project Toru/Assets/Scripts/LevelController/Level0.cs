@@ -12,18 +12,7 @@ public class Level0 : LevelScript
 		
 		LevelManager.setLevel();
 		
-		DialogueText text = new DialogueText();
-		text.name = "Hello";
-		text.sentences.Add("What?");
-		text.sentences.Add("Are");
-		text.sentences.Add("You");
-		text.sentences.Add("Doing?");
-		
-		dialogueManager.StartDialogue(text);
-		
-		
 		/// Assigning Levelscripts to objects
-		//Ex: vault.levelScript = this;
 		
 		/// Assigning Conditions
 		/**
@@ -43,5 +32,17 @@ public class Level0 : LevelScript
 			vaultRoomDoor.Close();
 		});
 		*/
+		
+		// Go
+		LevelManager.Delay(2, () => {
+			DialogueText text = new DialogueText();
+			text.name = "Welcome";
+			text.sentences.Add("What?");
+			text.sentences.Add("Are");
+			text.sentences.Add("You");
+			text.sentences.Add("Doing?");
+			
+			dialogueManager.StartDialogue(text);
+		});
 	}
 }

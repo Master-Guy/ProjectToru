@@ -188,20 +188,33 @@ public class LevelManager : MonoBehaviour
 
 	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
 	
-	static public void emit(string eventString)
+	public static void emit(string eventString)
 	{
 		Debug.Log("Emitting " + eventString);
 		events[eventString]?.Invoke();
 	}
 	
-	static public void on(string eventString, LevelScriptCallback callback)
+	public static void on(string eventString, LevelScriptCallback callback)
 	{
 		events.Add(eventString, callback);	
 	}
 	
-	static public void setLevel() {
+	public static void setLevel() {
 		events.Clear();
 	}
+	
+	public static void Delay(float delay, LevelScriptCallback callback) {
+		Instance().StartCoroutine(TriggerDelayCallback(delay, callback));
+	}
+	
+	private static IEnumerator TriggerDelayCallback(float delay, LevelScriptCallback callback) {
+		
+		yield return new WaitForSeconds(delay);
+		
+		callback.Invoke();
+	}
+	
+	
 	
     /// <summary>
     /// End level. For winning and losing
