@@ -119,30 +119,33 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			{
 				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
 				{
-					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().Equals(CardreaderColor.Disabled))
 					{
 						other.gameObject.GetComponent<CardReader>().getDoor().Open();
+						return;
 					}
-					else if (gameObject.GetComponent<NPC>())
+					StopPathFinding();
+					return;
+				}
+			}
+		}
+		catch (NullReferenceException) {}
+
+		try
+		{
+			if (other.gameObject.GetComponent<CardReader>())
+			{
+				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
+				{
+					if (gameObject.tag.Equals("NPC"))
 					{
-						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().Equals(CardreaderColor.Disabled))
 						{
 							other.gameObject.GetComponent<CardReader>().getDoor().Open();
+							return;
 						}
-						else
-						{
-							if (path.Count != 0)
-							{
-								StopPathFinding();
-							}
-						}
-					}
-					else
-					{
-						if (path.Count != 0)
-						{
-							StopPathFinding();
-						}
+						StopPathFinding();
+						return;
 					}
 				}
 			}
