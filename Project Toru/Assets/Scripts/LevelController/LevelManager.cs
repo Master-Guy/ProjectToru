@@ -65,13 +65,11 @@ public class LevelManager : MonoBehaviour
 		{
 			GameAnalytics.Initialize();
 		}
-	}
-	
-    void Start()
-    {
-        scene = SceneManager.GetActiveScene();
+		
+		scene = SceneManager.GetActiveScene();
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + levelIndex.ToString(), this.GetLevelName());
-    }
+	}
+
 
     void Update()
     {
@@ -216,6 +214,7 @@ public class LevelManager : MonoBehaviour
 	
 	public static void setLevel() {
 		events.Clear();
+		conditions.Clear();
 	}
 	
 	public static void Delay(float delay, LevelScriptCallback callback) {
@@ -251,7 +250,7 @@ public class LevelManager : MonoBehaviour
         }
 		
 		LevelManager.Delay(SegueAfterSeconds, () => {
-			SceneManager.LoadScene("BetweenLevel");
+			SceneManager.LoadScene("BetweenLevel", LoadSceneMode.Single);
 		});
 		
     }
