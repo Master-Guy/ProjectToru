@@ -191,8 +191,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.9, y: 14}
-  m_SizeDelta: {x: 305.3, y: 101.44}
+  m_AnchoredPosition: {x: 0, y: 61.9}
+  m_SizeDelta: {x: 550, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8314935620882176770
 CanvasRenderer:
@@ -363,7 +363,6 @@ GameObject:
   - component: {fileID: 6436817790698002113}
   - component: {fileID: 2569651279323861085}
   - component: {fileID: 2025728966033178542}
-  - component: {fileID: 7021930225601392295}
   - component: {fileID: 8384244473467164119}
   m_Layer: 5
   m_Name: DialogueBox
@@ -387,12 +386,12 @@ RectTransform:
   - {fileID: 5280211120780463569}
   - {fileID: 6949343909769083604}
   m_Father: {fileID: 3825185711421816023}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 10, y: -200}
-  m_SizeDelta: {x: 500, y: 168}
+  m_SizeDelta: {x: 600, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6436817790698002113
 CanvasRenderer:
@@ -444,23 +443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 8429640529003398819}
   dialogueText: {fileID: 3535839740719543652}
---- !u!114 &7021930225601392295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022140819096015368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a3cdbdc0f2f0414ba19417ebdbb85fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    name: Architect
-    sentences:
-    - Dit is een start van een nieuwe adventure.
-    - Get ready for some action! It is time for you to know what to do!
+  DebugDisableDialogue: 0
+  animator: {fileID: 0}
 --- !u!95 &8384244473467164119
 Animator:
   serializedVersion: 3
@@ -1389,8 +1373,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.7, y: -6.41}
-  m_SizeDelta: {x: 410.5, y: 60.62}
+  m_AnchoredPosition: {x: 0, y: 0.8}
+  m_SizeDelta: {x: 550, y: 90.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1175829019483509785
 CanvasRenderer:
