@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Guard : NPC
 {
-    Weapon weapon;
+    protected Weapon weapon;
     GameObject firePoint;
 
     Vector3 currentpos;

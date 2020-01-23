@@ -12,7 +12,7 @@ public class Police : Guard
 		{
 			GetComponent<ExecutePathFindingNPC>().StopPathFinding();
 			// TODO fight
-
+			weapon.Shoot();
 		}
 		else if(GetComponent<ExecutePathFindingNPC>().path.Count == 0)
 		{
