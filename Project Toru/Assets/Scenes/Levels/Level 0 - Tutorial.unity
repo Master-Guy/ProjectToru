@@ -669,7 +669,7 @@ PrefabInstance:
     - target: {fileID: 2025728966033178542, guid: 93f02214dd86b10438df85ded2e65167,
         type: 3}
       propertyPath: DebugDisableDialogue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7021930225601392295, guid: 93f02214dd86b10438df85ded2e65167, type: 3}
@@ -811,12 +811,12 @@ PrefabInstance:
     - target: {fileID: 4159666075906911371, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.821373
+      value: -9.88
       objectReference: {fileID: 0}
     - target: {fileID: 4159666075906911371, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7116603
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4159666075906911371, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
         type: 3}
@@ -23985,6 +23985,18 @@ Transform:
   m_Father: {fileID: 1586830776}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1452485022 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357494930098594450, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225780940}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cba34e2c3674c18a1cab3436c5d9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1501227298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9035884668655751477, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
@@ -24036,6 +24048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoliceSiren: {fileID: 599340976}
   PoliceCar: {fileID: 123684431}
+  van: {fileID: 1452485022}
 --- !u!1001 &1531032026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24435,7 +24448,7 @@ MonoBehaviour:
   pauseMenuPrefab: {fileID: 1866365909}
   settingsPrefab: {fileID: 1338287385}
   resumeButton: {fileID: 1866365908}
-  optionsButton: {fileID: 1866365907}
+  howtoplayButton: {fileID: 0}
   quitButton: {fileID: 1866365905}
   backButton: {fileID: 1338287384}
 --- !u!114 &1761269953
@@ -25029,18 +25042,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1866365904}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1866365907 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8440329788622121498, guid: ff144ef9d1db0314c91d789fea8a37aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866365904}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1866365908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 648118780862240840, guid: ff144ef9d1db0314c91d789fea8a37aa,
