@@ -811,12 +811,12 @@ PrefabInstance:
     - target: {fileID: 4159666075906911371, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.821373
+      value: -9.88
       objectReference: {fileID: 0}
     - target: {fileID: 4159666075906911371, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7116603
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4159666075906911371, guid: 2f4d97f08c6947f45b9c63ba91a096b8,
         type: 3}
@@ -24435,7 +24435,7 @@ MonoBehaviour:
   pauseMenuPrefab: {fileID: 1866365909}
   settingsPrefab: {fileID: 1338287385}
   resumeButton: {fileID: 1866365908}
-  optionsButton: {fileID: 1866365907}
+  howtoplayButton: {fileID: 0}
   quitButton: {fileID: 1866365905}
   backButton: {fileID: 1338287384}
 --- !u!114 &1761269953
@@ -25029,18 +25029,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1866365904}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1866365907 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8440329788622121498, guid: ff144ef9d1db0314c91d789fea8a37aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866365904}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1866365908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 648118780862240840, guid: ff144ef9d1db0314c91d789fea8a37aa,
