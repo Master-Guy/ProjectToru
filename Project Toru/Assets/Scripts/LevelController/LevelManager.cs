@@ -204,6 +204,7 @@ public class LevelManager : MonoBehaviour
 	
 	public static void setLevel() {
 		events.Clear();
+		events_string.Clear();
 		conditions.Clear();
 	}
 	

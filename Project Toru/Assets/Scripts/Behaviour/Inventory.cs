@@ -9,12 +9,12 @@ public class Inventory
     private HashSet<Item> inv;
 
     //Create's a static InventoryUI manager
-    private static InventoryUI INVUI = new InventoryUI();
+    //private static InventoryUI INVUI = new InventoryUI();
 
     public float MaxWeight;
 
     private Character ch;
-
+	
     //Constructor - Creates a Item List
     public Inventory(float MaxWeight)
     {
@@ -30,7 +30,7 @@ public class Inventory
     //Add an item to the Inventory
     public void addItem(Item item)
     {
-        if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
+        if (inv.Count < InventoryUI.Instance().allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
         {
             Debug.Log("1");
             bool Found = false;
@@ -81,11 +81,11 @@ public class Inventory
     {
         if (inv.Count == 0)
         {
-            INVUI.hideInv(inv);
+            InventoryUI.Instance().hideInv(inv);
         }
         else
         {
-            INVUI.showInv(inv);
+            InventoryUI.Instance().showInv(inv);
         }
     }
 
