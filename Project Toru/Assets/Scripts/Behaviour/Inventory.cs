@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using GameAnalyticsSDK;
-
 public class Inventory
 {
     //Assign a Item List

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-using GameAnalyticsSDK;
-
 /// <summary>
 /// This Level Manager receives "conditions" from the game.
 /// Any condtions can have a callback when a condition is met or not. Conditions don't check themselves, because the all behave differently
@@ -61,13 +59,7 @@ public class LevelManager : MonoBehaviour
     static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
 
 	void Awake() {
-		if (!GameAnalytics.IsInitialized())
-		{
-			GameAnalytics.Initialize();
-		}
-		
 		scene = SceneManager.GetActiveScene();
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + levelIndex.ToString(), this.GetLevelName());
 	}
 
 
@@ -133,8 +125,6 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
-
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), condition.name);
         }
         else
         {
@@ -239,16 +229,7 @@ public class LevelManager : MonoBehaviour
     /// <param name="FailAfterSeconds">The to wait before ending the level</param>
     public static void EndLevel(float SegueAfterSeconds = 0f)
     {	
-		if (LevelEndMessage.LevelSuccessfull)
-        {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
-        }
-        else
-        {
-			GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
-            
-        }
-		
+		 
 		LevelManager.Delay(SegueAfterSeconds, () => {
 			SceneManager.LoadScene("BetweenLevel", LoadSceneMode.Single);
 		});

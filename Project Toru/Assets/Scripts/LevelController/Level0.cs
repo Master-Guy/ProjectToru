@@ -14,6 +14,7 @@ public class Level0 : LevelScript
 	void Awake() {
 		
 		LevelManager.setLevel();
+		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
 		
 		/// Assigning Levelscripts to objects
 		
