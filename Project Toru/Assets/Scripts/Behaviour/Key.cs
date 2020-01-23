@@ -39,7 +39,7 @@ public class Key : Item
 		{
 			LevelManager.emit("PlayerFoundKey");
 			collision.GetComponent<Character>().inventory.addItem(this);
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }

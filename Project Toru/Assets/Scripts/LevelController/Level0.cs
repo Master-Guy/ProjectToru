@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class Level0 : LevelScript
 {
 	// Add objects
@@ -9,9 +11,10 @@ public class Level0 : LevelScript
 	// Ex: Vault vault = null;
 	public Van van = null;
 	
-	void Start() {
+	void Awake() {
 		
 		LevelManager.setLevel();
+		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
 		
 		/// Assigning Levelscripts to objects
 		
@@ -296,15 +299,29 @@ public class Level0 : LevelScript
 			
 			LevelManager.Condition("DriveVan").Fullfill();
 			
+			
+			
 			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
-				LevelManager.EndLevel("Good job!", "You got some loot and you are not caught!", 3);
+				LevelEndMessage.title = "Good job!";
+				LevelEndMessage.message = "You got some loot and you are not caught!";
+				LevelEndMessage.nextLevel = "Level 1";
+				LevelEndMessage.LevelSuccessfull = true;
+				LevelManager.EndLevel(3);
 				return;
 			}
 			else if (LevelManager.Condition("CopsTriggered").fullfilled) {
-				LevelManager.EndLevel("You got away!", "Sadly you could not get away with money...", 3);
+				LevelEndMessage.title = "You got away!";
+				LevelEndMessage.message = "Sadly you could not get away with money...";
+				LevelEndMessage.nextLevel = "Level 0 - Tutorial";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(3);
 			}
 			else {
-				LevelManager.EndLevel("You got away", "But the idea is that you steal some money...", 3);
+				LevelEndMessage.title = "You got away!";
+				LevelEndMessage.message = "But the idea is that you try to steal some money...";
+				LevelEndMessage.nextLevel = "Level 0 - Tutorial";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(3);
 			}
 		});
 		
@@ -327,5 +344,12 @@ public class Level0 : LevelScript
 				
 			dialogueManager.QueueDialogue(text);
 		});
+	}
+	
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.O))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 	}
 }

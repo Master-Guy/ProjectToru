@@ -2,7 +2,6 @@
 using Assets.Scripts.Options;
 using System.Collections.Generic;
 using UnityEngine;
-using GameAnalyticsSDK;
 
 public enum Skills
 {
