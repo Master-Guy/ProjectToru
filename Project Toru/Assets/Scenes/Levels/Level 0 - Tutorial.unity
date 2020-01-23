@@ -669,7 +669,7 @@ PrefabInstance:
     - target: {fileID: 2025728966033178542, guid: 93f02214dd86b10438df85ded2e65167,
         type: 3}
       propertyPath: DebugDisableDialogue
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7021930225601392295, guid: 93f02214dd86b10438df85ded2e65167, type: 3}
