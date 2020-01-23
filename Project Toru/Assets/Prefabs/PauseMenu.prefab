@@ -76,7 +76,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Settings
+  m_Text: How To Play
 --- !u!1 &667383283133567610
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 6156529787269550819}
   - component: {fileID: 8440329788622121498}
   m_Layer: 5
-  m_Name: SettingsButton
+  m_Name: HowToPlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
