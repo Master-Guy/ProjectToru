@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI
+public class InventoryUI : MonoBehaviour
 {
     private GameObject inventory;
 
@@ -12,14 +12,23 @@ public class InventoryUI
     private GameObject[] slots;
 
     public GameObject slotHolder;
-
-    public InventoryUI()
-    {
+	
+	static InventoryUI _instance = null;
+	
+	public static InventoryUI Instance() {
+		if (_instance == null) {
+			_instance = (InventoryUI)FindObjectOfType(typeof(InventoryUI));
+		}
+		Debug.Assert(_instance != null, "InventoryUI is still null after init");
+		
+		return _instance;
+	}
+	
+	public void Awake() {
 		//Get the objects needed to create the UI
 		inventory = GameObject.FindGameObjectWithTag("Inventory");
 		slotHolder = GameObject.FindGameObjectWithTag("InventorySlotHolder");
-
-		//Collects and create the slots needed
+		
 		allSlots = slotHolder.transform.childCount;
 		slots = new GameObject[allSlots];
 
@@ -28,8 +37,11 @@ public class InventoryUI
 		{
 			slots[i] = slotHolder.transform.GetChild(i).gameObject;
 		}
-
-		//Hides the inventory on Scene load
+		
+		// Set instance before it can't be found
+		Instance(); 
+		
+		// Hide Inventory
 		inventory.SetActive(false);
 	}
 
@@ -42,7 +54,7 @@ public class InventoryUI
 		UpdateMoneyUI();
 
 		//Show inventory
-		inventory.SetActive(true);
+		inventory?.SetActive(true);
     }
 
     public void hideInv(HashSet<Item> inv)
@@ -51,7 +63,7 @@ public class InventoryUI
         addInventoryToUI(inv);
 
         //Hide inventory
-        inventory.SetActive(false);
+        inventory?.SetActive(false);
     }
 
     public void addInventoryToUI(HashSet<Item> inv)

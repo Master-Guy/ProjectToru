@@ -14,7 +14,7 @@ public class Money : Item
 		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
 			collision.GetComponent<Character>().inventory.addItem(this);
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }

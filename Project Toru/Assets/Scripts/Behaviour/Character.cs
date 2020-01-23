@@ -2,7 +2,6 @@
 using Assets.Scripts.Options;
 using System.Collections.Generic;
 using UnityEngine;
-using GameAnalyticsSDK;
 
 public enum Skills
 {
@@ -66,7 +65,8 @@ public class Character : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.F))
 			{
-				weapon.Shoot();
+				LevelManager.emit("PlayerHasUsedGun");
+				weapon?.Shoot();
 			}
 		}
 
@@ -93,6 +93,8 @@ public class Character : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			selectedCharacter = this;
+			
+			LevelManager.emit("CharacterHasBeenSelected");
 
 			inventory.UpdateUI();
 		}
@@ -139,6 +141,7 @@ public class Character : MonoBehaviour
 		if (other.CompareTag("Room"))
 		{
 			currentRoom = other.gameObject;
+			LevelManager.emit("CharacterIsInRoom", currentRoom.name);
 		}
 	}
 }
