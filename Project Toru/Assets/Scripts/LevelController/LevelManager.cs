@@ -238,34 +238,22 @@ public class LevelManager : MonoBehaviour
     /// <param name="title"></param>
     /// <param name="message"></param>
     /// <param name="FailAfterSeconds">The to wait before ending the level</param>
-    public static void EndLevel(string title, string message, float FailAfterSeconds = 0f)
-    {
-        Instance().StartCoroutine(SegueToFailScene(title, message, FailAfterSeconds));
-    }
-
-    /// <summary>
-    /// Actualy ending the level.
-    /// </summary>
-    /// <param name="title"></param>
-    /// <param name="message"></param>
-    /// <param name="FailAfterSeconds"></param>
-    /// <returns></returns>
-    private static IEnumerator SegueToFailScene(string title, string message, float FailAfterSeconds)
-    {
-        if (AnyConditionFailed())
-        {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
-        }
-        else
+    public static void EndLevel(float SegueAfterSeconds = 0f)
+    {	
+		if (LevelEndMessage.LevelSuccessfull)
         {
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
         }
-
-        yield return new WaitForSeconds(FailAfterSeconds);
-
-        LevelEndMessage.title = title;
-        LevelEndMessage.message = message;
-        SceneManager.LoadScene("Fail");
+        else
+        {
+			GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
+            
+        }
+		
+		LevelManager.Delay(SegueAfterSeconds, () => {
+			SceneManager.LoadScene("BetweenLevel");
+		});
+		
     }
 
 

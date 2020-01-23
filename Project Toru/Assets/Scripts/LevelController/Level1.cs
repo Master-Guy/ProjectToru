@@ -31,14 +31,14 @@ public class Level1 : LevelScript
                 van.drive = true;
                 if (LevelManager.Condition("CharacterMustHaveMoney") != null) {
 					if (LevelManager.Condition("CharacterMustHaveMoney").fullfilled) {
-                    	LevelManager.EndLevel("Good job!", "You got some loot and you are not caught!", 3);
+                    	// LevelManager.EndLevel("Good job!", "You got some loot and you are not caught!", 3);
 					}
 					else
 					{
-						LevelManager.EndLevel("You got away", "But the idea is that you steal some money...", 3);
+						// LevelManager.EndLevel("You got away", "But the idea is that you steal some money...", 3);
 					}
 				} else {
-					LevelManager.EndLevel("Finished...", "..", 3);
+					// LevelManager.EndLevel("Finished...", "..", 3);
 				}
                	
             };

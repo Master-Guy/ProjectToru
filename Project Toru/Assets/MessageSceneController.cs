@@ -9,6 +9,12 @@ public class MessageSceneController : MonoBehaviour
 
     [SerializeField]
     TextMesh Message = null;
+	
+	[SerializeField]
+    TextMesh ContinueButton = null;
+	
+	[SerializeField]
+    SceneSwitcher ContinueButtonScript = null;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +30,14 @@ public class MessageSceneController : MonoBehaviour
         // Update interface
         Title.text = LevelEndMessage.title;
         Message.text = LevelEndMessage.message;
+		
+		if (LevelEndMessage.LevelSuccessfull) {
+			ContinueButton.text = "Continue";
+		} else {
+			ContinueButton.text = "Retry";
+		}
+		
+		ContinueButtonScript.scene = LevelEndMessage.nextLevel;
 
         // Reset LevelEndMessage
         LevelEndMessage.Reset();
