@@ -21,7 +21,7 @@ public class PoliceForce : StateMachine//: MonoBehaviour
 	//	public void Start()
 	private PoliceForce()
 	{
-		ChangeState(Aggressive.getInstance());
+		ChangeState(Defensive.getInstance());
 	}
 
 	public void Alert(Room seen)
@@ -33,7 +33,7 @@ public class PoliceForce : StateMachine//: MonoBehaviour
 
 	public void AlertKill()
 	{
-		ChangeState(Defensive.getInstance());
+		ChangeState(Aggressive.getInstance());
 	}
 
 	public void AddCop(Police cop)

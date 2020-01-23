@@ -26,6 +26,7 @@ public class Defensive : PoliceState
 
 	public override void MoveCop(Police p)
 	{
+		entrances.OrderBy(o => o.getNPCsInRoom().Where(npc => npc.GetComponent<Police>() != null).Count());
 		// TODO set p's destination to most understaffed entrance
 	}
 }

@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 public abstract class PoliceState : IState
 {
-	private static LinkedList<Room> LastKnownPositions = new LinkedList<Room>();
+	protected static LinkedList<Room> LastKnownPositions = new LinkedList<Room>();
+	protected static List<Room> entrances;
+
+	public PoliceState()
+	{
+		if(entrances == null)
+		{
+			entrances = new List<Room>();
+			// get entrances from building
+		}
+	}
 	public virtual void AddPosition(Room room)
 	{
 		LastKnownPositions.AddFirst(room);
