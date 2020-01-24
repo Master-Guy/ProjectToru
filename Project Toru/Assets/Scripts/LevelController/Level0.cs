@@ -268,7 +268,8 @@ public class Level0 : LevelScript
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", () => {
-			LevelManager.Condition("FirstDoorOpenened").Fail();
+			if (!LevelManager.Condition("FirstDoorOpenened").fullfilled)
+				LevelManager.Condition("FirstDoorOpenened").Fail();
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorSuccesfull", () => {
