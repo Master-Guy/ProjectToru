@@ -22,7 +22,7 @@ public class Key : Item
 				renderer.color = ColorZughy.cyan;
 				break;
 			case CardreaderColor.Yellow:
-				// The color is already yellow
+				renderer.color = ColorZughy.yellow;
 				break;
 			case CardreaderColor.Purple:
 				renderer.color = ColorZughy.purple;
