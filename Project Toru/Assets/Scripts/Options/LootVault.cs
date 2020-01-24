@@ -26,6 +26,7 @@ namespace Assets.Scripts.Options
             if ((color == CardreaderColor.Disabled) || (C.HasKey(color)))
             {
                 Vault.Open();
+				LevelManager.emit("CharacterGotMoneyFromVault");
                 C.inventory.addItem(money.GetComponent<Money>());
                 return null;
             }
