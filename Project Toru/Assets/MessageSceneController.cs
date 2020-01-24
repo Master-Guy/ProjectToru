@@ -37,7 +37,7 @@ public class MessageSceneController : MonoBehaviour
 			ContinueButton.text = "Retry";
 		}
 		
-		if (LevelEndMessage.nextLevel == "")
+		if (LevelEndMessage.nextLevel != "")
 			ContinueButtonScript.scene = LevelEndMessage.nextLevel;
 
         // Reset LevelEndMessage

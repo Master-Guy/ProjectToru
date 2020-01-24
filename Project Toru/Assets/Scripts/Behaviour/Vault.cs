@@ -47,6 +47,8 @@ public class Vault : Furniture
 
 		LevelManager.emit("vault_open");
         // door.Close();
+		
+		ColorIndicator.gameObject.SetActive(false);
 
         StartCoroutine(WaitForAnimationEndTimer());
         return true;
@@ -74,16 +76,16 @@ public class Vault : Furniture
         switch (keycardColor)
         {
             case CardreaderColor.Blue:
-//                ColorIndicator.color = ColorZughy.cyan;
+               	ColorIndicator.color = ColorZughy.cyan;
                 break;
             case CardreaderColor.Purple:
-// 	             ColorIndicator.color = ColorZughy.purple;
+	            ColorIndicator.color = ColorZughy.purple;
                 break;
             case CardreaderColor.Yellow:
-//	            ColorIndicator.color = ColorZughy.yellow;
+	            ColorIndicator.color = ColorZughy.yellow;
                 break;
             default:
-//         		ColorIndicator.color = ColorZughy.grey;
+        		ColorIndicator.color = ColorZughy.grey;
                 break;
         }
     }
