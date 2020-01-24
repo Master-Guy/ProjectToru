@@ -32,22 +32,15 @@ public class Inventory
     {
         if (inv.Count < InventoryUI.Instance().allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
         {
-            Debug.Log("1");
             bool Found = false;
             if (item.isStackable)
             {
-
-                Debug.Log("2");
                 foreach (Item i in inv)
                 {
-
-                    Debug.Log("3");
                     if (i.GetType().Equals(item.GetType()) && !Found)
                     {
                         i.value += item.value;
                         Found = true;
-
-                        Debug.Log("4");
                     }
                 }
             }
@@ -55,8 +48,6 @@ public class Inventory
             if (!Found)
             {
                 inv.Add(item);
-
-                Debug.Log("5");
             }
 
             UpdateUI();

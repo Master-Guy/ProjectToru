@@ -268,7 +268,8 @@ public class Level0 : LevelScript
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", () => {
-			LevelManager.Condition("FirstDoorOpenened").Fail();
+			if (!LevelManager.Condition("FirstDoorOpenened").fullfilled)
+				LevelManager.Condition("FirstDoorOpenened").Fail();
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorSuccesfull", () => {
@@ -293,6 +294,10 @@ public class Level0 : LevelScript
 
 		LevelManager.on("CharacterIsInVaultRoom", () => {
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
+		});
+		
+		LevelManager.on("CharacterGotMoneyFromVault", () => {
+			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
 		});
 		
 		LevelManager.on("AllCharactersInVan", () => {
