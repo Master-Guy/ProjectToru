@@ -11,7 +11,7 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject settingsPrefab;
     private bool paused = false;
     public Button resumeButton;
-    public Button optionsButton;
+    public Button howtoplayButton;
     public Button quitButton;
     public Button backButton;
 
@@ -21,7 +21,7 @@ public class PauseMenuManager : MonoBehaviour
         settingsPrefab.SetActive(false);
 
         resumeButton.onClick.AddListener(delegate { OnResumeClick(); });
-        optionsButton.onClick.AddListener(delegate { OnOptionsClick(); });
+        howtoplayButton.onClick.AddListener(delegate { OnHowToPlayClick(); });
         quitButton.onClick.AddListener(delegate { OnQuitClick(); });
         backButton.onClick.AddListener(delegate { OnBackClick(); });
     }
@@ -69,7 +69,7 @@ public class PauseMenuManager : MonoBehaviour
         OpenMenu();
     }
 
-    public void OnOptionsClick()
+    public void OnHowToPlayClick()
     {
         pauseMenuPrefab.SetActive(false);
 

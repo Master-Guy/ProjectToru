@@ -36,7 +36,7 @@ public class CameraRoom : MonoBehaviour
                     // RELEASE THE KRA.. COPS
                     FindObjectOfType<Cops>()?.Spawn();
 
-                    LevelManager.EndLevel("", "", 5);
+                    // LevelManager.EndLevel(5);
                 };
 
                 LevelManager.AddCondition(condition);
