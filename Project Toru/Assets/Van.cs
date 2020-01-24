@@ -29,6 +29,11 @@ public class Van : MonoBehaviour
             GetComponent<Rigidbody2D>().MovePosition(new Vector2(transform.position.x + -0.1f, transform.position.y));
         }
     }
+	
+	public void Drive() {
+		Debug.Log("Going for a ride!");
+		drive = true;
+	}
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,7 +41,7 @@ public class Van : MonoBehaviour
 
         if (collision.isTrigger && ch != null)
         {
-			levelScript?.emit("CharacterEntersVan");
+			LevelManager.emit("CharacterEntersVan");
 			
             this.EnterCharacter(ch);
         }
@@ -49,7 +54,7 @@ public class Van : MonoBehaviour
 
         if (1 == characters.Count)
         {
-			levelScript?.emit("AllCharactersInVan");
+			LevelManager.emit("AllCharactersInVan");
         }
     }
 

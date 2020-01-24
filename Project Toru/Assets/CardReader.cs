@@ -50,8 +50,11 @@ public class CardReader : MonoBehaviour
 			}
 			else if (collision.gameObject.GetComponent<Character>().HasKey(color))
 			{
+				LevelManager.emit("PlayerTriedOpeningDoorSuccesfull");
 				door.Open();
 				this.SetStatus(true);
+			} else {
+				LevelManager.emit("PlayerTriedOpeningDoorButWasLocked");
 			}
 		}
 	}
@@ -152,20 +155,19 @@ public class CardReader : MonoBehaviour
 		ColorIndicator.enabled = false;
 	}
 
-	/// <summary>
-	/// The colors of the cards and readers
-	/// </summary>
-	public enum CardreaderColor
-	{
-		Disabled,
-		Blue,
-		Purple,
-		Yellow
-	}
-
 	public Door getDoor()
 	{
 		return door;
 	}
+}
 
+/// <summary>
+/// The colors of the cards and readers
+/// </summary>
+public enum CardreaderColor
+{
+    Disabled,
+    Blue,
+    Purple,
+    Yellow
 }

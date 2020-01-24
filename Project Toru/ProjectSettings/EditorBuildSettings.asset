@@ -5,34 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Menu's/MainMenu.unity
     guid: 4160c54c8ef4b34429b0db2f1464edd6
-  - enabled: 1
-    path: Assets/Scenes/Levels/RoomTest.unity
-    guid: 1c47760a4c4cbc54196e6c8a42a28f9c
   - enabled: 1
     path: Assets/Scenes/Menu's/SettingsMenu.unity
     guid: e379f03afbdc1994289c06dfefcb7aa8
   - enabled: 0
     path: 
-    guid: 2de5127b6cd747f419777e485d79c807
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/LevelEnd/Fail.unity
+    path: Assets/Scenes/LevelEnd/BetweenLevel.unity
     guid: 1a03ff553e2c3a547a5b89d794c67ae6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LevelEnd/Complete.unity
     guid: 4003aa58fbbbea34396ba239b1de4e3e
   - enabled: 1
-    path: Assets/Scenes/Levels/NewStairs.unity
-    guid: b0107b700ec34460b8dd4899b95a08da
+    path: Assets/Scenes/Menu's/LevelMenu.unity
+    guid: 320ed186ac4575c4bb4dda9d77310f02
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 0 - Tutorial.unity
+    guid: 57c2a1b6b95d24f86bb3ae567dcf4258
   - enabled: 1
     path: Assets/Scenes/Levels/Level 1.unity
     guid: 7b4f20a6863fa4acb9f3c4bae0a5af4f
   - enabled: 1
-    path: Assets/Scenes/Menu's/LevelMenu.unity
-    guid: 320ed186ac4575c4bb4dda9d77310f02
+    path: Assets/Scenes/Levels/Level 2.unity
+    guid: 1228bbebcacaa4c2187a6eb08dfe5b7a
   m_configObjects: {}

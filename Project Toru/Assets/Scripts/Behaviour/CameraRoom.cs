@@ -23,6 +23,8 @@ public class CameraRoom : MonoBehaviour
                 npc.GetComponent<NPC>().Say("I am warned!");
             }
 
+             FindObjectOfType<PoliceSirenOverlay>().startSiren = true;
+
             {
                 LevelCondition condition = new LevelCondition();
                 condition.name = "GuardCalled_CharacterMustBeInVanBeforeArrival";
@@ -34,7 +36,7 @@ public class CameraRoom : MonoBehaviour
                     // RELEASE THE KRA.. COPS
                     FindObjectOfType<Cops>()?.Spawn();
 
-                    LevelManager.EndLevel("", "", 5);
+                    // LevelManager.EndLevel(5);
                 };
 
                 LevelManager.AddCondition(condition);

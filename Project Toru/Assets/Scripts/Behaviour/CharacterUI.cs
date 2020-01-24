@@ -9,7 +9,10 @@ public class CharacterUI : MonoBehaviour
     void Start()
     {
         int loop = 0;
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
+
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+		foreach (GameObject obj in players)
         {
             GameObject spawn = Instantiate(prefab);
             spawn.transform.SetParent(transform.GetChild(0));
@@ -19,5 +22,7 @@ public class CharacterUI : MonoBehaviour
             transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().setSprite(s);
             loop++;
         }
+
+		transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(100 , players.Length * 100);
     }
 }

@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using GameAnalyticsSDK;
-
 public class Employee : NPC
 {
     private bool surrender = false;
@@ -23,15 +21,12 @@ public class Employee : NPC
         AdjustOrderLayer();
         FleeIfPossible();
         showCountdown();
-
     }
 
     void OnMouseDown()
     {
         Surrender();
     }
-
-
 
     void Surrender()
     {
@@ -56,19 +51,17 @@ public class Employee : NPC
         }
     }
 
-
     void showCountdown()
     {
         if (fleeTrue)
         {
-            Invoke("startCountDown", 5);
+            Invoke("startCountDown", 8);
+            fleeTrue = false;
         }
-
     }
 
     void startCountDown()
     {
-
+		LevelManager.emit("EmployeeFleed");
     }
-
 }

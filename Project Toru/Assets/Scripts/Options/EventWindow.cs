@@ -40,7 +40,7 @@ namespace Assets.Scripts.Options
 			EventQueue = new List<Event>();
 			gameObject.SetActive(false);
 
-			Panel = gameObject.transform.parent.gameObject.transform.GetChild(0).gameObject;
+			Panel = gameObject.transform.parent.gameObject.transform.GetChild(2).gameObject;
 			Panel.SetActive(false);
 			TMP = GetComponent<TextMeshProUGUI>();
 			CurrentEventWindow.Current = this;

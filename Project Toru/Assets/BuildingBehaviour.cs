@@ -146,18 +146,23 @@ public class BuildingBehaviour : MonoBehaviour
     {
         foreach (Room room in rooms)
         {
-            Vector3Int rightNeighbourPos = new Vector3Int(room.GetPosition().x + room.GetSize().x, room.GetPosition().y, 0);
-            Vector3Int aboveNeighbourPos = new Vector3Int(room.GetPosition().x, room.GetPosition().y + room.GetSize().y, 0);
             foreach (Room possibleNeighbour in rooms)
             {
-                if(possibleNeighbour.GetPosition() == rightNeighbourPos)
-                {
-                    possibleNeighbour.AddNeighbour(Direction.Left, room);
-                }
-                if(room.getStairScript() != null && possibleNeighbour.GetPosition() == aboveNeighbourPos)
-                {
-                    possibleNeighbour.AddNeighbour(Direction.Down, room);
-                }
+                if ((possibleNeighbour.GetPosition().x <= room.GetPosition().x + room.GetSize().x + 1) 
+                    && (possibleNeighbour.GetPosition().x + possibleNeighbour.GetSize().x >= room.GetPosition().x + room.GetSize().x + 1) 
+                    && (possibleNeighbour.GetPosition().y <= room.GetPosition().y + 1) 
+                    && (possibleNeighbour.GetPosition().y + possibleNeighbour.GetSize().y >= room.GetPosition().y + 1)) 
+                { 
+                    possibleNeighbour.AddNeighbour(Direction.Left, room); 
+                } 
+                if (room.getStairScript() != null 
+                    && (possibleNeighbour.GetPosition().x <= room.GetPosition().x + 1) 
+                    && (possibleNeighbour.GetPosition().x + possibleNeighbour.GetSize().x >= room.GetPosition().x + 1) 
+                    && (possibleNeighbour.GetPosition().y <= room.GetPosition().y + room.GetSize().y + 1) 
+                    && (possibleNeighbour.GetPosition().y + possibleNeighbour.GetSize().y >= room.GetPosition().y + room.GetSize().y + 1)) 
+                { 
+                    possibleNeighbour.AddNeighbour(Direction.Down, room); 
+                } 
             }
         }
     }
