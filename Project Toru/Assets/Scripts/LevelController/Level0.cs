@@ -296,6 +296,10 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
 		});
 		
+		LevelManager.on("CharacterGotMoneyFromVault", () => {
+			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
+		});
+		
 		LevelManager.on("AllCharactersInVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();

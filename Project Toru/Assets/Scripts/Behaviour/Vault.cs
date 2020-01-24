@@ -7,7 +7,6 @@ using Assets.Scripts.Behaviour;
 public class Vault : Furniture
 {
 	public GameObject money = null;
-	public LevelScript levelScript = null;
 
     [SerializeField]
     public CardreaderColor keycardColor = CardreaderColor.Disabled;
