@@ -6,7 +6,6 @@ using Assets.Scripts.Behaviour;
 
 public class Vault : Furniture
 {
-	public GameObject money = null;
 	public LevelScript levelScript = null;
 
     [SerializeField]
@@ -14,7 +13,6 @@ public class Vault : Furniture
     SpriteRenderer ColorIndicator = null;
 
     bool closed = true;
-
 
     void Start()
     {
@@ -27,19 +25,6 @@ public class Vault : Furniture
         }
         UpdateColor();
     }
-
-    /*void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            if (collision.gameObject.GetComponent<Character>() && closed)
-            {
-				
-                Open();
-                collision.gameObject.GetComponent<Character>().inventory.addItem(money.GetComponent<Money>());
-            }
-        }
-    }*/
 
     public bool Open()
     {
