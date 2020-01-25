@@ -28,6 +28,12 @@ public class CardReader : MonoBehaviour
 
 	void Update()
 	{
+		if (door.IsOpen()) {
+			activated = true;
+		} else {
+			activated = false;
+		}
+		
 		if ((activated != currentActivated) || (color != currentColor))
 		{
 			UpdateColor();
@@ -41,6 +47,10 @@ public class CardReader : MonoBehaviour
 	/// <param name="collision"></param>
 	void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (activated == true) {
+			return;
+		}
+		
 		if (collision.CompareTag("Player"))
 		{
 			if (color == CardreaderColor.Disabled)

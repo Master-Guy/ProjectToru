@@ -5,10 +5,12 @@ using UnityEngine;
 public class Level1 : LevelScript
 {	
 	public Van van = null;
+	public Room VaultRoom = null;
+	public Character player = null;
 	
-	void Awake() {
+	protected override void Awake() {
 		
-		LevelManager.setLevel();
+		base.Awake();
 			
 		{
 			LevelCondition condition = new LevelCondition();
@@ -23,6 +25,136 @@ public class Level1 : LevelScript
 			
 			LevelManager.AddCondition(condition);
 		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerFoundKey";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "You found a key";
+				text.sentences.Add("I am sure this will open many doors");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "GuardsAlerted";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+				PoliceSiren.Activate();
+				VaultRoom.door.Close();
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CameraWasDisabled";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "Camera looks off";
+				text.sentences.Add("It looks like that camera is not working!");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}	
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CameraDetectedPlayer";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+				foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Room"))
+				{
+					if (obj.name.Equals("Security Room"))
+					{
+						obj.GetComponent<CameraRoom>()?.AlertGuard();
+					}
+				}
+				
+				if (!LevelManager.Condition("GuardsAlerted").fullfilled) {
+					LevelManager.Condition("CameraWasDisabled").Fullfill();
+				}
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerEntersCameraRoom";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+				player?.gameObject.GetComponent<ExecutePathFinding>()?.StopPathFinding();
+				
+				DialogueText text = new DialogueText();
+				text.name = "Watch out!";
+				text.sentences.Add("There is a camera in this room!");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerTriedOpeningDoorButWasLocked";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "Door is locked";
+				text.sentences.Add("I don't have the correct key");
+				text.sentences.Add("I got stuck here");
+				
+				text.callback = () => {
+					LevelEndMessage.title = "You got stuck in the vaultroom";
+					LevelEndMessage.message = "You didn't play everything out";
+					LevelEndMessage.nextLevel = "Level 1";
+					LevelEndMessage.LevelSuccessfull = false;
+					LevelManager.EndLevel(1);
+				};
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		
+		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
+			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
+		});
+		
+		LevelManager.on("GuardsAlerted", () => {
+			LevelManager.Condition("GuardsAlerted").Fullfill();
+		});
+		
+		LevelManager.on("PlayerFoundKey", () => {
+			LevelManager.Condition("PlayerFoundKey").Fullfill();
+		});
+		
+		LevelManager.on("CharacterIsInRoom", (string roomname) => {
+			if (roomname == "L1 Room") {
+				LevelManager.Condition("PlayerEntersCameraRoom").Fullfill();
+			}
+		});
+		
+		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", () => {
+			LevelManager.Condition("PlayerTriedOpeningDoorButWasLocked").Fullfill();
+		});
 		
 		LevelManager.on("AllCharactersInVan", () => {
 			

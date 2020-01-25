@@ -10,7 +10,8 @@ public class LevelScript : MonoBehaviour
 	public PoliceSirenOverlay PoliceSiren = null;
 	public PoliceCar PoliceCar = null;
 	
-	void Awake() {
+	protected virtual void Awake() {
+		LevelManager.setLevel();
 		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
 	}
 	

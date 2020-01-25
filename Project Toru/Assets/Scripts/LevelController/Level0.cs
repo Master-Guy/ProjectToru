@@ -9,12 +9,9 @@ public class Level0 : LevelScript
 	// Ex: Vault vault = null;
 	public Van van = null;
 	
-	void Awake() {
+	protected override void Awake() {
 		
-		LevelManager.setLevel();
-		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
-		
-		/// Assigning Levelscripts to objects
+		base.Awake();
 		
 		/// Assigning Conditions
 		{
