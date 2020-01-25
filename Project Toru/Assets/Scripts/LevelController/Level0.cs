@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.SceneManagement;
-
 public class Level0 : LevelScript
 {
 	// Add objects
@@ -349,12 +347,5 @@ public class Level0 : LevelScript
 				
 			dialogueManager.QueueDialogue(text);
 		});
-	}
-	
-	void Update() {
-		if (Input.GetKeyDown(KeyCode.O))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
 	}
 }
