@@ -43,8 +43,6 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-
-		AdjustOrderLayer();
 	}
 
 	// Update is called once per frame
@@ -69,8 +67,6 @@ public class Character : MonoBehaviour
 				weapon.Shoot();
 			}
 		}
-
-		AdjustOrderLayer();
 
 		if(weapon != null)
 		{
@@ -127,11 +123,6 @@ public class Character : MonoBehaviour
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
 		}
-	}
-
-	void AdjustOrderLayer()
-	{
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

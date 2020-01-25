@@ -11,6 +11,7 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 		MousePointInput();
 		WayPointsWalk();
 		HidePlayerOnStair();
+		AdjustOrderLayer();
 	}
 
 	private void MousePointInput()

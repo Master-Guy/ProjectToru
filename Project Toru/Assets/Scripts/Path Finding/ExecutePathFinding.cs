@@ -46,6 +46,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		pf = new PathFinding();
 	}
 
+	public void AdjustOrderLayer()
+	{
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
+	}
+
 	public void WayPointsWalk()
 	{
 		if (path.Count > 0)
