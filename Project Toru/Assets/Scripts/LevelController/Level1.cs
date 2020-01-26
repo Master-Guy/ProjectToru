@@ -61,6 +61,13 @@ public class Level1 : LevelScript
 		
 		{
 			LevelCondition condition = new LevelCondition();
+			condition.name = "CopsTriggered";
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
 			condition.name = "CameraWasDisabled";
 			
 			condition.fullfillHandler = (LevelCondition c) => {
@@ -151,6 +158,12 @@ public class Level1 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CharacterGotMoneyFromVault";
+			LevelManager.AddCondition(condition);
+		}
+		
 		
 		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
 			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
@@ -193,8 +206,9 @@ public class Level1 : LevelScript
 		});
 		
 		LevelManager.on("PlayerHasUsedGun", () => {
+			SpawnPoliceCar();
 			if (LevelManager.RandomChange(10)) {
-				LevelManager.Condition("SomeoneHeardShooting").Fullfill();
+				//LevelManager.Condition("SomeoneHeardShooting").Fullfill();
 			}
 		});
 		
@@ -202,22 +216,22 @@ public class Level1 : LevelScript
 			
 			LevelManager.Condition("DriveVan").Fullfill();
 			
-			// if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
-			// 	LevelEndMessage.title = "Good job!";
-			// 	LevelEndMessage.message = "You got some loot and you are not caught!";
-			// 	LevelEndMessage.nextLevel = "Level 1";
-			// 	LevelEndMessage.LevelSuccessfull = true;
-			// 	LevelManager.EndLevel(3);
-			// 	return;
-			// }
-			// else if (LevelManager.Condition("CopsTriggered").fullfilled) {
-			// 	LevelEndMessage.title = "You got away!";
-			// 	LevelEndMessage.message = "Sadly you could not get away with money...";
-			// 	LevelEndMessage.nextLevel = "Level 0 - Tutorial";
-			// 	LevelEndMessage.LevelSuccessfull = false;
-			// 	LevelManager.EndLevel(3);
-			// }
-			//else
+			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
+				LevelEndMessage.title = "Good job!";
+				LevelEndMessage.message = "You got some loot and you are not caught!";
+				LevelEndMessage.nextLevel = "Level 2";
+				LevelEndMessage.LevelSuccessfull = true;
+				LevelManager.EndLevel(3);
+				return;
+			}
+			else if (LevelManager.Condition("CopsTriggered").fullfilled) {
+				LevelEndMessage.title = "You got away!";
+				LevelEndMessage.message = "Sadly you could not get away with money...";
+				LevelEndMessage.nextLevel = "Level 1";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(3);
+			}
+			else
 			{
 				LevelEndMessage.title = "You got away!";
 				LevelEndMessage.message = "But the idea is that you try to steal some money...";
