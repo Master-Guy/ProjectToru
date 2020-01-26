@@ -19,7 +19,10 @@ public class Car : MonoBehaviour
 	}
 	
 	[Range (0f, 10f)]
-	public float speed = 3;
+	public float target_speed = 5;
+	
+	[Range (0f, 10f)]
+	public float speed = 0;
 	
 	bool directionRight = false;
 	
@@ -61,7 +64,7 @@ public class Car : MonoBehaviour
 	}
 	
 	
-	public void Drive(GameObject target) {
-		
+	public void Drive() {
+		speed = target_speed;
 	}
 }

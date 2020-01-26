@@ -36,6 +36,8 @@ public class Level1 : LevelScript
 				text.sentences.Add("I am sure this will open many doors");
 				
 				dialogueManager.QueueDialogue(text);
+				
+				Debug.Log("Dialogue");
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -47,8 +49,11 @@ public class Level1 : LevelScript
 			
 			condition.fullfillHandler = (LevelCondition c) => {
 				
-				PoliceSiren.Activate();
 				VaultRoom.door.Close();
+				
+				LevelManager.Delay(Random.Range(10, 20), () => {
+					SpawnPoliceCar();
+				});
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -133,6 +138,19 @@ public class Level1 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "SomeoneHeardShooting";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelManager.Delay(Random.Range(10, 20), () => {
+					SpawnPoliceCar();
+				});
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
 		
 		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
 			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
@@ -155,6 +173,28 @@ public class Level1 : LevelScript
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", (string roomname) => {
 			if (roomname == "L1 Room") {
 				LevelManager.Condition("PlayerTriedOpeningDoorButWasLocked").Fullfill();
+			}
+		});
+		
+		LevelManager.on("EmployeeFleed", () => {
+			LevelManager.Delay(Random.Range(10, 20), () => {
+				SpawnPoliceCar();
+				
+				if (LevelManager.RandomChange(70)) {
+					LevelManager.Delay(1, () => {
+						DialogueText text = new DialogueText();
+						text.name = "I hear the polce";
+						text.sentences.Add("That bloody employee called the cops, i am sure!");
+						
+						dialogueManager.QueueDialogue(text);
+					});
+				}
+			});
+		});
+		
+		LevelManager.on("PlayerHasUsedGun", () => {
+			if (LevelManager.RandomChange(10)) {
+				LevelManager.Condition("SomeoneHeardShooting").Fullfill();
 			}
 		});
 		

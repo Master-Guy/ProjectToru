@@ -134,7 +134,7 @@ public class Level0 : LevelScript
 				PoliceSiren.gameObject.SetActive(true);
 				
 				LevelManager.Delay(10, () => {
-					PoliceCar.speed = 8;
+					SpawnPoliceCar();
 				});
 			};
 			

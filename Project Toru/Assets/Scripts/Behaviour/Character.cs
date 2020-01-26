@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
 
 	public GameObject firePoint;
 	public Weapon weapon;
+	bool weaponKeyRelease = true;
 
 	public List<Skills> skills = new List<Skills>();
 
@@ -65,8 +66,13 @@ public class Character : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.F))
 			{
-				LevelManager.emit("PlayerHasUsedGun");
+				if (weaponKeyRelease)
+					LevelManager.emit("PlayerHasUsedGun");
+				
+				weaponKeyRelease = false;
 				weapon?.Shoot();
+			} else {
+				weaponKeyRelease = true;
 			}
 		}
 

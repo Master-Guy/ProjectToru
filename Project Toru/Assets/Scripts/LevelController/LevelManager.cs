@@ -227,6 +227,10 @@ public class LevelManager : MonoBehaviour
 	}
 	
 	
+	public static bool RandomChange(int percentage =  50) {
+		return (percentage > Random.Range(1, 100));
+	}
+	
 	
     /// <summary>
     /// End level. For winning and losing
