@@ -43,6 +43,10 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
+		
+		if (weapon != null) {
+			animator.SetBool("isHoldingGun", true);
+		}
 
 		AdjustOrderLayer();
 	}
@@ -64,15 +68,17 @@ public class Character : MonoBehaviour
 
 		if (this.Equals(selectedCharacter))
 		{
-			if (Input.GetKey(KeyCode.F))
-			{
-				if (weaponKeyRelease)
-					LevelManager.emit("PlayerHasUsedGun");
-				
-				weaponKeyRelease = false;
-				weapon?.Shoot();
-			} else {
-				weaponKeyRelease = true;
+			if(weapon != null) {
+				if (Input.GetKey(KeyCode.F))
+				{
+					if (weaponKeyRelease)
+						LevelManager.emit("PlayerHasUsedGun");
+					
+					weaponKeyRelease = false;
+					weapon?.Shoot();
+				} else {
+					weaponKeyRelease = true;
+				}
 			}
 		}
 
