@@ -152,8 +152,10 @@ public class Level1 : LevelScript
 			}
 		});
 		
-		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", () => {
-			LevelManager.Condition("PlayerTriedOpeningDoorButWasLocked").Fullfill();
+		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", (string roomname) => {
+			if (roomname == "L1 Room") {
+				LevelManager.Condition("PlayerTriedOpeningDoorButWasLocked").Fullfill();
+			}
 		});
 		
 		LevelManager.on("AllCharactersInVan", () => {

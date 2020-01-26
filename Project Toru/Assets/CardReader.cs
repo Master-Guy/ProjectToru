@@ -28,10 +28,12 @@ public class CardReader : MonoBehaviour
 
 	void Update()
 	{
-		if (door.IsOpen()) {
-			activated = true;
-		} else {
-			activated = false;
+		if (door != null) {
+			if (door.IsOpen()) {
+				activated = true;
+			} else {
+				activated = false;
+			}
 		}
 		
 		if ((activated != currentActivated) || (color != currentColor))
@@ -64,7 +66,7 @@ public class CardReader : MonoBehaviour
 				door.Open();
 				this.SetStatus(true);
 			} else {
-				LevelManager.emit("PlayerTriedOpeningDoorButWasLocked");
+				LevelManager.emit("PlayerTriedOpeningDoorButWasLocked", door?.room?.name);
 			}
 		}
 	}

@@ -43,7 +43,6 @@ public class DialogueManager : MonoBehaviour
 			return;
 		}
 		
-		Debug.LogWarning("Time to 0");
 		Time.timeScale = 0;
 		
 		animator.SetBool("IsOpen", true);
@@ -96,7 +95,6 @@ public class DialogueManager : MonoBehaviour
 			oldCurrentDialogue.callback?.Invoke();
 		});
 		
-		Debug.LogWarning("Time to 1");
 		Time.timeScale = 1.0f;
 	}
 }
