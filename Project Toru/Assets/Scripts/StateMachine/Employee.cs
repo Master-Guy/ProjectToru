@@ -47,7 +47,7 @@ public class Employee : NPC
         {
             this.surrender = false;
             this.statemachine.ChangeState(new Idle(this.animator));
-			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-15, 1);
+			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
             fleeTrue = true;
         }
     }

@@ -24225,12 +24225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!60 &1385511202 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1214099249711020074, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1531032026}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1413621009
 GameObject:
   m_ObjectHideFlags: 0
@@ -24509,7 +24503,7 @@ PrefabInstance:
         type: 3}
       propertyPath: doorCollider
       value: 
-      objectReference: {fileID: 1385511202}
+      objectReference: {fileID: 0}
     - target: {fileID: 8481900793061936897, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
       propertyPath: color
@@ -24753,12 +24747,6 @@ Transform:
   m_Father: {fileID: 2116965105}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1593510987 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1214099249711020074, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1767513049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!60 &1605704582 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 5775528775708929379, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
@@ -25082,7 +25070,7 @@ PrefabInstance:
         type: 3}
       propertyPath: doorCollider
       value: 
-      objectReference: {fileID: 1593510987}
+      objectReference: {fileID: 0}
     - target: {fileID: 360238972526500524, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
       propertyPath: m_IsActive
@@ -25201,6 +25189,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775528775708929379, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775528775708929379, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775528775708929379, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775528775708929379, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2008879952413551165, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}

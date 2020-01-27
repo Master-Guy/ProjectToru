@@ -31,11 +31,21 @@ public class Level1 : LevelScript
 			condition.name = "PlayerFoundKey";
 			
 			condition.fullfillHandler = (LevelCondition c) => {
-				DialogueText text = new DialogueText();
-				text.name = "You found a key";
-				text.sentences.Add("I am sure this will open many doors");
+				{
+					DialogueText text = new DialogueText();
+					text.name = "You found a key";
+					text.sentences.Add("I am sure this will open many doors");
+					
+					dialogueManager.QueueDialogue(text);
+				}
 				
-				dialogueManager.QueueDialogue(text);
+				{
+					DialogueText text = new DialogueText();
+					text.name = "Karen:";
+					text.sentences.Add("The brutality!");
+					
+					dialogueManager.QueueDialogue(text);
+				}
 				
 				Debug.Log("Dialogue");
 			};
@@ -164,6 +174,46 @@ public class Level1 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "LetKarenTalk";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+				LevelManager.Delay(1, () => {
+					DialogueText text = new DialogueText();
+				
+					text.name = "Karen:";
+					text.sentences.Add("Hello! Welcome to Bank of Clyde");
+					text.sentences.Add("You are holding a nice gun");
+					text.sentences.Add("I'm sure you won't use that here because that will kill people");
+					
+					dialogueManager.QueueDialogue(text);
+				});
+				
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "KarenSurrendered";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				
+				text.name = "Karen:";
+				text.sentences.Add("Don't point that on me! Why are you doing that?!?");
+				text.sentences.Add("I only can open a bank account for you... No money here!");
+				text.sentences.Add("But don't look into my desk!!");
+					
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
 		
 		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
 			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
@@ -178,9 +228,17 @@ public class Level1 : LevelScript
 		});
 		
 		LevelManager.on("CharacterIsInRoom", (string roomname) => {
-			if (roomname == "L1 Room") {
+			
+			if (roomname == "L0 Room L") {
+				LevelManager.Condition("LetKarenTalk").Fullfill();
+			}
+			else if (roomname == "L1 Room") {
 				LevelManager.Condition("PlayerEntersCameraRoom").Fullfill();
 			}
+		});
+		
+		LevelManager.on("KarenSurrendered", () => {
+			LevelManager.Condition("KarenSurrendered").Fullfill();
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", (string roomname) => {
