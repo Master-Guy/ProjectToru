@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Assets.Scripts.Behaviour;
-
 public class Vault : Furniture
 {
-	public LevelScript levelScript = null;
 	public GameObject money = null;
 
     [SerializeField]

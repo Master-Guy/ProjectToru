@@ -7,62 +7,54 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.Behaviour
+public abstract class Furniture : MonoBehaviour
 {
-	[RequireComponent(typeof(Options.Event))]
-	public abstract class Furniture : MonoBehaviour
+	[SerializeField]
+	bool Passable;
+
+	[SerializeField]
+	string Description = string.Empty;
+
+	List<Item> items;
+	Room Parent;
+
+	void Start()
 	{
-		[SerializeField]
-		bool Passable;
+		items = GetComponentsInChildren<Item>().ToList();
+		foreach (Item i in items)
+			i.gameObject.SetActive(false);
+	}
 
-		[SerializeField]
-		string Description = string.Empty;
+	
+	public void drop()
+	{
+		foreach (Item i in items)
+			i.gameObject.SetActive(true);
+	}
 
-		List<Item> items;
-		Room Parent;
-
-		void Start()
+	void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
-			items = GetComponentsInChildren<Item>().ToList();
-			foreach (Item i in items)
-				i.gameObject.SetActive(false);
+			//Known bug: Eventwindow is gone fast, will not click either
+			CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
 		}
+	}
 
-		void Update()
+	public void OnMouseOver()
+	{
+		if (Character.selectedCharacter != null)
 		{
-
-		}
-
-		public void drop()
-		{
-			foreach (Item i in items)
-				i.gameObject.SetActive(true);
-		}
-
-		void OnTriggerExit2D(Collider2D collision)
-		{
-			if (collision.CompareTag("Player") && collision.isTrigger)
+			if (Input.GetMouseButtonDown(1))
 			{
-				//Known bug: Eventwindow is gone fast, will not click either
-				CurrentEventWindow.Current.RemoveEvent(gameObject, collision.GetComponent<Character>());
+				Invoke("setFurnitureTarget", 0.1f);
+				return;
 			}
 		}
+	}
 
-		public void OnMouseOver()
-		{
-			if (Character.selectedCharacter != null)
-			{
-				if (Input.GetMouseButtonDown(1))
-				{
-					Invoke("setFurnitureTarget", 0.1f);
-					return;
-				}
-			}
-		}
-
-		private void setFurnitureTarget()
-		{
-			Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
-		}
+	private void setFurnitureTarget()
+	{
+		Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
 	}
 }
