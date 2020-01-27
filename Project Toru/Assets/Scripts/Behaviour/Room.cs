@@ -30,7 +30,6 @@ public class Room : MonoBehaviour//, IPointerClickHandler
 	Vector2Int size = new Vector2Int(0, 0);
 
 	private bool roomHasCamera = false;
-	CameraRoom cameraRoom;
 
     FogOfWar fogOfWar;
 
@@ -93,14 +92,6 @@ public class Room : MonoBehaviour//, IPointerClickHandler
 
 	void checkIfRoomHasACamera()
 	{
-		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Room"))
-		{
-			if (obj.name.Equals("Security Room"))
-			{
-				cameraRoom = obj.GetComponent<CameraRoom>();
-			}
-		}
-
 		foreach (Transform t in gameObject.transform)
 		{
 			if (t.name.Equals("Camera"))
@@ -151,11 +142,6 @@ public class Room : MonoBehaviour//, IPointerClickHandler
                 HideFogOfWar();
                 LeftRoom?.HideFogOfWar();
                 RightRoom?.HideFogOfWar();
-
-                if (roomHasCamera)
-				{
-					cameraRoom.AlertGuard();
-				}
 			}
 			if (other.CompareTag("NPC"))
 			{

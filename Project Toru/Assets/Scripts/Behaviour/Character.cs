@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
 
 	public GameObject firePoint;
 	public Weapon weapon;
+	bool weaponKeyRelease = true;
 
 	public List<Skills> skills = new List<Skills>();
 
@@ -42,8 +43,10 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-
-		AdjustOrderLayer();
+		
+		if (weapon != null) {
+			animator.SetBool("isHoldingGun", true);
+		}
 	}
 
 	// Update is called once per frame
@@ -63,14 +66,19 @@ public class Character : MonoBehaviour
 
 		if (this.Equals(selectedCharacter))
 		{
-			if (Input.GetKey(KeyCode.F))
-			{
+			if(weapon != null) {
+				if (Input.GetKey(KeyCode.F))
+				{
+					if (weaponKeyRelease)
 				LevelManager.emit("PlayerHasUsedGun", currentRoom);
-				weapon?.Shoot();
+					
+					weaponKeyRelease = false;
+					weapon?.Shoot();
+				} else {
+					weaponKeyRelease = true;
+				}
 			}
 		}
-
-		AdjustOrderLayer();
 
 		if(weapon != null)
 		{
@@ -129,11 +137,6 @@ public class Character : MonoBehaviour
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
 		}
-	}
-
-	void AdjustOrderLayer()
-	{
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

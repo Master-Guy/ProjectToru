@@ -3896,6 +3896,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 894814833535163767}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2442822722368047744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3282458972885161975, guid: 06f5823b051a543e48768d169abc141c,
+    type: 3}
+  m_PrefabInstance: {fileID: 894814833535163767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21c811258b114164ab7647ec5c94e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4448583640267657290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3903,6 +3915,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7590261706001718638}
     m_Modifications:
+    - target: {fileID: 2369414609990655981, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_Name
+      value: Door3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369414609990655981, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655976, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -3969,16 +3991,6 @@ PrefabInstance:
       propertyPath: doorCollider
       value: 
       objectReference: {fileID: 7193484020114034785}
-    - target: {fileID: 2369414609990655981, guid: 58961c0690de64e5cb99ecac92510057,
-        type: 3}
-      propertyPath: m_Name
-      value: Door3D
-      objectReference: {fileID: 0}
-    - target: {fileID: 2369414609990655981, guid: 58961c0690de64e5cb99ecac92510057,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_Enabled
