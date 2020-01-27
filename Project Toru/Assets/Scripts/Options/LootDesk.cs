@@ -8,15 +8,16 @@ namespace Assets.Scripts.Options
     {
         public GameObject Key = null;
 
-        private Desk Vault;
+        private Desk desk;
 
         public void Start()
         {
-            Vault = GetComponentInParent<Desk>();
+            desk = GetComponentInParent<Desk>();
         }
 
         public override string Activate(Character c)
         {
+            c.inventory.addItem(Key.GetComponent<Key>());
             return null;
         }
     }
