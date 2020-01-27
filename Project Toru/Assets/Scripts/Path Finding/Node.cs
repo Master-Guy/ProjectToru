@@ -23,7 +23,7 @@ public class Node
 		vissited.Add(this.nodeRoom);
 		node.Add(this);
 
-		if (nodeRoom.name.Equals(endRoom.name))
+		if (nodeRoom.name.ToLower().Equals(endRoom.name.ToLower()))
 		{
 			endNode = this;
 		}
