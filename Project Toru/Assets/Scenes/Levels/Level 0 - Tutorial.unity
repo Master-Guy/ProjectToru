@@ -24499,11 +24499,6 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[3].y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8811116169905011760, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-        type: 3}
-      propertyPath: doorCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8481900793061936897, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
       propertyPath: color
@@ -25065,11 +25060,6 @@ PrefabInstance:
         type: 3}
       propertyPath: key
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8811116169905011760, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-        type: 3}
-      propertyPath: doorCollider
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 360238972526500524, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
