@@ -124,7 +124,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			{
 				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
 				{
-					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().Equals(CardreaderColor.Disabled))
+					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor() == CardreaderColor.Disabled)
 					{
 						other.gameObject.GetComponent<CardReader>().getDoor().Open();
 						return;
@@ -144,7 +144,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				{
 					if (gameObject.tag.Equals("NPC"))
 					{
-						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().Equals(CardreaderColor.Disabled))
+						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor() == CardreaderColor.Disabled)
 						{
 							other.gameObject.GetComponent<CardReader>().getDoor().Open();
 							return;
@@ -194,18 +194,9 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		{
 			pos = new Vector3(pos.x, positionRoom.transform.position.y + 1, -1);
 
-			Room characterRoom;
+			Room characterRoom = GetEntranceRoom();
 
-			try
-			{
-				characterRoom = currentRoom;
-			}
-			catch (UnassignedReferenceException)
-			{
-				characterRoom = GetEntranceRoom();
-
-				path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
-			}
+			path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
 
 			if (!positionRoom.Equals(characterRoom))
 			{
@@ -216,6 +207,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		else
 		{
 			Room entranceRoom = GetEntranceRoomToOutside(pos);
+			Debug.Log(entranceRoom.name);
 
 			//Code for inside to outside
 			try
@@ -256,7 +248,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		{
 			Room r = room.GetComponent<Room>();
 
-			if (r.name.StartsWith("Entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
+			if (r.name.ToLower().Contains("entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
 			{
 				return r;
 			}

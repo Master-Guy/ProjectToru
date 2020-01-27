@@ -97,7 +97,7 @@ MonoBehaviour:
   name: Key Blue
   UIIcon: {fileID: 21300000, guid: 14700b364c2b143d781c5f4902a99897, type: 3}
   Weight: 0.25
-  isStackable: 1
+  isStackable: 0
   value: 0
   color: 1
 --- !u!61 &3485136947023997621

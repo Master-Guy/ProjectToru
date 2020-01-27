@@ -18,32 +18,34 @@ public class CameraRoom : MonoBehaviour
     {
         if (roomObj.getNPCsInRoom().Count > 0)
         {
+			LevelManager.emit("GuardsAlerted");
+			
             foreach (GameObject npc in roomObj.getNPCsInRoom())
             {
                 npc.GetComponent<NPC>().Say("I am warned!");
             }
 
-             FindObjectOfType<PoliceSirenOverlay>().startSiren = true;
+        	// FindObjectOfType<PoliceSirenOverlay>().startSiren = true;
 
-            {
-                LevelCondition condition = new LevelCondition();
-                condition.name = "GuardCalled_CharacterMustBeInVanBeforeArrival";
+            // {
+            //     LevelCondition condition = new LevelCondition();
+            //     condition.name = "GuardCalled_CharacterMustBeInVanBeforeArrival";
 
-                condition.failHandler = (LevelCondition c) =>
-                {
-                    Debug.Log("Player is caught");
+            //     condition.failHandler = (LevelCondition c) =>
+            //     {
+            //         Debug.Log("Player is caught");
 
-                    // RELEASE THE KRA.. COPS
-                    FindObjectOfType<Cops>()?.Spawn();
+            //         // RELEASE THE KRA.. COPS
+            //         FindObjectOfType<Cops>()?.Spawn();
 
-                    // LevelManager.EndLevel(5);
-                };
+            //         // LevelManager.EndLevel(5);
+            //     };
 
-                LevelManager.AddCondition(condition);
-            }
+            //     LevelManager.AddCondition(condition);
+            // }
         }
 
-        Invoke("AlertCops", 18);
+        // Invoke("AlertCops", 18);
     }
 
     void AlertCops()

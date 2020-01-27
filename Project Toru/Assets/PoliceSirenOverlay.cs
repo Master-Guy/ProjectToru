@@ -31,6 +31,16 @@ public class PoliceSirenOverlay : MonoBehaviour
             AutomateSiren();
         }
     }
+	
+	public void Activate() {
+		gameObject.SetActive(true);
+		startSiren = true;
+	}
+	
+	public void Deactivate() {
+		gameObject.SetActive(false);
+		startSiren = false;
+	}
 
     public void AutomateSiren()
     {

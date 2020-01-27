@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
 
 	public GameObject firePoint;
 	public Weapon weapon;
+	bool weaponKeyRelease = true;
 
 	public List<Skills> skills = new List<Skills>();
 
@@ -42,6 +43,10 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
+		
+		if (weapon != null) {
+			animator.SetBool("isHoldingGun", true);
+		}
 	}
 
 	// Update is called once per frame
@@ -61,10 +66,17 @@ public class Character : MonoBehaviour
 
 		if (this.Equals(selectedCharacter))
 		{
-			if (Input.GetKey(KeyCode.F))
-			{
-				LevelManager.emit("PlayerHasUsedGun");
-				weapon?.Shoot();
+			if(weapon != null) {
+				if (Input.GetKey(KeyCode.F))
+				{
+					if (weaponKeyRelease)
+						LevelManager.emit("PlayerHasUsedGun");
+					
+					weaponKeyRelease = false;
+					weapon?.Shoot();
+				} else {
+					weaponKeyRelease = true;
+				}
 			}
 		}
 
