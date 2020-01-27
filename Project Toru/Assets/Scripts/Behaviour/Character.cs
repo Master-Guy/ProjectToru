@@ -2,7 +2,6 @@
 using Assets.Scripts.Options;
 using System.Collections.Generic;
 using UnityEngine;
-using GameAnalyticsSDK;
 
 public enum Skills
 {
@@ -27,6 +26,7 @@ public class Character : MonoBehaviour
 
 	public GameObject firePoint;
 	public Weapon weapon;
+	bool weaponKeyRelease = true;
 
 	public List<Skills> skills = new List<Skills>();
 
@@ -43,8 +43,10 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-
-		AdjustOrderLayer();
+		
+		if (weapon != null) {
+			animator.SetBool("isHoldingGun", true);
+		}
 	}
 
 	// Update is called once per frame
@@ -64,13 +66,19 @@ public class Character : MonoBehaviour
 
 		if (this.Equals(selectedCharacter))
 		{
-			if (Input.GetKey(KeyCode.F))
-			{
-				weapon.Shoot();
+			if(weapon != null) {
+				if (Input.GetKey(KeyCode.F))
+				{
+					if (weaponKeyRelease)
+						LevelManager.emit("PlayerHasUsedGun");
+					
+					weaponKeyRelease = false;
+					weapon?.Shoot();
+				} else {
+					weaponKeyRelease = true;
+				}
 			}
 		}
-
-		AdjustOrderLayer();
 
 		if(weapon != null)
 		{
@@ -93,6 +101,8 @@ public class Character : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			selectedCharacter = this;
+			
+			LevelManager.emit("CharacterHasBeenSelected");
 
 			inventory.UpdateUI();
 		}
@@ -129,16 +139,12 @@ public class Character : MonoBehaviour
 		}
 	}
 
-	void AdjustOrderLayer()
-	{
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
-	}
-
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Room"))
 		{
 			currentRoom = other.gameObject;
+			LevelManager.emit("CharacterIsInRoom", currentRoom.name);
 		}
 	}
 }

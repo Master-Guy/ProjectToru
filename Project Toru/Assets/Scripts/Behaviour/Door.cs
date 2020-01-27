@@ -9,6 +9,8 @@ public class Door : MonoBehaviour
     Collider2D doorCollider = null;
 
     public bool closed = true;
+	
+	public Room room = null;
 
     void Start()
     {
@@ -16,6 +18,8 @@ public class Door : MonoBehaviour
         {
             Open();
         }
+		
+		room = this.GetComponentInParent(typeof(Room)) as Room;
     }
 
     public bool Close()
@@ -52,12 +56,7 @@ public class Door : MonoBehaviour
     {
         return closed;
     }
-
-    Room FindRoom()
-    {
-        return this.GetComponentInParent(typeof(Room)) as Room;
-    }
-
+	
 	public int isOpenOrHasTheRightKey(Item i)
 	{
 		Debug.LogWarning("This functions is not fully implemented");

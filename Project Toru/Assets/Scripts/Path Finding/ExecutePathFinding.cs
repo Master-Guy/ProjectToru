@@ -37,6 +37,8 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void Awake()
 	{
 		path = new List<Vector3>();
+
+		currentRoom = GetEntranceRoom();
 	}
 
 	public void Start()
@@ -44,6 +46,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		animator = GetComponent<Animator>();
 		character = GetComponent<Character>();
 		pf = new PathFinding();
+	}
+
+	public void AdjustOrderLayer()
+	{
+		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
 
 	public void WayPointsWalk()
@@ -66,7 +73,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				if (tag.Contains("Player")) { 
 					character.change = this.change;
 				}
-
+				
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
 
@@ -119,30 +126,33 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			{
 				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
 				{
-					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+					if (gameObject.GetComponent<Character>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor() == CardreaderColor.Disabled)
 					{
 						other.gameObject.GetComponent<CardReader>().getDoor().Open();
+						return;
 					}
-					else if (gameObject.GetComponent<NPC>())
+					StopPathFinding();
+					return;
+				}
+			}
+		}
+		catch (NullReferenceException) {}
+
+		try
+		{
+			if (other.gameObject.GetComponent<CardReader>())
+			{
+				if (other.gameObject.GetComponent<CardReader>().getDoor().IsClosed())
+				{
+					if (gameObject.tag.Equals("NPC"))
 					{
-						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor().ToString().Equals("Disabled"))
+						if (gameObject.GetComponent<NPC>().HasKey(other.gameObject.GetComponent<CardReader>().GetColor()) || other.gameObject.GetComponent<CardReader>().GetColor() == CardreaderColor.Disabled)
 						{
 							other.gameObject.GetComponent<CardReader>().getDoor().Open();
+							return;
 						}
-						else
-						{
-							if (path.Count != 0)
-							{
-								StopPathFinding();
-							}
-						}
-					}
-					else
-					{
-						if (path.Count != 0)
-						{
-							StopPathFinding();
-						}
+						StopPathFinding();
+						return;
 					}
 				}
 			}
@@ -161,19 +171,15 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void UpdateAnimations()
 	{
 		if(change != Vector3.zero)
-		{
+		{	
 			animator.SetFloat("moveX", change.x);
-
 			animator.SetFloat("moveY", change.y);
-
 			animator.SetBool("moving", true);
 		}
 		else
 		{
 			/*animator.SetFloat("moveX", 0);
-
 			animator.SetFloat("moveY", 0);*/
-
 			animator.SetBool("moving", false);
 		}
 		change = Vector2.zero;
@@ -246,13 +252,13 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		return null;
 	}
 
-	private Room GetEntranceRoom()
+	public Room GetEntranceRoom()
 	{
 		foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
 		{
 			Room r = room.GetComponent<Room>();
 
-			if (r.name.StartsWith("Entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
+			if (r.name.ToLower().Contains("entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
 			{
 				return r;
 			}

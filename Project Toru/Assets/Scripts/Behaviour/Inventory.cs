@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using GameAnalyticsSDK;
-
 public class Inventory
 {
     //Assign a Item List
     private HashSet<Item> inv;
 
     //Create's a static InventoryUI manager
-    private static InventoryUI INVUI = new InventoryUI();
+    //private static InventoryUI INVUI = new InventoryUI();
 
     public float MaxWeight;
 
     private Character ch;
-
+	
     //Constructor - Creates a Item List
     public Inventory(float MaxWeight)
     {
@@ -32,24 +30,17 @@ public class Inventory
     //Add an item to the Inventory
     public void addItem(Item item)
     {
-        if (inv.Count < INVUI.allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
+        if (inv.Count < InventoryUI.Instance().allSlots && (getWeightOfInventory() + item.Weight) <= MaxWeight)
         {
-            Debug.Log("1");
             bool Found = false;
             if (item.isStackable)
             {
-
-                Debug.Log("2");
                 foreach (Item i in inv)
                 {
-
-                    Debug.Log("3");
                     if (i.GetType().Equals(item.GetType()) && !Found)
                     {
                         i.value += item.value;
                         Found = true;
-
-                        Debug.Log("4");
                     }
                 }
             }
@@ -57,8 +48,6 @@ public class Inventory
             if (!Found)
             {
                 inv.Add(item);
-
-                Debug.Log("5");
             }
 
             UpdateUI();
@@ -83,11 +72,11 @@ public class Inventory
     {
         if (inv.Count == 0)
         {
-            INVUI.hideInv(inv);
+            InventoryUI.Instance().hideInv(inv);
         }
         else
         {
-            INVUI.showInv(inv);
+            InventoryUI.Instance().showInv(inv);
         }
     }
 

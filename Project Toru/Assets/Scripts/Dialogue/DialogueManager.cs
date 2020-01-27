@@ -7,29 +7,54 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
 	public Text nameText, dialogueText;
+	
+	public bool DebugDisableDialogue = false;
+	
+	[SerializeField]
+	private Animator animator = null;
 
-	private Animator animator;
-
-	private Queue<string> sentences;
+	private Queue<string> sentences = new Queue<string>();
+	private Queue<DialogueText> dialogues = new Queue<DialogueText>();
+	
+	private DialogueText currentDialogue = null;
 
 	void Start()
 	{
+		if (DebugDisableDialogue) {
+			Debug.LogWarning("!!!!! Dialogue is disabled for debugging !!!!!");
+		}
 		animator = GetComponent<Animator>();
-
-		sentences = new Queue<string>();
 	}
-
-	public void StartDialogue(DialogueText dialogue)
+	
+	public void QueueDialogue(DialogueText dialogue) {
+		
+		dialogues.Enqueue(dialogue);
+		
+		if (currentDialogue == null) {
+			currentDialogue = dialogue;
+			StartDialogue();
+		}
+	}
+	
+	public void StartDialogue()
 	{
+		
+		if (dialogues.Count == 0) {
+			return;
+		}
+		
+		Time.timeScale = 0;
+		
 		animator.SetBool("IsOpen", true);
-
-		nameText.text = dialogue.name;
-
-		sentences.Clear();
-
-		foreach(string s in dialogue.sentences)
-		{
-			sentences.Enqueue(s);
+		
+		DialogueText dialogue = dialogues.Dequeue();
+		nameText.text = dialogue.name;	
+	
+		if (!DebugDisableDialogue) {
+			foreach(string s in dialogue.sentences)
+			{
+				sentences.Enqueue(s);
+			}
 		}
 
 		DisplayNextSentence();
@@ -61,6 +86,15 @@ public class DialogueManager : MonoBehaviour
 
 	private void EndDialogue()
 	{
+		sentences.Clear();
 		animator.SetBool("IsOpen", false);
+		LevelManager.Delay(0.2f, () => {
+			StartDialogue();
+			DialogueText oldCurrentDialogue = currentDialogue;
+			currentDialogue = null;
+			oldCurrentDialogue.callback?.Invoke();
+		});
+		
+		Time.timeScale = 1.0f;
 	}
 }

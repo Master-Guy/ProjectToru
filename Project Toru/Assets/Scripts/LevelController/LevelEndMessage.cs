@@ -10,6 +10,7 @@ public static class LevelEndMessage
 {
     public static string title;
     public static string message;
+	public static string nextLevel;
 
     public static bool LevelSuccessfull = false;
 
@@ -19,6 +20,7 @@ public static class LevelEndMessage
     {
         title = "";
         message = "";
+		nextLevel = "";
         LevelSuccessfull = false;
         money = 0;
     }
