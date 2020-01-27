@@ -37,6 +37,8 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void Awake()
 	{
 		path = new List<Vector3>();
+
+		currentRoom = GetEntranceRoom();
 	}
 
 	public void Start()
@@ -194,9 +196,18 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		{
 			pos = new Vector3(pos.x, positionRoom.transform.position.y + 1, -1);
 
-			Room characterRoom = GetEntranceRoom();
+			Room characterRoom;
 
-			path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
+			try
+			{
+				characterRoom = currentRoom;
+			}
+			catch (UnassignedReferenceException)
+			{
+				characterRoom = GetEntranceRoom();
+
+				path.Add(new Vector3(characterRoom.transform.position.x - 1, characterRoom.transform.position.x + 1, -1));
+			}
 
 			if (!positionRoom.Equals(characterRoom))
 			{
@@ -207,7 +218,6 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		else
 		{
 			Room entranceRoom = GetEntranceRoomToOutside(pos);
-			Debug.Log(entranceRoom.name);
 
 			//Code for inside to outside
 			try
@@ -242,7 +252,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		return null;
 	}
 
-	private Room GetEntranceRoom()
+	public Room GetEntranceRoom()
 	{
 		foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
 		{
