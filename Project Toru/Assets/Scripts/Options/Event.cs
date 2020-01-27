@@ -96,6 +96,8 @@ namespace Assets.Scripts.Options
             temp += " " + Description + System.Environment.NewLine;
 
             BuildOptionShortList();
+			if (OptionShortList.Count == 0)
+				return null;
 
             foreach (var option in OptionShortList)
             {
@@ -135,7 +137,12 @@ namespace Assets.Scripts.Options
         public void ActivateOption(int indexOption, int indexCharacter, ref string result)
         {
             result = OptionShortList[indexOption].Activate(ActorShortList[indexCharacter]);
-            Actors.RemoveAt(indexCharacter);
+			if (OptionShortList[indexOption].once)
+			{
+				Options.Remove(OptionShortList[indexOption]);
+			}
+
+			Actors.RemoveAt(indexCharacter);
         }
     }
 }
