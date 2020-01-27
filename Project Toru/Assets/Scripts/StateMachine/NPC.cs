@@ -12,9 +12,6 @@ public abstract class NPC : MonoBehaviour
     [SerializeField]
     private GameObject TextBox = null;
 
-    [SerializeField]
-    public GameObject[] escapePath = null;
-
     [NonSerialized]
     public Room currentRoom = null;
 
@@ -35,7 +32,7 @@ public abstract class NPC : MonoBehaviour
     {
         foreach (GameObject g in bag)
         {
-            Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + UnityEngine.Random.Range(0.2f, 1.20f), 0), Quaternion.identity);
+            Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + 0.5f, 0), Quaternion.identity);
         }
     }
 

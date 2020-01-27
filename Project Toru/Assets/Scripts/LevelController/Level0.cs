@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.SceneManagement;
-
 public class Level0 : LevelScript
 {
 	// Add objects
@@ -11,12 +9,9 @@ public class Level0 : LevelScript
 	// Ex: Vault vault = null;
 	public Van van = null;
 	
-	void Awake() {
+	protected override void Awake() {
 		
-		LevelManager.setLevel();
-		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
-		
-		/// Assigning Levelscripts to objects
+		base.Awake();
 		
 		/// Assigning Conditions
 		{
@@ -75,7 +70,7 @@ public class Level0 : LevelScript
 				
 				DialogueText text = new DialogueText();
 				text.name = "Watch out!";
-				text.sentences.Add("The employee will call the cops when you enter the vaultroom");
+				text.sentences.Add("The employee will call the cops when you enter the vault room");
 				text.sentences.Add("[Left Click] on the employee to keep him under shot");
 				text.sentences.Add("Press [F] to fire and try to kill the employee");
 				text.sentences.Add("... you don't have to kill him");
@@ -94,6 +89,7 @@ public class Level0 : LevelScript
 				text.name = "Locked";
 				text.sentences.Add("This door seems locked...");
 				text.sentences.Add("Maybe I can find something to open it");
+				text.sentences.Add("Walk into something to see if you can interact with it");
 				
 				dialogueManager.QueueDialogue(text);
 			};
@@ -139,7 +135,7 @@ public class Level0 : LevelScript
 				PoliceSiren.gameObject.SetActive(true);
 				
 				LevelManager.Delay(10, () => {
-					PoliceCar.speed = 8;
+					SpawnPoliceCar();
 				});
 			};
 			
@@ -149,6 +145,12 @@ public class Level0 : LevelScript
 		{
 			LevelCondition condition = new LevelCondition();
 			condition.name = "CharacterIsInRoomVault";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelManager.Delay(3, () => {
+					SpawnPoliceCar();
+				});
+			};
 			
 			LevelManager.AddCondition(condition);
 		}
@@ -346,15 +348,10 @@ public class Level0 : LevelScript
 				text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
 				text.sentences.Add("Use [scroll] to zoom in and out");
 			}
+			
+			text.sentences.Add("Use [Q] focus on character");
 				
 			dialogueManager.QueueDialogue(text);
 		});
-	}
-	
-	void Update() {
-		if (Input.GetKeyDown(KeyCode.O))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
 	}
 }
