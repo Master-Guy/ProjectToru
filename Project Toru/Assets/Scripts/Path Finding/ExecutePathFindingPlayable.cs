@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Behaviour;
-using Assets.Scripts.Options;
+﻿using Assets.Scripts.Options;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
