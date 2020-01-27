@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.F))
 			{
-				LevelManager.emit("PlayerHasUsedGun");
+				LevelManager.emit("PlayerHasUsedGun", currentRoom);
 				weapon?.Shoot();
 			}
 		}
@@ -141,7 +141,7 @@ public class Character : MonoBehaviour
 		if (other.CompareTag("Room"))
 		{
 			currentRoom = other.gameObject;
-			LevelManager.emit("CharacterIsInRoom", currentRoom.name);
+			LevelManager.emit("CharacterIsInRoom", currentRoom);
 		}
 	}
 }
