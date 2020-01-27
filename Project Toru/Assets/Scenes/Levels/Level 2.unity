@@ -691,6 +691,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EntranceRight 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1784600117424164761, guid: 267ee8c10b1624d8386593c0d4402d11,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
+      objectReference: {fileID: 0}
     - target: {fileID: 1784600117424164766, guid: 267ee8c10b1624d8386593c0d4402d11,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -921,6 +926,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StairsUpDown (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696491881226293851, guid: fe29bb8aafb274f03856e12a68db393a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 6641824183735609056, guid: fe29bb8aafb274f03856e12a68db393a,
         type: 3}
@@ -1222,6 +1232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StairsUpDown (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696491881226293851, guid: fe29bb8aafb274f03856e12a68db393a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
       objectReference: {fileID: 0}
     - target: {fileID: 6641824183735609056, guid: fe29bb8aafb274f03856e12a68db393a,
         type: 3}
@@ -27720,6 +27735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StairsUpDown
       objectReference: {fileID: 0}
+    - target: {fileID: 6696491881226293851, guid: fe29bb8aafb274f03856e12a68db393a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Room
+      objectReference: {fileID: 0}
     - target: {fileID: 6641824183735609056, guid: fe29bb8aafb274f03856e12a68db393a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28594,7 +28614,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116965104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.580773, y: -1.9194953, z: -46155.504}
+  m_LocalPosition: {x: 2.95, y: -1.9194953, z: -46155.504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 132887078}
