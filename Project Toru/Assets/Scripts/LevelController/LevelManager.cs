@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-using GameAnalyticsSDK;
-
 /// <summary>
 /// This Level Manager receives "conditions" from the game.
 /// Any condtions can have a callback when a condition is met or not. Conditions don't check themselves, because the all behave differently
@@ -28,7 +26,7 @@ using GameAnalyticsSDK;
 /// </example>
 public class LevelManager : MonoBehaviour
 {
-
+	
     /// <summary>
     /// The current scene
     /// </summary>
@@ -61,17 +59,9 @@ public class LevelManager : MonoBehaviour
     static Dictionary<string, LevelCondition> conditions = new Dictionary<string, LevelCondition>();
 
 	void Awake() {
-		if (!GameAnalytics.IsInitialized())
-		{
-			GameAnalytics.Initialize();
-		}
+		scene = SceneManager.GetActiveScene();
 	}
-	
-    void Start()
-    {
-        scene = SceneManager.GetActiveScene();
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + levelIndex.ToString(), this.GetLevelName());
-    }
+
 
     void Update()
     {
@@ -135,8 +125,6 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
-
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), condition.name);
         }
         else
         {
@@ -184,6 +172,66 @@ public class LevelManager : MonoBehaviour
         return null;
     }
 
+	public delegate void LevelScriptCallback();
+	public delegate void LevelScriptCallbackString(string value);
+	
+	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
+	static Dictionary<string, LevelScriptCallbackString> events_string = new Dictionary<string, LevelScriptCallbackString>();
+	
+	public static void emit(string eventString)
+	{
+		Debug.Log("Emitting " + eventString);
+		if (events.ContainsKey(eventString)) {
+			events[eventString]?.Invoke();
+			return;
+		}
+	}
+	
+	public static void emit(string eventString, string value)
+	{
+		Debug.Log("Emitting " + eventString + " With STRING value " + value);
+		if (events_string.ContainsKey(eventString)) {
+			events_string[eventString]?.Invoke(value);
+			return;
+		}
+		
+		// Try emitting without string
+		LevelManager.emit(eventString);
+	}
+	
+	public static void on(string eventString, LevelScriptCallback callback)
+	{
+		events.Add(eventString, callback);	
+	}
+	
+	public static void on(string eventString, LevelScriptCallbackString callback)
+	{
+		events_string.Add(eventString, callback);	
+	}
+	
+	public static void setLevel() {
+		events.Clear();
+		events_string.Clear();
+		conditions.Clear();
+	}
+	
+	public static void Delay(float delay, LevelScriptCallback callback) {
+		Instance().StartCoroutine(TriggerDelayCallback(delay, callback));
+	}
+	
+	private static IEnumerator TriggerDelayCallback(float delay, LevelScriptCallback callback) {
+		
+		yield return new WaitForSeconds(delay);
+		
+		callback.Invoke();
+	}
+	
+	
+	public static bool RandomChange(int percentage =  50) {
+		return (percentage > Random.Range(1, 100));
+	}
+	
+	
     /// <summary>
     /// End level. For winning and losing
     /// The level is automaticly "won" when none of the conditions are failed.
@@ -191,34 +239,13 @@ public class LevelManager : MonoBehaviour
     /// <param name="title"></param>
     /// <param name="message"></param>
     /// <param name="FailAfterSeconds">The to wait before ending the level</param>
-    public static void EndLevel(string title, string message, float FailAfterSeconds = 0f)
-    {
-        Instance().StartCoroutine(SegueToFailScene(title, message, FailAfterSeconds));
-    }
-
-    /// <summary>
-    /// Actualy ending the level.
-    /// </summary>
-    /// <param name="title"></param>
-    /// <param name="message"></param>
-    /// <param name="FailAfterSeconds"></param>
-    /// <returns></returns>
-    private static IEnumerator SegueToFailScene(string title, string message, float FailAfterSeconds)
-    {
-        if (AnyConditionFailed())
-        {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
-        }
-        else
-        {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + Instance().levelIndex.ToString(), Instance().GetLevelName(), "main");
-        }
-
-        yield return new WaitForSeconds(FailAfterSeconds);
-
-        LevelEndMessage.title = title;
-        LevelEndMessage.message = message;
-        SceneManager.LoadScene("Fail");
+    public static void EndLevel(float SegueAfterSeconds = 0f)
+    {	
+		 
+		LevelManager.Delay(SegueAfterSeconds, () => {
+			SceneManager.LoadScene("BetweenLevel", LoadSceneMode.Single);
+		});
+		
     }
 
 
