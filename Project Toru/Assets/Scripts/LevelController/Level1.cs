@@ -46,8 +46,6 @@ public class Level1 : LevelScript
 					
 					dialogueManager.QueueDialogue(text);
 				}
-				
-				Debug.Log("Dialogue");
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -270,6 +268,11 @@ public class Level1 : LevelScript
 			}
 		});
 		
+		LevelManager.on("CharacterGotMoneyFromVault", () => {
+			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
+		});
+
+
 		LevelManager.on("AllCharactersInVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();
