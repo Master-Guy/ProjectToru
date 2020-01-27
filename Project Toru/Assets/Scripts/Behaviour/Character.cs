@@ -82,8 +82,6 @@ public class Character : MonoBehaviour
 			}
 		}
 
-		AdjustOrderLayer();
-
 		if(weapon != null)
 		{
 			FlipFirePoint();
@@ -141,11 +139,6 @@ public class Character : MonoBehaviour
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
 		}
-	}
-
-	void AdjustOrderLayer()
-	{
-		GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

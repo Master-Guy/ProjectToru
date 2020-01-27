@@ -169,7 +169,6 @@ MonoBehaviour:
   money: {fileID: 6706966753871349064, guid: 6a1473e49c90bb141998184284a57518, type: 3}
   levelScript: {fileID: 0}
   keycardColor: 0
-  ColorIndicator: {fileID: 0}
 --- !u!114 &1694405308677135751
 MonoBehaviour:
   m_ObjectHideFlags: 0

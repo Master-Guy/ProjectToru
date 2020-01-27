@@ -21,9 +21,6 @@ namespace Assets.Scripts.Behaviour
 		List<Item> items;
 		Room Parent;
 
-		[SerializeField]
-		Vector2Int size = new Vector2Int(0, 0);
-
 		void Start()
 		{
 			items = GetComponentsInChildren<Item>().ToList();
@@ -65,13 +62,7 @@ namespace Assets.Scripts.Behaviour
 
 		private void setFurnitureTarget()
 		{
-
 			Character.selectedCharacter.GetComponent<ExecutePathFindingPlayable>().targetFurniture = gameObject;
-		}
-
-		public Vector2Int GetSize()
-		{
-			return size;
 		}
 	}
 }

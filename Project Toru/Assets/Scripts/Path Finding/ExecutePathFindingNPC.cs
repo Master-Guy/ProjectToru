@@ -8,6 +8,7 @@ public class ExecutePathFindingNPC : ExecutePathFinding
 	{
 		WayPointsWalk();
 		HidePlayerOnStair();
+		AdjustOrderLayer();
 	}
 
 	public void setPosTarget(Vector3 pos)
