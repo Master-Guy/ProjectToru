@@ -44,5 +44,10 @@ public class LevelScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+		
+		if (Input.GetKeyDown(KeyCode.I))
+        {
+            dialogueManager.DebugDisableDialogue = true;
+        }
 	}
 }

@@ -47,8 +47,6 @@ public class Character : MonoBehaviour
 		if (weapon != null) {
 			animator.SetBool("isHoldingGun", true);
 		}
-
-		AdjustOrderLayer();
 	}
 
 	// Update is called once per frame

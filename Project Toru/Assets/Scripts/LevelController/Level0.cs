@@ -70,7 +70,7 @@ public class Level0 : LevelScript
 				
 				DialogueText text = new DialogueText();
 				text.name = "Watch out!";
-				text.sentences.Add("The employee will call the cops when you enter the vaultroom");
+				text.sentences.Add("The employee will call the cops when you enter the vault room");
 				text.sentences.Add("[Left Click] on the employee to keep him under shot");
 				text.sentences.Add("Press [F] to fire and try to kill the employee");
 				text.sentences.Add("... you don't have to kill him");
@@ -144,6 +144,12 @@ public class Level0 : LevelScript
 		{
 			LevelCondition condition = new LevelCondition();
 			condition.name = "CharacterIsInRoomVault";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelManager.Delay(3, () => {
+					SpawnPoliceCar();
+				});
+			};
 			
 			LevelManager.AddCondition(condition);
 		}
