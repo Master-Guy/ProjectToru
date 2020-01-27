@@ -66,7 +66,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				if (tag.Contains("Player")) { 
 					character.change = this.change;
 				}
-
+				
 				transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * 4);
 			}
 
@@ -161,19 +161,15 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	public void UpdateAnimations()
 	{
 		if(change != Vector3.zero)
-		{
+		{	
 			animator.SetFloat("moveX", change.x);
-
 			animator.SetFloat("moveY", change.y);
-
 			animator.SetBool("moving", true);
 		}
 		else
 		{
 			/*animator.SetFloat("moveX", 0);
-
 			animator.SetFloat("moveY", 0);*/
-
 			animator.SetBool("moving", false);
 		}
 		change = Vector2.zero;

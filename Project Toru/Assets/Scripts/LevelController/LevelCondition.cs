@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using GameAnalyticsSDK;
-
 public delegate void ConditionHandlerDelegate(LevelCondition condition);
 
 public class LevelCondition
@@ -67,21 +65,23 @@ public class LevelCondition
     public ConditionHandlerDelegate failHandler = null;
 
     public virtual void Fullfill()
-    {
+    {	
+		if (_fullfilled == true)
+			return;
+			
         Debug.Log(name + " fullfilled");
         _fullfilled = true;
-
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "level" + LevelManager.Instance().levelIndex.ToString(), LevelManager.Instance().GetLevelName(), this.name);
 
         fullfillHandler?.Invoke(this);
     }
 
     public void Fail()
-    {
+    {	
+		if (_failed == true)
+			return;
+			
         Debug.Log(name + " failed");
         _failed = true;
-
-        GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "level" + LevelManager.Instance().levelIndex.ToString(), LevelManager.Instance().GetLevelName(), this.name);
 
         failHandler?.Invoke(this);
     }

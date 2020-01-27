@@ -24,7 +24,8 @@ public class CharacterStats : MonoBehaviour
             {
                 npc.dropBag();
             }
-            Destroy(this.gameObject);
+			
+            gameObject.SetActive(false);
         }
     }
 }
