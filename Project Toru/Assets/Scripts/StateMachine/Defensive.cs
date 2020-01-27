@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+
 public class Defensive : PoliceState
 {
 	static Defensive instance;
@@ -26,7 +28,10 @@ public class Defensive : PoliceState
 
 	public override void MoveCop(Police p)
 	{
-		entrances.OrderBy(o => o.getNPCsInRoom().Where(npc => npc.GetComponent<Police>() != null).Count());
-		p.setPos(entrances.Last());
+		if (entrances.Count != 0)
+		{
+			var entrancePosition = entrances.Last().transform.position;
+			p.GetComponent<ExecutePathFindingNPC>().setPosTarget(new Vector3(UnityEngine.Random.Range(entrancePosition.x - 1.0f, entrancePosition.x + 1.0f), UnityEngine.Random.Range(entrancePosition.y - 1.0f, entrancePosition.y + 1.0f), entrancePosition.z));
+		}
 	}
 }

@@ -30,7 +30,8 @@ public class Aggressive : PoliceState
 	public override void MoveCop(Police p)
 	{
 		// remove this room from lastknownpositions
-		LastKnownPositions.Remove(p.currentRoom);
+		if(p.currentRoom !=null)
+			LastKnownPositions.Remove(p.currentRoom);
 
 		// give new destination
 		if(LastKnownPositions.Count != 0)

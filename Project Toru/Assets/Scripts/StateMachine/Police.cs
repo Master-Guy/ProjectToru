@@ -8,7 +8,7 @@ public class Police : Guard
 {
 	public void Update()
 	{
-		if (currentRoom.charactersInRoom.Count > 0)
+		if (currentRoom != null && currentRoom.charactersInRoom.Count > 0)
 		{
 			GetComponent<ExecutePathFindingNPC>().StopPathFinding();
 			// TODO fight
