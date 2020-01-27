@@ -38,9 +38,12 @@ public class DialogueManager : MonoBehaviour
 	
 	public void StartDialogue()
 	{
+		
 		if (dialogues.Count == 0) {
 			return;
 		}
+		
+		Time.timeScale = 0;
 		
 		animator.SetBool("IsOpen", true);
 		
@@ -91,5 +94,7 @@ public class DialogueManager : MonoBehaviour
 			currentDialogue = null;
 			oldCurrentDialogue.callback?.Invoke();
 		});
+		
+		Time.timeScale = 1.0f;
 	}
 }
