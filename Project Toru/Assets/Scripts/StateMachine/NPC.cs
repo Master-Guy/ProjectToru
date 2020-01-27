@@ -12,9 +12,6 @@ public abstract class NPC : MonoBehaviour
     [SerializeField]
     private GameObject TextBox = null;
 
-    [SerializeField]
-    public GameObject[] escapePath = null;
-
     [NonSerialized]
     public Room currentRoom = null;
 
