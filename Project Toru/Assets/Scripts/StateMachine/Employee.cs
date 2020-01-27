@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using GameAnalyticsSDK;
-
 public class Employee : NPC
 {
     private bool surrender = false;
@@ -64,6 +62,6 @@ public class Employee : NPC
 
     void startCountDown()
     {
-
+		LevelManager.emit("EmployeeFleed");
     }
 }

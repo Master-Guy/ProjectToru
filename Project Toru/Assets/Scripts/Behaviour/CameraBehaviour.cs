@@ -62,6 +62,8 @@ public class CameraBehaviour : MonoBehaviour
 
         if (change != Vector3.zero)
         {
+			LevelManager.emit("PlayerDidUseCameraControls");
+			
             if (!freeLook)
             {
                 freeLook = true;

@@ -15,7 +15,7 @@ public class SceneSwitcher : MonoBehaviour
 		text.fontStyle = FontStyle.Normal;
 		
 		if (scene != "")
-			SceneManager.LoadScene(scene);
+			SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 	
 	void OnMouseEnter() {

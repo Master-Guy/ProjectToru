@@ -17,11 +17,14 @@ public class ExecutePathFindingPlayable : ExecutePathFinding
 	private void MousePointInput()
 	{
 		if(GetComponent<Character>().Equals(Character.selectedCharacter)) {
+			
 			if (Input.GetMouseButtonDown(1))
 			{
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				Plane plane = new Plane(Vector3.forward, Character.selectedCharacter.transform.position);
 				float dist = 10;
+				
+				LevelManager.emit("CharacterHasBeenMoved");
 
 				if (plane.Raycast(ray, out dist))
 				{
