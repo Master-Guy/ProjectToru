@@ -130,8 +130,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6754952}
   m_Layer: 0
-  m_Name: Entrance
-  m_TagString: Untagged
+  m_Name: EntranceOutside
+  m_TagString: Entrance
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -287,7 +287,7 @@ public class Level0 : LevelScript
 		
 		LevelManager.on("PlayerHasUsedGun", (gObject) => {
 			LevelManager.Condition("PlayerHasUsedGun").Fullfill();
-			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+			PoliceForce.getInstance().Alert((gObject == null ? GameObject.Find("Entrance") : gObject).GetComponent<Room>());
 		});
 		
 		LevelManager.on("EmployeeFleed", (gObject) => {
@@ -303,7 +303,12 @@ public class Level0 : LevelScript
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
 		});
-		
+
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
 		LevelManager.on("AllCharactersInVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();

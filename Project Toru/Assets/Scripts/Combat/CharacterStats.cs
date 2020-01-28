@@ -24,7 +24,8 @@ public class CharacterStats : MonoBehaviour
             {
                 npc.dropBag();
             }
-			
+
+			LevelManager.emit("NPCKilled", npc.currentRoom.gameObject);
             gameObject.SetActive(false);
         }
     }
