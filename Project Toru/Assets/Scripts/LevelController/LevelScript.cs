@@ -10,7 +10,6 @@ public class LevelScript : MonoBehaviour
 	public PoliceSirenOverlay PoliceSiren = null;
 	private Queue<PoliceCar> _PoliceCars = new Queue<PoliceCar>();
 	public List<PoliceCar> PoliceCars = new List<PoliceCar>();
-
 	
 	protected void SpawnPoliceCar() {
 		if (_PoliceCars.Count == 0) {
@@ -63,6 +62,12 @@ public class LevelScript : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SceneManager.LoadScene("Level 2", LoadSceneMode.Single);
+        }
+
+		if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            GameObject.FindGameObjectWithTag("LevelIntroductionScreen")?.SetActive(false);
+			LevelManager.emit("StartLevel");
         }
 	}
 }

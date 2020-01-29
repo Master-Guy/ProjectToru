@@ -53,6 +53,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     GameObject FPSMonitor = null;
 
+	[SerializeField]
+    GameObject UI = null;
+
     /// <summary>
     /// Storage for Level Conditions
     /// </summary>
@@ -291,5 +294,9 @@ public class LevelManager : MonoBehaviour
     {
         return GetComponent<BuildingBehaviour>();
     }
+
+	public static GameObject GetUI() {
+		return LevelManager.Instance().UI;
+	}
 
 }

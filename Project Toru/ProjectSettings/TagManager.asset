@@ -21,6 +21,8 @@ TagManager:
   - Furniture
   - PoliceSiren
   - DialogueManager
+  - Entrance
+  - LevelIntroductionScreen
   layers:
   - Default
   - TransparentFX
