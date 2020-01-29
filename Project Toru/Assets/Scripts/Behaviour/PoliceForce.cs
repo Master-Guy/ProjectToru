@@ -26,8 +26,7 @@ public class PoliceForce : StateMachine//: MonoBehaviour
 
 	public void Alert(Room seen)
 	{
-		((PoliceState)GetCurrentlyRunningState()).AddPosition(seen);
-		if(!(GetCurrentlyRunningState() is Defensive))
+		if(((PoliceState)GetCurrentlyRunningState()).AddPosition(seen) && !(GetCurrentlyRunningState() is Defensive))
 			foreach (var p in Cops)
 				RequestOrders(p);
 	}

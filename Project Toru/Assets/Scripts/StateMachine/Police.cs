@@ -38,7 +38,7 @@ public class Police : NPC
 
 	public void Update()
 	{
-		if ((currentRoom != null && currentRoom.charactersInRoom.Count > 0) || currentRoom == Dest)
+		if ((currentRoom != null && currentRoom.charactersInRoom.Count > 0) || currentRoom.Equals(Dest))
 		{
 			GetComponent<ExecutePathFindingNPC>().StopPathFinding();
 			// TODO fight
