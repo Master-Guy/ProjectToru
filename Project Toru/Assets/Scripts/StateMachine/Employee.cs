@@ -7,6 +7,7 @@ public class Employee : NPC
 {
     private bool surrender = false;
     private bool fleeTrue = false;
+	private Room startRoom;
 
     public void Start()
     {
@@ -35,6 +36,7 @@ public class Employee : NPC
             this.surrender = true;
             this.statemachine.ChangeState(new Surrender(this.animator));
             Say("Don't shoot!");
+			startRoom = currentRoom;
             dropBag();
         }
     }
@@ -46,7 +48,8 @@ public class Employee : NPC
         if (!currentRoom.AnyCharacterInRoom() && surrender)
         {
             this.surrender = false;
-            this.statemachine.ChangeState(new Flee(this.escapePath, this.gameObject, this.animator));
+            this.statemachine.ChangeState(new Idle(this.animator));
+			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
             fleeTrue = true;
         }
     }
@@ -62,6 +65,6 @@ public class Employee : NPC
 
     void startCountDown()
     {
-		LevelManager.emit("EmployeeFleed");
+		LevelManager.emit("EmployeeFleed", startRoom.gameObject);
     }
 }

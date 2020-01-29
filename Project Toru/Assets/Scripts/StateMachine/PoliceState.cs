@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public abstract class PoliceState : IState
 {
 	protected static LinkedList<Room> LastKnownPositions = new LinkedList<Room>();
-	protected static List<Room> entrances;
+	protected static List<GameObject> entrances;
 
 	public PoliceState()
 	{
 		if(entrances == null)
 		{
-			entrances = new List<Room>();
-			// get entrances from building
+			entrances = GameObject.FindGameObjectsWithTag("Entrance").ToList();
 		}
 	}
 	public virtual void AddPosition(Room room)

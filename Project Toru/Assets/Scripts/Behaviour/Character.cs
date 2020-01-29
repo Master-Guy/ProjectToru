@@ -13,18 +13,19 @@ public class Character : MonoBehaviour
 	public float speed;
 	private Rigidbody2D myRigidbody;
 	public Vector3 change;
-	private Animator animator;
+    [NonSerialized]
+	public Animator animator;
 
 	public Inventory inventory;
 
 	private ParticleSystem ps;
 
-	public GameObject currentRoom;
+	public GameObject currentRoom = null;
 	public static Character selectedCharacter;
 
 	public float MaxWeight;
 
-	public GameObject firePoint;
+	//public GameObject firePoint;
 	public Weapon weapon;
 	bool weaponKeyRelease = true;
 
@@ -43,10 +44,10 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
+
+        weapon.weaponHolder = this.gameObject;
 		
-		if (weapon != null) {
-			animator.SetBool("isHoldingGun", true);
-		}
+		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
 
 	// Update is called once per frame
@@ -70,13 +71,17 @@ public class Character : MonoBehaviour
 				if (Input.GetKey(KeyCode.F))
 				{
 					if (weaponKeyRelease)
-						LevelManager.emit("PlayerHasUsedGun");
+						LevelManager.emit("PlayerHasUsedGun", currentRoom);
 					
 					weaponKeyRelease = false;
 					weapon?.Shoot();
 				} else {
 					weaponKeyRelease = true;
 				}
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    weapon.HideGun();
+                }
 			}
 		}
 
@@ -112,31 +117,35 @@ public class Character : MonoBehaviour
 	{
 		GameObject firePoint = weapon.gameObject;
 
-		if (change.x > 0)
+		if (animator.GetFloat("moveX") > 0.1)
 		{
 			firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
 			firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 		}
 
-		if (change.x < 0)
+		if (animator.GetFloat("moveX") < -0.1)
 		{
 			firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-			firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+			firePoint.transform.position = transform.position + new Vector3(-.3f, -.4f);
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 		}
 
-		if (change.y > 0)
-		{
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		}
+		// if (animator.GetFloat("moveY") > 0)
+		// {
+		// 	firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
+		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
+		// 	Debug.Log("3");
+		// }
 
-		if (change.y < 0)
-		{
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		}
+		// if (animator.GetFloat("moveY") < 0)
+		// {	
+		// 	firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+		// 	Debug.Log("4");
+		// }
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -144,7 +153,7 @@ public class Character : MonoBehaviour
 		if (other.CompareTag("Room"))
 		{
 			currentRoom = other.gameObject;
-			LevelManager.emit("CharacterIsInRoom", currentRoom.name);
+			LevelManager.emit("CharacterIsInRoom", currentRoom);
 		}
 	}
 }

@@ -68,9 +68,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -583620715
-  m_SortingLayer: 7
-  m_SortingOrder: 1
+  m_SortingLayerID: -1329448103
+  m_SortingLayer: 5
+  m_SortingOrder: -5000
   m_Sprite: {fileID: 21300000, guid: c262974ee1a8f4d6e88e731a5891fd7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -117,4 +117,5 @@ MonoBehaviour:
   target_speed: 8
   speed: 0
   SpawnCops: 1
-  policePrefab: {fileID: 0}
+  policePrefab: {fileID: -5366686149197315582, guid: 35d9a8d3d4bcb4fa294ff683c1480d61,
+    type: 3}

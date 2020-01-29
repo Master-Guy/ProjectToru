@@ -11,8 +11,10 @@ namespace Assets.Scripts.Options
     {
         [SerializeField]
         private string Description = null;
+		[SerializeField]
+		public bool once = false;
 
-        public Skills? Prerequisite = null;
+		public Skills? Prerequisite = null;
 
         public virtual string getInfo()
         {
