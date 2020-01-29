@@ -585,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5806881838564846442}
-  - component: {fileID: 1214099249711020074}
+  - component: {fileID: 7255768512472127419}
   m_Layer: 0
   m_Name: Collider Right
   m_TagString: Walls
@@ -607,7 +607,7 @@ Transform:
   m_Father: {fileID: 3382186349135791128}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1214099249711020074
+--- !u!60 &7255768512472127419
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -633,6 +633,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 8.55, y: 1}
+      - {x: 8.835962, y: 0.52862984}
+      - {x: 8.687477, y: 0.015094876}
       - {x: 9, y: 0}
       - {x: 9, y: 1}
 --- !u!1 &2010051922204835779
@@ -3073,12 +3075,17 @@ PrefabInstance:
         type: 3}
       propertyPath: collider
       value: 
-      objectReference: {fileID: 1214099249711020074}
+      objectReference: {fileID: 0}
     - target: {fileID: 2369414609990655982, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: doorCollider
       value: 
-      objectReference: {fileID: 1214099249711020074}
+      objectReference: {fileID: 7255768512472127419}
+    - target: {fileID: 2369414609990655982, guid: 58961c0690de64e5cb99ecac92510057,
+        type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 8669251148195207012}
     - target: {fileID: 2369414609990655978, guid: 58961c0690de64e5cb99ecac92510057,
         type: 3}
       propertyPath: m_Enabled

@@ -1,45 +1,45 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Employee : NPC
+public class Karen : NPC
 {
-    private bool surrender = false;
-    private bool fleeTrue = false;
-
-    public void Start()
+	
+	bool surrender = false;
+	bool fleeTrue = false;
+	
+    // Start is called before the first frame update
+    void Start()
     {
-        this.startingPosition = transform.position;
-        this.animator = GetComponent<Animator>();
-        PingPong();
+		animator = GetComponent<Animator>();
+        animator.SetFloat("moveX", -1);
     }
-
-    public void Update()
+	
+	public void Update()
     {
         this.statemachine.ExecuteStateUpdate();
         AdjustOrderLayer();
-        FleeIfPossible();
-        showCountdown();
+		FleeIfPossible();
     }
 
     void OnMouseDown()
     {
         Surrender();
     }
-
-    void Surrender()
+	
+	public void Surrender()
     {
         if (currentRoom.SelectedPlayerInRoom() && !surrender)
         {
             this.surrender = true;
+			animator.SetFloat("moveX", 0);
             this.statemachine.ChangeState(new Surrender(this.animator));
-            Say("Don't shoot!");
-            dropBag();
+			
+			LevelManager.emit("KarenSurrendered");
         }
     }
 
-    void FleeIfPossible()
+	void FleeIfPossible()
     {
         if (currentRoom == null) return;
 
@@ -50,19 +50,5 @@ public class Employee : NPC
 			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
             fleeTrue = true;
         }
-    }
-
-    void showCountdown()
-    {
-        if (fleeTrue)
-        {
-            Invoke("startCountDown", 8);
-            fleeTrue = false;
-        }
-    }
-
-    void startCountDown()
-    {
-		LevelManager.emit("EmployeeFleed");
     }
 }

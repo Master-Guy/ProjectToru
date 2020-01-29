@@ -9,6 +9,8 @@ public class CharacterStats : MonoBehaviour
     [NonSerialized]
     public float currentHealth;
 
+
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -25,6 +27,7 @@ public class CharacterStats : MonoBehaviour
                 npc.dropBag();
             }
 			
+			LevelManager.emit("NPCKilled", gameObject.name);
             gameObject.SetActive(false);
         }
     }
