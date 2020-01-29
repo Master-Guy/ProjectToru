@@ -13,7 +13,8 @@ public class Character : MonoBehaviour
 	public float speed;
 	private Rigidbody2D myRigidbody;
 	public Vector3 change;
-	private Animator animator;
+    [NonSerialized]
+	public Animator animator;
 
 	public Inventory inventory;
 
@@ -43,10 +44,8 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-		
-		if (weapon != null) {
-			animator.SetBool("isHoldingGun", true);
-		}
+
+        weapon.weaponHolder = this.gameObject;
 		
 		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
@@ -79,6 +78,10 @@ public class Character : MonoBehaviour
 				} else {
 					weaponKeyRelease = true;
 				}
+                if (Input.GetKeyDown(KeyCode.H))
+                {
+                    weapon.HideGun();
+                }
 			}
 		}
 
