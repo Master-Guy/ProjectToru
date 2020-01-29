@@ -963,6 +963,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2131420127}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &492517377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4975641957985152673, guid: 93f02214dd86b10438df85ded2e65167,
+    type: 3}
+  m_PrefabInstance: {fileID: 170400997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef7f14ac904a40d686363190987ab41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554032716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,7 +1956,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2139789197}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!19719996 &1246416047
 TilemapCollider2D:
@@ -24068,7 +24080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80632ee203fc149d9bfaafb28732f8e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoliceSiren: {fileID: 0}
+  PoliceSiren: {fileID: 492517377}
   PoliceCars:
   - {fileID: 1475084242}
   van: {fileID: 1452485022}
@@ -24239,14 +24251,14 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[3].y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8481900793061936897, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-        type: 3}
-      propertyPath: color
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7091624033157028490, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
       propertyPath: m_ColliderPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481900793061936897, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
+        type: 3}
+      propertyPath: color
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 288409693033675559, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
@@ -24305,6 +24317,7 @@ MonoBehaviour:
   maxZoomDistance: 10
   topLeft: {x: -5, y: 5}
   bottomRight: {x: 20, y: 0}
+  movementDisabled: 0
 --- !u!81 &1555143276
 AudioListener:
   m_ObjectHideFlags: 0
@@ -24781,24 +24794,19 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[3].y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8811116169905011760, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-        type: 3}
-      propertyPath: key
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 360238972526500524, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8481900793061936897, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
-        type: 3}
-      propertyPath: color
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7091624033157028490, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
         type: 3}
       propertyPath: m_ColliderPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481900793061936897, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
+        type: 3}
+      propertyPath: color
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 288409693033675559, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
@@ -24810,6 +24818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: color
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811116169905011760, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4,
+        type: 3}
+      propertyPath: key
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c9a428dd43f4cdea5df2a9ee4ea1e4, type: 3}
@@ -24925,16 +24938,16 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2008879952413551165, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
-        type: 3}
-      propertyPath: color
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8811116169905011760, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}
       propertyPath: doorCollider
       value: 
       objectReference: {fileID: 1605704582}
+    - target: {fileID: 2008879952413551165, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
+        type: 3}
+      propertyPath: color
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1336695865590724794, guid: 58944fa40ddf14d28a04bd9dcf646dd6,
         type: 3}
       propertyPath: m_IsActive
@@ -25968,7 +25981,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6754952}
   - {fileID: 1246416046}
   - {fileID: 1501227298}
   - {fileID: 1152676177}
