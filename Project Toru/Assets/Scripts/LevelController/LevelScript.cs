@@ -10,7 +10,6 @@ public class LevelScript : MonoBehaviour
 	public PoliceSirenOverlay PoliceSiren = null;
 	private Queue<PoliceCar> _PoliceCars = new Queue<PoliceCar>();
 	public List<PoliceCar> PoliceCars = new List<PoliceCar>();
-
 	
 	protected void SpawnPoliceCar() {
 		if (_PoliceCars.Count == 0) {

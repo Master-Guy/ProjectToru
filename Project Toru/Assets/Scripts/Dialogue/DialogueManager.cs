@@ -25,6 +25,15 @@ public class DialogueManager : MonoBehaviour
 		}
 		animator = GetComponent<Animator>();
 	}
+
+	void Update() {
+		if(animator.GetBool("IsOpen") == false)
+			return;
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			DisplayNextSentence();
+		}
+	}
 	
 	public void QueueDialogue(DialogueText dialogue) {
 		

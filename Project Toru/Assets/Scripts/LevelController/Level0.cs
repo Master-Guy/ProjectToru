@@ -303,8 +303,8 @@ public class Level0 : LevelScript
 		
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
-		});
-
+		});
+
 		LevelManager.on("NPCKilled", (gObject) => {
 			PoliceForce.getInstance().AlertKill();
 			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
@@ -339,27 +339,29 @@ public class Level0 : LevelScript
 				LevelManager.EndLevel(3);
 			}
 		});
-
-
-		// Trigger first dialogue
-		LevelManager.Delay(2, () => {
-			
-			DialogueText text = new DialogueText();
-			text.name = "Welcome";
-			text.sentences.Add("You are going to steal some money!");
+		
+		LevelManager.on("StartLevel", () => {
+			// Trigger first dialogue
+			LevelManager.Delay(1, () => {
 				
-			if (!LevelManager.Condition("CharacterHasBeenSelected").fullfilled) {
-				text.sentences.Add("Select a character by clicking on him with your [left mouse]");
-			}
-			
-			if (!LevelManager.Condition("PlayerDidUseCameraControls").fullfilled) {
-				text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
-				text.sentences.Add("Use [scroll] to zoom in and out");
-			}
-			
-			text.sentences.Add("Use [Q] focus on character");
+				DialogueText text = new DialogueText();
+				text.name = "Welcome";
+				text.sentences.Add("You are going to steal some money!");
+					
+				if (!LevelManager.Condition("CharacterHasBeenSelected").fullfilled) {
+					text.sentences.Add("Select a character by clicking on him with your [left mouse]");
+				}
 				
-			dialogueManager.QueueDialogue(text);
+				if (!LevelManager.Condition("PlayerDidUseCameraControls").fullfilled) {
+					text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
+					text.sentences.Add("Use [scroll] to zoom in and out");
+				}
+				
+				text.sentences.Add("Use [Q] focus on character");
+					
+				dialogueManager.QueueDialogue(text);
+			});
 		});
+		
 	}
 }
