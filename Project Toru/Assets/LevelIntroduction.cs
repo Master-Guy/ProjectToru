@@ -34,6 +34,7 @@ public class LevelIntroduction : MonoBehaviour
 
 		// Disable UI (will overlab otherwise)
 		LevelManager.GetUI()?.SetActive(false);
+		Camera.main.GetComponent<CameraBehaviour>().movementDisabled = true;
     }
 
 	enum State {
@@ -55,23 +56,33 @@ public class LevelIntroduction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            state = State.FadeOutIntroduction;
+			{
+				Color color = textMesh.color;
+				color.a = 0;
+				textMesh.color = color;
+			}
+
+			{
+				Color color = textMeshControls.color;
+				color.a = 0;
+				textMeshControls.color = color;
+			}
+
+			{
+				Color color = backgroundBlack.color;
+				color.a = 0;
+				backgroundBlack.color = color;
+			}
+        }
+
         switch(state) {
 
 			case State.Start:
 				state = State.BlackFadeIn;
 			break;
-
-			// case State.BlackFadeIn:
-			// 	{
-			// 		Color color = backgroundBlack.color;
-			// 		color.r += 0.5f * Time.deltaTime;
-			// 		color.g += 0.5f * Time.deltaTime;
-			// 		color.b += 0.5f * Time.deltaTime;
-			// 		backgroundBlack.color = color;
-					
-			// 		if (color.r >= 1) state = State.BackgroundFadeOut;
-			// 	}
-			// break;
 
 			case State.Wait:
 				{
@@ -170,6 +181,7 @@ public class LevelIntroduction : MonoBehaviour
 					
 					if (color.a <= 0) {
 						LevelManager.GetUI()?.SetActive(true);
+						Camera.main.GetComponent<CameraBehaviour>().movementDisabled = false;
 						LevelManager.emit("StartLevel");
 						gameObject.SetActive(false);
 					}

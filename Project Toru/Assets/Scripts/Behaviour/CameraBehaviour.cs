@@ -19,13 +19,21 @@ public class CameraBehaviour : MonoBehaviour
 
     private Vector3 change;
 
+	public bool movementDisabled = false;
+
     void Start()
     {
-        
+     
+        Move();
+        Zoom();   
     }
 
     void Update()
     {
+		if (movementDisabled) {
+			return;
+		}
+
         Move();
         Zoom();
 
