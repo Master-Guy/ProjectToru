@@ -6,6 +6,7 @@ public class Karen : NPC
 {
 	
 	bool surrender = false;
+	bool fleeTrue = false;
 	
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class Karen : NPC
     {
         this.statemachine.ExecuteStateUpdate();
         AdjustOrderLayer();
+		FleeIfPossible();
     }
 
     void OnMouseDown()
@@ -25,7 +27,7 @@ public class Karen : NPC
         Surrender();
     }
 	
-	void Surrender()
+	public void Surrender()
     {
         if (currentRoom.SelectedPlayerInRoom() && !surrender)
         {
@@ -34,6 +36,19 @@ public class Karen : NPC
             this.statemachine.ChangeState(new Surrender(this.animator));
 			
 			LevelManager.emit("KarenSurrendered");
+        }
+    }
+
+	void FleeIfPossible()
+    {
+        if (currentRoom == null) return;
+
+        if (!currentRoom.AnyCharacterInRoom() && surrender)
+        {
+            this.surrender = false;
+            this.statemachine.ChangeState(new Idle(this.animator));
+			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
+            fleeTrue = true;
         }
     }
 }
