@@ -7,6 +7,7 @@ public class Level1 : LevelScript
 	public Van van = null;
 	public Room VaultRoom = null;
 	public Character player = null;
+	public Karen karen = null;
 	
 	protected override void Awake() {
 		
@@ -39,12 +40,8 @@ public class Level1 : LevelScript
 					dialogueManager.QueueDialogue(text);
 				}
 				
-				{
-					DialogueText text = new DialogueText();
-					text.name = "Karen:";
-					text.sentences.Add("The brutality!");
-					
-					dialogueManager.QueueDialogue(text);
+				{	
+					karen?.Surrender();
 				}
 			};
 			
@@ -179,14 +176,7 @@ public class Level1 : LevelScript
 			condition.fullfillHandler = (LevelCondition c) => {
 				
 				LevelManager.Delay(1, () => {
-					DialogueText text = new DialogueText();
-				
-					text.name = "Karen:";
-					text.sentences.Add("Hello! Welcome to Bank of Clyde");
-					text.sentences.Add("You are holding a nice gun");
-					text.sentences.Add("I'm sure you won't use that here because that will kill people");
-					
-					dialogueManager.QueueDialogue(text);
+					karen?.Say("Welcome tot the Bank of Clyde");
 				});
 				
 			};
@@ -200,13 +190,13 @@ public class Level1 : LevelScript
 			
 			condition.fullfillHandler = (LevelCondition c) => {
 				DialogueText text = new DialogueText();
-				
-				text.name = "Karen:";
-				text.sentences.Add("Don't point that on me! Why are you doing that?!?");
-				text.sentences.Add("I only can open a bank account for you... No money here!");
-				text.sentences.Add("But don't look into my desk!!");
-					
-				dialogueManager.QueueDialogue(text);
+
+				if (LevelManager.Condition("PlayerFoundKey").fullfilled) {
+					karen?.Say("The brutality!");
+				}
+				else {
+					karen?.Say("Don't point that on me!!");
+				}
 			};
 			
 			LevelManager.AddCondition(condition);
