@@ -63,11 +63,5 @@ public class LevelScript : MonoBehaviour
         {
             SceneManager.LoadScene("Level 2", LoadSceneMode.Single);
         }
-
-		if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            GameObject.FindGameObjectWithTag("LevelIntroductionScreen")?.SetActive(false);
-			LevelManager.emit("StartLevel");
-        }
 	}
 }
