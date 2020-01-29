@@ -49,5 +49,20 @@ public class LevelScript : MonoBehaviour
         {
             dialogueManager.DebugDisableDialogue = true;
         }
+
+		if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SceneManager.LoadScene("Level 0 - Tutorial", LoadSceneMode.Single);
+        }
+
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
+        }
+
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene("Level 2", LoadSceneMode.Single);
+        }
 	}
 }
