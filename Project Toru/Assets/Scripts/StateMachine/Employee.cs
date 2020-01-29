@@ -48,7 +48,8 @@ public class Employee : NPC
         if (!currentRoom.AnyCharacterInRoom() && surrender)
         {
             this.surrender = false;
-            this.statemachine.ChangeState(new Flee(this.escapePath, this.gameObject, this.animator));
+            this.statemachine.ChangeState(new Idle(this.animator));
+			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
             fleeTrue = true;
         }
     }

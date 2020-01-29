@@ -7,6 +7,8 @@ public class Level1 : LevelScript
 	public Van van = null;
 	public Room VaultRoom = null;
 	public Character player = null;
+	public Karen karen = null;
+	public Employee employeeDownstairs = null;
 	
 	protected override void Awake() {
 		
@@ -31,13 +33,17 @@ public class Level1 : LevelScript
 			condition.name = "PlayerFoundKey";
 			
 			condition.fullfillHandler = (LevelCondition c) => {
-				DialogueText text = new DialogueText();
-				text.name = "You found a key";
-				text.sentences.Add("I am sure this will open many doors");
+				{
+					DialogueText text = new DialogueText();
+					text.name = "You found a key";
+					text.sentences.Add("I am sure this will open many doors");
+					
+					dialogueManager.QueueDialogue(text);
+				}
 				
-				dialogueManager.QueueDialogue(text);
-				
-				Debug.Log("Dialogue");
+				{	
+					karen?.Say("The brutality!");
+				}
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -68,21 +74,6 @@ public class Level1 : LevelScript
 		
 		{
 			LevelCondition condition = new LevelCondition();
-			condition.name = "CameraWasDisabled";
-			
-			condition.fullfillHandler = (LevelCondition c) => {
-				DialogueText text = new DialogueText();
-				text.name = "Camera looks off";
-				text.sentences.Add("It looks like that camera is not working!");
-				
-				dialogueManager.QueueDialogue(text);
-			};
-			
-			LevelManager.AddCondition(condition);
-		}	
-		
-		{
-			LevelCondition condition = new LevelCondition();
 			condition.name = "CameraDetectedPlayer";
 			
 			condition.fullfillHandler = (LevelCondition c) => {
@@ -109,13 +100,24 @@ public class Level1 : LevelScript
 			
 			condition.fullfillHandler = (LevelCondition c) => {
 				
-				player?.gameObject.GetComponent<ExecutePathFinding>()?.StopPathFinding();
+				if (LevelManager.Condition("CamerasDisabled").fullfilled) {
+					
+					DialogueText text = new DialogueText();
+					text.name = "Hmmm!";
+					text.sentences.Add("That camera looks disabled!");
+					
+					dialogueManager.QueueDialogue(text);
+
+				} else {
+					player?.gameObject.GetComponent<ExecutePathFinding>()?.StopPathFinding();
+					
+					DialogueText text = new DialogueText();
+					text.name = "Watch out!";
+					text.sentences.Add("There is a camera in this room!");
+					
+					dialogueManager.QueueDialogue(text);
+				}
 				
-				DialogueText text = new DialogueText();
-				text.name = "Watch out!";
-				text.sentences.Add("There is a camera in this room!");
-				
-				dialogueManager.QueueDialogue(text);
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -164,9 +166,87 @@ public class Level1 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "LetKarenTalk";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				
+				LevelManager.Delay(1, () => {
+					karen?.Say("Welcome tot the Bank of Clyde");
+				});
+				
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "KarenSurrendered";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				
+				karen?.Say("Don't point that on me!!");
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CamerasDisabled";
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerInRoomWithEmployeeAndMoney";
+
+			condition.fullfillHandler = (LevelCondition c) => {
+				if (!LevelManager.Condition("EmployeeKilled").fullfilled) {
+					employeeDownstairs?.Say("What are you doing?");
+				}
+			};
+
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerInRoomWithKarenAndMoney";
+
+			condition.fullfillHandler = (LevelCondition c) => {
+				if (!LevelManager.Condition("KarenKilled").fullfilled) {
+					karen?.Say("Now you have money, wanna date?");
+				}
+			};
+
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "EmployeeKilled";
+
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "KarenKilled";
+
+			LevelManager.AddCondition(condition);
+		}
 		
 		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
-			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
+			if (!LevelManager.Condition("CamerasDisabled").fullfilled)
+				LevelManager.Condition("CameraDetectedPlayer").Fullfill();
+		});
+
+		LevelManager.on("CamerasDisabled", () => {
+			LevelManager.Condition("CamerasDisabled").Fullfill();
 		});
 		
 		LevelManager.on("GuardsAlerted", () => {
@@ -178,9 +258,22 @@ public class Level1 : LevelScript
 		});
 		
 		LevelManager.on("CharacterIsInRoom", (string roomname) => {
-			if (roomname == "L1 Room") {
-				LevelManager.Condition("PlayerEntersCameraRoom").Fullfill();
+			
+			if (roomname == "L0 Room L") {
+				LevelManager.Condition("LetKarenTalk").Fullfill();
+				if (player.inventory.getMoney() != 0) {
+					LevelManager.Condition("PlayerInRoomWithKarenAndMoney").Fullfill();
+				}
 			}
+			else if (roomname == "L1 Room") {
+				LevelManager.Condition("PlayerEntersCameraRoom").Fullfill();
+			} else if (roomname == "L0 Room R"  && player.inventory.getMoney() != 0) {
+				LevelManager.Condition("PlayerInRoomWithEmployeeAndMoney").Fullfill();
+			}
+		});
+		
+		LevelManager.on("KarenSurrendered", () => {
+			LevelManager.Condition("KarenSurrendered").Fullfill();
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", (string roomname) => {
@@ -212,6 +305,23 @@ public class Level1 : LevelScript
 			}
 		});
 		
+		LevelManager.on("CharacterGotMoneyFromVault", () => {
+			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
+		});
+
+		LevelManager.on("EmployeeKilled", () => {
+			LevelManager.Condition("EmployeeKilled").Fullfill();
+		});
+
+		LevelManager.on("NPCKilled", (string name) => {
+			if (name == "Karen") {
+				LevelManager.Condition("KarenKilled").Fullfill();
+			} else if (name == "Employee 1") {
+				LevelManager.Condition("EmployeeKilled").Fullfill();
+			}
+		});
+
+
 		LevelManager.on("AllCharactersInVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();

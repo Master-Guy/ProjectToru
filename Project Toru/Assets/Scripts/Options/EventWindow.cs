@@ -122,7 +122,6 @@ namespace Assets.Scripts.Options
 		}
 		public void ChangeLinkColor(int LinkIndex, Color colorForLinkAndVert)
 		{
-			Debug.Log(LinkIndex);
 			var linkInfo = TMP.textInfo.linkInfo[LinkIndex];
 
 			for (int i = 0; i < linkInfo.linkTextLength; i++)

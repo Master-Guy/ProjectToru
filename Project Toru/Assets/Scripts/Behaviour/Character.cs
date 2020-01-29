@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 
 	public float MaxWeight;
 
-	public GameObject firePoint;
+	//public GameObject firePoint;
 	public Weapon weapon;
 	bool weaponKeyRelease = true;
 
@@ -47,6 +47,8 @@ public class Character : MonoBehaviour
 		if (weapon != null) {
 			animator.SetBool("isHoldingGun", true);
 		}
+		
+		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
 
 	// Update is called once per frame
@@ -112,31 +114,35 @@ public class Character : MonoBehaviour
 	{
 		GameObject firePoint = weapon.gameObject;
 
-		if (change.x > 0)
+		if (animator.GetFloat("moveX") > 0.1)
 		{
 			firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
 			firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 		}
 
-		if (change.x < 0)
+		if (animator.GetFloat("moveX") < -0.1)
 		{
 			firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-			firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+			firePoint.transform.position = transform.position + new Vector3(-.3f, -.4f);
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 		}
 
-		if (change.y > 0)
-		{
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		}
+		// if (animator.GetFloat("moveY") > 0)
+		// {
+		// 	firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
+		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
+		// 	Debug.Log("3");
+		// }
 
-		if (change.y < 0)
-		{
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		}
+		// if (animator.GetFloat("moveY") < 0)
+		// {	
+		// 	firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+		// 	Debug.Log("4");
+		// }
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

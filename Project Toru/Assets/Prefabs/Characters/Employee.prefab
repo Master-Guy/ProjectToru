@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bag: []
   TextBox: {fileID: 8285807996838187758}
-  escapePath: []
 --- !u!95 &6188662567543495645
 Animator:
   serializedVersion: 3
@@ -208,9 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85f12e8a350a140a227443b2f66d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerOnTheStairs: 0
-  targetVector: {x: 0, y: 0, z: 0}
-  test: 1
+  currentRoom: {fileID: 0}
 --- !u!1 &8285807996838187758
 GameObject:
   m_ObjectHideFlags: 0

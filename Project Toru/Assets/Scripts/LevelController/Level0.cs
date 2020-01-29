@@ -89,6 +89,7 @@ public class Level0 : LevelScript
 				text.name = "Locked";
 				text.sentences.Add("This door seems locked...");
 				text.sentences.Add("Maybe I can find something to open it");
+				text.sentences.Add("Walk into something to see if you can interact with it");
 				
 				dialogueManager.QueueDialogue(text);
 			};
@@ -355,6 +356,8 @@ public class Level0 : LevelScript
 				text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
 				text.sentences.Add("Use [scroll] to zoom in and out");
 			}
+			
+			text.sentences.Add("Use [Q] focus on character");
 				
 			dialogueManager.QueueDialogue(text);
 		});
