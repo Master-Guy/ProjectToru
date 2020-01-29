@@ -31,14 +31,14 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public bool playerOnTheStairs = false;
 
-	[NonSerialized]
+	//[NonSerialized]
 	public Room currentRoom;
 
 	public void Awake()
 	{
 		path = new List<Vector3>();
 
-		currentRoom = GetEntranceRoom();
+		currentRoom = GetEntranceOutsideRoom();
 	}
 
 	public void Start()
@@ -192,6 +192,12 @@ public abstract class ExecutePathFinding : MonoBehaviour
 		current = 0;
 		path.Clear();
 
+		if(currentRoom.name.ToLower().Contains("entrance") && positionRoom == null)
+		{
+			path.Add(new Vector2(pos.x, 1));
+			return;
+		}
+
 		if (positionRoom != null)
 		{
 			pos = new Vector3(pos.x, positionRoom.transform.position.y + 1, -1);
@@ -223,7 +229,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			try
 			{
 				if (entranceRoom != null)
-				{
+				{ 
 					path = pf.CalculateTransforms(entranceRoom, currentRoom);
 					path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
 				}
@@ -233,6 +239,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				//Outside to outside code
 				path.Add(new Vector3(pos.x, entranceRoom.transform.position.y + 1, -1));
 			}
+		}
+
+		if (currentRoom.name.ToLower().Contains("entrance"))
+		{
+			path.Insert(0, new Vector2(transform.position.x, 1));
 		}
 	}
 
@@ -259,6 +270,20 @@ public abstract class ExecutePathFinding : MonoBehaviour
 			Room r = room.GetComponent<Room>();
 
 			if (r.name.ToLower().Contains("entrance") && transform.position.y >= room.transform.position.y && transform.position.y <= (transform.position.y + r.GetSize().y))
+			{
+				return r;
+			}
+		}
+		return null;
+	}
+
+	public Room GetEntranceOutsideRoom()
+	{
+		foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+		{
+			Room r = room.GetComponent<Room>();
+
+			if (r.name.ToLower().Contains("entrance"))
 			{
 				return r;
 			}
