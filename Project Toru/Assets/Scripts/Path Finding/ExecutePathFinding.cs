@@ -38,7 +38,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	{
 		path = new List<Vector3>();
 
-		currentRoom = GetEntranceRoom();
+		currentRoom = GetEntranceOutsideRoom();
 	}
 
 	public void Start()
