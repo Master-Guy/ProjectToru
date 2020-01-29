@@ -13,7 +13,7 @@ public class LevelIntroduction : MonoBehaviour
 
 	public List<string> text = new List<string>();
 
-	State state = State.BlackFadeIn;
+	State state = State.Wait;
 
 	float WaitTimer = 1;
 	int currentLine = 0;
@@ -21,11 +21,19 @@ public class LevelIntroduction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		// No text means no usage
+		if (text.Count == 0) gameObject.SetActive(false);
+
+		// Set background visable
 		backgroundBlack.gameObject.SetActive(true);
 		background.gameObject.SetActive(true);
 
+		// Set UI to correct layer
 		textMesh.GetComponent<Renderer>().sortingLayerName = "UI";
 		textMeshControls.GetComponent<Renderer>().sortingLayerName = "UI";
+
+		// Disable UI (will overlab otherwise)
+		LevelManager.GetUI()?.SetActive(false);
     }
 
 	enum State {
@@ -53,15 +61,23 @@ public class LevelIntroduction : MonoBehaviour
 				state = State.BlackFadeIn;
 			break;
 
-			case State.BlackFadeIn:
-				{
-					Color color = backgroundBlack.color;
-					color.r += 0.5f * Time.deltaTime;
-					color.g += 0.5f * Time.deltaTime;
-					color.b += 0.5f * Time.deltaTime;
-					backgroundBlack.color = color;
+			// case State.BlackFadeIn:
+			// 	{
+			// 		Color color = backgroundBlack.color;
+			// 		color.r += 0.5f * Time.deltaTime;
+			// 		color.g += 0.5f * Time.deltaTime;
+			// 		color.b += 0.5f * Time.deltaTime;
+			// 		backgroundBlack.color = color;
 					
-					if (color.r >= 1) state = State.BackgroundFadeOut;
+			// 		if (color.r >= 1) state = State.BackgroundFadeOut;
+			// 	}
+			// break;
+
+			case State.Wait:
+				{
+					WaitTimer -= Time.deltaTime;
+					
+					if (WaitTimer <= 0) state = State.BackgroundFadeOut;
 				}
 			break;
 
@@ -99,14 +115,6 @@ public class LevelIntroduction : MonoBehaviour
 					textMeshControls.color = color;
 					
 					if (color.a >= 1) state = State.WaitForInput;
-				}
-			break;
-
-			case State.Wait:
-				{
-					WaitTimer -= Time.deltaTime;
-					
-					if (WaitTimer <= 0) state = State.None;
 				}
 			break;
 
@@ -160,7 +168,11 @@ public class LevelIntroduction : MonoBehaviour
 					color.a -= 0.3f * Time.deltaTime;
 					backgroundBlack.color = color;
 					
-					if (color.a <= 0) gameObject.SetActive(false);
+					if (color.a <= 0) {
+						LevelManager.GetUI()?.SetActive(true);
+						LevelManager.emit("StartLevel");
+						gameObject.SetActive(false);
+					}
 				}
 			}
 			break;

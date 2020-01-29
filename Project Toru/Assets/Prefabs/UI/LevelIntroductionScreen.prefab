@@ -177,7 +177,7 @@ TextMesh:
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 100
+  m_FontSize: 80
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 383aaba5a1330c6458def001e0813910, type: 3}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 7709109617974608070}
   m_Layer: 0
   m_Name: LevelIntroductionScreen
-  m_TagString: Untagged
+  m_TagString: LevelIntroductionScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,10 +235,7 @@ MonoBehaviour:
   background: {fileID: 7709109618138689531}
   textMesh: {fileID: 7709109617527568753}
   textMeshControls: {fileID: 7709109616908039714}
-  text:
-  - Welcome to Project Toru
-  - Lorum Ipsum
-  - Dolor Sit Amet
+  text: []
 --- !u!1 &7709109618138689528
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +306,7 @@ SpriteRenderer:
   m_SortingLayer: 8
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f5c9028879c484e48b6d6cee1a2ad065, type: 3}
-  m_Color: {r: 0.75294125, g: 0.75294125, b: 0.75294125, a: 0.35686275}
+  m_Color: {r: 0.7921569, g: 0.7921569, b: 0.7921569, a: 0.35686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -389,7 +386,7 @@ SpriteRenderer:
   m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ede644bfbf9a8487d919d5d23349051a, type: 3}
-  m_Color: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.65882355}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
