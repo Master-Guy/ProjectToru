@@ -183,7 +183,7 @@ public class LevelManager : MonoBehaviour
 	
 	public static void emit(string eventString)
 	{
-		Debug.Log("Emitting " + eventString);
+		//Debug.Log("Emitting " + eventString);
 		if (events.ContainsKey(eventString)) {
 			events[eventString]?.Invoke();
 			return;
@@ -192,7 +192,7 @@ public class LevelManager : MonoBehaviour
 	
 	public static void emit(string eventString, string value)
 	{
-		Debug.Log("Emitting " + eventString + " With STRING value " + value);
+		//Debug.Log("Emitting " + eventString + " With STRING value " + value);
 		if (events_string.ContainsKey(eventString)) {
 			events_string[eventString]?.Invoke(value);
 			return;
