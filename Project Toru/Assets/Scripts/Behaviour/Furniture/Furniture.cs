@@ -51,6 +51,13 @@ public abstract class Furniture : MonoBehaviour
 				return;
 			}
 		}
+
+		Tint.Apply(this.gameObject);
+	}
+
+	public void OnMouseExit()
+	{
+		Tint.Reset(this.gameObject);
 	}
 
 	private void setFurnitureTarget()
