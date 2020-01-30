@@ -24305,6 +24305,7 @@ MonoBehaviour:
   maxZoomDistance: 10
   topLeft: {x: -5, y: 5}
   bottomRight: {x: 20, y: 0}
+  movementDisabled: 0
 --- !u!81 &1555143276
 AudioListener:
   m_ObjectHideFlags: 0
@@ -25667,7 +25668,7 @@ PrefabInstance:
     - target: {fileID: 7709109618389485643, guid: a6dd2c11edd5e41dcb92605c0151eb59,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7709109618389485642, guid: a6dd2c11edd5e41dcb92605c0151eb59,
         type: 3}
@@ -25682,7 +25683,7 @@ PrefabInstance:
     - target: {fileID: 7709109618138689528, guid: a6dd2c11edd5e41dcb92605c0151eb59,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7709109618138689531, guid: a6dd2c11edd5e41dcb92605c0151eb59,
         type: 3}
