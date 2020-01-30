@@ -86,24 +86,14 @@ namespace Assets.Scripts.Options
 
         public string GetOptionText()
         {
-            string temp = Actors[0].name;
-            for (int i = 1; i < Actors.Count - 1; i++)
-            {
-                temp += ", " + Actors[i].name;
-            }
-            if (Actors.Count > 1)
-                temp += " and " + Actors[Actors.Count - 1].name;
-            temp += " " + Description + System.Environment.NewLine;
+            string temp = "<b>";
+            temp += " " + Description + "</b>" + System.Environment.NewLine;
 
             BuildOptionShortList();
 
             foreach (var option in OptionShortList)
             {
-                temp += "<link>[";
-                foreach (Character c in Actors)
-                    if (option.Prerequisite == null || c.skills.Contains(option.Prerequisite.Value))
-                        temp += c.name + " ";
-                temp += "] " + option.getInfo() + "</link>" + System.Environment.NewLine;
+                temp += "<link>" + option.getInfo() + "</link>" + System.Environment.NewLine;
             }
             return temp;
         }
