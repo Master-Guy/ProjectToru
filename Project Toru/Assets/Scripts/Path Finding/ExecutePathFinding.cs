@@ -34,6 +34,8 @@ public abstract class ExecutePathFinding : MonoBehaviour
 	[NonSerialized]
 	public Room currentRoom;
 
+	private Weapon weapon;
+
 	public void Awake()
 	{
 		path = new List<Vector3>();
@@ -274,7 +276,14 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 		if (tag.Contains("Player"))
 		{
-			transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+			weapon = GetComponent<Character>().weapon;
+			if(weapon != null)
+			{
+				if (weapon.weaponOut)
+				{
+					weapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				}
+			}
 		}
 
 		//Go to next transform in pathfinding
@@ -295,7 +304,13 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 				if (tag.Contains("Player"))
 				{
-					transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+					if(weapon != null)
+					{
+						if (weapon.weaponOut)
+						{
+							weapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+						}
+					}
 				}
 			}
 		}
