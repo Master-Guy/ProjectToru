@@ -6,7 +6,6 @@ public class Combat : IState
 {
     private Weapon weapon;
     private GameObject gameObject;
-    private CharacterStats stats;
     private GameObject firePoint;
     private Animator animator;
     private GameObject target;
@@ -18,7 +17,6 @@ public class Combat : IState
     {
         this.weapon = weapon;
         this.gameObject = gameObject;
-        this.stats = stats;
         this.firePoint = firePoint;
         this.animator = animator;
 		this.target = target;
@@ -33,11 +31,11 @@ public class Combat : IState
     {	
 		timer -= Time.deltaTime;
 		if (timer <= 0) {
+			Move();
 			timer = 0.5f;
-			moving = Move();
 		}
 
-		if (!moving) {
+		if (!animator.GetBool("moving")) {
 			CheckTargetDirection();
 			AdjustFirePoint();
 			weapon.Shoot();
@@ -50,7 +48,7 @@ public class Combat : IState
 
     }
 
-	bool Move() {
+	void Move() {
 
 		Vector3 distance = target.transform.position - gameObject.transform.position;
 		
@@ -60,11 +58,7 @@ public class Combat : IState
 			else				target.x += 2;
 
 			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(target);
-
-			return false;
 		}
-
-		return true;
 	}
 
     void CheckTargetDirection()
