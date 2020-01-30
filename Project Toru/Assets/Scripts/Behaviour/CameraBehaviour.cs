@@ -6,7 +6,7 @@ public class CameraBehaviour : MonoBehaviour
 {
     public Transform target = null;
 
-    public float smoothing;
+    public float smoothing = 0.04f;
 
     public float zoomDistance;
     public float minZoomDistance = 6;
