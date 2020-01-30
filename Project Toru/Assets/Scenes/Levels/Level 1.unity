@@ -1444,6 +1444,26 @@ PrefabInstance:
       propertyPath: Description
       value: Disable Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 4129982960560294847, guid: 287a4ef37fc4f4e87b83d02c458bd685,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129982960560294847, guid: 287a4ef37fc4f4e87b83d02c458bd685,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129982960560294847, guid: 287a4ef37fc4f4e87b83d02c458bd685,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129982960560294847, guid: 287a4ef37fc4f4e87b83d02c458bd685,
+        type: 3}
+      propertyPath: m_AutoTiling
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4129982960560294841, guid: 287a4ef37fc4f4e87b83d02c458bd685, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 287a4ef37fc4f4e87b83d02c458bd685, type: 3}
