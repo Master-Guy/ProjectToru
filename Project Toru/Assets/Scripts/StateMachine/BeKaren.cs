@@ -1,39 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class Combat : IState
+public class BeKaren : IState
 {
-    private Weapon weapon;
-    private GameObject gameObject;
-    private GameObject firePoint;
     private Animator animator;
-    private GameObject target;
+	private SpriteSelector spriteSelector;
+	private GameObject target;
+	private GameObject gameObject;
+	private GameObject firePoint;
 	private NPC npc;
+	private Weapon weapon;
 
 	float timer = 0.5f;
+	float textTimer = 5;
 
-    public Combat(NPC npc, Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
+	List<string> lines = new List<string>();
+	int currentLine = 0;
+
+    public BeKaren(Karen npc, Character target, GameObject firepoint, Weapon weapon)
     {
-        this.weapon = weapon;
-        this.gameObject = gameObject;
-        this.firePoint = firePoint;
-        this.animator = animator;
-		this.target = target;
+        this.animator = npc.animator;
+		this.spriteSelector = npc.GetComponent<SpriteSelector>();
+		this.gameObject = npc.gameObject;
+		this.firePoint = firepoint;
 		this.npc = npc;
+		this.weapon = weapon;
+		this.target = target.gameObject;
+
+		lines.Add("I HATE YOU");
+		lines.Add("I HAVE NO LIFE THANKS TO YOU");
+		lines.Add("BLA BLA BLA BLA BLA");
+		lines.Add("YOU ARE GOING TO DIE");
+		lines.Add("WHY WON'T YOU DIE??");
+		lines.Add("AAARRHHGG");
     }
 
     public void Enter()
     {
-
+		spriteSelector.SpriteSheetName = "karen_red";
     }
 
     public void Execute()
-    {	
+    {
 		timer -= Time.deltaTime;
+		textTimer -= Time.deltaTime;
 		if (timer <= 0) {
 			Move();
 			timer = 0.5f;
+		}
+
+		if (textTimer <= 0) {
+			if (currentLine < lines.Count) {
+				npc.Say(lines[currentLine]);
+				currentLine++;
+				textTimer = 5;
+			}
 		}
 
 		if (!animator.GetBool("moving")) {
@@ -45,12 +66,11 @@ public class Combat : IState
 		if (target.activeSelf == false) {
 			npc.StopShooting();
 		}
-        
     }
 
     public void Exit()
     {
-
+		spriteSelector.SpriteSheetName = "karen";
     }
 
 	void Move() {

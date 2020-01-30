@@ -62,6 +62,7 @@ public class CameraBehaviour : MonoBehaviour
         }
     }
 
+	bool PlayerDidUseCameraControls = false;
     void Move()
     {
         change = Vector3.zero;
@@ -70,7 +71,10 @@ public class CameraBehaviour : MonoBehaviour
 
         if (change != Vector3.zero)
         {
-			LevelManager.emit("PlayerDidUseCameraControls");
+			if (!PlayerDidUseCameraControls) {
+				LevelManager.emit("PlayerDidUseCameraControls");
+				PlayerDidUseCameraControls = true;
+			}
 			
             if (!freeLook)
             {

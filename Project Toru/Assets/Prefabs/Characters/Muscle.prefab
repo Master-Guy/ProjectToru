@@ -330,9 +330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  change: {x: 0, y: 0, z: 0}
   currentRoom: {fileID: 0}
-  MaxWeight: 0
+  MaxWeight: 40
   textBox: {fileID: 1595176097772404657}
   weapon: {fileID: 0}
   skills: 

@@ -313,8 +313,9 @@ public class Level1 : LevelScript
 			LevelManager.Condition("CharacterInRoomWithGuard").Fullfill();
 		});
 		
-		LevelManager.on("KarenSurrendered", () => {
-			LevelManager.Condition("KarenSurrendered").Fullfill();
+		LevelManager.on("Surrendered", (GameObject gameObject) => {
+			if (gameObject.name == "Karen")
+				LevelManager.Condition("KarenSurrendered").Fullfill();
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", (string roomname) => {

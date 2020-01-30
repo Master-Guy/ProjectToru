@@ -54,7 +54,7 @@ public class Room : MonoBehaviour//, IPointerClickHandler
         // Hide this room behind a fog of war.
         if (!discovered)
         {
-            ShowFogOfWar();
+         	ShowFogOfWar();
         }
 
         // Check if roomsize is set

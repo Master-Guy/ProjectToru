@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 	[NonSerialized]
 	public Inventory inventory;
 	
-	public GameObject currentRoom;
+	public Room currentRoom;
 
 	public static Character selectedCharacter;
 
@@ -42,6 +42,9 @@ public class Character : MonoBehaviour
 	public List<Skills> skills = new List<Skills>();
 
 	private bool outline = false;
+
+	[NonSerialized]
+	public bool surrendering = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -72,8 +75,10 @@ public class Character : MonoBehaviour
 			Outline.RemoveOutline(this.gameObject);
 			outline = false;
 		}
+		
+		if (surrendering) return;
 
-		if (this.Equals(selectedCharacter))
+		if (this.Equals(selectedCharacter) && !surrendering)
 		{
 			if(weapon != null) {
 				if (Input.GetKey(KeyCode.F))
@@ -151,7 +156,7 @@ public class Character : MonoBehaviour
 	{
 		if (other.CompareTag("Room"))
 		{
-			currentRoom = other.gameObject;
+			currentRoom = other.gameObject.GetComponent<Room>();
 			LevelManager.emit("CharacterIsInRoom", this.gameObject);
 		}
 	}
@@ -166,5 +171,20 @@ public class Character : MonoBehaviour
 	private void disableTextBox()
     {
         textBox.SetActive(false);
-    }
+	}
+
+	public void Surrender() {
+		weapon.HideGun();
+		surrendering = true;
+		animator.SetBool("Surrendering", true);
+		animator.SetFloat("moveX", 0);
+		gameObject.GetComponent<ExecutePathFindingPlayable>().StopPathFinding();
+		gameObject.GetComponent<ExecutePathFindingPlayable>().disabled = true;
+	}
+
+	public void StopSurrender() {
+		surrendering = false;
+		animator.SetBool("Surrendering", false);
+		gameObject.GetComponent<ExecutePathFindingPlayable>().disabled = false;
+	}
 }

@@ -18,7 +18,7 @@ namespace Assets.Scripts.Options
         public override string Activate(Character c)
         {
             c.inventory.addItem(Key.GetComponent<Key>());
-			LevelManager.emit("PlayerFoundKey");
+			LevelManager.emit("PlayerFoundKey", c.gameObject);
             return null;
         }
     }

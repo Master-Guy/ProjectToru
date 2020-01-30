@@ -24,12 +24,18 @@ public abstract class NPC : MonoBehaviour
     [NonSerialized]
     public Animator animator = null;
 
+	[NonSerialized]
+    public ExecutePathFindingNPC pathfinder = null;
+
     [NonSerialized]
     public CharacterStats stats;
 
 	protected Weapon weapon;
 	protected bool showWeapon = false;
 	protected GameObject firePoint;
+
+	protected bool surrender = false;
+	protected bool fleeTrue = false;
 
 	Vector3 currentpos;
     Vector3 lastpos;
@@ -41,6 +47,7 @@ public abstract class NPC : MonoBehaviour
         stats = GetComponent<CharacterStats>();
 		animator = GetComponent<Animator>();
         weapon = GetComponentInChildren<Weapon>();
+		pathfinder = GetComponent<ExecutePathFindingNPC>();
 
 		if(weapon != null)
         {
@@ -133,10 +140,16 @@ public abstract class NPC : MonoBehaviour
         return false;
     }
 
-	public void ShootAt(Character character) {
+	public virtual void ShootAt(Character character) {
 		
 		showWeapon = true;
 		this.statemachine.ChangeState(new Combat(this, weapon, gameObject, firePoint, animator, character.gameObject));
+	}
+
+	public virtual void StopShooting() {
+		this.statemachine.ChangeState(new Idle(animator));
+		weapon.HideGun();
+		showWeapon = false;
 	}
 
 	protected virtual void FlipFirePoint()
@@ -161,6 +174,37 @@ public abstract class NPC : MonoBehaviour
         else
         {
             weapon.RevealGun();
+        }
+    }
+
+	protected virtual void OnMouseDown() {
+		Character.selectedCharacter.weapon.RevealGun();
+		Surrender();
+	}
+
+	public virtual void Surrender()
+    {
+        if (currentRoom.SelectedPlayerInRoom() && !surrender)
+        {
+            this.surrender = true;
+			animator.SetFloat("moveX", 0);
+            this.statemachine.ChangeState(new Surrender(this.animator));
+			
+			LevelManager.emit("Surrendered", gameObject);
+        }
+    }
+
+
+	protected virtual void FleeIfPossible()
+    {
+        if (currentRoom == null) return;
+
+        if (!currentRoom.AnyCharacterInRoom() && surrender)
+        {
+            this.surrender = false;
+            this.statemachine.ChangeState(new Idle(this.animator));
+			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
+            fleeTrue = true;
         }
     }
 }

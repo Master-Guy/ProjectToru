@@ -37,7 +37,7 @@ public class Key : Item
 	{
 		if (collision.CompareTag("Player") && collision.isTrigger)
 		{
-			LevelManager.emit("PlayerFoundKey");
+			LevelManager.emit("PlayerFoundKey", collision.GetComponent<Character>().gameObject);
 			collision.GetComponent<Character>().inventory.addItem(this);
 			gameObject.SetActive(false);
 		}

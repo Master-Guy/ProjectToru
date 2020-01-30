@@ -49,6 +49,7 @@ public class Weapon : MonoBehaviour
 
     public void RevealGun()
     {
+		if (weaponOut) return;
         spriteRenderer.enabled = true;
         weaponOut = true;
         weaponHolder.GetComponent<Animator>().SetBool("isHoldingGun", true);
@@ -57,6 +58,7 @@ public class Weapon : MonoBehaviour
 
     public void HideGun()
     {
+		if (!weaponOut) return;
         spriteRenderer.enabled = false;
         weaponOut = false;
         weaponHolder.GetComponent<Animator>().SetBool("isHoldingGun", false);

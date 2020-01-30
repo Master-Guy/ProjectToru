@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Karen : NPC
 {
-	
-	bool surrender = false;
-	bool fleeTrue = false;
-	
     // Start is called before the first frame update
     protected override void Start()
     {
 		base.Start();
-        animator.SetFloat("moveX", -1);
     }
 	
 	protected override void Update()
@@ -22,33 +17,14 @@ public class Karen : NPC
 		FleeIfPossible();
     }
 
-    void OnMouseDown()
-    {
-        Surrender();
-    }
-	
-	public void Surrender()
-    {
-        if (currentRoom.SelectedPlayerInRoom() && !surrender)
-        {
-            this.surrender = true;
-			animator.SetFloat("moveX", 0);
-            this.statemachine.ChangeState(new Surrender(this.animator));
-			
-			LevelManager.emit("KarenSurrendered");
-        }
-    }
+	public override void Surrender() {
+		base.Surrender();
 
-	void FleeIfPossible()
-    {
-        if (currentRoom == null) return;
+		Say("Don't shoot!");
+	}
 
-        if (!currentRoom.AnyCharacterInRoom() && surrender)
-        {
-            this.surrender = false;
-            this.statemachine.ChangeState(new Idle(this.animator));
-			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
-            fleeTrue = true;
-        }
-    }
+	public void BeKaren(Character character) {
+		statemachine.ChangeState(new BeKaren(this, character, firePoint, weapon));
+	}
+
 }
