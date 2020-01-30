@@ -254,7 +254,10 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterHasBeenMoved").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (string value) => {
+		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
+
+			Character character = gameObject.GetComponent<Character>();
+			string value = character.currentRoom.name;
 			
 			if (value == "L0 Room L") {
 				LevelManager.Condition("CharacterIsInRoomL0_L").Fullfill();

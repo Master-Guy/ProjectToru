@@ -8,17 +8,17 @@ public class Employee : NPC
     private bool surrender = false;
     private bool fleeTrue = false;
 
-    public void Start()
+    protected override void Start()
     {
-        this.startingPosition = transform.position;
-        this.animator = GetComponent<Animator>();
+		base.Update();
+
         PingPong();
     }
 
-    public void Update()
+    protected override void Update()
     {
-        this.statemachine.ExecuteStateUpdate();
-        AdjustOrderLayer();
+		base.Update();
+
         FleeIfPossible();
         showCountdown();
     }

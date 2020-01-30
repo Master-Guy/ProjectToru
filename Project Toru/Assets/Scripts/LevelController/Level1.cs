@@ -103,11 +103,7 @@ public class Level1 : LevelScript
 				
 				if (LevelManager.Condition("CamerasDisabled").fullfilled) {
 					
-					DialogueText text = new DialogueText();
-					text.name = "Hmmm!";
-					text.sentences.Add("That camera looks disabled!");
-					
-					dialogueManager.QueueDialogue(text);
+					player.Say("That camera looks disabled");
 
 				} else {
 					player?.gameObject.GetComponent<ExecutePathFinding>()?.StopPathFinding();
@@ -292,8 +288,11 @@ public class Level1 : LevelScript
 			LevelManager.Condition("PlayerFoundKey").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (string roomname) => {
-			
+		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
+
+			Character character = gameObject.GetComponent<Character>();
+			string roomname = character.currentRoom.name;
+
 			if (roomname == "L0 Room L") {
 				LevelManager.Condition("LetKarenTalk").Fullfill();
 				if (player.inventory.getMoney() != 0) {

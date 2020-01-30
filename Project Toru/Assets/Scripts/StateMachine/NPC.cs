@@ -27,6 +27,45 @@ public abstract class NPC : MonoBehaviour
     [NonSerialized]
     public CharacterStats stats;
 
+	protected Weapon weapon;
+	protected bool showWeapon = false;
+	protected GameObject firePoint;
+
+	Vector3 currentpos;
+    Vector3 lastpos;
+    Vector3 change;
+
+	protected virtual void Awake() {
+
+		startingPosition = transform.position;;
+        stats = GetComponent<CharacterStats>();
+		animator = GetComponent<Animator>();
+        weapon = GetComponentInChildren<Weapon>();
+
+		if(weapon != null)
+        {
+            firePoint = weapon.gameObject;
+			weapon.weaponHolder = gameObject;
+        }
+	}
+
+	protected virtual void Start() {
+
+	}
+
+	protected virtual void Update() {
+		this.statemachine.ExecuteStateUpdate();
+		AdjustOrderLayer();
+
+		lastpos = currentpos;
+        currentpos = transform.position;
+        change = currentpos - lastpos;
+
+		if(change != Vector3.zero && showWeapon)
+        {
+            FlipFirePoint();
+        }
+	}
 
     public void dropBag()
     {
@@ -92,5 +131,36 @@ public abstract class NPC : MonoBehaviour
             }
         }
         return false;
+    }
+
+	public void ShootAt(Character character) {
+		
+		showWeapon = true;
+		this.statemachine.ChangeState(new Combat(this, weapon, gameObject, firePoint, animator, character.gameObject));
+	}
+
+	protected virtual void FlipFirePoint()
+    {
+        if (animator.GetFloat("moveX") > 0)
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
+            firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+        else
+        {
+            firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
+            firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
+            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
+        }
+
+        if (animator.GetFloat("moveY") > 0.1)
+        {
+            weapon.HideGun();
+        }
+        else
+        {
+            weapon.RevealGun();
+        }
     }
 }

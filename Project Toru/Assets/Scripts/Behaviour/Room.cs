@@ -185,6 +185,17 @@ public class Room : MonoBehaviour//, IPointerClickHandler
 		}
 	}
 
+	
+	public Guard GetGuardFromRoom()
+	{
+		foreach (var npc in npcsInRoom) {
+			Guard guard = npc.GetComponent<Guard>();
+			if (guard != null) return guard;
+		}
+
+		return null;
+	}
+
 	public HashSet<GameObject> getNPCsInRoom()
 	{
 		return npcsInRoom;

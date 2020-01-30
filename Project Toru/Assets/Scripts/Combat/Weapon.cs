@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
 {
 	public GameObject bullet;
 
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
 
     [NonSerialized]
     public GameObject weaponHolder;
@@ -21,8 +21,8 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         bullet.GetComponent<Bullet>().weapon = this;
-        renderer = GetComponent<SpriteRenderer>();
-        renderer.enabled = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
     }
 
     private void Update()
@@ -49,14 +49,15 @@ public class Weapon : MonoBehaviour
 
     public void RevealGun()
     {
-        renderer.enabled = true;
+        spriteRenderer.enabled = true;
         weaponOut = true;
         weaponHolder.GetComponent<Animator>().SetBool("isHoldingGun", true);
+		LevelManager.emit("IsHoldingGun", weaponHolder);
     }
 
     public void HideGun()
     {
-        renderer.enabled = false;
+        spriteRenderer.enabled = false;
         weaponOut = false;
         weaponHolder.GetComponent<Animator>().SetBool("isHoldingGun", false);
     }

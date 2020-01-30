@@ -9,16 +9,16 @@ public class Karen : NPC
 	bool fleeTrue = false;
 	
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-		animator = GetComponent<Animator>();
+		base.Start();
         animator.SetFloat("moveX", -1);
     }
 	
-	public void Update()
+	protected override void Update()
     {
-        this.statemachine.ExecuteStateUpdate();
-        AdjustOrderLayer();
+		base.Update();
+
 		FleeIfPossible();
     }
 

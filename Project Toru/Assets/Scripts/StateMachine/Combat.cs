@@ -9,17 +9,19 @@ public class Combat : IState
     private GameObject firePoint;
     private Animator animator;
     private GameObject target;
+	private NPC npc;
 
 	float timer = 0.5f;
 	bool moving = false;
 
-    public Combat(Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
+    public Combat(NPC npc, Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
     {
         this.weapon = weapon;
         this.gameObject = gameObject;
         this.firePoint = firePoint;
         this.animator = animator;
 		this.target = target;
+		this.npc = npc;
     }
 
     public void Enter()
@@ -39,6 +41,10 @@ public class Combat : IState
 			CheckTargetDirection();
 			AdjustFirePoint();
 			weapon.Shoot();
+		}
+
+		if (target.activeSelf == false) {
+			
 		}
         
     }
