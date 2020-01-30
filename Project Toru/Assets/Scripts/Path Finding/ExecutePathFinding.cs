@@ -284,6 +284,8 @@ public abstract class ExecutePathFinding : MonoBehaviour
 					weapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 				}
 			}
+
+			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		}
 
 		//Go to next transform in pathfinding
@@ -311,6 +313,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 							weapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
 						}
 					}
+				}
+
+				if(GetComponent<Character>().Equals(Character.selectedCharacter))
+				{
+					transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
 				}
 			}
 		}

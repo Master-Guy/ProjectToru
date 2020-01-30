@@ -24,7 +24,12 @@ public class CharacterSlot : MonoBehaviour
 
     public void SelectCharacter()
     {
-        Character.selectedCharacter = character;
+		if(Character.selectedCharacter != null)
+		{
+			Character.selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		Character.selectedCharacter = character;
         Camera.main.GetComponent<CameraBehaviour>().target = Character.selectedCharacter.transform;
-    }
+		Character.selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+	}
 }
