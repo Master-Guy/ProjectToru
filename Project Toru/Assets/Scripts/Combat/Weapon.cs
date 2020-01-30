@@ -44,7 +44,6 @@ public class Weapon : MonoBehaviour
         {
             Timer = 60 / RoundsPerMinute;
             Instantiate(bullet, transform.position, transform.rotation);
-			Debug.Log("Sjoot");
         }
 	}
 
