@@ -44,11 +44,13 @@ public class LevelIntroduction : MonoBehaviour
 		BackgroundFadeOut,
 		FadeInText,
 		SelectNextLine,
+		ExtremeText,
 		FadeOutText,
 		Wait,
 		FadeOutIntroduction,
 		WaitForInput,
 		FadeInControls
+		
 	};
 
 	
@@ -131,15 +133,7 @@ public class LevelIntroduction : MonoBehaviour
 
 			case State.SelectNextLine:
 				{
-					if (currentLine >= text.Count) {
-						state = State.FadeOutIntroduction;
-						break;
-					}
-
-					textMesh.text = text[currentLine];
-					currentLine++;
-
-					state = State.FadeInText;
+					SelectNextLine();
 				}
 			break;
 
@@ -149,16 +143,35 @@ public class LevelIntroduction : MonoBehaviour
 					color.a -= 1f * Time.deltaTime;
 					textMesh.color = color;
 					
-					if (color.a <= 0) state = State.SelectNextLine;
+					if (color.a <= 0) {
+						if (textMesh.fontSize > 80) {
+							textMesh.fontSize = 80;
+							textMesh.transform.Rotate(new Vector3(0, 0, -10));
+						}
+						state = State.SelectNextLine;
+					}
 				}
 			break;
 
 			case State.WaitForInput:
 				{
 					if (Input.GetKeyDown(KeyCode.Space)) {
+						if (currentLine < text.Count) {
+							if (text[currentLine].StartsWith("!")) {
+								state = State.ExtremeText;
+								break;
+							}
+						}
+
 						state = State.FadeOutText;
 					}
 				}
+			break;
+
+			case State.ExtremeText:
+				SelectNextLine();
+				textMesh.fontSize = 120;
+				textMesh.transform.Rotate(new Vector3(0, 0, 10));
 			break;
 
 			case State.FadeOutIntroduction: {
@@ -188,11 +201,26 @@ public class LevelIntroduction : MonoBehaviour
 				}
 			}
 			break;
-
 			
-
 			default:
 				break;
 		}
     }
+
+	void SelectNextLine() {
+		if (currentLine >= text.Count) {
+			state = State.FadeOutIntroduction;
+			return;
+		}
+
+		string textString = text[currentLine];
+		if (textString.StartsWith("!")) {
+			textString = textString.Substring(1);
+		}
+
+		textMesh.text = textString;
+		currentLine++;
+
+		state = State.FadeInText;
+	}
 }
