@@ -9,6 +9,7 @@ public class Level1 : LevelScript
 	public Character player = null;
 	public Karen karen = null;
 	public Employee employeeDownstairs = null;
+	public Guard guardSecurityRoom = null;
 	
 	protected override void Awake() {
 		
@@ -239,6 +240,18 @@ public class Level1 : LevelScript
 
 			LevelManager.AddCondition(condition);
 		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CharacterInRoomWithGuard";
+
+			condition.fullfillHandler = (LevelCondition c) => {
+				guardSecurityRoom.Say("What are you doing?");
+				guardSecurityRoom.ShootAt(player);
+			};
+
+			LevelManager.AddCondition(condition);
+		}
 		
 		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
 			if (!LevelManager.Condition("CamerasDisabled").fullfilled)
@@ -269,7 +282,14 @@ public class Level1 : LevelScript
 				LevelManager.Condition("PlayerEntersCameraRoom").Fullfill();
 			} else if (roomname == "L0 Room R"  && player.inventory.getMoney() != 0) {
 				LevelManager.Condition("PlayerInRoomWithEmployeeAndMoney").Fullfill();
+			} else if (roomname == "Security Room") {
+				LevelManager.emit("CharacterInRoomWithGuard");
 			}
+		});
+
+		{}
+		LevelManager.on("CharacterInRoomWithGuard", () => {
+			LevelManager.Condition("CharacterInRoomWithGuard").Fullfill();
 		});
 		
 		LevelManager.on("KarenSurrendered", () => {
