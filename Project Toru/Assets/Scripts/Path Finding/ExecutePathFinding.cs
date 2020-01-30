@@ -304,7 +304,7 @@ public abstract class ExecutePathFinding : MonoBehaviour
 
 				if (tag.Contains("Player"))
 				{
-					if(weapon != null)
+					if (weapon != null)
 					{
 						if (weapon.weaponOut)
 						{

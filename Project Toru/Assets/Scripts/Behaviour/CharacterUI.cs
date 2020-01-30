@@ -16,7 +16,8 @@ public class CharacterUI : MonoBehaviour
         if(players.Length == 1)
         {
             CharacterSelectionBox.SetActive(false);
-        } else
+        } 
+        else
         {
             foreach (GameObject obj in players)
             {

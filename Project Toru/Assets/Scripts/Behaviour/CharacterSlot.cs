@@ -25,5 +25,6 @@ public class CharacterSlot : MonoBehaviour
     public void SelectCharacter()
     {
         Character.selectedCharacter = character;
+        Camera.main.GetComponent<CameraBehaviour>().target = Character.selectedCharacter.transform;
     }
 }

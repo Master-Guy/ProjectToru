@@ -31,11 +31,13 @@ public class Character : MonoBehaviour
 
 	public List<Skills> skills = new List<Skills>();
 
-	private bool outline = false;
+	public GameObject selectedTriangle;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		selectedTriangle = transform.Find("SelectedTriangle").gameObject;
+
 		myRigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 
@@ -44,26 +46,14 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-
         weapon.weaponHolder = this.gameObject;
-		
 		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (selectedCharacter == this && !outline)
-		{
-			Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
-			outline = true;
-		}
-
-		if (selectedCharacter != this)
-		{
-			Outline.RemoveOutline(this.gameObject);
-			outline = false;
-		}
+		SelectedTriangle();
 
 		if (this.Equals(selectedCharacter))
 		{
@@ -95,6 +85,24 @@ public class Character : MonoBehaviour
 		if(weapon != null)
 		{
 			FlipFirePoint();
+		}
+	}
+
+	public void SelectedTriangle()
+	{
+		if (selectedCharacter == this && !selectedTriangle.GetComponent<SpriteRenderer>().enabled)
+		{
+			selectedTriangle.GetComponent<SpriteRenderer>().enabled = true;
+		}
+
+		if (selectedCharacter != this && selectedTriangle.GetComponent<SpriteRenderer>().enabled)
+		{
+			selectedTriangle.GetComponent<SpriteRenderer>().enabled = false;
+		}
+
+		if (selectedCharacter == this)
+		{
+			selectedTriangle.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
 		}
 	}
 
