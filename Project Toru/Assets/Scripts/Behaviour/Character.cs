@@ -80,7 +80,14 @@ public class Character : MonoBehaviour
 				}
                 if (Input.GetKeyDown(KeyCode.H))
                 {
-                    weapon.HideGun();
+					if (weapon.weaponOut)
+					{
+						weapon.HideGun();
+					}
+					else
+					{
+						weapon.RevealGun();
+					}
                 }
 			}
 		}
@@ -130,22 +137,6 @@ public class Character : MonoBehaviour
 			firePoint.transform.position = transform.position + new Vector3(-.3f, -.4f);
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 		}
-
-		// if (animator.GetFloat("moveY") > 0)
-		// {
-		// 	firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
-		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-		// 	Debug.Log("3");
-		// }
-
-		// if (animator.GetFloat("moveY") < 0)
-		// {	
-		// 	firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-		// 	Debug.Log("4");
-		// }
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
