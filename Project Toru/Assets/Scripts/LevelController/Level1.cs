@@ -348,9 +348,9 @@ public class Level1 : LevelScript
 		});
 		
 		LevelManager.on("PlayerHasUsedGun", (GameObject room) => {
-			SpawnPoliceCar();
-			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 			if (LevelManager.RandomChange(10)) {
+				SpawnPoliceCar();
+				PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 				//LevelManager.Condition("SomeoneHeardShooting").Fullfill();
 			}
 		});
