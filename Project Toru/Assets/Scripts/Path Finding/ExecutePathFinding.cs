@@ -87,8 +87,9 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				}
 				StopPathFinding();
 			}
+
+			UpdateAnimations();
 		}
-		UpdateAnimations();
 	}
 
 	private void CallEventWindow()

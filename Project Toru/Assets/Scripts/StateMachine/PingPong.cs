@@ -17,11 +17,11 @@ public class PingPong : IState
 
 	public void Enter()
 	{
-		
 	}
 
 	public void Execute()
 	{
+		
 		var trans = gameObject.GetComponent<Transform>();
 		change = new Vector3(Mathf.PingPong(Time.time, 1.5f) + startPos.x, trans.position.y, trans.position.z);
 

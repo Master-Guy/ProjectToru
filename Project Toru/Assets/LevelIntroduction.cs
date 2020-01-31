@@ -32,6 +32,7 @@ public class LevelIntroduction : MonoBehaviour
 	public void Init() {
 		// No text means no usage
 		if (text.Count == 0 || LevelEndMessage.lastLevel == currentLevel) {
+			LevelManager.emit("StartLevel");
 			gameObject.SetActive(false);
 			return;
 		} else {
