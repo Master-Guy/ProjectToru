@@ -125,7 +125,7 @@ public class Character : MonoBehaviour
 		{
 			if (selectedCharacter != null)
 			{
-				selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				// selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			}
 
 			selectedCharacter = this;
@@ -134,7 +134,7 @@ public class Character : MonoBehaviour
 
 			inventory.UpdateUI();
 
-			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+			// transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
 

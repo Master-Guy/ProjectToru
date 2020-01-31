@@ -203,8 +203,7 @@ public class LevelManager : MonoBehaviour
 		// Try emitting without string
 		LevelManager.emit(eventString);
 	}
-
-D
+	
 	public static void emit(string eventString, GameObject gameobject)
 	{
 		Debug.Log("Emitting " + eventString + " With OBJECT " + gameobject.name);

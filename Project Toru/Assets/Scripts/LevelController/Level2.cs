@@ -195,24 +195,6 @@ public class Level2 : LevelScript
 			condition.fullfillHandler = (LevelCondition c) => {
 
 				karen.animator.SetFloat("moveX", 1);
-
-				// DialogueText text = new DialogueText();
-				// text.name = "Karen:";
-				// text.sentences.Add("You are my manager!!!!!!");
-				// text.sentences.Add("Why are you so stupid??");
-				// text.sentences.Add("It was a guy with a gun! The same one as last year!");
-				// text.sentences.Add("It was...");
-
-				// dialogueManager.QueueDialogue(text);
-				
-				// text.callback = () => {
-				// 	karen.animator.SetFloat("moveX", -1);
-				// 	karen.Say("YOU");
-				// 	karen.BeKaren(architect);
-				// 	LevelManager.Delay(0.5f, () => {
-				// 		employeeUpstairs.Say("WHOA! Easy!");
-				// 	});
-				// };
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -602,10 +584,12 @@ public class Level2 : LevelScript
 
 				LevelManager.Delay(2, () => {
 					introduction.transistionToScene = true;
+					introduction.gameObject.SetActive(true);
 					introduction.text.Clear();
 					introduction.text.Add("You did it!");
 					introduction.text.Add("You have the holy grail!");
 					introduction.text.Add("Great job!");
+					introduction.currentLevel = -1;
 					introduction.Init();
 
 					LevelEndMessage.title = "You've won!";
@@ -615,6 +599,7 @@ public class Level2 : LevelScript
 
 					Character.selectedCharacter = null;
 
+
 					introduction.backgroundBlack.gameObject.SetActive(true);
 					{
 						Color color = introduction.backgroundBlack.color;
@@ -622,6 +607,7 @@ public class Level2 : LevelScript
 						introduction.backgroundBlack.color = color;
 					}
 					introduction.state = LevelIntroduction.State.BlackFadeIn;
+
 				});
 				
 			};
