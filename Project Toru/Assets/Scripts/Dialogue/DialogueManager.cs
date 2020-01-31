@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 	public bool DebugDisableDialogue = false;
 	
 	[SerializeField]
-	private Animator animator = null;
+	public Animator animator = null;
 
 	private Queue<string> sentences = new Queue<string>();
 	private Queue<DialogueText> dialogues = new Queue<DialogueText>();
