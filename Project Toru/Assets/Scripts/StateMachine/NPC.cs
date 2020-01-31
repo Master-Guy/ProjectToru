@@ -38,6 +38,8 @@ public abstract class NPC : MonoBehaviour
 	public bool surrender = false;
 	protected bool fleeTrue = false;
 
+	public bool fleeIfPossible = false;
+
 	Vector3 currentpos;
     Vector3 lastpos;
     Vector3 change;
@@ -68,6 +70,8 @@ public abstract class NPC : MonoBehaviour
 		lastpos = currentpos;
         currentpos = transform.position;
         change = currentpos - lastpos;
+
+		if (fleeIfPossible) FleeIfPossible();
 
 		if(change != Vector3.zero && showWeapon)
         {

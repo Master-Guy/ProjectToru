@@ -400,6 +400,7 @@ public class Level1 : LevelScript
 			karen.animator.SetFloat("moveX", -1);
 			employeeDownstairs.PingPong();
 			guardSecurityRoom.PingPong();
+			karen.fleeIfPossible = true;
 		});
 		
 	}
