@@ -9,17 +9,18 @@ public class Combat : IState
     private GameObject firePoint;
     private Animator animator;
     private GameObject target;
+	private NPC npc;
 
 	float timer = 0.5f;
-	bool moving = false;
 
-    public Combat(Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
+    public Combat(NPC npc, Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
     {
         this.weapon = weapon;
         this.gameObject = gameObject;
         this.firePoint = firePoint;
         this.animator = animator;
 		this.target = target;
+		this.npc = npc;
     }
 
     public void Enter()
@@ -40,6 +41,11 @@ public class Combat : IState
 			AdjustFirePoint();
 			weapon.Shoot();
 		}
+
+		if (target.activeSelf == false) {
+			Debug.Log("StopShoot");
+			npc.StopShooting();
+		}
         
     }
 
@@ -52,7 +58,7 @@ public class Combat : IState
 
 		Vector3 distance = target.transform.position - gameObject.transform.position;
 		
-		if (Mathf.Abs(distance.x) > 4 || Mathf.Abs(distance.y) > 2 || Mathf.Abs(distance.x) < 1) {
+		if (Mathf.Abs(distance.x) > 4 || Mathf.Abs(distance.y) > 0.5 || Mathf.Abs(distance.x) < 1) {
 			Vector3 target = this.target.transform.position;
 			if (distance.x > 0) target.x -= 2;
 			else				target.x += 2;
@@ -95,22 +101,4 @@ public class Combat : IState
             weapon.RevealGun();
         }
     }
-
-    // void ChangeAnimations()
-    // {
-    //     if (direction == targetDirection.left)
-    //     {
-    //         animator.SetFloat("moveX", -1);
-    //     }
-    //     else
-    //     {
-    //         animator.SetFloat("moveX", 1);
-    //     }
-    // }
-
-    // private enum targetDirection
-    // {
-    //     left,
-    //     right
-    // }
 }

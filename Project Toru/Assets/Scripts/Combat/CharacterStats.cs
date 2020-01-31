@@ -4,8 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
-{
-    public float maxHealth;
+{	
+	public float _maxHealth;
+    public float maxHealth {
+		set {
+			_maxHealth = value;
+			currentHealth = value;	
+		}
+		get{
+			return _maxHealth;
+		}
+	}
+
     [NonSerialized]
     public float currentHealth;
 
@@ -25,9 +35,10 @@ public class CharacterStats : MonoBehaviour
             if(npc != null)
             {
                 npc.dropBag();
+			    LevelManager.emit("NPCKilled", npc.currentRoom.gameObject);
             }
 			
-			LevelManager.emit("Killed", gameObject.name);
+			LevelManager.emit("Killed", gameObject);
             gameObject.SetActive(false);
         }
     }

@@ -1,68 +1,50 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Employee : NPC
-{
-    private bool surrender = false;
-    private bool fleeTrue = false;
 
-    public void Start()
+{ 
+    protected override void Start()
     {
-        this.startingPosition = transform.position;
-        this.animator = GetComponent<Animator>();
-        PingPong();
+		base.Update();
     }
 
-    public void Update()
+    protected override void Update()
     {
-        this.statemachine.ExecuteStateUpdate();
-        AdjustOrderLayer();
+		base.Update();
+
         FleeIfPossible();
-        showCountdown();
     }
 
-    void OnMouseDown()
-    {
-        Surrender();
-    }
+    public override void Surrender() {
+		base.Surrender();
 
-    void Surrender()
-    {
-        if (currentRoom.SelectedPlayerInRoom() && !surrender)
-        {
-            this.surrender = true;
-            this.statemachine.ChangeState(new Surrender(this.animator));
-            Say("Don't shoot!");
-            dropBag();
-        }
-    }
+		if (currentRoom.SelectedPlayerInRoom() && !surrender) {
+			int random = Random.Range(0, 3);
+			switch (random) {
+				case 0:
+					Say("Not me!");
+				break;
 
-    void FleeIfPossible()
-    {
-        if (currentRoom == null) return;
+				case 1:
+					Say("I have nothing!");
+				break;
 
-        if (!currentRoom.AnyCharacterInRoom() && surrender)
-        {
-            this.surrender = false;
-            this.statemachine.ChangeState(new Idle(this.animator));
-			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(-30, 1);
-            fleeTrue = true;
-        }
-    }
+				case 2:
+					Say("Let me live!");
+				break;
 
-    void showCountdown()
-    {
-        if (fleeTrue)
-        {
-            Invoke("startCountDown", 8);
-            fleeTrue = false;
-        }
-    }
+				case 3:
+					Say("Don't shoot!");
+				break;
 
-    void startCountDown()
-    {
-		LevelManager.emit("EmployeeFleed");
-    }
+				default:
+				break;
+			}
+		}
+
+		dropBag();
+		
+	}
 }

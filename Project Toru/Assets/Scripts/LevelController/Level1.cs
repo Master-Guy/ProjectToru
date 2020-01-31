@@ -103,11 +103,7 @@ public class Level1 : LevelScript
 				
 				if (LevelManager.Condition("CamerasDisabled").fullfilled) {
 					
-					DialogueText text = new DialogueText();
-					text.name = "Hmmm!";
-					text.sentences.Add("That camera looks disabled!");
-					
-					dialogueManager.QueueDialogue(text);
+					player.Say("That camera looks disabled");
 
 				} else {
 					player?.gameObject.GetComponent<ExecutePathFinding>()?.StopPathFinding();
@@ -292,8 +288,11 @@ public class Level1 : LevelScript
 			LevelManager.Condition("PlayerFoundKey").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (string roomname) => {
-			
+		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
+
+			Character character = gameObject.GetComponent<Character>();
+			string roomname = character.currentRoom.name;
+
 			if (roomname == "L0 Room L") {
 				LevelManager.Condition("LetKarenTalk").Fullfill();
 				if (player.inventory.getMoney() != 0) {
@@ -314,8 +313,9 @@ public class Level1 : LevelScript
 			LevelManager.Condition("CharacterInRoomWithGuard").Fullfill();
 		});
 		
-		LevelManager.on("KarenSurrendered", () => {
-			LevelManager.Condition("KarenSurrendered").Fullfill();
+		LevelManager.on("Surrendered", (GameObject gameObject) => {
+			if (gameObject.name == "Karen")
+				LevelManager.Condition("KarenSurrendered").Fullfill();
 		});
 		
 		LevelManager.on("PlayerTriedOpeningDoorButWasLocked", (string roomname) => {
@@ -366,7 +366,7 @@ public class Level1 : LevelScript
 		});
 
 
-		LevelManager.on("AllCharactersInVan", () => {
+		LevelManager.on("CharacterEntersVan", (GameObject character) => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();
 			
@@ -393,6 +393,13 @@ public class Level1 : LevelScript
 				LevelEndMessage.LevelSuccessfull = false;
 				LevelManager.EndLevel(3);
 			}
+		});
+
+		LevelManager.on("StartLevel", () => {
+			LevelEndMessage.lastLevel = 1;
+			karen.animator.SetFloat("moveX", -1);
+			employeeDownstairs.PingPong();
+			guardSecurityRoom.PingPong();
 		});
 		
 	}

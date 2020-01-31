@@ -7,7 +7,7 @@ public class StateMachine
 	private IState currentlyRunningState;
 	private IState previousState;
 
-	public void ChangeState(IState newState)
+	public virtual void ChangeState(IState newState)
 	{
 		if(currentlyRunningState != null)
 		{
@@ -19,7 +19,7 @@ public class StateMachine
 		this.currentlyRunningState.Enter();
 	}
 
-	public void ExecuteStateUpdate()
+	public virtual void ExecuteStateUpdate()
 	{
 		var runningState = this.currentlyRunningState;
 		if(runningState != null)
@@ -28,14 +28,14 @@ public class StateMachine
 		}
 	}
 
-	public void SwitchToPreviousState()
+	public virtual void SwitchToPreviousState()
 	{
 		this.currentlyRunningState.Exit();
 		this.currentlyRunningState = previousState;
 		this.currentlyRunningState.Enter();
 	}
 
-	public IState GetCurrentlyRunningState()
+	public virtual IState GetCurrentlyRunningState()
 	{
 		return currentlyRunningState;
 	}

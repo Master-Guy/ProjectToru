@@ -8,6 +8,7 @@ public class Level0 : LevelScript
 	// Ex: [SerializeField]    
 	// Ex: Vault vault = null;
 	public Van van = null;
+	public Employee employee;
 	
 	protected override void Awake() {
 		
@@ -254,7 +255,10 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterHasBeenMoved").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (string value) => {
+		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
+
+			Character character = gameObject.GetComponent<Character>();
+			string value = character.currentRoom.name;
 			
 			if (value == "L0 Room L") {
 				LevelManager.Condition("CharacterIsInRoomL0_L").Fullfill();
@@ -302,10 +306,9 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
 		});
 		
-		LevelManager.on("AllCharactersInVan", () => {
+		LevelManager.on("CharacterEntersVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();
-			
 			
 			
 			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
@@ -333,6 +336,11 @@ public class Level0 : LevelScript
 		});
 		
 		LevelManager.on("StartLevel", () => {
+
+			LevelEndMessage.lastLevel = 0;
+
+			employee.PingPong();
+
 			// Trigger first dialogue
 			LevelManager.Delay(1, () => {
 				

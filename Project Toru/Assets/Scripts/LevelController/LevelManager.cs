@@ -177,13 +177,15 @@ public class LevelManager : MonoBehaviour
 
 	public delegate void LevelScriptCallback();
 	public delegate void LevelScriptCallbackString(string value);
+	public delegate void LevelScriptCallbackGameObject(GameObject gameobject);
 	
 	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
 	static Dictionary<string, LevelScriptCallbackString> events_string = new Dictionary<string, LevelScriptCallbackString>();
+	static Dictionary<string, LevelScriptCallbackGameObject> events_object = new Dictionary<string, LevelScriptCallbackGameObject>();
 	
 	public static void emit(string eventString)
 	{
-		//Debug.Log("Emitting " + eventString);
+		Debug.Log("Emitting " + eventString);
 		if (events.ContainsKey(eventString)) {
 			events[eventString]?.Invoke();
 			return;
@@ -192,9 +194,21 @@ public class LevelManager : MonoBehaviour
 	
 	public static void emit(string eventString, string value)
 	{
-		//Debug.Log("Emitting " + eventString + " With STRING value " + value);
+		Debug.Log("Emitting " + eventString + " With STRING value " + value);
 		if (events_string.ContainsKey(eventString)) {
 			events_string[eventString]?.Invoke(value);
+			return;
+		}
+		
+		// Try emitting without string
+		LevelManager.emit(eventString);
+	}
+	
+	public static void emit(string eventString, GameObject gameobject)
+	{
+		Debug.Log("Emitting " + eventString + " With OBJECT " + gameobject.name);
+		if (events_object.ContainsKey(eventString)) {
+			events_object[eventString]?.Invoke(gameobject);
 			return;
 		}
 		
@@ -211,7 +225,12 @@ public class LevelManager : MonoBehaviour
 	{
 		events_string.Add(eventString, callback);	
 	}
-	
+
+	public static void on(string eventString, LevelScriptCallbackGameObject callback)
+	{
+		events_object.Add(eventString, callback);
+	}
+
 	public static void setLevel() {
 		events.Clear();
 		events_string.Clear();

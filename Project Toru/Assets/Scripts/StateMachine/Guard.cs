@@ -2,82 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 public class Guard : NPC
 {
-    Weapon weapon;
-    GameObject firePoint;
 
-    Vector3 currentpos;
-    Vector3 lastpos;
-    Vector3 change;
+    
+	public Character targetCharacter;
+	bool flee = false;
 
-    void Start()
-    {
-        startingPosition = transform.position;;
-        stats = GetComponent<CharacterStats>();
-		animator = GetComponent<Animator>();
-        weapon = GetComponentInChildren<Weapon>();
-        if(weapon != null)
-        {
-            firePoint = weapon.gameObject;
-			weapon.weaponHolder = gameObject;
-			weapon.RevealGun();
-        }
+    protected override void Start()
+    {	
+		base.Start();
         PingPong();
 	}
 
-	bool release = true;
-    void Update()
-    {
-		this.statemachine.ExecuteStateUpdate();
-		AdjustOrderLayer();
-
-		if(stats.currentHealth < stats.maxHealth)
-		{
-            // this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint,this.animator));
-		}
-
-        lastpos = currentpos;
-        currentpos = transform.position;
-        change = currentpos - lastpos;
-
-        if(change != Vector3.zero && weapon != null)
-        {
-            FlipFirePoint();
-        }
-    }
-
-	Character targetCharacter = null;
-
-	public void ShootAt(Character character) {
+	protected override void Update()
+    {	
+		base.Update();
+        FleeIfPossible();
 		
-		// this.statemachine.ChangeState(new Idle(animator));
-		this.statemachine.ChangeState(new Combat(weapon, gameObject, firePoint, animator, character.gameObject));
 	}
 
+	protected override void FleeIfPossible() {
+		if (flee) return;
 
-    private void FlipFirePoint()
-    {
-        if (animator.GetFloat("moveX") > 0)
-        {
-            firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
-            firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-        }
-        else
-        {
-            firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-            firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-        }
+		if (currentRoom == null) return;
 
-        if (animator.GetFloat("moveY") > 0.1)
-        {
-            weapon.HideGun();
-        }
-        else
-        {
-            weapon.RevealGun();
-        }
-    }
+        if (!currentRoom.AnyCharacterInRoom() && surrender)
+        {	
+			flee = true;
+			ShootAt(targetCharacter);
+		}
+	}
+
+	public override void StopShooting() {
+		
+		base.StopShooting();
+		GetComponent<ExecutePathFindingNPC>().setPosTarget(startingPosition);
+	}
+
+	public void Arrest(Character character) {
+		if (!surrender)
+		this.statemachine.ChangeState(new Arrest(this, weapon, gameObject, firePoint, animator, character.gameObject));
+	}
 }
