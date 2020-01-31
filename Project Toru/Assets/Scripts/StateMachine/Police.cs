@@ -8,7 +8,7 @@ using UnityEngine;
 public class Police : NPC
 {
 	[SerializeField]
-	Room Dest, LastRoom;
+	Room Dest;
 
 	protected override void Awake() {
 		base.Awake();
@@ -44,7 +44,7 @@ public class Police : NPC
 			PoliceForce.getInstance().Alert(LastRoom);
 			setPos(LastRoom);
 		}*/
-		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && (currentRoom == Dest || LastRoom == Dest))
+		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && currentRoom == Dest)
 		{
 			statemachine.ChangeState(new Idle(animator));
 			PoliceForce.getInstance().RequestOrders(this);
