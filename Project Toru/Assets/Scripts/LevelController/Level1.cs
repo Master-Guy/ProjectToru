@@ -339,6 +339,10 @@ public class Level1 : LevelScript
 			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 
+		LevelManager.on("CopsTriggered", () => {
+			LevelManager.Condition("CopsTriggered").Fullfill();
+		});
+
 		LevelManager.on("EmployeeFleed", () => {
 			LevelManager.Delay(Random.Range(10, 20), () => {
 				SpawnPoliceCar();

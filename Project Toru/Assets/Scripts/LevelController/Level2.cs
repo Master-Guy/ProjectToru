@@ -502,6 +502,10 @@ public class Level2 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 
+		LevelManager.on("CopsTriggered", () => {
+			LevelManager.Condition("CopsTriggered").Fullfill();
+		});
+
 		{
 			LevelCondition condition = new LevelCondition();
 			condition.name = "MuscleKilled";
