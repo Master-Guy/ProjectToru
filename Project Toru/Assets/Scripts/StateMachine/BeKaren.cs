@@ -101,13 +101,13 @@ public class BeKaren : IState
         if (animator.GetFloat("moveX") > 0)
         {
             firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
-            firePoint.transform.position = gameObject.transform.position + new Vector3(.3f, -.3f);
+            firePoint.transform.position = gameObject.transform.position + new Vector3(.3f, -.4f);
             firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
         }
         else
         {
             firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-            firePoint.transform.position = gameObject.transform.position + new Vector3(-.3f, -.3f);
+            firePoint.transform.position = gameObject.transform.position + new Vector3(-.3f, -.4f);
             firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
         }
 

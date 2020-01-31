@@ -79,8 +79,8 @@ public abstract class NPC : MonoBehaviour
         foreach (GameObject g in bag)
         {
             Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + 0.5f, 0), Quaternion.identity);
-			bag.Remove(g);
         }
+		bag.Clear();
     }
 
     public void Say(string text)

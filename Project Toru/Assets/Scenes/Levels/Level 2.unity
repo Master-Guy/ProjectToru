@@ -1088,6 +1088,11 @@ PrefabInstance:
       propertyPath: TextBox
       value: 
       objectReference: {fileID: 1621325387}
+    - target: {fileID: 8845129313483243389, guid: 3c4bcabd714b84711ba528241c4fb9de,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2510886674794060575, guid: 3c4bcabd714b84711ba528241c4fb9de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3c4bcabd714b84711ba528241c4fb9de, type: 3}

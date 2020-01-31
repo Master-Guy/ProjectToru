@@ -93,6 +93,7 @@ public class Level2 : LevelScript
 
 								LevelManager.Delay(3, () => {
 									karen.transform.position = new Vector3(30, 5.2f);
+									karen.stats.maxHealth = 100;
 								});
 							});
 						});
@@ -332,7 +333,7 @@ public class Level2 : LevelScript
 			};
 
 			
-
+			// At this stage, character is holding gun while guard is in room
 			LevelManager.Delay(0.5f, () => {
 
 				if (guard.surrender) {
@@ -341,8 +342,9 @@ public class Level2 : LevelScript
 
 				guard.ShootAt(character);
 				guard.Say("HOLD YOUR GUN DOWN!");
+				LevelManager.Condition("KarenFleed").Fullfill();
 			});
-			// At this stage, character is holding gun while guard is in room
+			
 			
 		});
 
@@ -369,12 +371,18 @@ public class Level2 : LevelScript
 				
 				HashSet<Item> copy = new HashSet<Item>(muscle.inventory.getItemsList());
 
+				Debug.Log("Count11 + " + architect.inventory.getItemsList().Count);
+				Debug.Log("Count12 + " + muscle.inventory.getItemsList().Count);
 				foreach(var item in copy) {
+					Debug.Log("KeyHandOver");
 					if (!item.name.Contains("Key")) continue;
+					Debug.Log("Done");
 
 					architect.inventory.addItem(item);
 					muscle.inventory.removeItem(item);
 				}
+				Debug.Log("Count21 + " + architect.inventory.getItemsList().Count);
+				Debug.Log("Count22 + " + muscle.inventory.getItemsList().Count);
 			}
 
 			if (LevelManager.Condition("PlayerFoundKey").fullfilled) return;

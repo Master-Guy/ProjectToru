@@ -13,8 +13,6 @@ public class Karen : NPC
 	protected override void Update()
     {
 		base.Update();
-
-		FleeIfPossible();
     }
 
 	public override void Surrender() {
