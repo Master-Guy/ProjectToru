@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class Muscle : Character
 {
+
 	
+
+
 	protected override void FlipFirePoint() {
 		GameObject firePoint = weapon.gameObject;
 

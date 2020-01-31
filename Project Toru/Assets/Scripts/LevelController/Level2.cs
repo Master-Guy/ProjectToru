@@ -67,6 +67,38 @@ public class Level2 : LevelScript
 			LevelCondition condition = new LevelCondition();
 			condition.name = "KarenFleed";
 			
+			condition.fullfillHandler = (LevelCondition c) => {
+				karen.pathfinder.setPosTarget(9, 1);
+				LevelManager.Delay(0.5f, () => {
+					
+					karen.currentRoom.door.Open();
+
+					Door door = karen.currentRoom.door;
+
+					if (LevelManager.Condition("PlayerFoundKey").fullfilled) {
+						LevelManager.Delay(1, () => {
+							door.Close();
+						});
+					}
+				
+					karen.pathfinder.setPosTarget(17.3f, 1);
+					LevelManager.Delay(1, () => {
+						DownStairsDoor.Open();
+
+						LevelManager.Delay(1, () => {
+							karen.pathfinder.setPosTarget(21, 5);
+
+							LevelManager.Delay(1, () => {
+								DownStairsDoor.Close();
+
+								LevelManager.Delay(3, () => {
+									karen.transform.position = new Vector3(30, 5.2f);
+								});
+							});
+						});
+					});
+				});
+			};
 			
 			LevelManager.AddCondition(condition);
 		}
@@ -314,9 +346,37 @@ public class Level2 : LevelScript
 			
 		});
 
-		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "MuscleFoundKey";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "Found a key";
+				text.sentences.Add("Muscle found key, muscle better give key to boss");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
 
 		LevelManager.on("PlayerFoundKey", (GameObject gameObject) => {
+
+			if (gameObject.name == "Muscle") {
+				LevelManager.Condition("MuscleFoundKey").Fullfill();
+				
+				HashSet<Item> copy = new HashSet<Item>(muscle.inventory.getItemsList());
+
+				foreach(var item in copy) {
+					if (!item.name.Contains("Key")) continue;
+
+					architect.inventory.addItem(item);
+					muscle.inventory.removeItem(item);
+				}
+			}
+
 			if (LevelManager.Condition("PlayerFoundKey").fullfilled) return;
 
 			LevelManager.Condition("PlayerFoundKey").Fullfill();
@@ -330,8 +390,10 @@ public class Level2 : LevelScript
 
 				guard.Arrest(character);
 
-				if (!LevelManager.Condition("KarenFleed").fullfilled)
-					karen.Say("GUARD HELP!");
+				if (!LevelManager.Condition("KarenFleed").fullfilled) {
+					LevelManager.Condition("KarenFleed").Fullfill();
+					karen.Say("GUARD! HELP!");
+				}
 			}
 		});
 
@@ -369,28 +431,7 @@ public class Level2 : LevelScript
 				LevelManager.Condition("GuardDownstairsSurrender").Fullfill();
 				LevelManager.Condition("KarenFleed").Fullfill();
 
-				karen.pathfinder.setPosTarget(9, 1);
-				LevelManager.Delay(0.5f, () => {
-
-					npc.currentRoom.door.Open();
 				
-					karen.pathfinder.setPosTarget(17.3f, 1);
-					LevelManager.Delay(1, () => {
-						DownStairsDoor.Open();
-
-						LevelManager.Delay(1, () => {
-							karen.pathfinder.setPosTarget(21, 5);
-
-							LevelManager.Delay(1, () => {
-								DownStairsDoor.Close();
-
-								LevelManager.Delay(3, () => {
-									karen.transform.position = new Vector3(30, 5.2f);
-								});
-							});
-						});
-					});
-				});
 			}
 
 			else {
