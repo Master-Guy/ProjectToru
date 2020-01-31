@@ -9,7 +9,8 @@ public class Police : NPC
 {
 	public Weapon weapon;
 	GameObject firePoint;
-	Room Dest;
+	[SerializeField]
+	Room Dest, LastRoom;
 
 	Vector3 currentpos;
 	Vector3 lastpos;
@@ -17,7 +18,6 @@ public class Police : NPC
 
 	public void Start()
 	{
-
 		startingPosition = transform.position; ;
 		stats = GetComponent<CharacterStats>();
 		animator = GetComponent<Animator>();
@@ -25,6 +25,8 @@ public class Police : NPC
 		if (weapon != null)
 		{
 			firePoint = weapon.gameObject;
+			weapon.weaponHolder = gameObject;
+			weapon.RevealGun();
 		}
 		if (weapon != null)
 		{
@@ -38,26 +40,32 @@ public class Police : NPC
 
 	public void Update()
 	{
-		if ((currentRoom != null && currentRoom.charactersInRoom.Count > 0) || currentRoom.Equals(Dest))
+		if (currentRoom != null && currentRoom.charactersInRoom.Count > 0)
 		{
-			GetComponent<ExecutePathFindingNPC>().StopPathFinding();
-			// TODO fight
-			weapon.Shoot();
-			// @todo
-			// this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
+			//GetComponent<ExecutePathFindingNPC>().StopPathFinding();
+			PoliceForce.getInstance().Alert(currentRoom);
+			this.statemachine.ChangeState(new Combat(weapon, gameObject, firePoint, animator, currentRoom.charactersInRoom.First().gameObject));
 		}
-		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && currentRoom == Dest)
+		/*else if (LastRoom != null && LastRoom.charactersInRoom.Count > 0)
 		{
+			PoliceForce.getInstance().Alert(LastRoom);
+			setPos(LastRoom);
+		}*/
+		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && (currentRoom == Dest || LastRoom == Dest))
+		{
+			statemachine.ChangeState(new Idle(animator));
 			PoliceForce.getInstance().RequestOrders(this);
 		}
 
+		statemachine.ExecuteStateUpdate();
+
 		AdjustOrderLayer();
 
-		if (stats.currentHealth < stats.maxHealth)
+		/*if (stats.currentHealth < stats.maxHealth)
 		{	
 			// @todo
 			// this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
-		}
+		}*/
 
 		lastpos = currentpos;
 		currentpos = transform.position;
@@ -99,5 +107,24 @@ public class Police : NPC
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
 		}
+	}
+
+	public override void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
+		{
+			LastRoom = currentRoom;
+			currentRoom = other.gameObject.GetComponent<Room>();
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		/*if (other.CompareTag("Room") && other.gameObject.GetComponent<Room>() == currentRoom)
+		{
+			var temp = currentRoom;
+			currentRoom = LastRoom;
+			LastRoom = temp;
+		}*/
 	}
 }
