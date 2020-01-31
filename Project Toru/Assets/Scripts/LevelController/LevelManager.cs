@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
 
         if (Condition(condition.name) == null)
         {
-            Debug.Log("Adding Condition '" + condition.name + "'");
+            //Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
         }
         else
@@ -227,13 +227,14 @@ public class LevelManager : MonoBehaviour
 	}
 
 	public static void on(string eventString, LevelScriptCallbackGameObject callback)
-	{
+	{	
 		events_object.Add(eventString, callback);
 	}
 
 	public static void setLevel() {
 		events.Clear();
 		events_string.Clear();
+		events_object.Clear();
 		conditions.Clear();
 	}
 	

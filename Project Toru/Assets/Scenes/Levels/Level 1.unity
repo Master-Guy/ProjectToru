@@ -1422,6 +1422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4129982960560294846, guid: 287a4ef37fc4f4e87b83d02c458bd685,
         type: 3}
+      propertyPath: Options.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129982960560294846, guid: 287a4ef37fc4f4e87b83d02c458bd685,
+        type: 3}
       propertyPath: Description
       value: Disable Camera
       objectReference: {fileID: 0}
