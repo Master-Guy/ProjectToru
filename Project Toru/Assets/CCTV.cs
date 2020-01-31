@@ -13,7 +13,7 @@ public class CCTV : MonoBehaviour
 		{
 			if (other.CompareTag("Player"))
 			{
-				LevelManager.emit("CameraDetectedPlayer", room.name);
+				LevelManager.emit("CameraDetectedPlayer", room.gameObject);
 			}
 		}
 	}

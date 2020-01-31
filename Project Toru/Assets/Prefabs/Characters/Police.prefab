@@ -18,8 +18,8 @@ GameObject:
   - component: {fileID: 2510886674794060572}
   - component: {fileID: 2510886674794060575}
   - component: {fileID: 8845129313483243389}
-  - component: {fileID: -8390646282274178548}
   - component: {fileID: 4931646122773758167}
+  - component: {fileID: -8390646282274178548}
   m_Layer: 8
   m_Name: Police
   m_TagString: NPC
@@ -4931,6 +4931,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 0
+--- !u!114 &4931646122773758167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510886674794060566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd85f12e8a350a140a227443b2f66d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRoom: {fileID: 0}
 --- !u!114 &-8390646282274178548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4949,19 +4962,6 @@ MonoBehaviour:
   surrender: 0
   fleeIfPossible: 0
   Dest: {fileID: 0}
---- !u!114 &4931646122773758167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510886674794060566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd85f12e8a350a140a227443b2f66d49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentRoom: {fileID: 0}
 --- !u!1001 &2434520026927941504
 PrefabInstance:
   m_ObjectHideFlags: 0
