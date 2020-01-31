@@ -177,7 +177,7 @@ TextMesh:
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 80
+  m_FontSize: 70
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 383aaba5a1330c6458def001e0813910, type: 3}
@@ -235,7 +235,11 @@ MonoBehaviour:
   background: {fileID: 7709109618138689531}
   textMesh: {fileID: 7709109617527568753}
   textMeshControls: {fileID: 7709109616908039714}
+  cameraCenter: {fileID: 0}
+  currentLevel: 0
   text: []
+  state: 8
+  transistionToScene: 0
 --- !u!1 &7709109618138689528
 GameObject:
   m_ObjectHideFlags: 0
