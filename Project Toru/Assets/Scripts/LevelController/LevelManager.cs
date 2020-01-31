@@ -56,6 +56,9 @@ public class LevelManager : MonoBehaviour
 	[SerializeField]
     GameObject UI = null;
 
+	[SerializeField]
+    public WebRequest webRequest;
+
     /// <summary>
     /// Storage for Level Conditions
     /// </summary>

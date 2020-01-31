@@ -338,6 +338,7 @@ public class Level0 : LevelScript
 		LevelManager.on("StartLevel", () => {
 
 			LevelEndMessage.lastLevel = 0;
+			LevelManager.Instance().webRequest.setTime();
 
 			employee.PingPong();
 

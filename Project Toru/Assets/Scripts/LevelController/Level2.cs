@@ -588,6 +588,8 @@ public class Level2 : LevelScript
 			condition.fullfillHandler = (LevelCondition c) => {
 				van.Drive();
 
+				LevelManager.Instance().webRequest.stopTime();
+
 				LevelManager.Delay(2, () => {
 					introduction.transistionToScene = true;
 					introduction.gameObject.SetActive(true);
@@ -623,6 +625,8 @@ public class Level2 : LevelScript
 
 		LevelManager.on("CharacterEntersVan", (GameObject gameobject) => {
 
+			LevelManager.Instance().webRequest.stopTime();
+
 			if (gameobject.name == "Muscle") {
 				LevelManager.Condition("MuscleInVan").Fullfill();
 			} else if (gameobject.name == "Architect") {
@@ -641,7 +645,9 @@ public class Level2 : LevelScript
 		});
 
 		LevelManager.on("StartLevel", () => {
-
+			
+			LevelManager.Instance().webRequest.setTime();
+			
 			LevelEndMessage.lastLevel = 2;
 
 			LevelManager.Delay(1, () => {
