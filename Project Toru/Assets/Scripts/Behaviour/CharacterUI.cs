@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterUI : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CharacterUI : MonoBehaviour
             CharacterSelectionBox.SetActive(false);
 
 			players[0].transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+			Character.selectedCharacter = players[0].GetComponent<Character>();
 		} 
         else
         {
@@ -29,12 +31,13 @@ public class CharacterUI : MonoBehaviour
                 Sprite s = obj.GetComponent<SpriteRenderer>().sprite;
                 transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().AddCharacter(obj.GetComponent<Character>());
                 transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().setSprite(s);
-                loop++;
+				Tint.Transparent(transform.GetChild(0).GetChild(loop).GetComponent<CharacterSlot>().GetComponent<Image>());
+
+				loop++;
 
 				obj.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			}
         }
-
-		transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(100 , players.Length * 100);
+		transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(100 , players.Length * 115);
     }
 }
