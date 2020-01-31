@@ -78,7 +78,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnQuitClick()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void OnBackClick()
