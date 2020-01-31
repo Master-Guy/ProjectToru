@@ -69,7 +69,15 @@ public class Level1 : LevelScript
 		{
 			LevelCondition condition = new LevelCondition();
 			condition.name = "CopsTriggered";
-			
+			condition.fullfillHandler = (LevelCondition c) => {
+				PoliceSiren.startSiren = true;
+				PoliceSiren.gameObject.SetActive(true);
+
+				LevelManager.Delay(10, () => {
+					SpawnPoliceCar();
+				});
+			};
+
 			LevelManager.AddCondition(condition);
 		}
 		
