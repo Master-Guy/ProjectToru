@@ -4698,7 +4698,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bag.Array.data[0]
       value: 
-      objectReference: {fileID: 3485136947023997620, guid: 463ccd0dc50034ff99f957f96344caf5,
+      objectReference: {fileID: 3485136947023997620, guid: cbfd9fa75be664f4a84ac822e94618cb,
         type: 3}
     - target: {fileID: 4947826929547256069, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
@@ -27253,6 +27253,7 @@ MonoBehaviour:
   fatGuy: {fileID: 1043033017}
   DownStairsDoor: {fileID: 312980546}
   van: {fileID: 1604688218}
+  deskUpstairs: {fileID: 0}
   introduction: {fileID: 57710084}
 --- !u!1001 &1527203321
 PrefabInstance:
@@ -27730,6 +27731,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 926686799}
     m_Modifications:
+    - target: {fileID: 1595176097772404657, guid: 88b7d4e2a2b054b2192c94ea0705261e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3019187250590598516, guid: 88b7d4e2a2b054b2192c94ea0705261e,
         type: 3}
       propertyPath: m_RootOrder

@@ -173,6 +173,7 @@ public class Character : MonoBehaviour
     {
         textBox.GetComponent<TextMesh>().text = text;
         textBox.SetActive(true);
+		textBox.GetComponent<Renderer>().sortingLayerName = "UI";
         Invoke("disableTextBox", 3);
     }
 

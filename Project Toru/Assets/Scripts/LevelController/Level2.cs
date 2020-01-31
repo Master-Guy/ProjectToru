@@ -19,8 +19,8 @@ public class Level2 : LevelScript
 	public FatGuy fatGuy;
 
 	public Door DownStairsDoor;	
-
 	public Van van;
+	public Desk deskUpstairs;
 
 	public LevelIntroduction introduction;
 
@@ -379,6 +379,12 @@ public class Level2 : LevelScript
 					LevelManager.Condition("KarenFleed").Fullfill();
 					karen.Say("GUARD! HELP!");
 				}
+			}
+
+			else if (character.currentRoom.name == "L1 Room R") {
+				employeeUpstairs.bag.Clear();
+				// deskUpstairs.GetComponent<Event>().
+				//@todo
 			}
 		});
 
