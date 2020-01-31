@@ -10,10 +10,11 @@ public class WebRequest : MonoBehaviour
 	public static Int32 timeStart = 0;
 	public static Int32 totalTime = 0;
 
-	public static string playerName;
+	public static string playerName = "player";
 
 	public void setTime() {
 		timeStart = getTime();
+		playerName = "";
 	}
 
 	private Int32 getTime() {
@@ -32,12 +33,14 @@ public class WebRequest : MonoBehaviour
 	static IEnumerator Upload()
 	{	
 		if (totalTime == 0) yield return 0;
+		if (playerName == "") yield return 0;
 
 		WWWForm form = new WWWForm();
 		form.AddField("key", "70cd531b-03a2-408f-ba82-956e382cd407");
-		form.AddField("name", "myData");
-		form.AddField("seconds", totalTime);
+		form.AddField("name", playerName);
+		form.AddField("seconds", (int) totalTime);
 		totalTime = 0;
+		playerName = "";
 		
 		using (UnityWebRequest www = UnityWebRequest.Post("https://clyde.ducosebel.nl/api/submit.php", form))
 		{
