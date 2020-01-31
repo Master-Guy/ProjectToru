@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public abstract class NPC : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> bag = null;
+    public List<GameObject> bag = null;
 
     [SerializeField]
     private GameObject TextBox = null;
@@ -88,6 +88,7 @@ public abstract class NPC : MonoBehaviour
     {
         TextBox.GetComponent<TextMesh>().text = text;
         TextBox.SetActive(true);
+		TextBox.GetComponent<Renderer>().sortingLayerName = "UI";
         Invoke("disableTextBox", 3);
     }
 
