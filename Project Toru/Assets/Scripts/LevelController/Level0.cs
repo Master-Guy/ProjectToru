@@ -269,7 +269,7 @@ public class Level0 : LevelScript
 			}
 			
 			else if (value == "VaultRoom") {
-				LevelManager.emit("CharacterIsInVaultRoom");	
+				LevelManager.emit("CharacterIsInVaultRoom", character.currentRoom.gameObject);	
 			}
 		});
 		
