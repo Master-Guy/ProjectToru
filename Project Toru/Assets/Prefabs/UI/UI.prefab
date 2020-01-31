@@ -1838,6 +1838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8144476812539155877, guid: 268ffdcef6e7940b5ac6f8254db40ef5, type: 3}
+  CharacterSelectionBox: {fileID: 0}
 --- !u!1 &5490866675993370632
 GameObject:
   m_ObjectHideFlags: 0
