@@ -31,20 +31,20 @@ public class Police : NPC
 	protected override void Update()
 	{	
 		base.Update();
-
+		
 		if (currentRoom != null && currentRoom.charactersInRoom.Count > 0)
 		{
 			//GetComponent<ExecutePathFindingNPC>().StopPathFinding();
 			PoliceForce.getInstance().Alert(currentRoom);
-			// this.statemachine.ChangeState(new Combat(weapon, gameObject, firePoint, animator, currentRoom.charactersInRoom.First().gameObject));
+			if(!(statemachine.GetCurrentlyRunningState() is Combat))
+				this.statemachine.ChangeState(new Combat(this, weapon, gameObject, firePoint, animator, currentRoom.charactersInRoom.First().gameObject));
 		}
-
 		/*else if (LastRoom != null && LastRoom.charactersInRoom.Count > 0)
 		{
 			PoliceForce.getInstance().Alert(LastRoom);
 			setPos(LastRoom);
 		}*/
-		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && currentRoom == Dest)
+		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && !(statemachine.GetCurrentlyRunningState() is Combat) && currentRoom == Dest)
 		{
 			statemachine.ChangeState(new Idle(animator));
 			PoliceForce.getInstance().RequestOrders(this);

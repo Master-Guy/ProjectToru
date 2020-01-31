@@ -25,7 +25,7 @@ public class PoliceCar : Car
     {
         yield return new WaitForSeconds(Random.Range(0f, 2f));
         
-		Vector3 spawnPosition = target + new Vector3(Random.Range(-1f, 1f), 2.0f, 0);		
+		Vector3 spawnPosition = target + new Vector3(Random.Range(0f, 1f), 2.0f, 0);		
 		PoliceForce.getInstance().AddCop(Instantiate(policePrefab, spawnPosition, Quaternion.identity));
     }
 	
