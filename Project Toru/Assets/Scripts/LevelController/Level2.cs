@@ -644,7 +644,7 @@ public class Level2 : LevelScript
 
 					LevelEndMessage.title = "You've won!";
 					LevelEndMessage.message = "Great job!";
-					LevelEndMessage.nextLevel = "MainMenu";
+					LevelEndMessage.nextLevel = "SubmitScore";
 					LevelEndMessage.LevelSuccessfull = true;
 
 					Character.selectedCharacter = null;
