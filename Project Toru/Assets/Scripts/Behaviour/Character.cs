@@ -72,7 +72,10 @@ public class Character : MonoBehaviour
 				if (Input.GetKey(KeyCode.F))
 				{
 					if (weaponKeyRelease)
-						LevelManager.emit("PlayerHasUsedGun", currentRoom.gameObject);
+						if (currentRoom != null) {
+							LevelManager.emit("PlayerHasUsedGun", currentRoom.gameObject);
+						}
+						
 					
 					weaponKeyRelease = false;
 					weapon?.Shoot();

@@ -34,6 +34,21 @@ public class Level0 : LevelScript
 
             LevelManager.AddCondition(condition);
         }
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "ArchitectKilled";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelEndMessage.title = "You got killed";
+				LevelEndMessage.message = "Luck doesn't seem to be on your side.";
+				LevelEndMessage.nextLevel = "Level 1";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(1);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
 		
 		{
             LevelCondition condition = new LevelCondition();
@@ -269,7 +284,7 @@ public class Level0 : LevelScript
 			}
 			
 			else if (value == "VaultRoom") {
-				LevelManager.emit("CharacterIsInVaultRoom");	
+				LevelManager.emit("CharacterIsInVaultRoom", character.currentRoom.gameObject);	
 			}
 		});
 		
@@ -290,20 +305,32 @@ public class Level0 : LevelScript
 			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
 		});
 		
-		LevelManager.on("PlayerHasUsedGun", () => {
+		LevelManager.on("PlayerHasUsedGun", (gObject) => {
 			LevelManager.Condition("PlayerHasUsedGun").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
-		LevelManager.on("EmployeeFleed", () => {
+		LevelManager.on("EmployeeFleed", (gObject) => {
 			LevelManager.Condition("EmployeeFleed").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 
-		LevelManager.on("CharacterIsInVaultRoom", () => {
+		LevelManager.on("CharacterIsInVaultRoom", (gObject) => {
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
+		});
+
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
+		LevelManager.on("Killed", (gObject) => {
+			if (gObject.name == "Architect") LevelManager.Condition("ArchitectKilled").Fullfill();
 		});
 		
 		LevelManager.on("CharacterEntersVan", () => {

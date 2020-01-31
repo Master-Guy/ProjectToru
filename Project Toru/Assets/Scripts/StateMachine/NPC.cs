@@ -109,7 +109,7 @@ public abstract class NPC : MonoBehaviour
         GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.position.y * 1000);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Room"))
         {

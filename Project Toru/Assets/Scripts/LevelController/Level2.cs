@@ -257,6 +257,7 @@ public class Level2 : LevelScript
 					}
 					
 				}
+				PoliceForce.getInstance().Alert(character.currentRoom);
 			}
 			else if (character.currentRoom.name == "L1 Room R") {
 				
@@ -327,9 +328,31 @@ public class Level2 : LevelScript
 				guard.Say("HOLD YOUR GUN DOWN!");
 				LevelManager.Condition("KarenFleed").Fullfill();
 			});
-			
-			
 		});
+
+		LevelManager.on("PlayerHasUsedGun", (GameObject room) => {
+			if (LevelManager.RandomChange(10))
+			{
+				SpawnPoliceCar();
+				PoliceForce.getInstance().Alert(room.GetComponent<Room>());
+				//LevelManager.Condition("SomeoneHeardShooting").Fullfill();
+			}
+		});
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CopsTriggered";
+			condition.fullfillHandler = (LevelCondition c) => {
+				PoliceSiren.startSiren = true;
+				PoliceSiren.gameObject.SetActive(true);
+
+				LevelManager.Delay(10, () => {
+					SpawnPoliceCar();
+				});
+			};
+
+			LevelManager.AddCondition(condition);
+		}
 
 		{
 			LevelCondition condition = new LevelCondition();
@@ -346,6 +369,20 @@ public class Level2 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
+		LevelManager.on("GuardsAlerted", (GameObject room) => {
+			LevelManager.Condition("GuardsAlerted").Fullfill();
+			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
+		});
+
+		LevelManager.on("CharacterInRoomWithGuard", (GameObject room) => {
+			LevelManager.Condition("CharacterInRoomWithGuard").Fullfill();
+			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
+		});
 
 		LevelManager.on("PlayerFoundKey", (GameObject gameObject) => {
 
@@ -445,8 +482,9 @@ public class Level2 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 
-		LevelManager.on("CameraDetectedPlayer", () => {
+		LevelManager.on("CameraDetectedPlayer", (GameObject room) => {
 			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
+			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 		});
 
 		{
@@ -463,6 +501,10 @@ public class Level2 : LevelScript
 			
 			LevelManager.AddCondition(condition);
 		}
+
+		LevelManager.on("CopsTriggered", () => {
+			LevelManager.Condition("CopsTriggered").Fullfill();
+		});
 
 		{
 			LevelCondition condition = new LevelCondition();

@@ -69,7 +69,15 @@ public class Level1 : LevelScript
 		{
 			LevelCondition condition = new LevelCondition();
 			condition.name = "CopsTriggered";
-			
+			condition.fullfillHandler = (LevelCondition c) => {
+				PoliceSiren.startSiren = true;
+				PoliceSiren.gameObject.SetActive(true);
+
+				LevelManager.Delay(10, () => {
+					SpawnPoliceCar();
+				});
+			};
+
 			LevelManager.AddCondition(condition);
 		}
 		
@@ -280,8 +288,9 @@ public class Level1 : LevelScript
 			LevelManager.Condition("CamerasDisabled").Fullfill();
 		});
 		
-		LevelManager.on("GuardsAlerted", () => {
+		LevelManager.on("GuardsAlerted", (GameObject room) => {
 			LevelManager.Condition("GuardsAlerted").Fullfill();
+			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 		});
 		
 		LevelManager.on("PlayerFoundKey", () => {
@@ -304,13 +313,14 @@ public class Level1 : LevelScript
 			} else if (roomname == "L0 Room R"  && player.inventory.getMoney() != 0) {
 				LevelManager.Condition("PlayerInRoomWithEmployeeAndMoney").Fullfill();
 			} else if (roomname == "Security Room") {
-				LevelManager.emit("CharacterInRoomWithGuard");
+				LevelManager.emit("CharacterInRoomWithGuard", character.currentRoom.gameObject);
 			}
 		});
 
 		{}
-		LevelManager.on("CharacterInRoomWithGuard", () => {
+		LevelManager.on("CharacterInRoomWithGuard", (GameObject room) => {
 			LevelManager.Condition("CharacterInRoomWithGuard").Fullfill();
+			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 		});
 		
 		LevelManager.on("Surrendered", (GameObject gameObject) => {
@@ -323,7 +333,16 @@ public class Level1 : LevelScript
 				LevelManager.Condition("PlayerTriedOpeningDoorButWasLocked").Fullfill();
 			}
 		});
-		
+
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
+		LevelManager.on("CopsTriggered", () => {
+			LevelManager.Condition("CopsTriggered").Fullfill();
+		});
+
 		LevelManager.on("EmployeeFleed", () => {
 			LevelManager.Delay(Random.Range(10, 20), () => {
 				SpawnPoliceCar();
@@ -340,9 +359,10 @@ public class Level1 : LevelScript
 			});
 		});
 		
-		LevelManager.on("PlayerHasUsedGun", () => {
-			SpawnPoliceCar();
+		LevelManager.on("PlayerHasUsedGun", (GameObject room) => {
 			if (LevelManager.RandomChange(10)) {
+				SpawnPoliceCar();
+				PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 				//LevelManager.Condition("SomeoneHeardShooting").Fullfill();
 			}
 		});
@@ -351,11 +371,15 @@ public class Level1 : LevelScript
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
 		});
 
-		LevelManager.on("EmployeeKilled", () => {
+		LevelManager.on("EmployeeKilled", (GameObject room) => {
 			LevelManager.Condition("EmployeeKilled").Fullfill();
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 		});
 
-		LevelManager.on("Killed", (string name) => {
+		LevelManager.on("Killed", (GameObject gameobject) => {
+			string name = gameobject.name;
+
 			if (name == "Karen") {
 				LevelManager.Condition("KarenKilled").Fullfill();
 			} else if (name == "Employee 1") {

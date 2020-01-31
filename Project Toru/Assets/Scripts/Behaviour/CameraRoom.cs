@@ -18,7 +18,7 @@ public class CameraRoom : MonoBehaviour
     {
         if (roomObj.getNPCsInRoom().Count > 0)
         {
-			LevelManager.emit("GuardsAlerted");
+			LevelManager.emit("GuardsAlerted", roomObj.gameObject);
 			
             foreach (GameObject npc in roomObj.getNPCsInRoom())
             {

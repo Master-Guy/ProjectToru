@@ -90,6 +90,12 @@ namespace Assets.Scripts.Options
 			DisplayNextOptions();
 		}
 
+		public void RemoveEvent()
+		{
+			EventQueue.RemoveAt(0);
+			DisplayNextOptions();
+		}
+
 		void DisplayNextOptions()
 		{
 			if (EventQueue.Count == 0)
