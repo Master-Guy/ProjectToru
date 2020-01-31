@@ -29,7 +29,9 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     void Update()
-    {
+    {	
+		
+
 		if (movementDisabled) {
 			return;
 		}
@@ -60,6 +62,8 @@ public class CameraBehaviour : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, targetVector, smoothing);
             }
         }
+
+		GetComponent<Camera>().orthographicSize = zoomDistance;
     }
 
 	bool PlayerDidUseCameraControls = false;
@@ -92,7 +96,6 @@ public class CameraBehaviour : MonoBehaviour
     {
         zoomDistance -= Input.mouseScrollDelta.y * Time.deltaTime * 30;
         zoomDistance = Mathf.Clamp(zoomDistance, minZoomDistance, maxZoomDistance);
-        GetComponent<Camera>().orthographicSize = zoomDistance;
     }
 
     Vector3 CheckBorders()

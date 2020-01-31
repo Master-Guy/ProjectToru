@@ -22,6 +22,8 @@ public class Level2 : LevelScript
 
 	public Van van;
 
+	public LevelIntroduction introduction;
+
 	protected override void Awake() {
 		
 		base.Awake();
@@ -335,6 +337,7 @@ public class Level2 : LevelScript
 			employeeDownstairsRight.animator.SetFloat("moveX", -1);
 			karen.animator.SetFloat("moveX", -1);
 			employeeUpstairs.animator.SetFloat("moveX", -1);
+
 		});
 
 		LevelManager.on("IsHoldingGun", (GameObject gameObject) => {
@@ -435,7 +438,7 @@ public class Level2 : LevelScript
 		LevelManager.on("Surrendered", (GameObject gameObject) => {
 
 			if (gameObject.name == "Architect") {
-				if (LevelManager.Condition("MuscleKilled").fullfilled || muscle.surrendering) {
+				if (LevelManager.Condition("MuscleKilled").fullfilled || muscle.surrendering || LevelManager.Condition("MuscleInVan").fullfilled) {
 					LevelEndMessage.title = "You got arrested";
 					LevelEndMessage.message = "Nobody was there to help";
 					LevelEndMessage.nextLevel = "Level 2";
@@ -560,7 +563,30 @@ public class Level2 : LevelScript
 			
 			condition.fullfillHandler = (LevelCondition c) => {
 				if (LevelManager.Condition("PlayerFoundPacmanMachine").fullfilled) {
+					if (LevelManager.Condition("MuscleInVan").fullfilled) {
+						LevelManager.Condition("LevelEndSuccesfull").Fullfill();
+						
+						return;
+					}
 
+					if (muscle.surrendering) {
+						LevelManager.Condition("LevelEndSuccesfull").Fullfill();
+
+						return;
+					}
+
+					if (LevelManager.Condition("MuscleKilled").fullfilled) {
+						LevelManager.Condition("LevelEndSuccesfull").Fullfill();
+
+						return;
+					}
+				} else {
+					LevelEndMessage.title = "You got away";
+					LevelEndMessage.message = "But you can't leave the Pacman machine behind!";
+					LevelEndMessage.nextLevel = "Level 2";
+					LevelEndMessage.LevelSuccessfull = false;
+					LevelManager.EndLevel(3);
+					return;
 				}
 			};
 			
@@ -572,13 +598,55 @@ public class Level2 : LevelScript
 			condition.name = "MuscleInVan";
 			
 			condition.fullfillHandler = (LevelCondition c) => {
-				// LevelEndMessage.title = "You got killed";
-				// LevelEndMessage.message = "You wasn't so lucky";
-				// LevelEndMessage.nextLevel = "Level 2";
-				// LevelEndMessage.LevelSuccessfull = false;
-				// LevelManager.EndLevel(3);
-				/// I WAS HERE
+				if (LevelManager.Condition("ArchitectInVan").fullfilled) {
+					LevelManager.Condition("LevelEndSuccesfull").Fullfill();
+					return;
+				};
 
+				if (architect.surrendering) {
+					LevelEndMessage.title = "You deserted your boss!";
+					LevelEndMessage.message = "You can't leave him behind!";
+					LevelEndMessage.nextLevel = "Level 2";
+					LevelEndMessage.LevelSuccessfull = false;
+					LevelManager.EndLevel(3);
+					return;
+				}
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "LevelEndSuccesfull";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				van.Drive();
+
+				LevelManager.Delay(2, () => {
+					introduction.transistionToScene = true;
+					introduction.text.Clear();
+					introduction.text.Add("You did it!");
+					introduction.text.Add("You have the holy grail!");
+					introduction.text.Add("Great job!");
+					introduction.Init();
+
+					LevelEndMessage.title = "You've won!";
+					LevelEndMessage.message = "Great job!";
+					LevelEndMessage.nextLevel = "MainMenu";
+					LevelEndMessage.LevelSuccessfull = true;
+
+					Character.selectedCharacter = null;
+
+					introduction.backgroundBlack.gameObject.SetActive(true);
+					{
+						Color color = introduction.backgroundBlack.color;
+						color.a = 0;
+						introduction.backgroundBlack.color = color;
+					}
+					introduction.state = LevelIntroduction.State.BlackFadeIn;
+				});
+				
 			};
 			
 			LevelManager.AddCondition(condition);
@@ -603,7 +671,7 @@ public class Level2 : LevelScript
 			LevelManager.Condition("MuscleFoundPacmanMachine").Fullfill();
 		});
 
-		LevelManager.emit("StartLevel");
+		// LevelManager.emit("StartLevel");
 	}
 
 	

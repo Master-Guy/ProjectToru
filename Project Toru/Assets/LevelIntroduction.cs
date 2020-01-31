@@ -11,18 +11,30 @@ public class LevelIntroduction : MonoBehaviour
 	public TextMesh textMesh;
 	public TextMesh textMeshControls;
 
+	public Transform cameraCenter;
+
 	public List<string> text = new List<string>();
 
-	State state = State.Wait;
+	public State state = State.Wait;
 
 	float WaitTimer = 1;
 	int currentLine = 0;
 
+	public bool transistionToScene = false;
+
     // Start is called before the first frame update
     void Start()
     {
+		Init();
+    }
+
+	public void Init() {
 		// No text means no usage
-		if (text.Count == 0) gameObject.SetActive(false);
+		if (text.Count == 0) {
+			gameObject.SetActive(false);
+		} else {
+			gameObject.SetActive(true);
+		}
 
 		// Set background visable
 		backgroundBlack.gameObject.SetActive(true);
@@ -34,10 +46,17 @@ public class LevelIntroduction : MonoBehaviour
 
 		// Disable UI (will overlab otherwise)
 		LevelManager.GetUI()?.SetActive(false);
-		Camera.main.GetComponent<CameraBehaviour>().movementDisabled = true;
-    }
 
-	enum State {
+		// Set Camera
+		Camera.main.GetComponent<CameraBehaviour>().zoomDistance = 6;
+		Camera.main.GetComponent<CameraBehaviour>().target = cameraCenter;
+		Camera.main.GetComponent<CameraBehaviour>().smoothing = 1;
+		Camera.main.GetComponent<CameraBehaviour>().movementDisabled = true;
+
+		currentLine = 0;
+	}
+
+	public enum State {
 		None,
 		Start,
 		BlackFadeIn,
@@ -52,8 +71,6 @@ public class LevelIntroduction : MonoBehaviour
 		FadeInControls
 		
 	};
-
-	
 
     // Update is called once per frame
     void Update()
@@ -90,8 +107,21 @@ public class LevelIntroduction : MonoBehaviour
 				{
 					WaitTimer -= Time.deltaTime;
 					
-					if (WaitTimer <= 0) state = State.BackgroundFadeOut;
+					if (WaitTimer <= 0) {
+						WaitTimer = 1;
+						state = State.BackgroundFadeOut;
+					}
 				}
+			break;
+
+			case State.BlackFadeIn: 
+			{
+				Color color = backgroundBlack.color;
+				color.a += 0.5f * Time.deltaTime;
+				backgroundBlack.color = color;
+					
+				if (color.a >= 1) state = State.SelectNextLine;
+			}
 			break;
 
 			case State.BackgroundFadeOut:
@@ -175,6 +205,11 @@ public class LevelIntroduction : MonoBehaviour
 			break;
 
 			case State.FadeOutIntroduction: {
+
+				if (transistionToScene) {
+					LevelManager.EndLevel(0);
+				}
+
 				{
 					Color color = textMesh.color;
 					color.a -= 0.5f * Time.deltaTime;
