@@ -479,6 +479,8 @@ public class Level2 : LevelScript
 		}
 
 		LevelManager.on("CameraDetectedPlayer", (GameObject room) => {
+			if (LevelManager.Condition("CamerasDisabled").fullfilled) return;
+			
 			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
 			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 		});
@@ -660,7 +662,19 @@ public class Level2 : LevelScript
 			};
 			
 			LevelManager.AddCondition(condition);
+		}	
+		
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CamerasDisabled";
+			
+			LevelManager.AddCondition(condition);
 		}
+
+	
+		LevelManager.on("CamerasDisabled", () => {
+			LevelManager.Condition("CamerasDisabled").Fullfill();
+		});
 
 		LevelManager.on("CharacterEntersVan", (GameObject gameobject) => {
 
