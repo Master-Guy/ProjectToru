@@ -131,8 +131,8 @@ public class Level1 : LevelScript
 				text.sentences.Add("I got stuck here");
 				
 				text.callback = () => {
-					LevelEndMessage.title = "You got stuck in the vaultroom";
-					LevelEndMessage.message = "You didn't play everything out";
+					LevelEndMessage.title = "You got stuck in the vault room";
+					LevelEndMessage.message = "You didn't find all the necessaru pieces of the puzzle.";
 					LevelEndMessage.nextLevel = "Level 1";
 					LevelEndMessage.LevelSuccessfull = false;
 					LevelManager.EndLevel(1);
@@ -258,7 +258,7 @@ public class Level1 : LevelScript
 				
 				text.callback = () => {
 					LevelEndMessage.title = "You got killed";
-					LevelEndMessage.message = "You wasn't so lucky";
+					LevelEndMessage.message = "Luck doesn't seem to be on your side.";
 					LevelEndMessage.nextLevel = "Level 1";
 					LevelEndMessage.LevelSuccessfull = false;
 					LevelManager.EndLevel(1);
@@ -331,8 +331,8 @@ public class Level1 : LevelScript
 				if (LevelManager.RandomChange(70)) {
 					LevelManager.Delay(1, () => {
 						DialogueText text = new DialogueText();
-						text.name = "I hear the polce";
-						text.sentences.Add("That bloody employee called the cops, i am sure!");
+						text.name = "I hear the police";
+						text.sentences.Add("That bloody employee called the cops, I am sure!");
 						
 						dialogueManager.QueueDialogue(text);
 					});
@@ -372,7 +372,7 @@ public class Level1 : LevelScript
 			
 			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
 				LevelEndMessage.title = "Good job!";
-				LevelEndMessage.message = "You got some loot and you are not caught!";
+				LevelEndMessage.message = "You stole some money and didn't get caught!";
 				LevelEndMessage.nextLevel = "Level 2";
 				LevelEndMessage.LevelSuccessfull = true;
 				LevelManager.EndLevel(3);

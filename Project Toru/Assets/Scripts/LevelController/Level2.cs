@@ -455,7 +455,7 @@ public class Level2 : LevelScript
 			
 			condition.fullfillHandler = (LevelCondition c) => {
 				LevelEndMessage.title = "You got killed";
-				LevelEndMessage.message = "You wasn't so lucky";
+				LevelEndMessage.message = "Luck doesn't seem to be on your side.";
 				LevelEndMessage.nextLevel = "Level 2";
 				LevelEndMessage.LevelSuccessfull = false;
 				LevelManager.EndLevel(3);
@@ -514,7 +514,7 @@ public class Level2 : LevelScript
 			condition.fullfillHandler = (LevelCondition c) => {
 				DialogueText text = new DialogueText();
 				text.name = "The Pacman Machine!!";
-				text.sentences.Add("Muscle better let boss take machine");
+				text.sentences.Add("Muscle better let boss take shiny machine");
 				
 				dialogueManager.QueueDialogue(text);
 			};

@@ -72,7 +72,7 @@ public class Level0 : LevelScript
 				DialogueText text = new DialogueText();
 				text.name = "Watch out!";
 				text.sentences.Add("The employee will call the cops when you enter the vault room");
-				text.sentences.Add("[Left Click] on the employee to keep him under shot");
+				text.sentences.Add("[Left Click] on the employee to keep him at gunpoint");
 				text.sentences.Add("Press [F] to fire and try to kill the employee");
 				text.sentences.Add("... you don't have to kill him");
 				
@@ -321,7 +321,7 @@ public class Level0 : LevelScript
 			
 			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
 				LevelEndMessage.title = "Good job!";
-				LevelEndMessage.message = "You got some loot and you are not caught!";
+				LevelEndMessage.message = "You stole some money and didn't get caught!";
 				LevelEndMessage.nextLevel = "Level 1";
 				LevelEndMessage.LevelSuccessfull = true;
 				LevelManager.EndLevel(3);
@@ -361,7 +361,7 @@ public class Level0 : LevelScript
 				}
 				
 				if (!LevelManager.Condition("PlayerDidUseCameraControls").fullfilled) {
-					text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
+					text.sentences.Add("Use [up] [down] [left] [right] or [W] [A] [S] [D] keys to look through the level");
 					text.sentences.Add("Use [scroll] to zoom in and out");
 				}
 				
