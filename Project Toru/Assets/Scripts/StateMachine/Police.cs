@@ -44,7 +44,7 @@ public class Police : NPC
 		{
 			//GetComponent<ExecutePathFindingNPC>().StopPathFinding();
 			PoliceForce.getInstance().Alert(currentRoom);
-			this.statemachine.ChangeState(new Combat(weapon, gameObject, firePoint, animator, currentRoom.charactersInRoom.First().gameObject));
+			//this.statemachine.ChangeState(new Combat(weapon, gameObject, firePoint, animator, currentRoom.charactersInRoom.First().gameObject));
 		}
 		/*else if (LastRoom != null && LastRoom.charactersInRoom.Count > 0)
 		{

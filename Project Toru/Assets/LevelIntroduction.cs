@@ -11,18 +11,32 @@ public class LevelIntroduction : MonoBehaviour
 	public TextMesh textMesh;
 	public TextMesh textMeshControls;
 
+	public Transform cameraCenter;
+	public int currentLevel;
+
 	public List<string> text = new List<string>();
 
-	State state = State.Wait;
+	public State state = State.Wait;
 
 	float WaitTimer = 1;
 	int currentLine = 0;
 
+	public bool transistionToScene = false;
+
     // Start is called before the first frame update
     void Start()
     {
+		Init();
+    }
+
+	public void Init() {
 		// No text means no usage
-		if (text.Count == 0) gameObject.SetActive(false);
+		if (text.Count == 0 || LevelEndMessage.lastLevel == currentLevel) {
+			gameObject.SetActive(false);
+			return;
+		} else {
+			gameObject.SetActive(true);
+		}
 
 		// Set background visable
 		backgroundBlack.gameObject.SetActive(true);
@@ -34,24 +48,31 @@ public class LevelIntroduction : MonoBehaviour
 
 		// Disable UI (will overlab otherwise)
 		LevelManager.GetUI()?.SetActive(false);
-		Camera.main.GetComponent<CameraBehaviour>().movementDisabled = true;
-    }
 
-	enum State {
+		// Set Camera
+		Camera.main.GetComponent<CameraBehaviour>().zoomDistance = 6;
+		Camera.main.GetComponent<CameraBehaviour>().target = cameraCenter;
+		Camera.main.GetComponent<CameraBehaviour>().smoothing = 1;
+		Camera.main.GetComponent<CameraBehaviour>().movementDisabled = true;
+
+		currentLine = 0;
+	}
+
+	public enum State {
 		None,
 		Start,
 		BlackFadeIn,
 		BackgroundFadeOut,
 		FadeInText,
 		SelectNextLine,
+		ExtremeText,
 		FadeOutText,
 		Wait,
 		FadeOutIntroduction,
 		WaitForInput,
 		FadeInControls
+		
 	};
-
-	
 
     // Update is called once per frame
     void Update()
@@ -88,8 +109,21 @@ public class LevelIntroduction : MonoBehaviour
 				{
 					WaitTimer -= Time.deltaTime;
 					
-					if (WaitTimer <= 0) state = State.BackgroundFadeOut;
+					if (WaitTimer <= 0) {
+						WaitTimer = 1;
+						state = State.BackgroundFadeOut;
+					}
 				}
+			break;
+
+			case State.BlackFadeIn: 
+			{
+				Color color = backgroundBlack.color;
+				color.a += 0.5f * Time.deltaTime;
+				backgroundBlack.color = color;
+					
+				if (color.a >= 1) state = State.SelectNextLine;
+			}
 			break;
 
 			case State.BackgroundFadeOut:
@@ -131,15 +165,7 @@ public class LevelIntroduction : MonoBehaviour
 
 			case State.SelectNextLine:
 				{
-					if (currentLine >= text.Count) {
-						state = State.FadeOutIntroduction;
-						break;
-					}
-
-					textMesh.text = text[currentLine];
-					currentLine++;
-
-					state = State.FadeInText;
+					SelectNextLine();
 				}
 			break;
 
@@ -149,19 +175,43 @@ public class LevelIntroduction : MonoBehaviour
 					color.a -= 1f * Time.deltaTime;
 					textMesh.color = color;
 					
-					if (color.a <= 0) state = State.SelectNextLine;
+					if (color.a <= 0) {
+						if (textMesh.fontSize > 80) {
+							textMesh.fontSize = 80;
+							textMesh.transform.Rotate(new Vector3(0, 0, -10));
+						}
+						state = State.SelectNextLine;
+					}
 				}
 			break;
 
 			case State.WaitForInput:
 				{
 					if (Input.GetKeyDown(KeyCode.Space)) {
+						if (currentLine < text.Count) {
+							if (text[currentLine].StartsWith("!")) {
+								state = State.ExtremeText;
+								break;
+							}
+						}
+
 						state = State.FadeOutText;
 					}
 				}
 			break;
 
+			case State.ExtremeText:
+				SelectNextLine();
+				textMesh.fontSize = 120;
+				textMesh.transform.Rotate(new Vector3(0, 0, 10));
+			break;
+
 			case State.FadeOutIntroduction: {
+
+				if (transistionToScene) {
+					LevelManager.EndLevel(0);
+				}
+
 				{
 					Color color = textMesh.color;
 					color.a -= 0.5f * Time.deltaTime;
@@ -188,11 +238,26 @@ public class LevelIntroduction : MonoBehaviour
 				}
 			}
 			break;
-
 			
-
 			default:
 				break;
 		}
     }
+
+	void SelectNextLine() {
+		if (currentLine >= text.Count) {
+			state = State.FadeOutIntroduction;
+			return;
+		}
+
+		string textString = text[currentLine];
+		if (textString.StartsWith("!")) {
+			textString = textString.Substring(1);
+		}
+
+		textMesh.text = textString;
+		currentLine++;
+
+		state = State.FadeInText;
+	}
 }

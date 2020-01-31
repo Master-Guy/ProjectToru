@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
 
         if (Condition(condition.name) == null)
         {
-            Debug.Log("Adding Condition '" + condition.name + "'");
+            //Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
         }
         else
@@ -177,15 +177,15 @@ public class LevelManager : MonoBehaviour
 
 	public delegate void LevelScriptCallback();
 	public delegate void LevelScriptCallbackString(string value);
-	public delegate void LevelScriptCallbackGameObject(GameObject value);
-
+	public delegate void LevelScriptCallbackGameObject(GameObject gameobject);
+	
 	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
 	static Dictionary<string, LevelScriptCallbackString> events_string = new Dictionary<string, LevelScriptCallbackString>();
-	static Dictionary<string, LevelScriptCallbackGameObject> events_GameObject = new Dictionary<string, LevelScriptCallbackGameObject>();
-
+	static Dictionary<string, LevelScriptCallbackGameObject> events_object = new Dictionary<string, LevelScriptCallbackGameObject>();
+	
 	public static void emit(string eventString)
 	{
-		//Debug.Log("Emitting " + eventString);
+		Debug.Log("Emitting " + eventString);
 		if (events.ContainsKey(eventString)) {
 			events[eventString]?.Invoke();
 			return;
@@ -194,7 +194,7 @@ public class LevelManager : MonoBehaviour
 	
 	public static void emit(string eventString, string value)
 	{
-		//Debug.Log("Emitting " + eventString + " With STRING value " + value);
+		Debug.Log("Emitting " + eventString + " With STRING value " + value);
 		if (events_string.ContainsKey(eventString)) {
 			events_string[eventString]?.Invoke(value);
 			return;
@@ -203,12 +203,17 @@ public class LevelManager : MonoBehaviour
 		// Try emitting without string
 		LevelManager.emit(eventString);
 	}
-
-	public static void emit(string eventString, GameObject value)
+	
+	public static void emit(string eventString, GameObject gameobject)
 	{
-		Debug.Log("Emitting " + eventString);
-		if (events_GameObject.ContainsKey(eventString))
-			events_GameObject[eventString]?.Invoke(value);
+		Debug.Log("Emitting " + eventString + " With OBJECT " + gameobject.name);
+		if (events_object.ContainsKey(eventString)) {
+			events_object[eventString]?.Invoke(gameobject);
+			return;
+		}
+		
+		// Try emitting without string
+		LevelManager.emit(eventString);
 	}
 	
 	public static void on(string eventString, LevelScriptCallback callback)
@@ -222,13 +227,14 @@ public class LevelManager : MonoBehaviour
 	}
 
 	public static void on(string eventString, LevelScriptCallbackGameObject callback)
-	{
-		events_GameObject.Add(eventString, callback);
+	{	
+		events_object.Add(eventString, callback);
 	}
 
 	public static void setLevel() {
 		events.Clear();
 		events_string.Clear();
+		events_object.Clear();
 		conditions.Clear();
 	}
 	

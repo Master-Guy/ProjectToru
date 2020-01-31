@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bag: []
   TextBox: {fileID: 8285807996838187758}
+  surrender: 0
 --- !u!95 &6188662567543495645
 Animator:
   serializedVersion: 3
@@ -194,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  _maxHealth: 100
 --- !u!114 &5668241911090664038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd85f12e8a350a140a227443b2f66d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoom: {fileID: 0}
 --- !u!1 &8285807996838187758
 GameObject:
   m_ObjectHideFlags: 0
