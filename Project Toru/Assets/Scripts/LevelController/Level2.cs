@@ -317,29 +317,6 @@ public class Level2 : LevelScript
 			LevelManager.AddCondition(condition);
 		}
 
-		LevelManager.on("StartLevel", () => {
-			LevelManager.Delay(1, () => {
-				DialogueText text = new DialogueText();
-				text.name = "You have a companion!";
-				text.sentences.Add("He will help you to keep the hostages under control");
-				text.sentences.Add("Control him the same way you control the Architect");
-					
-				text.callback = () => {
-					LevelManager.Delay(0.5f, () => {
-						architect.Say("Where is that pacman machine...");
-					});
-				};
-
-				dialogueManager.QueueDialogue(text);
-			});
-
-			employeeDownstairsLeft.animator.SetFloat("moveX", -1);
-			employeeDownstairsRight.animator.SetFloat("moveX", -1);
-			karen.animator.SetFloat("moveX", -1);
-			employeeUpstairs.animator.SetFloat("moveX", -1);
-
-		});
-
 		LevelManager.on("IsHoldingGun", (GameObject gameObject) => {
 			
 			Character character = gameObject.GetComponent<Character>();
@@ -671,7 +648,31 @@ public class Level2 : LevelScript
 			LevelManager.Condition("MuscleFoundPacmanMachine").Fullfill();
 		});
 
-		// LevelManager.emit("StartLevel");
+		LevelManager.on("StartLevel", () => {
+
+			LevelEndMessage.lastLevel = 2;
+
+			LevelManager.Delay(1, () => {
+				DialogueText text = new DialogueText();
+				text.name = "You have a companion!";
+				text.sentences.Add("He will help you to keep the hostages under control");
+				text.sentences.Add("Control him the same way you control the Architect");
+					
+				text.callback = () => {
+					LevelManager.Delay(0.5f, () => {
+						architect.Say("Where is that pacman machine...");
+					});
+				};
+
+				dialogueManager.QueueDialogue(text);
+			});
+
+			employeeDownstairsLeft.animator.SetFloat("moveX", -1);
+			employeeDownstairsRight.animator.SetFloat("moveX", -1);
+			karen.animator.SetFloat("moveX", -1);
+			employeeUpstairs.animator.SetFloat("moveX", -1);
+
+		});
 	}
 
 	

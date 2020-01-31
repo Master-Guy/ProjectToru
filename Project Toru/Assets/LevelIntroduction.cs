@@ -12,6 +12,7 @@ public class LevelIntroduction : MonoBehaviour
 	public TextMesh textMeshControls;
 
 	public Transform cameraCenter;
+	public int currentLevel;
 
 	public List<string> text = new List<string>();
 
@@ -30,8 +31,9 @@ public class LevelIntroduction : MonoBehaviour
 
 	public void Init() {
 		// No text means no usage
-		if (text.Count == 0) {
+		if (text.Count == 0 || LevelEndMessage.lastLevel == currentLevel) {
 			gameObject.SetActive(false);
+			return;
 		} else {
 			gameObject.SetActive(true);
 		}

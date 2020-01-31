@@ -366,7 +366,7 @@ public class Level1 : LevelScript
 		});
 
 
-		LevelManager.on("AllCharactersInVan", () => {
+		LevelManager.on("CharacterEntersVan", (GameObject character) => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();
 			
@@ -393,6 +393,13 @@ public class Level1 : LevelScript
 				LevelEndMessage.LevelSuccessfull = false;
 				LevelManager.EndLevel(3);
 			}
+		});
+
+		LevelManager.on("StartLevel", () => {
+			LevelEndMessage.lastLevel = 1;
+			karen.animator.SetFloat("moveX", -1);
+			employeeDownstairs.PingPong();
+			guardSecurityRoom.PingPong();
 		});
 		
 	}

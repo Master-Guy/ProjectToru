@@ -16,6 +16,8 @@ public static class LevelEndMessage
 
     public static int money;
 
+	public static int lastLevel = -1;
+
     public static void Reset()
     {
         title = "";
