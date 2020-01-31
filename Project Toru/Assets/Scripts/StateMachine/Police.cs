@@ -8,7 +8,7 @@ using UnityEngine;
 public class Police : NPC
 {
 	[SerializeField]
-	Room Dest;
+	Room Dest, lastRoom;
 
 	protected override void Awake() {
 		base.Awake();
@@ -46,6 +46,25 @@ public class Police : NPC
 	public void setPos(Room dest)
 	{
 		Dest = dest;
-		GetComponent<ExecutePathFindingNPC>().setPosTarget(Dest.GetPosition());
+		GetComponent<ExecutePathFindingNPC>().setPosTarget(Dest.GetPosition() + new Vector3(Dest.GetSize().x/2.0f, 0.5f, 0.0f));
+	}
+
+	public override void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Room"))
+		{
+			lastRoom = currentRoom;
+			currentRoom = other.gameObject.GetComponent<Room>();
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag("Room") && other.gameObject.GetComponent<Room>() == currentRoom)
+		{
+			var temp = currentRoom;
+			currentRoom = lastRoom;
+			lastRoom = temp;
+		}
 	}
 }
