@@ -309,7 +309,6 @@ public abstract class ExecutePathFinding : MonoBehaviour
 					weapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 				}
 			}
-
 			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		}
 

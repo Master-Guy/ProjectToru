@@ -17,9 +17,6 @@ public class CharacterUI : MonoBehaviour
         if(players.Length == 1)
         {
             CharacterSelectionBox.SetActive(false);
-
-			players[0].transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
-			Character.selectedCharacter = players[0].GetComponent<Character>();
 		} 
         else
         {
