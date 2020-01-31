@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public abstract class NPC : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> bag = null;
+    public List<GameObject> bag = null;
 
     [SerializeField]
     private GameObject TextBox = null;
@@ -37,6 +37,8 @@ public abstract class NPC : MonoBehaviour
 
 	public bool surrender = false;
 	protected bool fleeTrue = false;
+
+	public bool fleeIfPossible = false;
 
 	Vector3 currentpos;
     Vector3 lastpos;
@@ -69,6 +71,8 @@ public abstract class NPC : MonoBehaviour
         currentpos = transform.position;
         change = currentpos - lastpos;
 
+		if (fleeIfPossible) FleeIfPossible();
+
 		if(change != Vector3.zero && showWeapon)
         {
             FlipFirePoint();
@@ -88,6 +92,7 @@ public abstract class NPC : MonoBehaviour
     {
         TextBox.GetComponent<TextMesh>().text = text;
         TextBox.SetActive(true);
+		TextBox.GetComponent<Renderer>().sortingLayerName = "UI";
         Invoke("disableTextBox", 3);
     }
 

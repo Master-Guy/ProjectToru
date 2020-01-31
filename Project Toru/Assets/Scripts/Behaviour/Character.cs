@@ -60,20 +60,7 @@ public class Character : MonoBehaviour
 
 	// Update is called once per frame
 	void Update()
-	{
-
-		if (selectedCharacter == this && !outline)
-		{
-			Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
-			outline = true;
-		}
-
-		if (selectedCharacter != this)
-		{
-			Outline.RemoveOutline(this.gameObject);
-			outline = false;
-		}
-		
+	{	
 		if (surrendering) return;
 
 		if (this.Equals(selectedCharacter) && !surrendering)
@@ -125,7 +112,7 @@ public class Character : MonoBehaviour
 		{
 			if (selectedCharacter != null)
 			{
-				// selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			}
 
 			selectedCharacter = this;
@@ -134,7 +121,7 @@ public class Character : MonoBehaviour
 
 			inventory.UpdateUI();
 
-			// transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
 
@@ -173,6 +160,7 @@ public class Character : MonoBehaviour
     {
         textBox.GetComponent<TextMesh>().text = text;
         textBox.SetActive(true);
+		textBox.GetComponent<Renderer>().sortingLayerName = "UI";
         Invoke("disableTextBox", 3);
     }
 
