@@ -7,8 +7,7 @@ public class PoliceCar : Car
 	[Range (0, 10)]
 	public int SpawnCops = 1;
 	
-	public Character policePrefab = null;
-	
+	public Police policePrefab = null;
 	public PoliceCar() {
 		base.callback = (Vector3 target) => {
 			if (policePrefab == null) {
@@ -26,8 +25,8 @@ public class PoliceCar : Car
     {
         yield return new WaitForSeconds(Random.Range(0f, 2f));
         
-		Vector3 spawnPosition = target + new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 1.5f), 0);		
-		Instantiate(policePrefab, spawnPosition, Quaternion.identity);
+		Vector3 spawnPosition = target + new Vector3(Random.Range(-1f, 1f), 1.5f, 0);		
+		PoliceForce.getInstance().AddCop(Instantiate(policePrefab, spawnPosition, Quaternion.identity));
     }
 	
 }

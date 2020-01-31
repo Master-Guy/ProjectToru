@@ -6,6 +6,7 @@ using System.Linq;
 
 public class Guard : NPC
 {
+
     
 	public Character targetCharacter;
 	bool flee = false;

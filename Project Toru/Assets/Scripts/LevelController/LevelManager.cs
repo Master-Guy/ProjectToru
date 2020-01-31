@@ -204,6 +204,7 @@ public class LevelManager : MonoBehaviour
 		LevelManager.emit(eventString);
 	}
 
+D
 	public static void emit(string eventString, GameObject gameobject)
 	{
 		Debug.Log("Emitting " + eventString + " With OBJECT " + gameobject.name);
@@ -228,9 +229,9 @@ public class LevelManager : MonoBehaviour
 
 	public static void on(string eventString, LevelScriptCallbackGameObject callback)
 	{
-		events_object.Add(eventString, callback);	
+		events_object.Add(eventString, callback);
 	}
-	
+
 	public static void setLevel() {
 		events.Clear();
 		events_string.Clear();

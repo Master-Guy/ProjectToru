@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Employee : NPC
+
 { 
     protected override void Start()
     {

@@ -45,7 +45,6 @@ public class Character : MonoBehaviour
 
 	[NonSerialized]
 	public bool surrendering = false;
-
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -55,15 +54,14 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-
         weapon.weaponHolder = this.gameObject;
-		
 		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+
 		if (selectedCharacter == this && !outline)
 		{
 			Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
@@ -84,7 +82,7 @@ public class Character : MonoBehaviour
 				if (Input.GetKey(KeyCode.F))
 				{
 					if (weaponKeyRelease)
-						LevelManager.emit("PlayerHasUsedGun");
+						LevelManager.emit("PlayerHasUsedGun", currentRoom.gameObject);
 					
 					weaponKeyRelease = false;
 					weapon?.Shoot();
@@ -125,11 +123,18 @@ public class Character : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
+			if (selectedCharacter != null)
+			{
+				selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			}
+
 			selectedCharacter = this;
 			
 			LevelManager.emit("CharacterHasBeenSelected");
 
 			inventory.UpdateUI();
+
+			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
 
@@ -155,6 +160,7 @@ public class Character : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Room"))
+
 		{	
 			Room oldRoom = currentRoom;
 			currentRoom = other.gameObject.GetComponent<Room>();

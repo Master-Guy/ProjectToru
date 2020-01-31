@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
 
     IEnumerator WaitForAnimationEndTimer()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0f);
         doorCollider.enabled = false;
     }
 
