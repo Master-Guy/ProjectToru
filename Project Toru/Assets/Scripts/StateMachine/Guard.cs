@@ -20,10 +20,13 @@ public class Guard : NPC
         if(weapon != null)
         {
             firePoint = weapon.gameObject;
+			weapon.weaponHolder = gameObject;
+			weapon.RevealGun();
         }
         PingPong();
 	}
 
+	bool release = true;
     void Update()
     {
 		this.statemachine.ExecuteStateUpdate();
@@ -31,7 +34,7 @@ public class Guard : NPC
 
 		if(stats.currentHealth < stats.maxHealth)
 		{
-            this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint,this.animator));
+            // this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint,this.animator));
 		}
 
         lastpos = currentpos;
@@ -44,29 +47,37 @@ public class Guard : NPC
         }
     }
 
+	Character targetCharacter = null;
+
+	public void ShootAt(Character character) {
+		
+		// this.statemachine.ChangeState(new Idle(animator));
+		this.statemachine.ChangeState(new Combat(weapon, gameObject, firePoint, animator, character.gameObject));
+	}
+
+
     private void FlipFirePoint()
     {
-        if (change.x > 0)
+        if (animator.GetFloat("moveX") > 0)
         {
             firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
             firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
             firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
         }
-        if (change.x < 0)
+        else
         {
             firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
             firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
             firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
         }
-        if (change.y > 0)
+
+        if (animator.GetFloat("moveY") > 0.1)
         {
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+            weapon.HideGun();
         }
-        if (change.y < 0)
+        else
         {
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
+            weapon.RevealGun();
         }
     }
 }

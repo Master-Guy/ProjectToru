@@ -51,13 +51,13 @@ public class Weapon : MonoBehaviour
     {
         renderer.enabled = true;
         weaponOut = true;
-        weaponHolder.GetComponent<Character>().animator.SetBool("isHoldingGun", true);
+        weaponHolder.GetComponent<Animator>().SetBool("isHoldingGun", true);
     }
 
     public void HideGun()
     {
         renderer.enabled = false;
         weaponOut = false;
-        weaponHolder.GetComponent<Character>().animator.SetBool("isHoldingGun", false);
+        weaponHolder.GetComponent<Animator>().SetBool("isHoldingGun", false);
     }
 }

@@ -7,8 +7,33 @@ public class CharacterSlot : MonoBehaviour
 {
     public Sprite icon;
     public Character character;
+	public bool selected;
 
-    public void AddCharacter(Character newCharacter)
+	private void Awake()
+	{
+		selected = false;
+	}
+
+	private void Update()
+	{
+		checkSelected();
+	}
+
+	private void checkSelected()
+	{
+		if(character.Equals(Character.selectedCharacter) && !selected)
+		{
+			Tint.Reset(GetComponent<Image>());
+			selected = true;
+		}
+		if (!character.Equals(Character.selectedCharacter) && selected)
+		{
+			Tint.Transparent(GetComponent<Image>());
+			selected = false;
+		}
+	}
+
+	public void AddCharacter(Character newCharacter)
     {
         character = newCharacter;
     }
@@ -24,6 +49,13 @@ public class CharacterSlot : MonoBehaviour
 
     public void SelectCharacter()
     {
-        Character.selectedCharacter = character;
-    }
+		if(Character.selectedCharacter != null)
+		{
+			Character.selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		Character.selectedCharacter = character;
+        Camera.main.GetComponent<CameraBehaviour>().target = Character.selectedCharacter.transform;
+		Character.selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+		Character.selectedCharacter.inventory.UpdateUI();
+	}
 }

@@ -31,8 +31,6 @@ public class Character : MonoBehaviour
 
 	public List<Skills> skills = new List<Skills>();
 
-	private bool outline = false;
-
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -44,27 +42,16 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-
-        weapon.weaponHolder = this.gameObject;
-		
-		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
+		if (weapon != null)
+		{
+			weapon.weaponHolder = this.gameObject;
+			weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
+		}
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (selectedCharacter == this && !outline)
-		{
-			Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
-			outline = true;
-		}
-
-		if (selectedCharacter != this)
-		{
-			Outline.RemoveOutline(this.gameObject);
-			outline = false;
-		}
-
 		if (this.Equals(selectedCharacter))
 		{
 			if(weapon != null) {
@@ -80,7 +67,14 @@ public class Character : MonoBehaviour
 				}
                 if (Input.GetKeyDown(KeyCode.H))
                 {
-                    weapon.HideGun();
+					if (weapon.weaponOut)
+					{
+						weapon.HideGun();
+					}
+					else
+					{
+						weapon.RevealGun();
+					}
                 }
 			}
 		}
@@ -105,11 +99,18 @@ public class Character : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
+			if (selectedCharacter != null)
+			{
+				selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			}
+
 			selectedCharacter = this;
 			
 			LevelManager.emit("CharacterHasBeenSelected");
 
 			inventory.UpdateUI();
+
+			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
 
@@ -130,22 +131,6 @@ public class Character : MonoBehaviour
 			firePoint.transform.position = transform.position + new Vector3(-.3f, -.4f);
 			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
 		}
-
-		// if (animator.GetFloat("moveY") > 0)
-		// {
-		// 	firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
-		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-		// 	Debug.Log("3");
-		// }
-
-		// if (animator.GetFloat("moveY") < 0)
-		// {	
-		// 	firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-		// 	firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		// 	firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-		// 	Debug.Log("4");
-		// }
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

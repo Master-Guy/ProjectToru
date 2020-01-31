@@ -65,7 +65,7 @@ public abstract class NPC : MonoBehaviour
     {
         if (currentRoom.SelectedPlayerInRoom())
         {
-            Outline.SetOutline(this.gameObject);
+            Tint.Apply(this.gameObject);
         }
     }
 
@@ -76,7 +76,7 @@ public abstract class NPC : MonoBehaviour
 
     private void OnMouseExit()
     {
-        Outline.RemoveOutline(this.gameObject);
+        Tint.Reset(this.gameObject);
     }
 
     public bool HasKey(CardreaderColor color)

@@ -6,7 +6,7 @@ public class CameraBehaviour : MonoBehaviour
 {
     public Transform target = null;
 
-    public float smoothing;
+    public float smoothing = 0.04f;
 
     public float zoomDistance;
     public float minZoomDistance = 6;
@@ -19,13 +19,21 @@ public class CameraBehaviour : MonoBehaviour
 
     private Vector3 change;
 
+	public bool movementDisabled = false;
+
     void Start()
     {
-        
+     
+        Move();
+        Zoom();   
     }
 
     void Update()
     {
+		if (movementDisabled) {
+			return;
+		}
+
         Move();
         Zoom();
 
