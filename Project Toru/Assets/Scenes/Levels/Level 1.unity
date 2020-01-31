@@ -2276,6 +2276,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1694405308677135751, guid: 5edebd83d3858c641bb6c36ed531fff9,
+        type: 3}
+      propertyPath: Description
+      value: Found a vault!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5edebd83d3858c641bb6c36ed531fff9, type: 3}
 --- !u!1001 &752194868
