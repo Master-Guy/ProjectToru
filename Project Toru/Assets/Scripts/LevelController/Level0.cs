@@ -254,18 +254,18 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterHasBeenMoved").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (string value) => {
+		LevelManager.on("CharacterIsInRoom", (GameObject value) => {
 			
-			if (value == "L0 Room L") {
+			if (value.name == "L0 Room L") {
 				LevelManager.Condition("CharacterIsInRoomL0_L").Fullfill();
 			}
 			
-			else if (value == "L0 Room R") {
+			else if (value.name == "L0 Room R") {
 				LevelManager.Condition("CharacterIsInRoomL0_R").Fullfill();
 			}
 			
-			else if (value == "VaultRoom") {
-				LevelManager.emit("CharacterIsInVaultRoom");	
+			else if (value.name == "VaultRoom") {
+				LevelManager.emit("CharacterIsInVaultRoom", value);	
 			}
 		});
 		
@@ -286,22 +286,30 @@ public class Level0 : LevelScript
 			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
 		});
 		
-		LevelManager.on("PlayerHasUsedGun", () => {
+		LevelManager.on("PlayerHasUsedGun", (gObject) => {
 			LevelManager.Condition("PlayerHasUsedGun").Fullfill();
+			PoliceForce.getInstance().Alert((gObject == null ? GameObject.Find("Entrance") : gObject).GetComponent<Room>());
 		});
 		
-		LevelManager.on("EmployeeFleed", () => {
+		LevelManager.on("EmployeeFleed", (gObject) => {
 			LevelManager.Condition("EmployeeFleed").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 
-		LevelManager.on("CharacterIsInVaultRoom", () => {
+		LevelManager.on("CharacterIsInVaultRoom", (gObject) => {
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
+		});
+
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
-		
+
 		LevelManager.on("AllCharactersInVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();

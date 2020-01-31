@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Guard : NPC
 {
-    Weapon weapon;
+    public Weapon weapon;
     GameObject firePoint;
 
     Vector3 currentpos;
@@ -23,7 +23,13 @@ public class Guard : NPC
 			weapon.weaponHolder = gameObject;
 			weapon.RevealGun();
         }
-        PingPong();
+		PingPong();
+		if (weapon != null)
+		{
+			animator.SetBool("isHoldingGun", true);
+		}
+
+		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
 
 	bool release = true;

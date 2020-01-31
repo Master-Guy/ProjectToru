@@ -25,6 +25,7 @@ public class CharacterStats : MonoBehaviour
             if(npc != null)
             {
                 npc.dropBag();
+			    LevelManager.emit("NPCKilled", npc.currentRoom.gameObject);
             }
 			
 			LevelManager.emit("Killed", gameObject.name);

@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
 
 	private ParticleSystem ps;
 
-	public GameObject currentRoom;
+	public GameObject currentRoom = null;
 	public static Character selectedCharacter;
 
 	public float MaxWeight;
@@ -55,7 +55,7 @@ public class Character : MonoBehaviour
 				if (Input.GetKey(KeyCode.F))
 				{
 					if (weaponKeyRelease)
-						LevelManager.emit("PlayerHasUsedGun");
+						LevelManager.emit("PlayerHasUsedGun", currentRoom);
 					
 					weaponKeyRelease = false;
 					weapon?.Shoot();
@@ -135,7 +135,7 @@ public class Character : MonoBehaviour
 		if (other.CompareTag("Room"))
 		{
 			currentRoom = other.gameObject;
-			LevelManager.emit("CharacterIsInRoom", currentRoom.name);
+			LevelManager.emit("CharacterIsInRoom", currentRoom);
 		}
 	}
 }
