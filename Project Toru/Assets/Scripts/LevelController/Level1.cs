@@ -365,7 +365,9 @@ public class Level1 : LevelScript
 			PoliceForce.getInstance().Alert(room.GetComponent<Room>());
 		});
 
-		LevelManager.on("Killed", (string name) => {
+		LevelManager.on("Killed", (GameObject gameobject) => {
+			string name = gameobject.name;
+
 			if (name == "Karen") {
 				LevelManager.Condition("KarenKilled").Fullfill();
 			} else if (name == "Employee 1") {
