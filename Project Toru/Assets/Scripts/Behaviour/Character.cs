@@ -155,9 +155,11 @@ public class Character : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Room"))
-		{
+		{	
+			Room oldRoom = currentRoom;
 			currentRoom = other.gameObject.GetComponent<Room>();
-			LevelManager.emit("CharacterIsInRoom", this.gameObject);
+			if (currentRoom != oldRoom)
+				LevelManager.emit("CharacterIsInRoom", this.gameObject);
 		}
 	}
 
@@ -178,8 +180,12 @@ public class Character : MonoBehaviour
 		surrendering = true;
 		animator.SetBool("Surrendering", true);
 		animator.SetFloat("moveX", 0);
+		animator.SetFloat("moveY", 0);
+		animator.SetBool("moving", false);
 		gameObject.GetComponent<ExecutePathFindingPlayable>().StopPathFinding();
 		gameObject.GetComponent<ExecutePathFindingPlayable>().disabled = true;
+
+		LevelManager.emit("Surrendered", gameObject);
 	}
 
 	public void StopSurrender() {

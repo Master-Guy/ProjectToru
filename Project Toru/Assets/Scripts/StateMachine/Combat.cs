@@ -43,6 +43,7 @@ public class Combat : IState
 		}
 
 		if (target.activeSelf == false) {
+			Debug.Log("StopShoot");
 			npc.StopShooting();
 		}
         

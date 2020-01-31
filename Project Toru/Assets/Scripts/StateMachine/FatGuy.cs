@@ -8,7 +8,8 @@ public class FatGuy : NPC
     protected override void Start()
     {
 		base.Start();
-        PingPong();
+        
+		statemachine.ChangeState(new PlayGame(this));
     }
 	
 	protected override void Update()
@@ -18,4 +19,9 @@ public class FatGuy : NPC
 		FleeIfPossible();
     }
 
+	public void RunAway() {
+		this.pathfinder.setPosTarget(-30, 1);
+		statemachine.ChangeState(new Idle(this.animator));
+		animator.SetBool("Surrendering", true);
+	}
 }

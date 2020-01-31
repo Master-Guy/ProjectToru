@@ -19,27 +19,31 @@ public class Employee : NPC
     public override void Surrender() {
 		base.Surrender();
 
-		int random = Random.Range(0, 3);
-		switch (random) {
-			case 0:
-				Say("Not me!");
-			break;
+		if (currentRoom.SelectedPlayerInRoom() && !surrender) {
+			int random = Random.Range(0, 3);
+			switch (random) {
+				case 0:
+					Say("Not me!");
+				break;
 
-			case 1:
-				Say("I have nothing!");
-			break;
+				case 1:
+					Say("I have nothing!");
+				break;
 
-			case 2:
-				Say("Let me live!");
-			break;
+				case 2:
+					Say("Let me live!");
+				break;
 
-			case 3:
-				Say("Don't shoot!");
-			break;
+				case 3:
+					Say("Don't shoot!");
+				break;
 
-			default:
-			break;
+				default:
+				break;
+			}
 		}
+
+		dropBag();
 		
 	}
 }

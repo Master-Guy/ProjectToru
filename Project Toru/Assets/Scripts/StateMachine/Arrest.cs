@@ -100,7 +100,7 @@ public class Arrest : IState
             weapon.HideGun();
         }
         else
-        {
+        {	
             weapon.RevealGun();
         }
     }

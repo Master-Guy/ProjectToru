@@ -7,6 +7,8 @@ using System.Linq;
 public class Guard : NPC
 {
     
+	public Character targetCharacter;
+	bool flee = false;
 
     protected override void Start()
     {	
@@ -17,20 +19,24 @@ public class Guard : NPC
 	protected override void Update()
     {	
 		base.Update();
-        
-		if(stats.currentHealth < stats.maxHealth)
-		{
-            // this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint,this.animator));
+        FleeIfPossible();
+		
+	}
+
+	protected override void FleeIfPossible() {
+		if (flee) return;
+
+		if (currentRoom == null) return;
+
+        if (!currentRoom.AnyCharacterInRoom() && surrender)
+        {	
+			flee = true;
+			ShootAt(targetCharacter);
 		}
 	}
 
-	public override void Surrender()
-    {
-        base.Surrender();
-		Say("You will regret this");
-    }
-
 	public override void StopShooting() {
+		
 		base.StopShooting();
 		GetComponent<ExecutePathFindingNPC>().setPosTarget(startingPosition);
 	}

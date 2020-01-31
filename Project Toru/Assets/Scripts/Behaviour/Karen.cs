@@ -20,7 +20,10 @@ public class Karen : NPC
 	public override void Surrender() {
 		base.Surrender();
 
-		Say("Don't shoot!");
+		if (currentRoom.SelectedPlayerInRoom() && !surrender) {
+			Say("Don't shoot!");
+		}
+		
 	}
 
 	public void BeKaren(Character character) {

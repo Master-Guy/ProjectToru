@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public abstract class NPC : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] bag = null;
+    private List<GameObject> bag = null;
 
     [SerializeField]
     private GameObject TextBox = null;
@@ -34,7 +34,7 @@ public abstract class NPC : MonoBehaviour
 	protected bool showWeapon = false;
 	protected GameObject firePoint;
 
-	protected bool surrender = false;
+	public bool surrender = false;
 	protected bool fleeTrue = false;
 
 	Vector3 currentpos;
@@ -79,6 +79,7 @@ public abstract class NPC : MonoBehaviour
         foreach (GameObject g in bag)
         {
             Instantiate(g, new Vector3(transform.position.x + UnityEngine.Random.Range(-1.5f, 1.5f), currentRoom.transform.position.y + 0.5f, 0), Quaternion.identity);
+			bag.Remove(g);
         }
     }
 
@@ -141,7 +142,6 @@ public abstract class NPC : MonoBehaviour
     }
 
 	public virtual void ShootAt(Character character) {
-		
 		showWeapon = true;
 		this.statemachine.ChangeState(new Combat(this, weapon, gameObject, firePoint, animator, character.gameObject));
 	}
@@ -173,12 +173,12 @@ public abstract class NPC : MonoBehaviour
         }
         else
         {
+
             weapon.RevealGun();
         }
     }
 
 	protected virtual void OnMouseDown() {
-		Character.selectedCharacter.weapon.RevealGun();
 		Surrender();
 	}
 
@@ -186,6 +186,8 @@ public abstract class NPC : MonoBehaviour
     {
         if (currentRoom.SelectedPlayerInRoom() && !surrender)
         {
+			Character.selectedCharacter.weapon.RevealGun();
+
             this.surrender = true;
 			animator.SetFloat("moveX", 0);
             this.statemachine.ChangeState(new Surrender(this.animator));

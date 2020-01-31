@@ -147,6 +147,57 @@ public class Level2 : LevelScript
 			
 			LevelManager.AddCondition(condition);
 		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "KarenTalksToTheManagerMuscle";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+
+				karen.animator.SetFloat("moveX", 1);
+
+				// DialogueText text = new DialogueText();
+				// text.name = "Karen:";
+				// text.sentences.Add("You are my manager!!!!!!");
+				// text.sentences.Add("Why are you so stupid??");
+				// text.sentences.Add("It was a guy with a gun! The same one as last year!");
+				// text.sentences.Add("It was...");
+
+				// dialogueManager.QueueDialogue(text);
+				
+				// text.callback = () => {
+				// 	karen.animator.SetFloat("moveX", -1);
+				// 	karen.Say("YOU");
+				// 	karen.BeKaren(architect);
+				// 	LevelManager.Delay(0.5f, () => {
+				// 		employeeUpstairs.Say("WHOA! Easy!");
+				// 	});
+				// };
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "FatGuyRunsAway";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				fatGuy.Say("Whaaaa i can't deal with people!");
+				fatGuy.RunAway();
+				
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "GuardUpstairsArrest";
+			
+			LevelManager.AddCondition(condition);
+		}
+
 		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
 
 			Character character = gameObject.GetComponent<Character>();
@@ -163,9 +214,11 @@ public class Level2 : LevelScript
 			}
 			else if (character.currentRoom.name == "L0 Room M") {
 				if (character.weapon.weaponOut) {
-					LevelManager.Condition("EmplyeesSurrender").Fullfill();
+					LevelManager.Condition("EmployeesSurrender").Fullfill();
 				} else {
-					LevelManager.Condition("EmployeesTalk").Fullfill();
+					LevelManager.Delay(0.5f, () => {
+						LevelManager.Condition("EmployeesTalk").Fullfill();
+					});
 				}
 			}
 			else if (character.currentRoom.name == "L1 Room L") {
@@ -173,14 +226,38 @@ public class Level2 : LevelScript
 				if (character.weapon.weaponOut) {
 					guardUpstairs.ShootAt(character);
 				} else {
-					guardUpstairs.Arrest(character);
+					if (!LevelManager.Condition("GuardUpstairsArrest").fullfilled) {
+						LevelManager.Condition("GuardUpstairsArrest").Fullfill();
+
+						guardUpstairs.Arrest(character);
+					} else {
+						guardUpstairs.ShootAt(character);
+					}
+					
 				}
 			}
 			else if (character.currentRoom.name == "L1 Room R") {
-				LevelManager.Delay(0.5f, () => {
-					LevelManager.Condition("KarenTalksToTheManager").Fullfill();
-				});
 				
+				if (gameObject == muscle.gameObject)
+				{	
+					LevelManager.Delay(0.5f, () => {
+						LevelManager.Condition("KarenTalksToTheManagerMuscle").Fullfill();
+					});
+				}
+				else
+				{
+					LevelManager.Delay(0.5f, () => {
+						LevelManager.Condition("KarenTalksToTheManager").Fullfill();
+					});	
+				}
+
+				
+				
+			}
+			else if (character.currentRoom.name == "L2 Room R") {
+				LevelManager.Delay(0.5f, () => {
+					LevelManager.Condition("FatGuyRunsAway").Fullfill();
+				});	
 			}
 		});
 
@@ -203,6 +280,7 @@ public class Level2 : LevelScript
 			employeeDownstairsLeft.animator.SetFloat("moveX", -1);
 			employeeDownstairsRight.animator.SetFloat("moveX", -1);
 			karen.animator.SetFloat("moveX", -1);
+			employeeUpstairs.animator.SetFloat("moveX", -1);
 		});
 
 		LevelManager.on("IsHoldingGun", (GameObject gameObject) => {
@@ -221,9 +299,19 @@ public class Level2 : LevelScript
 				return;
 			};
 
+			
+
+			LevelManager.Delay(0.5f, () => {
+
+				if (guard.surrender) {
+					return;
+				}
+
+				guard.ShootAt(character);
+				guard.Say("HOLD YOUR GUN DOWN!");
+			});
 			// At this stage, character is holding gun while guard is in room
-			guard.ShootAt(character);
-			guard.Say("HOLD YOUR GUN DOWN!");
+			
 		});
 
 		
@@ -247,10 +335,38 @@ public class Level2 : LevelScript
 			}
 		});
 
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "GuardDownstairsSurrender";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				guardDownStairs.Say("You will regret this!");
+				guardDownStairs.targetCharacter = Character.selectedCharacter;
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
 		LevelManager.on("Surrendered", (GameObject gameObject) => {
+
+			if (gameObject.name == "Architect") {
+				if (LevelManager.Condition("MuscleKilled").fullfilled || muscle.surrendering) {
+					LevelEndMessage.title = "You got arrested";
+					LevelEndMessage.message = "Nobody was there to help";
+					LevelEndMessage.nextLevel = "Level 2";
+					LevelEndMessage.LevelSuccessfull = false;
+					LevelManager.EndLevel(3);
+					return;
+				}
+				return;
+			}
+
 			NPC npc = gameObject.GetComponent<NPC>();
+			if (npc == null) return;
 
 			if (npc.currentRoom.name == "L0 Room L") {
+				
+				LevelManager.Condition("GuardDownstairsSurrender").Fullfill();
 				LevelManager.Condition("KarenFleed").Fullfill();
 
 				karen.pathfinder.setPosTarget(9, 1);
@@ -284,13 +400,64 @@ public class Level2 : LevelScript
 					_npc.GetComponent<NPC>().Surrender();
 				}
 			}
-
-			
-			// if (gameObject.name == "Karen")
-				// LevelManager.Condition("KarenSurrendered").Fullfill();
 		});
 
-		// LevelManager.emit("StartLevel");
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "CameraDetectedPlayer";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				Debug.LogError("Cops not implemented");
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		LevelManager.on("CameraDetectedPlayer", () => {
+			LevelManager.Condition("CameraDetectedPlayer").Fullfill();
+		});
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "ArchitectKilled";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelEndMessage.title = "You got killed";
+				LevelEndMessage.message = "You wasn't so lucky";
+				LevelEndMessage.nextLevel = "Level 2";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(3);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "MuscleKilled";
+
+			condition.fullfillHandler = (LevelCondition c) => {
+				if (architect.surrendering) {
+					LevelEndMessage.title = "You got arrested";
+					LevelEndMessage.message = "Nobody was there to help";
+					LevelEndMessage.nextLevel = "Level 2";
+					LevelEndMessage.LevelSuccessfull = false;
+					LevelManager.EndLevel(3);
+				}
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		LevelManager.on("Killed", (GameObject gameObject) => {
+			if (gameObject.name == "Muscle") {
+				LevelManager.Condition("MuscleKilled").Fullfill();
+			} else if (gameObject.name == "Architect") {
+				LevelManager.Condition("ArchitectKilled").Fullfill();
+			}
+		});
+
+		LevelManager.emit("StartLevel");
 	}
 
 	
