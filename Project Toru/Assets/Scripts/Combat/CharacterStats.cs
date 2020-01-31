@@ -28,7 +28,7 @@ public class CharacterStats : MonoBehaviour
 			    LevelManager.emit("NPCKilled", npc.currentRoom.gameObject);
             }
 			
-			LevelManager.emit("NPCKilled", gameObject.name);
+			LevelManager.emit("Killed", gameObject.name);
             gameObject.SetActive(false);
         }
     }
