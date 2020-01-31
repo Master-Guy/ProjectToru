@@ -87,8 +87,9 @@ public abstract class ExecutePathFinding : MonoBehaviour
 				}
 				StopPathFinding();
 			}
+
+			UpdateAnimations();
 		}
-		UpdateAnimations();
 	}
 
 	private void CallEventWindow()
@@ -337,11 +338,11 @@ public abstract class ExecutePathFinding : MonoBehaviour
 							weapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
 						}
 					}
-				}
 
-				if(GetComponent<Character>().Equals(Character.selectedCharacter))
-				{
-					transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+					if (GetComponent<Character>().Equals(Character.selectedCharacter))
+					{
+						transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+					}
 				}
 			}
 		}

@@ -34,6 +34,21 @@ public class Level0 : LevelScript
 
             LevelManager.AddCondition(condition);
         }
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "ArchitectKilled";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelEndMessage.title = "You got killed";
+				LevelEndMessage.message = "Luck doesn't seem to be on your side.";
+				LevelEndMessage.nextLevel = "Level 1";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(1);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
 		
 		{
             LevelCondition condition = new LevelCondition();
@@ -312,6 +327,10 @@ public class Level0 : LevelScript
 		LevelManager.on("NPCKilled", (gObject) => {
 			PoliceForce.getInstance().AlertKill();
 			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
+		LevelManager.on("Killed", (gObject) => {
+			if (gObject.name == "Architect") LevelManager.Condition("ArchitectKilled").Fullfill();
 		});
 		
 		LevelManager.on("CharacterEntersVan", () => {
