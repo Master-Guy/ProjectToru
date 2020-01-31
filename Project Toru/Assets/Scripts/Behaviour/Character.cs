@@ -42,11 +42,8 @@ public class Character : MonoBehaviour
 		inventory = new Inventory(MaxWeight);
 
 		weapon = GetComponentInChildren<Weapon>();
-		if (weapon != null)
-		{
-			weapon.weaponHolder = this.gameObject;
-			weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
-		}
+        weapon.weaponHolder = this.gameObject;
+		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 	}
 
 	// Update is called once per frame
