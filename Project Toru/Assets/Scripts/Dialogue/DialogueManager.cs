@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 			StartDialogue();
 			DialogueText oldCurrentDialogue = currentDialogue;
 			currentDialogue = null;
-			oldCurrentDialogue.callback?.Invoke();
+			oldCurrentDialogue?.callback?.Invoke();
 		});
 		
 		Time.timeScale = 1.0f;

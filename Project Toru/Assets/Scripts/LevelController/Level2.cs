@@ -630,6 +630,8 @@ public class Level2 : LevelScript
 			condition.fullfillHandler = (LevelCondition c) => {
 				van.Drive();
 
+				LevelManager.Instance().webRequest.stopTime();
+
 				LevelManager.Delay(2, () => {
 					introduction.transistionToScene = true;
 					introduction.gameObject.SetActive(true);
@@ -642,7 +644,7 @@ public class Level2 : LevelScript
 
 					LevelEndMessage.title = "You've won!";
 					LevelEndMessage.message = "Great job!";
-					LevelEndMessage.nextLevel = "MainMenu";
+					LevelEndMessage.nextLevel = "SubmitScore";
 					LevelEndMessage.LevelSuccessfull = true;
 
 					Character.selectedCharacter = null;
@@ -683,7 +685,7 @@ public class Level2 : LevelScript
 		});
 
 		LevelManager.on("StartLevel", () => {
-
+			
 			LevelEndMessage.lastLevel = 2;
 
 			LevelManager.Delay(1, () => {
