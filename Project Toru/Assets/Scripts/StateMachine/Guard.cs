@@ -2,71 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 public class Guard : NPC
 {
-    Weapon weapon;
-    GameObject firePoint;
 
-    Vector3 currentpos;
-    Vector3 lastpos;
-    Vector3 change;
+    
+	public Character targetCharacter;
+	bool flee = false;
 
-    void Start()
-    {
-        startingPosition = transform.position;;
-        stats = GetComponent<CharacterStats>();
-		animator = GetComponent<Animator>();
-        weapon = GetComponentInChildren<Weapon>();
-        if(weapon != null)
-        {
-            firePoint = weapon.gameObject;
-        }
+    protected override void Start()
+    {	
+		base.Start();
         PingPong();
 	}
 
-    void Update()
-    {
-		this.statemachine.ExecuteStateUpdate();
-		AdjustOrderLayer();
+	protected override void Update()
+    {	
+		base.Update();
+        FleeIfPossible();
+		
+	}
 
-		if(stats.currentHealth < stats.maxHealth)
-		{
-            this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint,this.animator));
+	protected override void FleeIfPossible() {
+		if (flee) return;
+
+		if (currentRoom == null) return;
+
+        if (!currentRoom.AnyCharacterInRoom() && surrender)
+        {	
+			flee = true;
+			ShootAt(targetCharacter);
 		}
+	}
 
-        lastpos = currentpos;
-        currentpos = transform.position;
-        change = currentpos - lastpos;
+	public override void StopShooting() {
+		
+		base.StopShooting();
+		GetComponent<ExecutePathFindingNPC>().setPosTarget(startingPosition);
+	}
 
-        if(change != Vector3.zero && weapon != null)
-        {
-            FlipFirePoint();
-        }
-    }
-
-    private void FlipFirePoint()
-    {
-        if (change.x > 0)
-        {
-            firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
-            firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-        }
-        if (change.x < 0)
-        {
-            firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-            firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-        }
-        if (change.y > 0)
-        {
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-        }
-        if (change.y < 0)
-        {
-            firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-            firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-        }
-    }
+	public void Arrest(Character character) {
+		if (!surrender)
+		this.statemachine.ChangeState(new Arrest(this, weapon, gameObject, firePoint, animator, character.gameObject));
+	}
 }

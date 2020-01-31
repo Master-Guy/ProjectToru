@@ -90,6 +90,12 @@ namespace Assets.Scripts.Options
 			DisplayNextOptions();
 		}
 
+		public void RemoveEvent()
+		{
+			EventQueue.RemoveAt(0);
+			DisplayNextOptions();
+		}
+
 		void DisplayNextOptions()
 		{
 			if (EventQueue.Count == 0)
@@ -108,6 +114,11 @@ namespace Assets.Scripts.Options
 			Time.timeScale = 0.2f + (float)(0.8f * Math.Floor(Math.Min(EventQueue[0].priority, 4) / 4f));
 
 			TMP.text = EventQueue[0].GetOptionText();
+			if (TMP.text == null)
+			{
+				EventQueue.RemoveAt(0);
+				DisplayNextOptions();
+			}
 			TextType = EventTextType.options;
 		}
 

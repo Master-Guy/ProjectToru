@@ -22,15 +22,18 @@ public class Bullet : MonoBehaviour
 			other.GetComponent<CharacterStats>().TakeDamage(weapon.damage);
 			DestroyObject();
 		}
-        if (other.CompareTag("Player") && owner != bulletOwner.Player)
+        else if (other.CompareTag("Player") && owner != bulletOwner.Player)
         {
             other.GetComponent<CharacterStats>().TakeDamage(weapon.damage);
             DestroyObject();
         }
-		if (other.CompareTag("Walls"))
-		{
-			DestroyObject();
-		}
+		else if (other.CompareTag("Door"))
+        {
+            if (other.GetComponent<Door>().IsClosed()) {
+				DestroyObject();
+			}
+
+        }
 	}
 	
 	private void DestroyObject()

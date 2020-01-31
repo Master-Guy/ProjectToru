@@ -53,6 +53,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     GameObject FPSMonitor = null;
 
+	[SerializeField]
+    GameObject UI = null;
+
+	[SerializeField]
+    public WebRequest webRequest;
+
     /// <summary>
     /// Storage for Level Conditions
     /// </summary>
@@ -123,7 +129,7 @@ public class LevelManager : MonoBehaviour
 
         if (Condition(condition.name) == null)
         {
-            Debug.Log("Adding Condition '" + condition.name + "'");
+            //Debug.Log("Adding Condition '" + condition.name + "'");
             conditions.Add(condition.name, condition);
         }
         else
@@ -174,9 +180,11 @@ public class LevelManager : MonoBehaviour
 
 	public delegate void LevelScriptCallback();
 	public delegate void LevelScriptCallbackString(string value);
+	public delegate void LevelScriptCallbackGameObject(GameObject gameobject);
 	
 	static Dictionary<string, LevelScriptCallback> events = new Dictionary<string, LevelScriptCallback>();
 	static Dictionary<string, LevelScriptCallbackString> events_string = new Dictionary<string, LevelScriptCallbackString>();
+	static Dictionary<string, LevelScriptCallbackGameObject> events_object = new Dictionary<string, LevelScriptCallbackGameObject>();
 	
 	public static void emit(string eventString)
 	{
@@ -199,6 +207,18 @@ public class LevelManager : MonoBehaviour
 		LevelManager.emit(eventString);
 	}
 	
+	public static void emit(string eventString, GameObject gameobject)
+	{
+		Debug.Log("Emitting " + eventString + " With OBJECT " + gameobject.name);
+		if (events_object.ContainsKey(eventString)) {
+			events_object[eventString]?.Invoke(gameobject);
+			return;
+		}
+		
+		// Try emitting without string
+		LevelManager.emit(eventString);
+	}
+	
 	public static void on(string eventString, LevelScriptCallback callback)
 	{
 		events.Add(eventString, callback);	
@@ -208,10 +228,16 @@ public class LevelManager : MonoBehaviour
 	{
 		events_string.Add(eventString, callback);	
 	}
-	
+
+	public static void on(string eventString, LevelScriptCallbackGameObject callback)
+	{	
+		events_object.Add(eventString, callback);
+	}
+
 	public static void setLevel() {
 		events.Clear();
 		events_string.Clear();
+		events_object.Clear();
 		conditions.Clear();
 	}
 	
@@ -291,5 +317,9 @@ public class LevelManager : MonoBehaviour
     {
         return GetComponent<BuildingBehaviour>();
     }
+
+	public static GameObject GetUI() {
+		return LevelManager.Instance().UI;
+	}
 
 }

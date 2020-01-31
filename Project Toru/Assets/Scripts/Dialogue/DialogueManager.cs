@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 	public bool DebugDisableDialogue = false;
 	
 	[SerializeField]
-	private Animator animator = null;
+	public Animator animator = null;
 
 	private Queue<string> sentences = new Queue<string>();
 	private Queue<DialogueText> dialogues = new Queue<DialogueText>();
@@ -24,6 +24,15 @@ public class DialogueManager : MonoBehaviour
 			Debug.LogWarning("!!!!! Dialogue is disabled for debugging !!!!!");
 		}
 		animator = GetComponent<Animator>();
+	}
+
+	void Update() {
+		if(animator.GetBool("IsOpen") == false)
+			return;
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			DisplayNextSentence();
+		}
 	}
 	
 	public void QueueDialogue(DialogueText dialogue) {
@@ -92,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 			StartDialogue();
 			DialogueText oldCurrentDialogue = currentDialogue;
 			currentDialogue = null;
-			oldCurrentDialogue.callback?.Invoke();
+			oldCurrentDialogue?.callback?.Invoke();
 		});
 		
 		Time.timeScale = 1.0f;

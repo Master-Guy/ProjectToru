@@ -6,7 +6,7 @@ public class CameraBehaviour : MonoBehaviour
 {
     public Transform target = null;
 
-    public float smoothing;
+    public float smoothing = 0.04f;
 
     public float zoomDistance;
     public float minZoomDistance = 6;
@@ -19,13 +19,23 @@ public class CameraBehaviour : MonoBehaviour
 
     private Vector3 change;
 
+	public bool movementDisabled = false;
+
     void Start()
     {
-        
+     
+        Move();
+        Zoom();   
     }
 
     void Update()
-    {
+    {	
+		
+
+		if (movementDisabled) {
+			return;
+		}
+
         Move();
         Zoom();
 
@@ -52,8 +62,11 @@ public class CameraBehaviour : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, targetVector, smoothing);
             }
         }
+
+		GetComponent<Camera>().orthographicSize = zoomDistance;
     }
 
+	bool PlayerDidUseCameraControls = false;
     void Move()
     {
         change = Vector3.zero;
@@ -62,7 +75,10 @@ public class CameraBehaviour : MonoBehaviour
 
         if (change != Vector3.zero)
         {
-			LevelManager.emit("PlayerDidUseCameraControls");
+			if (!PlayerDidUseCameraControls) {
+				LevelManager.emit("PlayerDidUseCameraControls");
+				PlayerDidUseCameraControls = true;
+			}
 			
             if (!freeLook)
             {
@@ -80,7 +96,6 @@ public class CameraBehaviour : MonoBehaviour
     {
         zoomDistance -= Input.mouseScrollDelta.y * Time.deltaTime * 30;
         zoomDistance = Mathf.Clamp(zoomDistance, minZoomDistance, maxZoomDistance);
-        GetComponent<Camera>().orthographicSize = zoomDistance;
     }
 
     Vector3 CheckBorders()

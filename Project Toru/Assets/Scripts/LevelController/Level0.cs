@@ -8,6 +8,7 @@ public class Level0 : LevelScript
 	// Ex: [SerializeField]    
 	// Ex: Vault vault = null;
 	public Van van = null;
+	public Employee employee;
 	
 	protected override void Awake() {
 		
@@ -33,6 +34,21 @@ public class Level0 : LevelScript
 
             LevelManager.AddCondition(condition);
         }
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "ArchitectKilled";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				LevelEndMessage.title = "You got killed";
+				LevelEndMessage.message = "Luck doesn't seem to be on your side.";
+				LevelEndMessage.nextLevel = "Level 1";
+				LevelEndMessage.LevelSuccessfull = false;
+				LevelManager.EndLevel(1);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
 		
 		{
             LevelCondition condition = new LevelCondition();
@@ -71,7 +87,7 @@ public class Level0 : LevelScript
 				DialogueText text = new DialogueText();
 				text.name = "Watch out!";
 				text.sentences.Add("The employee will call the cops when you enter the vault room");
-				text.sentences.Add("[Left Click] on the employee to keep him under shot");
+				text.sentences.Add("[Left Click] on the employee to keep him at gunpoint");
 				text.sentences.Add("Press [F] to fire and try to kill the employee");
 				text.sentences.Add("... you don't have to kill him");
 				
@@ -254,7 +270,10 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterHasBeenMoved").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (string value) => {
+		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
+
+			Character character = gameObject.GetComponent<Character>();
+			string value = character.currentRoom.name;
 			
 			if (value == "L0 Room L") {
 				LevelManager.Condition("CharacterIsInRoomL0_L").Fullfill();
@@ -265,7 +284,7 @@ public class Level0 : LevelScript
 			}
 			
 			else if (value == "VaultRoom") {
-				LevelManager.emit("CharacterIsInVaultRoom");	
+				LevelManager.emit("CharacterIsInVaultRoom", character.currentRoom.gameObject);	
 			}
 		});
 		
@@ -286,34 +305,45 @@ public class Level0 : LevelScript
 			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
 		});
 		
-		LevelManager.on("PlayerHasUsedGun", () => {
+		LevelManager.on("PlayerHasUsedGun", (gObject) => {
 			LevelManager.Condition("PlayerHasUsedGun").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
-		LevelManager.on("EmployeeFleed", () => {
+		LevelManager.on("EmployeeFleed", (gObject) => {
 			LevelManager.Condition("EmployeeFleed").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 
-		LevelManager.on("CharacterIsInVaultRoom", () => {
+		LevelManager.on("CharacterIsInVaultRoom", (gObject) => {
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
 		});
+
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
+		LevelManager.on("Killed", (gObject) => {
+			if (gObject.name == "Architect") LevelManager.Condition("ArchitectKilled").Fullfill();
+		});
 		
-		LevelManager.on("AllCharactersInVan", () => {
+		LevelManager.on("CharacterEntersVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();
 			
 			
-			
 			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
 				LevelEndMessage.title = "Good job!";
-				LevelEndMessage.message = "You got some loot and you are not caught!";
+				LevelEndMessage.message = "You stole some money and didn't get caught!";
 				LevelEndMessage.nextLevel = "Level 1";
 				LevelEndMessage.LevelSuccessfull = true;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(2);
 				return;
 			}
 			else if (LevelManager.Condition("CopsTriggered").fullfilled) {
@@ -321,37 +351,45 @@ public class Level0 : LevelScript
 				LevelEndMessage.message = "Sadly you could not get away with money...";
 				LevelEndMessage.nextLevel = "Level 0 - Tutorial";
 				LevelEndMessage.LevelSuccessfull = false;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(2);
 			}
 			else {
 				LevelEndMessage.title = "You got away!";
 				LevelEndMessage.message = "But the idea is that you try to steal some money...";
 				LevelEndMessage.nextLevel = "Level 0 - Tutorial";
 				LevelEndMessage.LevelSuccessfull = false;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(1);
 			}
 		});
 		
-		
-		// Trigger first dialogue
-		LevelManager.Delay(2, () => {
-			
-			DialogueText text = new DialogueText();
-			text.name = "Welcome";
-			text.sentences.Add("You are going to steal some money!");
+		LevelManager.on("StartLevel", () => {
+
+			LevelEndMessage.lastLevel = 0;
+			LevelManager.Instance().webRequest.setTime();
+
+			employee.PingPong();
+
+			// Trigger first dialogue
+			LevelManager.Delay(1, () => {
 				
-			if (!LevelManager.Condition("CharacterHasBeenSelected").fullfilled) {
-				text.sentences.Add("Select a character by clicking on him with your [left mouse]");
-			}
-			
-			if (!LevelManager.Condition("PlayerDidUseCameraControls").fullfilled) {
-				text.sentences.Add("Use [up] [down] [left] [right] keys to look through the level");
-				text.sentences.Add("Use [scroll] to zoom in and out");
-			}
-			
-			text.sentences.Add("Use [Q] focus on character");
+				DialogueText text = new DialogueText();
+				text.name = "Welcome";
+				text.sentences.Add("You are going to steal some money!");
+					
+				if (!LevelManager.Condition("CharacterHasBeenSelected").fullfilled) {
+					text.sentences.Add("Select a character by clicking on him with your [left mouse]");
+				}
 				
-			dialogueManager.QueueDialogue(text);
+				if (!LevelManager.Condition("PlayerDidUseCameraControls").fullfilled) {
+					text.sentences.Add("Use [up] [down] [left] [right] or [W] [A] [S] [D] keys to look through the level");
+					text.sentences.Add("Use [scroll] to zoom in and out");
+				}
+				
+				text.sentences.Add("Use [Q] focus on character");
+					
+				dialogueManager.QueueDialogue(text);
+			});
 		});
+		
 	}
 }

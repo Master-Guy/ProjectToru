@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class ExecutePathFindingPlayable : ExecutePathFinding
 {
+	public bool disabled = false;
+
 	public void Update()
 	{
+		if (disabled) {
+			return;
+		}
+
 		MousePointInput();
 		WayPointsWalk();
 		HidePlayerOnStair();
