@@ -7,97 +7,59 @@ using UnityEngine;
 
 public class Police : NPC
 {
-	public Weapon weapon;
-	GameObject firePoint;
+	[SerializeField]
 	Room Dest;
 
-	Vector3 currentpos;
-	Vector3 lastpos;
-	Vector3 change;
+	protected override void Awake() {
+		base.Awake();
 
-	public void Start()
+		/*if (weapon != null)
+		{
+			weapon.RevealGun();
+		}*/
+	}
+
+	protected override void Start()
 	{
-
-		startingPosition = transform.position; ;
-		stats = GetComponent<CharacterStats>();
-		animator = GetComponent<Animator>();
-		weapon = GetComponentInChildren<Weapon>();
-		if (weapon != null)
-		{
-			firePoint = weapon.gameObject;
-		}
-		if (weapon != null)
-		{
-			animator.SetBool("isHoldingGun", true);
-		}
+		base.Start();
 
 		weapon.gameObject.transform.position = transform.position + new Vector3(.3f, -.3f);
 		statemachine.ChangeState(new Idle(animator));
 		PoliceForce.getInstance().RequestOrders(this);
 	}
 
-	public void Update()
-	{
-		if ((currentRoom != null && currentRoom.charactersInRoom.Count > 0) || currentRoom.Equals(Dest))
+	protected override void Update()
+	{	
+		base.Update();
+		
+		if (currentRoom != null && currentRoom.charactersInRoom.Count > 0)
 		{
-			GetComponent<ExecutePathFindingNPC>().StopPathFinding();
-			// TODO fight
-			weapon.Shoot();
-			// @todo
-			// this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
+			//GetComponent<ExecutePathFindingNPC>().StopPathFinding();
+			PoliceForce.getInstance().Alert(currentRoom);
+			if(!(statemachine.GetCurrentlyRunningState() is Combat))
+				this.statemachine.ChangeState(new Combat(this, weapon, gameObject, firePoint, animator, currentRoom.charactersInRoom.First().gameObject));
 		}
-		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && currentRoom == Dest)
+		/*else if (LastRoom != null && LastRoom.charactersInRoom.Count > 0)
 		{
+			PoliceForce.getInstance().Alert(LastRoom);
+			setPos(LastRoom);
+		}*/
+		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && !(statemachine.GetCurrentlyRunningState() is Combat) && currentRoom == Dest)
+		{
+			statemachine.ChangeState(new Idle(animator));
 			PoliceForce.getInstance().RequestOrders(this);
 		}
 
-		AdjustOrderLayer();
-
-		if (stats.currentHealth < stats.maxHealth)
+		/*if (stats.currentHealth < stats.maxHealth)
 		{	
 			// @todo
 			// this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
-		}
-
-		lastpos = currentpos;
-		currentpos = transform.position;
-		change = currentpos - lastpos;
-
-		if (change != Vector3.zero && weapon != null)
-		{
-			FlipFirePoint();
-		}
+		}*/
 	}
 
 	public void setPos(Room dest)
 	{
 		Dest = dest;
-		GetComponent<ExecutePathFindingNPC>().setPosTarget(dest.GetPosition());
-	}
-
-	private void FlipFirePoint()
-	{
-		if (change.x > 0)
-		{
-			firePoint.transform.rotation = Quaternion.Euler(0, 0, 0);
-			firePoint.transform.position = transform.position + new Vector3(.3f, -.3f);
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-		}
-		if (change.x < 0)
-		{
-			firePoint.transform.rotation = Quaternion.Euler(0, 180, 0);
-			firePoint.transform.position = transform.position + new Vector3(-.3f, -.3f);
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-		}
-		if (change.y > 0)
-		{
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Background Items";
-			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		}
-		if (change.y < 0)
-		{
-			firePoint.GetComponent<SpriteRenderer>().sortingLayerName = "Guns";
-			firePoint.transform.position = transform.position + new Vector3(0, -.3f);
-		}
+		GetComponent<ExecutePathFindingNPC>().setPosTarget(Dest.GetPosition());
 	}
 }
