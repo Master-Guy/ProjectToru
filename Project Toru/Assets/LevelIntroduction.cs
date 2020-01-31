@@ -140,7 +140,7 @@ public class LevelIntroduction : MonoBehaviour
 			case State.FadeInText:
 				{
 					Color color = textMesh.color;
-					color.a += 1f * Time.deltaTime;
+					color.a += 1.5f * Time.deltaTime;
 					textMesh.color = color;
 					
 					if (color.a >= 1) {
@@ -173,7 +173,7 @@ public class LevelIntroduction : MonoBehaviour
 			case State.FadeOutText:
 				{
 					Color color = textMesh.color;
-					color.a -= 1f * Time.deltaTime;
+					color.a -= 1.5f * Time.deltaTime;
 					textMesh.color = color;
 					
 					if (color.a <= 0) {
@@ -247,6 +247,7 @@ public class LevelIntroduction : MonoBehaviour
 
 	void SelectNextLine() {
 		if (currentLine >= text.Count) {
+			LevelManager.GetUI()?.SetActive(true);
 			state = State.FadeOutIntroduction;
 			return;
 		}

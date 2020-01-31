@@ -25649,6 +25649,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Architect
       objectReference: {fileID: 0}
+    - target: {fileID: 2510886674794060574, guid: bf95452cd57984e5ca8bc794c6b27c55,
+        type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510886674794060574, guid: bf95452cd57984e5ca8bc794c6b27c55,
+        type: 3}
+      propertyPath: MaxWeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2510886674794060565, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25724,6 +25734,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8852936447365297302, guid: bf95452cd57984e5ca8bc794c6b27c55,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852936447365297302, guid: bf95452cd57984e5ca8bc794c6b27c55,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1319200028078772342, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_IsActive
@@ -25743,16 +25763,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_GravityScale
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2510886674794060574, guid: bf95452cd57984e5ca8bc794c6b27c55,
-        type: 3}
-      propertyPath: speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2510886674794060574, guid: bf95452cd57984e5ca8bc794c6b27c55,
-        type: 3}
-      propertyPath: MaxWeight
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5867511438587329899, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
@@ -27099,6 +27109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5267581302340188244, guid: 93f02214dd86b10438df85ded2e65167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3825185711421816023, guid: 93f02214dd86b10438df85ded2e65167,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27384,11 +27399,6 @@ PrefabInstance:
       propertyPath: CharacterSelectionBox
       value: 
       objectReference: {fileID: 1093519333}
-    - target: {fileID: 5267581302340188244, guid: 93f02214dd86b10438df85ded2e65167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5470812402966689782, guid: 93f02214dd86b10438df85ded2e65167,
         type: 3}
       propertyPath: m_Enabled
@@ -27538,47 +27548,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: escapePath.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: bag.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: timeIsUpText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: escapePath.Array.data[0]
-      value: 
-      objectReference: {fileID: 1722593120}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: escapePath.Array.data[1]
-      value: 
-      objectReference: {fileID: 1593426111}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: escapePath.Array.data[2]
-      value: 
-      objectReference: {fileID: 424620144}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: escapePath.Array.data[3]
-      value: 
-      objectReference: {fileID: 424620144}
-    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
-        type: 3}
-      propertyPath: bag.Array.data[0]
-      value: 
-      objectReference: {fileID: 3485136947023997620, guid: cbfd9fa75be664f4a84ac822e94618cb,
-        type: 3}
     - target: {fileID: 4947826929547256064, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27634,6 +27603,47 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: escapePath.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: bag.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: timeIsUpText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: escapePath.Array.data[0]
+      value: 
+      objectReference: {fileID: 1722593120}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: escapePath.Array.data[1]
+      value: 
+      objectReference: {fileID: 1593426111}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: escapePath.Array.data[2]
+      value: 
+      objectReference: {fileID: 424620144}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: escapePath.Array.data[3]
+      value: 
+      objectReference: {fileID: 424620144}
+    - target: {fileID: 4521887051741011871, guid: cef2cc5444238334dadd6abbae014fad,
+        type: 3}
+      propertyPath: bag.Array.data[0]
+      value: 
+      objectReference: {fileID: 3485136947023997620, guid: cbfd9fa75be664f4a84ac822e94618cb,
+        type: 3}
     - target: {fileID: 5668241911090664038, guid: cef2cc5444238334dadd6abbae014fad,
         type: 3}
       propertyPath: m_Enabled

@@ -343,7 +343,7 @@ public class Level0 : LevelScript
 				LevelEndMessage.message = "You stole some money and didn't get caught!";
 				LevelEndMessage.nextLevel = "Level 1";
 				LevelEndMessage.LevelSuccessfull = true;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(2);
 				return;
 			}
 			else if (LevelManager.Condition("CopsTriggered").fullfilled) {
@@ -351,14 +351,14 @@ public class Level0 : LevelScript
 				LevelEndMessage.message = "Sadly you could not get away with money...";
 				LevelEndMessage.nextLevel = "Level 0 - Tutorial";
 				LevelEndMessage.LevelSuccessfull = false;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(2);
 			}
 			else {
 				LevelEndMessage.title = "You got away!";
 				LevelEndMessage.message = "But the idea is that you try to steal some money...";
 				LevelEndMessage.nextLevel = "Level 0 - Tutorial";
 				LevelEndMessage.LevelSuccessfull = false;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(1);
 			}
 		});
 		
