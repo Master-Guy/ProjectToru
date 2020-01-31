@@ -43,7 +43,8 @@ public class Police : NPC
 			GetComponent<ExecutePathFindingNPC>().StopPathFinding();
 			// TODO fight
 			weapon.Shoot();
-			this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
+			// @todo
+			// this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
 		}
 		else if(!(PoliceForce.getInstance().GetCurrentlyRunningState() is Defensive) && currentRoom == Dest)
 		{
@@ -53,8 +54,9 @@ public class Police : NPC
 		AdjustOrderLayer();
 
 		if (stats.currentHealth < stats.maxHealth)
-		{
-			this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
+		{	
+			// @todo
+			// this.statemachine.ChangeState(new Combat(this.weapon, this.gameObject, this.stats, this.firePoint, this.animator));
 		}
 
 		lastpos = currentpos;
