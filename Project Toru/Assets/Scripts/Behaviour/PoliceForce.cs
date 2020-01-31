@@ -43,6 +43,7 @@ public class PoliceForce : StateMachine//: MonoBehaviour
 
 	public void RequestOrders(Police cop)
 	{
+		if(!(cop.statemachine.GetCurrentlyRunningState() is Combat))
 		((PoliceState)GetCurrentlyRunningState()).MoveCop(cop);
 	}
 }
