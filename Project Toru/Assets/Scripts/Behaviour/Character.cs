@@ -10,34 +10,46 @@ public enum Skills
 
 public class Character : MonoBehaviour
 {
+	[SerializeField]
 	public float speed;
+	
 	private Rigidbody2D myRigidbody;
+
+	[NonSerialized]
 	public Vector3 change;
+
     [NonSerialized]
 	public Animator animator;
 
+	[NonSerialized]
 	public Inventory inventory;
+	
+	public Room currentRoom;
 
-	private ParticleSystem ps;
-
-	public GameObject currentRoom = null;
 	public static Character selectedCharacter;
 
+	[SerializeField]
 	public float MaxWeight;
 
-	//public GameObject firePoint;
+	[SerializeField]
+	private GameObject textBox = null;
+
+	[SerializeField]
 	public Weapon weapon;
+
 	bool weaponKeyRelease = true;
 
 	public List<Skills> skills = new List<Skills>();
 
+	private bool outline = false;
+
+	[NonSerialized]
+	public bool surrendering = false;
 	// Start is called before the first frame update
 	void Start()
 	{
 		myRigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-
-		ps = GetComponent<ParticleSystem>();
 
 		inventory = new Inventory(MaxWeight);
 
@@ -49,13 +61,28 @@ public class Character : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (this.Equals(selectedCharacter))
+
+		if (selectedCharacter == this && !outline)
+		{
+			Outline.SetOutline(this.gameObject, Resources.Load<Material>("Shaders/Character-Outline"));
+			outline = true;
+		}
+
+		if (selectedCharacter != this)
+		{
+			Outline.RemoveOutline(this.gameObject);
+			outline = false;
+		}
+		
+		if (surrendering) return;
+
+		if (this.Equals(selectedCharacter) && !surrendering)
 		{
 			if(weapon != null) {
 				if (Input.GetKey(KeyCode.F))
 				{
 					if (weaponKeyRelease)
-						LevelManager.emit("PlayerHasUsedGun", currentRoom);
+						LevelManager.emit("PlayerHasUsedGun", currentRoom.gameObject);
 					
 					weaponKeyRelease = false;
 					weapon?.Shoot();
@@ -98,7 +125,7 @@ public class Character : MonoBehaviour
 		{
 			if (selectedCharacter != null)
 			{
-				selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				// selectedCharacter.transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			}
 
 			selectedCharacter = this;
@@ -107,11 +134,11 @@ public class Character : MonoBehaviour
 
 			inventory.UpdateUI();
 
-			transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+			// transform.Find("SelectedTriangle").gameObject.GetComponent<SpriteRenderer>().enabled = true;
 		}
 	}
 
-	private void FlipFirePoint()
+	protected virtual void FlipFirePoint()
 	{
 		GameObject firePoint = weapon.gameObject;
 
@@ -133,9 +160,43 @@ public class Character : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Room"))
-		{
-			currentRoom = other.gameObject;
-			LevelManager.emit("CharacterIsInRoom", currentRoom);
+
+		{	
+			Room oldRoom = currentRoom;
+			currentRoom = other.gameObject.GetComponent<Room>();
+			if (currentRoom != oldRoom)
+				LevelManager.emit("CharacterIsInRoom", this.gameObject);
 		}
+	}
+
+	public void Say(string text)
+    {
+        textBox.GetComponent<TextMesh>().text = text;
+        textBox.SetActive(true);
+        Invoke("disableTextBox", 3);
+    }
+
+	private void disableTextBox()
+    {
+        textBox.SetActive(false);
+	}
+
+	public void Surrender() {
+		weapon.HideGun();
+		surrendering = true;
+		animator.SetBool("Surrendering", true);
+		animator.SetFloat("moveX", 0);
+		animator.SetFloat("moveY", 0);
+		animator.SetBool("moving", false);
+		gameObject.GetComponent<ExecutePathFindingPlayable>().StopPathFinding();
+		gameObject.GetComponent<ExecutePathFindingPlayable>().disabled = true;
+
+		LevelManager.emit("Surrendered", gameObject);
+	}
+
+	public void StopSurrender() {
+		surrendering = false;
+		animator.SetBool("Surrendering", false);
+		gameObject.GetComponent<ExecutePathFindingPlayable>().disabled = false;
 	}
 }

@@ -8,6 +8,7 @@ public class Level0 : LevelScript
 	// Ex: [SerializeField]    
 	// Ex: Vault vault = null;
 	public Van van = null;
+	public Employee employee;
 	
 	protected override void Awake() {
 		
@@ -254,18 +255,21 @@ public class Level0 : LevelScript
 			LevelManager.Condition("CharacterHasBeenMoved").Fullfill();
 		});
 		
-		LevelManager.on("CharacterIsInRoom", (GameObject value) => {
+		LevelManager.on("CharacterIsInRoom", (GameObject gameObject) => {
+
+			Character character = gameObject.GetComponent<Character>();
+			string value = character.currentRoom.name;
 			
-			if (value.name == "L0 Room L") {
+			if (value == "L0 Room L") {
 				LevelManager.Condition("CharacterIsInRoomL0_L").Fullfill();
 			}
 			
-			else if (value.name == "L0 Room R") {
+			else if (value == "L0 Room R") {
 				LevelManager.Condition("CharacterIsInRoomL0_R").Fullfill();
 			}
 			
-			else if (value.name == "VaultRoom") {
-				LevelManager.emit("CharacterIsInVaultRoom", value);	
+			else if (value == "VaultRoom") {
+				LevelManager.emit("CharacterIsInVaultRoom");	
 			}
 		});
 		
@@ -286,34 +290,25 @@ public class Level0 : LevelScript
 			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
 		});
 		
-		LevelManager.on("PlayerHasUsedGun", (gObject) => {
+		LevelManager.on("PlayerHasUsedGun", () => {
 			LevelManager.Condition("PlayerHasUsedGun").Fullfill();
-			PoliceForce.getInstance().Alert((gObject == null ? GameObject.Find("Entrance") : gObject).GetComponent<Room>());
 		});
 		
-		LevelManager.on("EmployeeFleed", (gObject) => {
+		LevelManager.on("EmployeeFleed", () => {
 			LevelManager.Condition("EmployeeFleed").Fullfill();
-			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 
-		LevelManager.on("CharacterIsInVaultRoom", (gObject) => {
+		LevelManager.on("CharacterIsInVaultRoom", () => {
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
-			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
-		});
-
-		LevelManager.on("NPCKilled", (gObject) => {
-			PoliceForce.getInstance().AlertKill();
-			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
-
-		LevelManager.on("AllCharactersInVan", () => {
+		
+		LevelManager.on("CharacterEntersVan", () => {
 			
 			LevelManager.Condition("DriveVan").Fullfill();
-			
 			
 			
 			if (LevelManager.Condition("CharacterGotMoneyFromVault").fullfilled) {
@@ -341,6 +336,11 @@ public class Level0 : LevelScript
 		});
 		
 		LevelManager.on("StartLevel", () => {
+
+			LevelEndMessage.lastLevel = 0;
+
+			employee.PingPong();
+
 			// Trigger first dialogue
 			LevelManager.Delay(1, () => {
 				

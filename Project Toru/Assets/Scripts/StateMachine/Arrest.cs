@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Combat : IState
+public class Arrest : IState
 {
     private Weapon weapon;
     private GameObject gameObject;
@@ -12,8 +12,9 @@ public class Combat : IState
 	private NPC npc;
 
 	float timer = 0.5f;
+	bool moving = false;
 
-    public Combat(NPC npc, Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
+    public Arrest(NPC npc, Weapon weapon, GameObject gameObject, GameObject firePoint, Animator animator, GameObject target)
     {
         this.weapon = weapon;
         this.gameObject = gameObject;
@@ -25,7 +26,7 @@ public class Combat : IState
 
     public void Enter()
     {
-
+		npc.Say("Stand still!");
     }
 
     public void Execute()
@@ -39,11 +40,9 @@ public class Combat : IState
 		if (!animator.GetBool("moving")) {
 			CheckTargetDirection();
 			AdjustFirePoint();
-			weapon.Shoot();
 		}
 
 		if (target.activeSelf == false) {
-			Debug.Log("StopShoot");
 			npc.StopShooting();
 		}
         
@@ -51,20 +50,24 @@ public class Combat : IState
 
     public void Exit()
     {
-
+		target.GetComponent<Character>().StopSurrender();
     }
 
 	void Move() {
 
 		Vector3 distance = target.transform.position - gameObject.transform.position;
 		
-		if (Mathf.Abs(distance.x) > 4 || Mathf.Abs(distance.y) > 0.5 || Mathf.Abs(distance.x) < 1) {
+		if (Mathf.Abs(distance.x) > 4 || Mathf.Abs(distance.y) > 0.5) {
 			Vector3 target = this.target.transform.position;
 			if (distance.x > 0) target.x -= 2;
 			else				target.x += 2;
 
 			gameObject.GetComponent<ExecutePathFindingNPC>().setPosTarget(target);
+			return;
 		}
+
+		
+		target.GetComponent<Character>().Surrender();
 	}
 
     void CheckTargetDirection()
@@ -97,7 +100,7 @@ public class Combat : IState
             weapon.HideGun();
         }
         else
-        {
+        {	
             weapon.RevealGun();
         }
     }

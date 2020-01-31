@@ -48,7 +48,6 @@ public class FullScreenToggle : MonoBehaviour
         }
 
         gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
-		Debug.Log(gameSettings.fullscreen);
 
         text.text = gameSettings.fullscreen ? "Disable fullscreen" : "Enable fullscreen";
     }
