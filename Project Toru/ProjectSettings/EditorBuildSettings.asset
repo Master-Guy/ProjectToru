@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelEnd/BetweenLevel.unity
     guid: 1a03ff553e2c3a547a5b89d794c67ae6
   - enabled: 0
-    path: Assets/Scenes/LevelEnd/Complete.unity
+    path: 
     guid: 4003aa58fbbbea34396ba239b1de4e3e
   - enabled: 1
     path: Assets/Scenes/Menu's/LevelMenu.unity
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level 2.unity
     guid: 1228bbebcacaa4c2187a6eb08dfe5b7a
+  - enabled: 1
+    path: Assets/Scenes/LevelEnd/SubmitScore.unity
+    guid: a64859cdb451140b691fc73e3e8b4174
   m_configObjects: {}

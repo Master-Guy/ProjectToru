@@ -26,14 +26,18 @@ public class WebRequest : MonoBehaviour
 
 		totalTime = getTime() - timeStart;
 		timeStart = 0;
-		
+	}
+
+	public void GoUpload() {
 		StartCoroutine(Upload());
 	}
 
 	static IEnumerator Upload()
 	{	
+		Debug.Log("1");
 		if (totalTime == 0) yield return 0;
 		if (playerName == "") yield return 0;
+		Debug.Log("2");
 
 		WWWForm form = new WWWForm();
 		form.AddField("key", "70cd531b-03a2-408f-ba82-956e382cd407");
@@ -41,10 +45,14 @@ public class WebRequest : MonoBehaviour
 		form.AddField("seconds", (int) totalTime);
 		totalTime = 0;
 		playerName = "";
+
+		Debug.Log("3");
 		
 		using (UnityWebRequest www = UnityWebRequest.Post("https://clyde.ducosebel.nl/api/submit.php", form))
 		{
+			Debug.Log("4");
 			yield return www.SendWebRequest();
+			Debug.Log("5");
 			if (www.isNetworkError || www.isHttpError)
 			{
 				Debug.Log(www.error);

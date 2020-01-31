@@ -626,6 +626,11 @@ public class Level2 : LevelScript
 		LevelManager.on("CharacterEntersVan", (GameObject gameobject) => {
 
 			LevelManager.Instance().webRequest.stopTime();
+			LevelEndMessage.title = "You deserted your boss!";
+					LevelEndMessage.message = "You can't leave him behind!";
+					LevelEndMessage.nextLevel = "SubmitScore";
+					LevelEndMessage.LevelSuccessfull = true;
+					LevelManager.EndLevel(0);
 
 			if (gameobject.name == "Muscle") {
 				LevelManager.Condition("MuscleInVan").Fullfill();
