@@ -26,6 +26,7 @@ public class PoliceForce : StateMachine//: MonoBehaviour
 
 	public void Alert(Room seen)
 	{
+		LevelManager.emit("CopsTriggered");
 		if(((PoliceState)GetCurrentlyRunningState()).AddPosition(seen) && !(GetCurrentlyRunningState() is Defensive))
 			foreach (var p in Cops)
 				RequestOrders(p);

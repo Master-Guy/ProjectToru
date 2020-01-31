@@ -69,7 +69,15 @@ public class Level1 : LevelScript
 		{
 			LevelCondition condition = new LevelCondition();
 			condition.name = "CopsTriggered";
-			
+			condition.fullfillHandler = (LevelCondition c) => {
+				PoliceSiren.startSiren = true;
+				PoliceSiren.gameObject.SetActive(true);
+
+				LevelManager.Delay(10, () => {
+					SpawnPoliceCar();
+				});
+			};
+
 			LevelManager.AddCondition(condition);
 		}
 		
@@ -329,6 +337,10 @@ public class Level1 : LevelScript
 		LevelManager.on("NPCKilled", (gObject) => {
 			PoliceForce.getInstance().AlertKill();
 			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
+		});
+
+		LevelManager.on("CopsTriggered", () => {
+			LevelManager.Condition("CopsTriggered").Fullfill();
 		});
 
 		LevelManager.on("EmployeeFleed", () => {
