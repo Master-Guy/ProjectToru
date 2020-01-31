@@ -38,6 +38,8 @@ public abstract class NPC : MonoBehaviour
 	public bool surrender = false;
 	protected bool fleeTrue = false;
 
+	DialogueManager dialogueManager;
+
 	public bool fleeIfPossible = false;
 
 	Vector3 currentpos;
@@ -51,6 +53,7 @@ public abstract class NPC : MonoBehaviour
 		animator = GetComponent<Animator>();
         weapon = GetComponentInChildren<Weapon>();
 		pathfinder = GetComponent<ExecutePathFindingNPC>();
+		dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
 
 		if(weapon != null)
         {
@@ -185,6 +188,10 @@ public abstract class NPC : MonoBehaviour
     }
 
 	protected virtual void OnMouseDown() {
+		if (dialogueManager.animator.GetBool("IsOpen") == true) {
+			return;
+		}
+		
 		Surrender();
 	}
 
