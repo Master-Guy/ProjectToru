@@ -18,8 +18,9 @@ public class Level2 : LevelScript
 
 	public FatGuy fatGuy;
 
-	public Door DownStairsDoor;
-	
+	public Door DownStairsDoor;	
+
+	public Van van;
 
 	protected override void Awake() {
 		
@@ -94,6 +95,8 @@ public class Level2 : LevelScript
 								LevelManager.Delay(3, () => {
 									karen.transform.position = new Vector3(30, 5.2f);
 									karen.stats.maxHealth = 100;
+									karen.animator.SetBool("Surrendering", false);
+									karen.animator.SetFloat("moveX", 1);
 								});
 							});
 						});
@@ -121,6 +124,8 @@ public class Level2 : LevelScript
 			condition.name = "EmployeesTalk";
 			
 			condition.fullfillHandler = (LevelCondition c) => {
+				if (LevelManager.Condition("EmployeesSurrender").fullfilled) return;
+
 				DialogueText text = new DialogueText();
 				text.name = "Employee:";
 				text.sentences.Add("Are you our new colleague?");
@@ -290,9 +295,25 @@ public class Level2 : LevelScript
 			else if (character.currentRoom.name == "L2 Room R") {
 				LevelManager.Delay(0.5f, () => {
 					LevelManager.Condition("FatGuyRunsAway").Fullfill();
-				});	
+				});
+
+				if (character.name == "Architect") {
+					LevelManager.Condition("ArchitectInGameRoom").Fullfill();
+				}
 			}
 		});
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "ArchitectInGameRoom";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+
+
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
 
 		LevelManager.on("StartLevel", () => {
 			LevelManager.Delay(1, () => {
@@ -371,18 +392,12 @@ public class Level2 : LevelScript
 				
 				HashSet<Item> copy = new HashSet<Item>(muscle.inventory.getItemsList());
 
-				Debug.Log("Count11 + " + architect.inventory.getItemsList().Count);
-				Debug.Log("Count12 + " + muscle.inventory.getItemsList().Count);
 				foreach(var item in copy) {
-					Debug.Log("KeyHandOver");
 					if (!item.name.Contains("Key")) continue;
-					Debug.Log("Done");
 
 					architect.inventory.addItem(item);
 					muscle.inventory.removeItem(item);
 				}
-				Debug.Log("Count21 + " + architect.inventory.getItemsList().Count);
-				Debug.Log("Count22 + " + muscle.inventory.getItemsList().Count);
 			}
 
 			if (LevelManager.Condition("PlayerFoundKey").fullfilled) return;
@@ -504,6 +519,88 @@ public class Level2 : LevelScript
 			} else if (gameObject.name == "Architect") {
 				LevelManager.Condition("ArchitectKilled").Fullfill();
 			}
+		});
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "PlayerFoundPacmanMachine";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "The Pacman Machine";
+				text.sentences.Add("Finally! After all those years");
+				text.sentences.Add("Now quickly get out!");
+
+				architect.speed = 5;
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "MuscleFoundPacmanMachine";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				DialogueText text = new DialogueText();
+				text.name = "The Pacman Machine!!";
+				text.sentences.Add("Muscle better let boss take machine");
+				
+				dialogueManager.QueueDialogue(text);
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "ArchitectInVan";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				if (LevelManager.Condition("PlayerFoundPacmanMachine").fullfilled) {
+
+				}
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		{
+			LevelCondition condition = new LevelCondition();
+			condition.name = "MuscleInVan";
+			
+			condition.fullfillHandler = (LevelCondition c) => {
+				// LevelEndMessage.title = "You got killed";
+				// LevelEndMessage.message = "You wasn't so lucky";
+				// LevelEndMessage.nextLevel = "Level 2";
+				// LevelEndMessage.LevelSuccessfull = false;
+				// LevelManager.EndLevel(3);
+				/// I WAS HERE
+
+			};
+			
+			LevelManager.AddCondition(condition);
+		}
+
+		LevelManager.on("CharacterEntersVan", (GameObject gameobject) => {
+
+			if (gameobject.name == "Muscle") {
+				LevelManager.Condition("MuscleInVan").Fullfill();
+			} else if (gameobject.name == "Architect") {
+				LevelManager.Condition("ArchitectInVan").Fullfill();
+			}
+			
+		});
+
+
+		LevelManager.on("PlayerFoundPacmanMachine", () => {
+			LevelManager.Condition("PlayerFoundPacmanMachine").Fullfill();
+		});
+
+		LevelManager.on("MuscleFoundPacmanMachine", () => {
+			LevelManager.Condition("MuscleFoundPacmanMachine").Fullfill();
 		});
 
 		LevelManager.emit("StartLevel");

@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  _maxHealth: 100
 --- !u!114 &5700235386843543567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bag: []
   TextBox: {fileID: 2424368187582298858}
+  surrender: 0
 --- !u!114 &4632547819200081624
 MonoBehaviour:
   m_ObjectHideFlags: 0

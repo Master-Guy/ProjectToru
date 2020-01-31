@@ -12,7 +12,7 @@ public abstract class NPC : MonoBehaviour
     [SerializeField]
     private GameObject TextBox = null;
 
-    [NonSerialized]
+    // [NonSerialized]
     public Room currentRoom = null;
 
     [NonSerialized]

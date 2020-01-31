@@ -31,7 +31,6 @@ public class Van : MonoBehaviour
     }
 	
 	public void Drive() {
-		Debug.Log("Going for a ride!");
 		drive = true;
 	}
 
@@ -41,7 +40,7 @@ public class Van : MonoBehaviour
 
         if (collision.isTrigger && ch != null)
         {
-			LevelManager.emit("CharacterEntersVan");
+			LevelManager.emit("CharacterEntersVan", ch.gameObject);
 			
             this.EnterCharacter(ch);
         }
@@ -51,11 +50,6 @@ public class Van : MonoBehaviour
     {
         characters.Add(character);
         character.gameObject.SetActive(false);
-
-        if (1 == characters.Count)
-        {
-			LevelManager.emit("AllCharactersInVan");
-        }
     }
 
     public void ExitCharacter(Character character)

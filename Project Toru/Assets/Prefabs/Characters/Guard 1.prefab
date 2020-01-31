@@ -182,6 +182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bag: []
   TextBox: {fileID: 3145244995637311128}
+  surrender: 0
+  targetCharacter: {fileID: 0}
 --- !u!114 &1381812995163818562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9503cbb7eab2542a0372058b81d565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  _maxHealth: 100
 --- !u!114 &4569530733233667342
 MonoBehaviour:
   m_ObjectHideFlags: 0
