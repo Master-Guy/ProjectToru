@@ -10,10 +10,16 @@ public class WebRequest : MonoBehaviour
 	public static Int32 timeStart = 0;
 	public static Int32 totalTime = 0;
 
-	public static string playerName = "player";
+	public static string playerName = "";
 
 	public void setTime() {
+		Reset();
 		timeStart = getTime();
+	}
+
+	public static void Reset() {
+		timeStart = 0;
+		totalTime = 0;
 		playerName = "";
 	}
 
@@ -41,9 +47,8 @@ public class WebRequest : MonoBehaviour
 		form.AddField("key", "70cd531b-03a2-408f-ba82-956e382cd407");
 		form.AddField("name", playerName);
 		form.AddField("seconds", (int) totalTime);
-		totalTime = 0;
-		playerName = "";
 
+		Reset();
 		
 		using (UnityWebRequest www = UnityWebRequest.Post("https://clyde.ducosebel.nl/api/submit.php", form))
 		{
