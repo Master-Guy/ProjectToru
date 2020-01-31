@@ -345,6 +345,10 @@ public class Level2 : LevelScript
 			condition.fullfillHandler = (LevelCondition c) => {
 				PoliceSiren.startSiren = true;
 				PoliceSiren.gameObject.SetActive(true);
+
+				LevelManager.Delay(10, () => {
+					SpawnPoliceCar();
+				});
 			};
 
 			LevelManager.AddCondition(condition);
