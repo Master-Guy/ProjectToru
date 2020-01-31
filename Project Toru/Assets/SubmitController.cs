@@ -1,23 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class SubmitController : MonoBehaviour
 {
    
     [SerializeField]
-    TextMesh Title = null;
-
-    [SerializeField]
     TextMesh Message = null;
-	
-	[SerializeField]
-    TextMesh ContinueButton = null;
 	
 	[SerializeField]
     SceneSwitcherSubmit ContinueButtonScript = null;
 
+	[SerializeField]
+	InputField inputField;
 
 	void Start() {
 
@@ -25,6 +22,7 @@ public class SubmitController : MonoBehaviour
 
 		if (WebRequest.totalTime == 0) {
 			Message.text = "You finished the game";
+			inputField.gameObject.SetActive(false);
 			return;
 		}
 

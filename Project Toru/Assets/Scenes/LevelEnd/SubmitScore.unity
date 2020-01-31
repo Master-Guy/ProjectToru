@@ -659,10 +659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8387b881b3364ac08582618ce4ce94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: {fileID: 24240540}
   Message: {fileID: 734097563}
-  ContinueButton: {fileID: 1249644662}
   ContinueButtonScript: {fileID: 1249644661}
+  inputField: {fileID: 1532941817}
 --- !u!4 &917797061
 Transform:
   m_ObjectHideFlags: 0

@@ -19,8 +19,10 @@ public class SceneSwitcherSubmit : MonoBehaviour
     {
 		text.fontStyle = FontStyle.Normal;
 		WebRequest.playerName = input.text;
-		Debug.Log(WebRequest.playerName);
-		webRequest.GoUpload();
+		
+		if (input.IsActive()) { 	
+			webRequest.GoUpload();
+		}
 
 		StartCoroutine(Segue());		
     }

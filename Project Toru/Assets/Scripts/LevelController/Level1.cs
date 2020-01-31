@@ -279,7 +279,7 @@ public class Level1 : LevelScript
 		}
 
 		
-		LevelManager.on("CameraDetectedPlayer", (string roomname) => {
+		LevelManager.on("CameraDetectedPlayer", (GameObject gameObject) => {
 			if (!LevelManager.Condition("CamerasDisabled").fullfilled)
 				LevelManager.Condition("CameraDetectedPlayer").Fullfill();
 		});
@@ -399,7 +399,7 @@ public class Level1 : LevelScript
 				LevelEndMessage.message = "You stole some money and didn't get caught!";
 				LevelEndMessage.nextLevel = "Level 2";
 				LevelEndMessage.LevelSuccessfull = true;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(2);
 				return;
 			}
 			else if (LevelManager.Condition("CopsTriggered").fullfilled) {
@@ -407,7 +407,7 @@ public class Level1 : LevelScript
 				LevelEndMessage.message = "Sadly you could not get away with money...";
 				LevelEndMessage.nextLevel = "Level 1";
 				LevelEndMessage.LevelSuccessfull = false;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(2);
 			}
 			else
 			{
@@ -415,7 +415,7 @@ public class Level1 : LevelScript
 				LevelEndMessage.message = "But the idea is that you try to steal some money...";
 				LevelEndMessage.nextLevel = "Level 1";
 				LevelEndMessage.LevelSuccessfull = false;
-				LevelManager.EndLevel(3);
+				LevelManager.EndLevel(1);
 			}
 		});
 
