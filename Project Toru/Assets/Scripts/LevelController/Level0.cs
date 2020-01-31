@@ -290,20 +290,28 @@ public class Level0 : LevelScript
 			LevelManager.Condition("PlayerDidUseCameraControls").Fullfill();
 		});
 		
-		LevelManager.on("PlayerHasUsedGun", () => {
+		LevelManager.on("PlayerHasUsedGun", (gObject) => {
 			LevelManager.Condition("PlayerHasUsedGun").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
-		LevelManager.on("EmployeeFleed", () => {
+		LevelManager.on("EmployeeFleed", (gObject) => {
 			LevelManager.Condition("EmployeeFleed").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 
-		LevelManager.on("CharacterIsInVaultRoom", () => {
+		LevelManager.on("CharacterIsInVaultRoom", (gObject) => {
 			LevelManager.Condition("CharacterIsInRoomVault").Fullfill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
 		LevelManager.on("CharacterGotMoneyFromVault", () => {
 			LevelManager.Condition("CharacterGotMoneyFromVault").Fullfill();
+		});
+
+		LevelManager.on("NPCKilled", (gObject) => {
+			PoliceForce.getInstance().AlertKill();
+			PoliceForce.getInstance().Alert(gObject.GetComponent<Room>());
 		});
 		
 		LevelManager.on("CharacterEntersVan", () => {

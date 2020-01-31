@@ -13,10 +13,10 @@ public class Police : NPC
 	protected override void Awake() {
 		base.Awake();
 
-		if (weapon != null)
+		/*if (weapon != null)
 		{
 			weapon.RevealGun();
-		}
+		}*/
 	}
 
 	protected override void Start()
@@ -60,6 +60,6 @@ public class Police : NPC
 	public void setPos(Room dest)
 	{
 		Dest = dest;
-		GetComponent<ExecutePathFindingNPC>().setPosTarget(dest.GetPosition());
+		GetComponent<ExecutePathFindingNPC>().setPosTarget(Dest.GetPosition());
 	}
 }
