@@ -68,5 +68,11 @@ public class LevelScript : MonoBehaviour
 			WebRequest.Reset();
             SceneManager.LoadScene("Level 2", LoadSceneMode.Single);
         }
+
+		if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+			Time.timeScale = 1.0f;
+            // SceneManager.LoadScene("Level 2", LoadSceneMode.Single);
+        }
 	}
 }
