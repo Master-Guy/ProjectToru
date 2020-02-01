@@ -36,6 +36,7 @@ public class CharacterStats : MonoBehaviour
             {
                 npc.dropBag();
 			    LevelManager.emit("NPCKilled", npc.currentRoom.gameObject);
+				npc.statemachine.ChangeState(new Idle(npc.animator));
             }
 			
 			LevelManager.emit("Killed", gameObject);

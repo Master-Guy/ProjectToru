@@ -22,6 +22,9 @@ public class Guard : NPC
 		base.Update();
         FleeIfPossible();
 		
+		if (stats.maxHealth > stats.currentHealth) {
+			this.statemachine.ChangeState(new Combat(this, weapon, gameObject, firePoint, animator, Character.selectedCharacter.gameObject));
+		}
 	}
 
 	protected override void FleeIfPossible() {
