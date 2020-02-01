@@ -697,6 +697,8 @@ public class Level2 : LevelScript
 
 		LevelManager.on("StartLevel", () => {
 			
+			LevelManager.Instance().webRequest.setTime();
+			
 			LevelEndMessage.lastLevel = 2;
 
 			LevelManager.Delay(1, () => {
