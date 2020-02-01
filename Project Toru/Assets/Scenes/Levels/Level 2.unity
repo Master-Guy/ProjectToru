@@ -1038,7 +1038,7 @@ PrefabInstance:
     - target: {fileID: 2064942316735422703, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2064942316735422703, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
@@ -1053,7 +1053,7 @@ PrefabInstance:
     - target: {fileID: 8852936447365297302, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8852936447365297302, guid: bf95452cd57984e5ca8bc794c6b27c55,
         type: 3}
@@ -1069,6 +1069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8845129313483243389, guid: bf95452cd57984e5ca8bc794c6b27c55,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf95452cd57984e5ca8bc794c6b27c55, type: 3}
@@ -1694,12 +1699,12 @@ PrefabInstance:
     - target: {fileID: 7879655298218481254, guid: ea252c5cfa0bf3b49969efedf5d781a3,
         type: 3}
       propertyPath: RoundsPerMinute
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7879655298218481254, guid: ea252c5cfa0bf3b49969efedf5d781a3,
         type: 3}
       propertyPath: damage
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea252c5cfa0bf3b49969efedf5d781a3, type: 3}
@@ -28235,6 +28240,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8845129313483243389, guid: 88b7d4e2a2b054b2192c94ea0705261e,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 250
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2510886674794060575, guid: 88b7d4e2a2b054b2192c94ea0705261e, type: 3}
     - {fileID: 2510886674794060572, guid: 88b7d4e2a2b054b2192c94ea0705261e, type: 3}
@@ -30346,16 +30356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879655298218481254, guid: ea252c5cfa0bf3b49969efedf5d781a3,
-        type: 3}
-      propertyPath: RoundsPerMinute
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879655298218481254, guid: ea252c5cfa0bf3b49969efedf5d781a3,
-        type: 3}
-      propertyPath: damage
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea252c5cfa0bf3b49969efedf5d781a3, type: 3}
