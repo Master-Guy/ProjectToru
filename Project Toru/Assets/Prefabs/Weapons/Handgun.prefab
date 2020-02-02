@@ -94,5 +94,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6960800346692626890, guid: ec14d43d40619214888c3f2c717a6b0b, type: 3}
-  damage: 35
+  damage: 10
   RoundsPerMinute: 240
